@@ -1,0 +1,192 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { mobileTiresBrand } from "../brands";
+
+
+const title = "Deals & Specials | Queens Mobile Tires";
+const description =
+    "Check out our latest deals and specials on mobile tire installation and automotive services.";
+
+const deals = [
+    {
+        title: "$369 Brakes",
+        subtitle: "Price Per Axle",
+        description:
+            "Get new brake pads and professional installation for just $369 per axle. Includes parts and labor—no hidden fees. Drive safer with fresh, reliable brakes today.",
+        details:
+            "Additional parts or services may be required depending on vehicle condition. Some restrictions may apply. Limited time only.",
+        cta: "Book Appointment",
+        link: "/request-an-appointment",
+    },
+    {
+        title: "$35 Alignment",
+        subtitle: "Wheel Alignment",
+        description:
+            "Keep your car tracking straight and your tires wearing evenly. A precision alignment for only $35 helps improve safety, handling, and tire life. Limited time special.",
+        details:
+            "Most vehicles. Additional adjustments or parts may be extra. Some restrictions may apply. Limited time only.",
+        cta: "Book Appointment",
+        link: "/request-an-appointment",
+    },
+    {
+        title: "Up To $45 OFF",
+        subtitle: "Auto Repair",
+        description:
+            "Save more on the services you need: Spend $100-$199 = $15 OFF; $200-$299 = $30 OFF; $300+ = $45 OFF. Applies to repairs, maintenance, and diagnostics.",
+        details:
+            "Excludes tires and batteries. One coupon per visit. Some restrictions may apply. Limited time only.",
+        cta: "Book Appointment",
+        link: "/request-an-appointment",
+    },
+    {
+        title: "FREE Alignment",
+        subtitle: "With 4 Tire Purchase",
+        description:
+            "Buy 4 new tires and we'll include a professional wheel alignment at no extra charge—helps your car track straight, improves handling, and protects tire life.",
+        details:
+            "Most vehicles. Additional adjustments/parts may be extra (e.g., camber bolts, seized hardware). Some ADAS-equipped vehicles may require calibration after alignment; calibration not included. Must purchase four new tires in a single visit.",
+        cta: "Browse New Tires",
+        link: "/buy-new-tires",
+    },
+    {
+        title: "FREE Seasonal",
+        subtitle: "Safety Check",
+        description:
+            "Before long drives or seasonal changes, we'll look over fluids, belts, wipers, and lights to catch small issues early.",
+        details: "No wrench, no charge—just peace of mind. Limited time only.",
+        cta: "Book Appointment",
+        link: "/request-an-appointment",
+    },
+    {
+        title: "FREE Battery",
+        subtitle: "Charging Test",
+        description:
+            "Cold mornings and weak batteries don't mix. We'll test your battery and charging system so you're not stranded.",
+        details:
+            "Further diagnostics or replacements may carry additional charges. Limited time only.",
+        cta: "Book Appointment",
+        link: "/request-an-appointment",
+    },
+];
+---
+
+<BaseLayout brand={mobileTiresBrand} title={title}>
+    <!-- NOTE: Extra top padding to account for floating header -->
+    <div class="pt-36 pb-24 sm:pt-48 sm:pb-32">
+        <div class="site-canvas">
+            <div class="mx-auto max-w-2xl text-center">
+                <h1 class="display-hero-page text-queens-primary dark:text-white hero-title">
+                    Current Deals
+                </h1>
+                <p class="mt-2 paragraph-1 text-gray-600 dark:text-gray-300 hero-subtitle">
+                    Save on your next service with our exclusive offers.
+                </p>
+            </div>
+
+            <div
+                class="mt-16 sm:mt-20 lg:mt-24 w-full"
+                data-reveal
+            >
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto justify-items-center justify-center content-center"
+                >
+                    {
+                        deals.map((deal, index) => (
+                        <div class="deal-card service-card-item glow-beam-hover flex flex-col rounded-[2.5rem] p-8 sm:p-10 shadow-xl dark:shadow-black/40 backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:shadow-queens-secondary/20 hover:scale-[1.02] text-center h-full bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 group w-full max-w-md lg:max-w-none">
+                                <p class="font-serif italic text-2xl text-queens-secondary mb-2 tracking-tight">
+                                    {deal.subtitle}
+                                </p>
+                                <h2 class="display-md text-queens-primary dark:text-white mb-6 group-hover:scale-105 transition-transform duration-500">
+                                    {deal.title}
+                                </h2>
+                                
+                                <!-- Glowing Beam Effect -->
+                                <div class="relative w-full h-8 mb-8 flex justify-center">
+                                    <div class="glow-beam-sm opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                </div>
+                                
+                                <p class="paragraph-1 text-gray-700 dark:text-gray-200 flex-grow mb-6 leading-relaxed">
+                                    {deal.description}
+                                </p>
+                                <p class="paragraph-3 text-gray-500 dark:text-gray-400 mb-8 italic opacity-80">
+                                    * {deal.details}
+                                </p>
+                                <div class={`border-t pt-6 mt-auto ${ (index + 1) % 2 === 0 ? 'border-white/10' : 'border-gray-200 dark:border-gray-700' }`}>
+                                    <a
+                                        href={deal.link}
+                                        class={`inline-block w-full rounded-full px-6 py-4 text-center text-sm font-bold shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
+                                            (index + 1) % 2 === 0 
+                                            ? 'bg-white !text-queens-primary hover:bg-gray-100' 
+                                            : 'bg-queens-secondary text-white hover:bg-queens-light'
+                                        }`}
+                                    >
+                                        {deal.cta}
+                                    </a>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        import gsap from "gsap";
+        import ScrollTrigger from "gsap/ScrollTrigger";
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        function initDealsAnimations() {
+            // Hero title animation
+            gsap.to(".hero-title", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: 0.1,
+            });
+
+            // Hero subtitle animation
+            gsap.to(".hero-subtitle", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: 0.25,
+            });
+
+            // Deal cards - staggered scroll animation
+            ScrollTrigger.batch(".deal-card", {
+                start: "top 88%",
+                once: true,
+                onEnter: (batch) => {
+                    gsap.to(batch, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.7,
+                        stagger: 0.1,
+                        ease: "back.out(1.2)",
+                    });
+                },
+            });
+        }
+
+        document.addEventListener("astro:page-load", initDealsAnimations);
+    </script>
+</BaseLayout>
+
+<style>
+    /* Animation initial states */
+    .hero-title,
+    .hero-subtitle {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .deal-card {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+</style>

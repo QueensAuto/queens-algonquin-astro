@@ -1,0 +1,503 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { mobileTiresBrand } from "../../../brands";
+import servicesData from "../../../data/services.json";
+import SmoothReveal from "../../../components/SmoothReveal.astro";
+import CtaButton from "../../../components/CtaButton.astro";
+import CtaButtonSecondary from "../../../components/CtaButtonSecondary.astro";
+import SpeedometerCTA from "../../../components/SpeedometerCTA.astro";
+import FaqAccordion from "../../../components/FaqAccordion.astro";
+
+import { marked } from "marked";
+
+export async function getStaticPaths() {
+    const paths: any[] = [];
+
+    // servicesData is an array of categories
+    for (const category of servicesData) {
+        for (const service of category.services) {
+            paths.push({
+                params: {
+                    category: category.slug,
+                    service: service.slug,
+                },
+                props: {
+                    category,
+                    service,
+                },
+            });
+        }
+    }
+
+    return paths;
+}
+
+const { category, service } = Astro.props as { category: any; service: any };
+const title = `${service.title} | Queens Auto Service`;
+const description = `Professional ${service.title} services in Elgin, IL. Quality care and expert technicians for all your ${category.title.toLowerCase()} needs.`;
+
+const parsedContent = service.fullContent
+    ? marked.parse(service.fullContent)
+    : null;
+const parsedCloser = service.closer ? marked.parse(service.closer) : null;
+
+const serviceFaqs = [
+    {
+        question: "Do I need an appointment, or can I just walk in?",
+        answer: "Appointments are recommended, especially for mechanical work and diagnostics, to help us get you in faster. However, we do accept walk-ins whenever our schedule allows.",
+    },
+    {
+        question: "How long will my service take?",
+        answer: "Basics like tire installation and alignments are often completed the same day. For diagnostics or larger repairs, we'll give you a clear time estimate before we start any work.",
+    },
+    {
+        question: "Do you provide a quote before starting?",
+        answer: "Absolutely. We never perform repairs without your approval. We'll explain what's needed, why it's needed, and exactly what it costs—no surprises.",
+    },
+    {
+        question: "Can I bring my own parts or tires?",
+        answer: "In some cases, yes, but we highly recommend using the parts we supply. Our parts are specifically matched to your vehicle and come with our full warranty and testing.",
+    },
+    {
+        question: "Do you offer warranties on your work?",
+        answer: "Yes. Most repairs and parts come with a warranty. We'll explain your specific coverage clearly before the work begins so you have total peace of mind.",
+    },
+    {
+        question: "How do I know if I really need the recommended repair?",
+        answer: "We believe in education, not pressure. We’ll show you what we found, explain the risks of waiting, and let you decide. If a repair can wait, we’ll tell you.",
+    },
+    {
+        question: "Is labor taxable?",
+        answer: "No. In Illinois, labor is not taxable—only parts and goods are. Your invoice will always clearly reflect this according to state law.",
+    },
+    {
+        question: "Why choose Queens Auto instead of a dealership?",
+        answer: "You get dealership-level expertise and equipment, but with honest communication, fair pricing, and zero high-pressure sales tactics.",
+    },
+];
+---
+
+<BaseLayout
+    brand={mobileTiresBrand}
+    title={title}
+    description={description}
+    headerInverse={true}
+    serviceData={service}
+    faqData={serviceFaqs}
+>
+    <!-- Hero Section - Full Width Background with slight inset, Contained Content -->
+    <div class="px-1 pt-[3px]">
+        <div
+            class="relative w-full h-[60vh] min-h-[500px] overflow-hidden rounded-3xl"
+        >
+            <!-- Background Image (Full Width) -->
+            <img
+                src="/images/shop/Queens-Auto-Services-Elgin-a-view-from-outside.webp"
+                alt="Shop View"
+                class="absolute inset-0 w-full h-full object-cover"
+            />
+            <!-- Gradient Overlay -->
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-slate-900/10 mix-blend-multiply"
+            >
+            </div>
+
+            <!-- Content Overlay - Respects Site Canvas -->
+            <div class="absolute inset-0 flex flex-col justify-end">
+                <div class="site-canvas w-full pb-12 lg:pb-20">
+                    <div
+                        class="flex flex-col lg:flex-row lg:items-end justify-between gap-8"
+                    >
+                        <!-- Title Section -->
+                        <div class="max-w-2xl">
+                            <nav
+                                class="flex gap-2 text-sm font-medium text-white/80 mb-4 uppercase tracking-wider items-center animate-fade-up"
+                            >
+                                <a
+                                    href="/services/"
+                                    class="hover:text-white transition-colors text-white"
+                                    >Services</a
+                                >
+                                <span class="text-white/60">/</span>
+                                <a
+                                    href={`/services/${category.slug}/`}
+                                    class="hover:text-white transition-colors text-white"
+                                    >{category.title}</a
+                                >
+                            </nav>
+                            <h3
+                                class="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-md animate-fade-up delay-100"
+                            >
+                                {service.shortTitle || service.title}
+                            </h3>
+                        </div>
+
+                        <!-- Description Section (Right aligned on desktop) -->
+                        <div
+                            class="max-w-xl text-white text-lg sm:text-lg border-l-4 border-queens-secondary pl-6 drop-shadow-sm animate-fade-up delay-200"
+                        >
+                            {
+                                service.pitch ||
+                                    `Professional ${service.title} services at Queens Auto Service. Our expert technicians ensure your vehicle remains safe and reliable on the Elgin roads.`
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Below Hero -->
+    <div class="site-canvas py-16 sm:py-24" data-reveal>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+            <!-- Left Column: Main Service Content -->
+            <div class="lg:col-span-2" data-reveal-item>
+                {
+                    parsedContent && (
+                        <div
+                            class="prose prose-lg prose-slate dark:prose-invert max-w-none mb-12"
+                            set:html={parsedContent}
+                        />
+                    )
+                }
+
+                {
+                    parsedCloser && (
+                        <div
+                            class="prose prose-lg prose-slate dark:prose-invert max-w-none mb-12 border-t border-gray-100 dark:border-white/10 pt-12"
+                            set:html={parsedCloser}
+                        />
+                    )
+                }
+
+                {
+                    !parsedContent && !parsedCloser && (
+                        <div class="prose prose-lg prose-slate dark:prose-invert max-w-none mb-12">
+                            <p class="lead text-xl text-gray-600 dark:text-gray-300">
+                                Experience quality automotive care with our
+                                professional {service.title} service. Our expert
+                                technicians are dedicated to providing the best
+                                service in Elgin.
+                            </p>
+                        </div>
+                    )
+                }
+
+                <div class="flex flex-wrap gap-5 mt-10">
+                    <CtaButton
+                        href="/request-an-appointment"
+                        text="Book Appointment"
+                    />
+                    <CtaButtonSecondary
+                        href={`tel:${mobileTiresBrand.phone.replace(/\D/g, "")}`}
+                        text={`Call ${mobileTiresBrand.phone}`}
+                    />
+                </div>
+            </div>
+
+            <!-- Right Column: Deals & Specials Sidebar -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="sticky top-24 space-y-6">
+                    <h3
+                        class="text-lg font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-2"
+                        data-reveal-item
+                    >
+                        Current Specials
+                    </h3>
+
+                    <!-- Banner 1: Auto Repair -->
+                    <a
+                        href="https://queensautoserviceselgin.com/auto-repair-landing-page/?banner=sidebar_auto_repair_01"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-white/5"
+                        data-reveal-item
+                    >
+                        <img
+                            src="/images/deals/Auto-Repair-Coupon-Banner-001.webp"
+                            alt="Auto Repair Special Offer"
+                            class="w-full h-auto object-cover"
+                        />
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover:bg-white/10 transition-colors duration-300"
+                        >
+                        </div>
+                    </a>
+
+                    <!-- Banner 2: Brakes -->
+                    <a
+                        href="https://queensautoserviceselgin.com/brakes/booking.htm?banner=sidebar_brakes_01"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-slate-800"
+                        data-reveal-item
+                    >
+                        <img
+                            src="/images/deals/Brake-Soecial-Banner-001.webp"
+                            alt="Brake Service Special Offer"
+                            loading="lazy"
+                            class="w-full h-auto object-cover"
+                        />
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover:bg-white/10 transition-colors duration-300"
+                        >
+                        </div>
+                    </a>
+
+                    <!-- Banner 3: Alignment -->
+                    <a
+                        href="https://queensautoserviceselgin.com/wheel-alignment/special-offer.htm?banner=sidebar_alignment_01"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-slate-800"
+                        data-reveal-item
+                    >
+                        <img
+                            src="/images/deals/Wheel-Alignment-Banner-001.webp"
+                            alt="Wheel Alignment Special Offer"
+                            loading="lazy"
+                            class="w-full h-auto object-cover"
+                        />
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover:bg-white/10 transition-colors duration-300"
+                        >
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Grid Section -->
+    <div class="site-canvas pb-16 sm:pb-24" data-reveal>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Image 1 -->
+            <div
+                class="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-white/5 shadow-sm"
+                data-reveal-item
+            >
+                <img
+                    src="/images/services/Queens-Auto-repair.webp"
+                    alt="Queens Auto Repair"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    onerror="this.src='https://placehold.co/600x400/1e293b/white?text=Auto+Repair'"
+                />
+            </div>
+            <!-- Image 2 -->
+            <div
+                class="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-slate-800 shadow-sm"
+                data-reveal-item
+            >
+                <img
+                    src="/images/services/Queens-Auto-Services-Elgin-Auto-Repair-001.webp"
+                    alt="Auto Services Elgin"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    onerror="this.src='https://placehold.co/600x400/1e293b/white?text=Service+Bay'"
+                />
+            </div>
+            <!-- Image 3 -->
+            <div
+                class="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-slate-800 shadow-sm"
+                data-reveal-item
+            >
+                <img
+                    src="/images/services/Queens-Auto-Auto-Repair-005.webp"
+                    alt="Auto Repair Service"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    onerror="this.src='https://placehold.co/600x400/1e293b/white?text=Repair+Shop'"
+                />
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="py-16 sm:py-24" data-reveal>
+        <div class="site-canvas">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+                <!-- FAQ Header (Left Column) -->
+                <div class="lg:col-span-1 reveal-hidden" data-reveal-item>
+                    <h5
+                        class="font-bold tracking-tight text-gray-900 dark:text-white mb-4"
+                    >
+                        Frequently Asked Questions
+                    </h5>
+                    <p
+                        class="text-lg leading-8 text-gray-600 dark:text-gray-300"
+                    >
+                        Have questions about our {service.title}? Here are some
+                        common queries from our customers.
+                    </p>
+                </div>
+
+                <!-- FAQ Items (Right Column) -->
+                <div class="lg:col-span-2" data-reveal-item>
+                    <FaqAccordion faqs={serviceFaqs} />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section with CSS-Only Scroll Reveal (Kevin Powell technique) -->
+    <!-- CTA Section with Speedometer Visual -->
+    <SpeedometerCTA />
+
+    <!-- Include the SmoothReveal animation system -->
+    <SmoothReveal />
+
+    <!-- JavaScript Scroll-Driven Animation (works in all browsers) -->
+    <script is:inline>
+        (function () {
+            function initScrollReveal() {
+                var section = document.querySelector(".scroll-reveal");
+                if (!section || section.getAttribute("data-scroll-init"))
+                    return;
+                section.setAttribute("data-scroll-init", "true");
+
+                var spans = section.querySelectorAll("span");
+                var button = section.querySelector(".cta-button-reveal");
+
+                function updateOnScroll() {
+                    var rect = section.getBoundingClientRect();
+                    var windowHeight = window.innerHeight;
+
+                    // Calculate progress (0 to 1) based on element position
+                    // Start when top is at 80% of viewport, end when top is at 20%
+                    var start = windowHeight * 0.8;
+                    var end = windowHeight * 0.2;
+                    var progress = (start - rect.top) / (start - end);
+                    progress = Math.min(1, Math.max(0, progress));
+
+                    // Update each span's background-size
+                    spans.forEach(function (span, index) {
+                        // Stagger: each span starts slightly later
+                        var staggeredProgress = (progress - index * 0.1) / 0.6;
+                        staggeredProgress = Math.min(
+                            1,
+                            Math.max(0, staggeredProgress),
+                        );
+                        var size = staggeredProgress * 100;
+                        span.style.backgroundSize = size + "% 100%";
+                    });
+
+                    // Fade in button
+                    if (button) {
+                        var buttonProgress = (progress - 0.4) / 0.4;
+                        buttonProgress = Math.min(
+                            1,
+                            Math.max(0, buttonProgress),
+                        );
+                        button.style.opacity = buttonProgress;
+                        button.style.transform =
+                            "translateY(" + (20 - buttonProgress * 20) + "px)";
+                    }
+                }
+
+                // Listen to scroll
+                window.addEventListener("scroll", updateOnScroll, {
+                    passive: true,
+                });
+                // Initial call
+                updateOnScroll();
+            }
+
+            // Run on page load and View Transitions
+            document.addEventListener("astro:page-load", initScrollReveal);
+
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", initScrollReveal);
+            } else {
+                initScrollReveal();
+            }
+        })();
+    </script>
+
+    <style>
+        /* CSS-Only Scroll Reveal Theme Variables */
+        .scroll-reveal {
+            /* Light Mode Default */
+            --reveal-text-dim: hsl(0 0% 50% / 0.25); /* Faint Gray */
+            --reveal-text-bright: #111827; /* Deep Black */
+        }
+
+        /* 
+           Use :global(.dark) because the .dark class is on the <html> element, 
+           outside this component's scope. 
+        */
+        :global(.dark) .scroll-reveal {
+            /* Dark Mode Inverse */
+            --reveal-text-dim: hsl(
+                0 0% 100% / 0.4
+            ); /* Soft White/Gray (Increased visibility) */
+            --reveal-text-bright: #ffffff; /* Pure White */
+        }
+
+        /* Scroll Reveal Effect */
+        .scroll-reveal span {
+            /* Unrevealed state (Dim) */
+            color: var(--reveal-text-dim);
+
+            /* Revealed state (Bright) applied via background gradient */
+            background-image: linear-gradient(
+                90deg,
+                var(--reveal-text-bright),
+                var(--reveal-text-bright)
+            );
+
+            /* Clip background to text shape */
+            background-clip: text;
+            -webkit-background-clip: text;
+
+            /* Initial state - hidden reveal */
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+
+            /* Smooth transition */
+            transition: background-size 0.1s ease-out;
+        }
+
+        /* CTA button initial state */
+        .cta-button-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition:
+                opacity 0.1s ease-out,
+                transform 0.1s ease-out;
+        }
+    </style>
+
+    <style>
+        /* Hero animations - smooth, premium entrance */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        /* Hero stagger delays - slower, more intentional */
+        .delay-100 {
+            animation-delay: 150ms;
+        }
+        .delay-200 {
+            animation-delay: 300ms;
+        }
+        .delay-300 {
+            animation-delay: 450ms;
+        }
+        .delay-400 {
+            animation-delay: 600ms;
+        }
+    </style>
+</BaseLayout>

@@ -1,0 +1,736 @@
+---
+import CtaButton from "./CtaButton.astro";
+import CtaButtonSecondary from "./CtaButtonSecondary.astro";
+
+/**
+ * GSAPNewTires - GSAP New Tires Section
+ * Section pins to viewport, scroll drives animations, then unpins.
+ */
+---
+
+<div class="scroll-promo" id="scroll-promo">
+    <!-- Main Pinned Section -->
+    <section class="promo-section promo-section--main" data-section="main">
+        <!--
+Video Background -->
+        <video
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="none"
+            style="background-color: #000;"
+            class="promo-video"
+        >
+            <source
+                src="/video/Queens%20Auto%20Services%20-%20Elgin%20New%20Tires%20Service.mp4"
+                type="video/mp4"
+            />
+            Your browser does not support the video tag.
+        </video>
+        <!-- Content
+wrapper -->
+        <div class="promo-content">
+            <!-- Headline 1: Tire Sale -->
+            <h2 class="promo-text promo-text--1">
+                <span class="promo-text__tag">Limited Time</span>
+                <span class="promo-text__main">Tire Sale</span>
+            </h2>
+            <!-- Headline
+2: Free Alignment Offer -->
+            <h3 class="promo-text promo-text--2">
+                Buy 4 Tires.<br />Free Alignment.
+            </h3>
+            <!-- Text Reveal -->
+            <p class="promo-text
+promo-text--3">
+                <span>Shop top brands online.</span>
+                <span>&nbsp;Professional in-shop installation.</span>
+                <span>&nbsp;Purchase a full set of 4.</span>
+                <span>&nbsp;And get a FREE alignment.</span>
+            </p>
+        </div>
+    </section>
+    <!-- CTA Section (Enhanced) -->
+    <section class="promo-section promo-section--cta" data-section="cta">
+        <!-- Radial Glow Background -->
+        <div class="promo-cta__glow"></div>
+
+        <div class="promo-cta">
+            <!-- Headline -->
+            <h2 class="promo-cta__label">
+                FIND YOUR <span class="promo-cta__label-accent"
+                    >PERFECT TIRES</span
+                >
+            </h2>
+
+            <!-- Trust Signals -->
+            <div class="promo-cta__trust">
+                <div class="promo-cta__trust-item">
+                    <svg
+                        class="promo-cta__trust-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Top Brands</span>
+                </div>
+                <div class="promo-cta__trust-item">
+                    <svg
+                        class="promo-cta__trust-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Same-Day Install</span>
+                </div>
+                <div class="promo-cta__trust-item">
+                    <svg
+                        class="promo-cta__trust-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Price Match</span>
+                </div>
+            </div>
+
+            <!-- Brand Logos Carousel -->
+            <div class="promo-cta__brands-wrapper">
+                <div class="promo-cta__brands-track" id="brands-track">
+                    <!-- First set -->
+                    <img
+                        src="/images/logos/tire brands logos/Michelin-Tires-Logo.webp"
+                        alt="Michelin"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Bridgestone-Tires-Logo.webp"
+                        alt="Bridgestone"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Cooper-Tires-Logo.webp"
+                        alt="Cooper"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Hankook-Tires-Logo.webp"
+                        alt="Hankook"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Kumho-Tires-Logo.webp"
+                        alt="Kumho"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/New-Nexen-Tires-Logo.webp"
+                        alt="Nexen"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Ironman-Tires-Logo.webp"
+                        alt="Ironman"
+                        class="promo-cta__brand-logo"
+                    />
+                    <!-- Duplicate set for seamless loop -->
+                    <img
+                        src="/images/logos/tire brands logos/Michelin-Tires-Logo.webp"
+                        alt="Michelin"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Bridgestone-Tires-Logo.webp"
+                        alt="Bridgestone"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Cooper-Tires-Logo.webp"
+                        alt="Cooper"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Hankook-Tires-Logo.webp"
+                        alt="Hankook"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Kumho-Tires-Logo.webp"
+                        alt="Kumho"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/New-Nexen-Tires-Logo.webp"
+                        alt="Nexen"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Ironman-Tires-Logo.webp"
+                        alt="Ironman"
+                        class="promo-cta__brand-logo"
+                    />
+                </div>
+            </div>
+
+            <!-- Dual Buttons -->
+            <div class="promo-cta__buttons">
+                <CtaButton
+                    href="/buy-new-tires"
+                    text="Shop Tires Now"
+                    reload={true}
+                />
+                <CtaButtonSecondary
+                    href="/buy-new-tires"
+                    text="View All Brands"
+                    reload={true}
+                />
+            </div>
+
+            <!-- Free Alignment Callout -->
+            <p class="promo-cta__offer">
+                <span class="promo-cta__offer-badge">LIMITED TIME</span>
+                Free Alignment with 4-Tire Purchase
+            </p>
+        </div>
+    </section>
+</div>
+<style>
+    /* Main Container */
+    .scroll-promo {
+        background: #141517;
+        color: #f9fafb;
+        position: relative;
+    } /* Main section - will be pinned */
+    .promo-section--main {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+    }
+    .promo-section--cta {
+        position: relative;
+        min-height: auto;
+        padding: 4rem 0 6rem;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    } /* Video Background */
+    .promo-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        filter: saturate(0.2) brightness(0.35);
+        opacity: 0;
+    } /* Content container - centered */
+    .promo-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+    } /* All text elements stacked in same position */
+    .promo-text {
+        position: absolute;
+        text-align: center;
+        margin: 0;
+        font-family: var(--font-display);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        transform-origin: center center;
+        padding: 0 1.5rem;
+        max-width: 100vw;
+    } /* Headline 1 */
+    .promo-text--1 {
+        display: grid;
+        font-size: clamp(3rem, 12vw + 1rem, 14rem);
+        line-height: 0.85;
+        gap: 0;
+        will-change: transform, opacity;
+    }
+    .promo-text__tag {
+        display: inline-block;
+        color: #0a79c8;
+        font-size: 0.3em;
+        margin-bottom: -0.2em;
+        will-change: opacity;
+    }
+    .promo-text__main {
+        display: inline-block;
+        color: hsl(0 0% 40%);
+        will-change: transform, color;
+        transform: scale(0.5);
+    } /* Headline 2 */
+    .promo-text--2 {
+        font-size: clamp(2rem, 7vw + 1rem, 6rem);
+        line-height: 1.15;
+        max-width: 900px;
+        color: hsl(0 0% 40%);
+        opacity: 0;
+        transform: scale(0.6);
+        text-transform: none;
+        will-change: transform, opacity, color;
+    } /* Text Reveal */
+    .promo-text--3 {
+        font-size: clamp(1.5rem, 4vw + 1rem, 4.5rem);
+        letter-spacing: -0.01em;
+        line-height: 1.25;
+        font-weight: 600;
+        max-width: 1000px;
+        text-transform: none;
+        opacity: 0;
+        color: hsl(0 0% 100%);
+    }
+    .promo-text--3 span {
+        opacity: 0.15;
+        display: inline;
+        color: hsl(0 0% 40%);
+    } /*
+CTA Section */
+    .promo-section--cta {
+        overflow: hidden;
+    }
+    .promo-cta__glow {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120%;
+        height: 100%;
+        background: radial-gradient(
+            ellipse at center top,
+            rgba(10, 121, 200, 0.15) 0%,
+            transparent 60%
+        );
+        pointer-events: none;
+        z-index: 0;
+    }
+    .promo-cta {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        gap: 1.5rem;
+        text-align: center;
+        padding: 2rem;
+        max-width: 900px;
+    }
+    .promo-cta__label {
+        font-family: var(--font-display);
+        font-size: clamp(2.5rem, 6vw + 1rem, 5rem);
+        font-weight: 800;
+        color: white;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        line-height: 1.05;
+        margin: 0;
+    }
+    .promo-cta__label-accent {
+        color: #0a79c8;
+    }
+
+    /* Trust Signals */
+    .promo-cta__trust {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem 2rem;
+        margin-top: 0.5rem;
+    }
+    .promo-cta__trust-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: hsl(0 0% 60%);
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .promo-cta__trust-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: hsl(142 76% 45%);
+    }
+
+    /* Brand Logos Carousel */
+    .promo-cta__brands-wrapper {
+        width: 100%;
+        max-width: 800px;
+        overflow: hidden;
+        margin: 1.5rem 0;
+        padding: 1.5rem 0;
+        border-top: 1px solid hsl(0 0% 20%);
+        border-bottom: 1px solid hsl(0 0% 20%);
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 10%,
+            black 90%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 10%,
+            black 90%,
+            transparent 100%
+        );
+    }
+    .promo-cta__brands-track {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+        width: max-content;
+    }
+    .promo-cta__brand-logo {
+        height: 36px;
+        width: auto;
+        opacity: 0.6;
+        filter: grayscale(100%);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+    .promo-cta__brand-logo:hover {
+        opacity: 1;
+        filter: grayscale(0%);
+    }
+    @media (min-width: 768px) {
+        .promo-cta__brand-logo {
+            height: 48px;
+        }
+    }
+
+    /* Dual Buttons */
+    .promo-cta__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    /* Offer Callout */
+    .promo-cta__offer {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.875rem;
+        color: hsl(0 0% 50%);
+        font-weight: 500;
+        margin-top: 1rem;
+    }
+    .promo-cta__offer-badge {
+        background: rgba(10, 121, 200, 0.15);
+        color: #0a79c8;
+        font-size: 0.625rem;
+        font-weight: 800;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        letter-spacing: 0.1em;
+    }
+</style>
+<script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    // Register globally once
+    gsap.registerPlugin(ScrollTrigger);
+
+    let ctx: any; // Using any to avoid type issues if GSAP types aren't perfectly inferred
+
+    async function initScrollPromo() {
+        const container = document.getElementById("scroll-promo");
+
+        // If we navigated to a page without this component, clean up and exit
+        if (!container) {
+            if (ctx) ctx.revert();
+            return;
+        }
+
+        // Clean up any existing context for this component
+        if (ctx) ctx.revert();
+
+        // Wait for next frame to ensure DOM layout is settled
+        await new Promise(requestAnimationFrame);
+
+        const video = container.querySelector(
+            ".promo-video",
+        ) as HTMLVideoElement;
+        // Ensure video is playing if it was paused by navigation logic
+        if (video) {
+            video.play().catch(() => {
+                /* Auto-play restrictions */
+            });
+        }
+
+        // Create a new GSAP context scoped to the container
+        ctx = gsap.context(() => {
+            const mainSection = container.querySelector(
+                '[data-section="main"]',
+            );
+            const text1 = container.querySelector(".promo-text--1");
+            const textMain = container.querySelector(".promo-text__main");
+            const textTag = container.querySelector(".promo-text__tag");
+            const text2 = container.querySelector(".promo-text--2");
+            const text3 = container.querySelector(".promo-text--3");
+            const textSpans = container.querySelectorAll(".promo-text--3 span");
+
+            if (!mainSection) return;
+
+            // Create main timeline with PIN
+            const masterTL = gsap.timeline({
+                scrollTrigger: {
+                    trigger: mainSection,
+                    start: "top top",
+                    end: "+=2000", // Reduced from 4000 to improve scroll speed and responsiveness
+                    pin: true,
+                    scrub: 1, // Reduced scrub for snappier feel
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                },
+            });
+
+            // ==========================================
+            // PHASE 1: Text 1 "Tire Sale"
+            // ==========================================
+            masterTL
+                .fromTo(
+                    textMain,
+                    { scale: 0.5, color: "hsl(0, 0%, 40%)" },
+                    {
+                        scale: 1.3,
+                        color: "hsl(0, 0%, 100%)",
+                        duration: 1,
+                        ease: "none",
+                    },
+                    0,
+                )
+                .to(
+                    textTag,
+                    { opacity: 0, duration: 0.5, ease: "power2.in" },
+                    0.3,
+                )
+                .to(
+                    text1,
+                    {
+                        opacity: 0,
+                        scale: 1.5,
+                        duration: 0.5,
+                        ease: "power2.in",
+                    },
+                    1,
+                )
+
+                // ==========================================
+                // PHASE 2: Text 2 "Premium Tires"
+                // ==========================================
+                .to(
+                    text2,
+                    {
+                        opacity: 1,
+                        duration: 0.2,
+                        ease: "none",
+                    },
+                    1.6,
+                )
+                .fromTo(
+                    text2,
+                    { scale: 0.6, color: "hsl(0, 0%, 50%)" },
+                    {
+                        scale: 1,
+                        color: "hsl(0, 0%, 100%)",
+                        duration: 0.8,
+                        ease: "none",
+                    },
+                    1.7,
+                )
+                .to(
+                    text2,
+                    { opacity: 0, scale: 1.1, duration: 0.5, ease: "none" },
+                    2.6,
+                )
+
+                // ==========================================
+                // PHASE 3: Video fades in
+                // ==========================================
+                .to(
+                    video,
+                    { opacity: 1, duration: 0.5, ease: "power2.out" },
+                    2.8,
+                )
+
+                // ==========================================
+                // PHASE 4: Text 3 reveal
+                // ==========================================
+                .to(
+                    text3,
+                    { opacity: 1, duration: 0.3, ease: "power2.out" },
+                    3,
+                );
+
+            // Add span reveals
+            if (textSpans.length) {
+                textSpans.forEach((span, i) => {
+                    masterTL.to(
+                        span,
+                        {
+                            opacity: 1,
+                            color: "hsl(0, 0%, 100%)",
+                            duration: 0.4,
+                            ease: "power2.inOut",
+                        },
+                        3.2 + i * 0.3,
+                    );
+                });
+            }
+
+            // Fade everything out at end
+            masterTL
+                .to(
+                    text3,
+                    { opacity: 0, duration: 0.3, ease: "power2.in" },
+                    4.5,
+                )
+                .to(
+                    video,
+                    { opacity: 0, duration: 0.3, ease: "power2.in" },
+                    4.5,
+                );
+
+            // ==========================================
+            // CTA SECTION
+            // ==========================================
+            const ctaSection = container.querySelector('[data-section="cta"]');
+            const ctaLabel = container.querySelector(".promo-cta__label");
+            const ctaButton = container.querySelector(".promo-cta__button");
+
+            if (ctaSection) {
+                // Animate CTA label
+                if (ctaLabel) {
+                    gsap.fromTo(
+                        ctaLabel,
+                        { y: 40, opacity: 0 },
+                        {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: ctaSection,
+                                start: "top 90%",
+                                once: true,
+                            },
+                        },
+                    );
+                }
+
+                // Animate trust signals, brands, and buttons
+                const ctaTrust = container.querySelector(".promo-cta__trust");
+                const ctaBrands = container.querySelector(".promo-cta__brands");
+                const ctaButtons = container.querySelector(
+                    ".promo-cta__buttons",
+                );
+                const ctaOffer = container.querySelector(".promo-cta__offer");
+
+                const ctaElements = [
+                    ctaTrust,
+                    ctaBrands,
+                    ctaButtons,
+                    ctaOffer,
+                ].filter(Boolean);
+
+                if (ctaElements.length > 0) {
+                    gsap.fromTo(
+                        ctaElements,
+                        { y: 30, opacity: 0 },
+                        {
+                            y: 0,
+                            opacity: 1,
+                            stagger: 0.1,
+                            duration: 0.6,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: ctaSection,
+                                start: "top 80%",
+                                once: true,
+                            },
+                        },
+                    );
+                }
+            }
+
+            // ==========================================
+            // BRAND LOGOS INFINITE CAROUSEL
+            // ==========================================
+            const brandsTrack = container.querySelector("#brands-track");
+            if (brandsTrack) {
+                // Get the total width of the first half (original logos)
+                const logos = brandsTrack.querySelectorAll(
+                    ".promo-cta__brand-logo",
+                );
+                const logoCount = logos.length / 2; // Half are duplicates
+
+                // Calculate width of one set of logos
+                let totalWidth = 0;
+                for (let i = 0; i < logoCount; i++) {
+                    const logo = logos[i] as HTMLElement;
+                    totalWidth += logo.offsetWidth;
+                }
+                // Add gaps (4rem = 64px per gap, logoCount - 1 gaps in one set)
+                const gapWidth = 64 * logoCount;
+                const scrollDistance = totalWidth + gapWidth;
+
+                // Create infinite seamless loop
+                gsap.to(brandsTrack, {
+                    x: -scrollDistance,
+                    duration: 25,
+                    ease: "none",
+                    repeat: -1,
+                    modifiers: {
+                        x: gsap.utils.unitize(
+                            (x: number) =>
+                                parseFloat(x as unknown as string) %
+                                scrollDistance,
+                        ),
+                    },
+                });
+            }
+        }, container); // Scope matches container
+
+        // Refresh ScrollTrigger after a slight delay to account for any layout shifts
+        setTimeout(() => ScrollTrigger.refresh(), 500);
+    }
+
+    // Initialize on page load (covers initial load and view transitions)
+    document.addEventListener("astro:page-load", initScrollPromo);
+
+    // Cleanup on component unmount/page swap
+    document.addEventListener("astro:before-swap", () => {
+        if (ctx) ctx.revert();
+    });
+</script>

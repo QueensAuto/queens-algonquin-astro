@@ -1,0 +1,74 @@
+---
+/**
+ * SmoothScroll - Premium smooth scrolling using Lenis
+ * Add this to your BaseLayout for site-wide smooth scrolling
+ */
+---
+
+<script>
+    import Lenis from "lenis";
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    let lenis: Lenis | null = null;
+
+    function initSmoothScroll() {
+        // Firefox specific check - Firefox often has issues with wheel interception
+        const isFirefox =
+            navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+
+        if (lenis) {
+            lenis.destroy();
+        }
+
+        // Initialize Lenis
+        lenis = new Lenis({
+            autoRaf: true, // Let Lenis handle its own animation loop for better reliability
+            lerp: 0.1,
+            smoothWheel: !isFirefox, // Disable Lenis smoothing on Firefox to use native wheel scroll
+            syncTouch: true,
+        });
+
+        // Sync ScrollTrigger with Lenis
+        lenis.on("scroll", ScrollTrigger.update);
+
+        // Expose Lenis on window for programmatic scrolling from other components
+        (window as any).lenis = lenis;
+
+        gsap.ticker.lagSmoothing(0);
+
+        // Ensure ScrollTrigger uses the scroll container
+        ScrollTrigger.scrollerProxy(document.body, {
+            scrollTop(value) {
+                return arguments.length
+                    ? lenis?.scrollTo(value ?? 0)
+                    : lenis?.scroll;
+            },
+            getBoundingClientRect() {
+                return {
+                    top: 0,
+                    left: 0,
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                };
+            },
+        });
+    }
+
+    // Initialize after page load
+    document.addEventListener("astro:page-load", () => {
+        initSmoothScroll();
+        // Refresh ScrollTrigger after a short delay
+        setTimeout(() => ScrollTrigger.refresh(), 100);
+    });
+
+    // Cleanup before page swap
+    document.addEventListener("astro:before-swap", () => {
+        if (lenis) {
+            lenis.destroy();
+            lenis = null;
+        }
+    });
+</script>

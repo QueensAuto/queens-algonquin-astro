@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import ServicesHome from "../components/ServicesHome.astro";
+import ServiceCards from "../components/ServiceCards.astro";
+import GSAPNewTires from "../components/GSAPNewTires.astro";
+import ProcessSteps from "../components/ProcessSteps.astro";
+import ReviewsVideo from "../components/ReviewsVideo.astro";
+import WhyChooseUs from "../components/WhyChooseUs.astro";
+import FinancingSection from "../components/FinancingSection.astro";
+import { mobileTiresBrand } from "../brands";
+import reviews from "../data/reviews.json";
+---
+
+<BaseLayout
+  brand={mobileTiresBrand}
+  title="Queens Auto Service | Professional Auto Repair in Elgin, IL"
+  description="Expert auto repair and tire services in Elgin. From wheel alignments to engine diagnostics, we provide dealership-level care without the dealership pressure."
+  reviewData={reviews}
+>
+  <link
+    rel="preload"
+    as="video"
+    href="/video/Queens-Elgin-Hero-2025.mp4"
+    type="video/mp4"
+    slot="head"
+  />
+  <link
+    rel="preload"
+    as="image"
+    href="/images/shop/Queens-Auto-Banner-001.webp"
+    slot="head"
+  />
+
+  <Hero brand={mobileTiresBrand} />
+  <ServiceCards />
+  <GSAPNewTires />
+  <FinancingSection />
+  <WhyChooseUs />
+  <ProcessSteps />
+  <ReviewsVideo />
+  <ServicesHome brand={mobileTiresBrand} />
+</BaseLayout>

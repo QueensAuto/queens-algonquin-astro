@@ -1,0 +1,255 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaButton from "../components/CtaButton.astro";
+---
+
+<BaseLayout
+    title="404 - Page Not Found | Queens Auto Services"
+    description="The page you are looking for is not available."
+>
+    <section
+        class="page_404 flex items-center justify-center min-h-[90vh] pt-32 pb-20 overflow-hidden"
+    >
+        <div class="site-canvas relative">
+            <div class="animation-wrapper relative flex flex-col items-center">
+                <!-- COG ANIMATION START -->
+                <div class="cog-container">
+                    <h1 class="first-four">4</h1>
+                    <div class="cog-wheel1">
+                        <div class="cog1">
+                            <div class="top"></div>
+                            <div class="down"></div>
+                            <div class="left-top"></div>
+                            <div class="left-down"></div>
+                            <div class="right-top"></div>
+                            <div class="right-down"></div>
+                            <div class="left"></div>
+                            <div class="right"></div>
+                        </div>
+                    </div>
+
+                    <div class="cog-wheel2">
+                        <div class="cog2">
+                            <div class="top"></div>
+                            <div class="down"></div>
+                            <div class="left-top"></div>
+                            <div class="left-down"></div>
+                            <div class="right-top"></div>
+                            <div class="right-down"></div>
+                            <div class="left"></div>
+                            <div class="right"></div>
+                        </div>
+                    </div>
+                    <h1 class="second-four">4</h1>
+                </div>
+                <!-- COG ANIMATION END -->
+
+                <div class="content_404 text-center">
+                    <p class="wrong-para mb-10">Uh Oh! Page not found!</p>
+
+                    <div class="flex justify-center relative z-20">
+                        <CtaButton href="/" text="Back to Homepage" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<style>
+    .page_404 {
+        background-color: var(--bg-page);
+        font-family: var(--font-sans);
+    }
+
+    .cog-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        left: 2vmin;
+        height: 40vmin;
+        min-height: 220px;
+    }
+
+    .cog-wheel1,
+    .cog-wheel2 {
+        transform: scale(0.45);
+    }
+
+    @media (min-width: 768px) {
+        .cog-wheel1,
+        .cog-wheel2 {
+            transform: scale(0.55);
+        }
+    }
+
+    .cog1,
+    .cog2 {
+        width: 40vmin;
+        height: 40vmin;
+        border-radius: 50%;
+        border: 6vmin solid #0a79c8; /* Queens Secondary */
+        position: relative;
+    }
+
+    .cog2 {
+        border: 6vmin solid #0b1121; /* Queens Primary */
+        position: relative;
+        left: -10.2vmin;
+        bottom: 0; /* Remove vertical offset for symmetry */
+    }
+
+    :global(.dark) .cog2 {
+        border-color: #facc15; /* Star Yellow for contrast in dark mode */
+    }
+
+    .top,
+    .down,
+    .left,
+    .right,
+    .left-top,
+    .left-down,
+    .right-top,
+    .right-down {
+        width: 10vmin;
+        height: 10vmin;
+        background-color: #0a79c8;
+        position: absolute;
+    }
+
+    .cog2 .top,
+    .cog2 .down,
+    .cog2 .left,
+    .cog2 .right,
+    .cog2 .left-top,
+    .cog2 .left-down,
+    .cog2 .right-top,
+    .cog2 .right-down {
+        background-color: #0b1121;
+    }
+
+    :global(.dark) .cog2 .top,
+    :global(.dark) .cog2 .down,
+    :global(.dark) .cog2 .left,
+    :global(.dark) .cog2 .right,
+    :global(.dark) .cog2 .left-top,
+    :global(.dark) .cog2 .left-down,
+    :global(.dark) .cog2 .right-top,
+    :global(.dark) .cog2 .right-down {
+        background-color: #facc15;
+    }
+
+    .top {
+        top: -14vmin;
+        left: 9vmin;
+    }
+    .down {
+        bottom: -14vmin;
+        left: 9vmin;
+    }
+    .left {
+        left: -14vmin;
+        top: 9vmin;
+    }
+    .right {
+        right: -14vmin;
+        top: 9vmin;
+    }
+    .left-top {
+        transform: rotateZ(-45deg);
+        left: -8vmin;
+        top: -8vmin;
+    }
+    .left-down {
+        transform: rotateZ(45deg);
+        left: -8vmin;
+        top: 25vmin;
+    }
+    .right-top {
+        transform: rotateZ(45deg);
+        right: -8vmin;
+        top: -8vmin;
+    }
+    .right-down {
+        transform: rotateZ(-45deg);
+        right: -8vmin;
+        top: 25vmin;
+    }
+
+    .first-four,
+    .second-four {
+        font-family: var(--font-display);
+        color: var(--text-primary);
+        font-weight: 800;
+        font-size: 28vmin;
+        line-height: 1;
+    }
+
+    .first-four {
+        position: relative;
+        left: 4vmin;
+        z-index: 1;
+    }
+
+    .second-four {
+        position: relative;
+        right: 12vmin;
+        z-index: 1;
+    }
+
+    .wrong-para {
+        font-family: var(--font-sans);
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .content_404 {
+        margin-top: -5vmin;
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap";
+
+    function init404() {
+        let t1 = gsap.timeline();
+        let t2 = gsap.timeline();
+        let t3 = gsap.timeline();
+
+        t1.to(".cog1", {
+            transformOrigin: "50% 50%",
+            rotation: "+=360",
+            repeat: -1,
+            ease: "none",
+            duration: 8,
+        });
+
+        t2.to(".cog2", {
+            transformOrigin: "50% 50%",
+            rotation: "-=360",
+            repeat: -1,
+            ease: "none",
+            duration: 8,
+        });
+
+        t3.fromTo(
+            ".wrong-para",
+            {
+                opacity: 0.4,
+            },
+            {
+                opacity: 1,
+                duration: 1.5,
+                repeat: -1,
+                yoyo: true,
+                ease: "power2.inOut",
+            },
+        );
+    }
+
+    document.addEventListener("astro:page-load", init404);
+</script>

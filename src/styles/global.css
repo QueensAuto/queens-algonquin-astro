@@ -1,0 +1,1454 @@
+@import "tailwindcss";
+
+/* Lenis Smooth Scroll Base Styles */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+    pointer-events: none;
+}
+
+@layer components {
+    .site-canvas {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1400px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-queens-primary: #0b1121;
+    --color-queens-secondary-ultra-dark: #021828;
+    --color-queens-secondary-darker: #043050;
+    --color-queens-secondary-dark: #064978;
+    --color-queens-secondary-medium-dark: #0861a0;
+    --color-queens-secondary: #0a79c8;
+    --color-queens-secondary-medium-light: #3b94d3;
+    --color-queens-secondary-light: #6cafde;
+    --color-queens-secondary-lighter: #9dc9e9;
+    --color-queens-secondary-ultra-light: #cee4f4;
+    --color-queens-dark: #141517;
+    --color-queens-light: #1489e1;
+    --color-queens-orange: #f97316;
+    --color-queens-black: #050505;
+    --color-star-yellow: #facc15;
+
+    --font-sans: "Instrument Sans", "Inter", sans-serif;
+    --font-big-shoulders: "Big Shoulders Display", sans-serif;
+    --font-display: var(--font-big-shoulders);
+    --font-serif: "Source Serif 4", serif;
+
+    --max-width-site: 1400px;
+}
+
+/* ========================================
+   BRAND COLOR UTILITIES
+   Override heading color rules for brand colors
+   ======================================== */
+
+.text-queens-secondary,
+h1 .text-queens-secondary,
+h2 .text-queens-secondary,
+h3 .text-queens-secondary,
+span.text-queens-secondary {
+    color: #0a79c8 !important;
+}
+
+.text-queens-primary {
+    color: #0b1121 !important;
+}
+
+/* Hover states for secondary color */
+.hover\:text-queens-secondary:hover,
+a.hover\:text-queens-secondary:hover,
+nav a.hover\:text-queens-secondary:hover {
+    color: #0a79c8 !important;
+}
+
+/* Group hover for icons and nested elements */
+.group:hover .group-hover\:text-queens-secondary {
+    color: #0a79c8 !important;
+}
+
+/* ========================================
+   SEMANTIC THEME VARIABLES
+   These automatically switch based on .dark class
+   ======================================== */
+
+:root {
+    /* Brand Colors */
+    --color-queens-dark-bg: #141517;
+
+    /* Text Colors */
+    --text-primary: #0b1121;
+    --text-secondary: #374151;
+    --text-muted: #6b7280;
+    --text-inverted: #ffffff;
+
+    /* Background Colors */
+    --bg-page: #f9fafb;
+    --bg-surface: #ffffff;
+    --bg-elevated: #ffffff;
+    --bg-muted: #f3f4f6;
+
+    /* Border Colors */
+    --border-default: #e5e7eb;
+    --border-muted: #f3f4f6;
+
+    /* Shadow opacity */
+    --shadow-opacity: 0.1;
+}
+
+.dark {
+    /* Text Colors - inverted for dark mode */
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --text-inverted: #0b1121;
+
+    /* Background Colors - dark surfaces */
+    --bg-page: var(--color-queens-dark-bg);
+    /* Queens Dark */
+    --bg-surface: #141517;
+    --bg-elevated: #0b1121;
+    /* Queens Primary */
+    --bg-muted: #0b1121;
+    /* Queens Primary */
+
+    /* Border Colors */
+    --border-default: #1e293b;
+    --border-muted: #0f172a;
+
+    /* Shadow opacity - less visible on dark */
+    --shadow-opacity: 0.3;
+}
+
+/* Custom background utility */
+.bg-page {
+    background-color: var(--bg-page);
+}
+
+/* ========================================
+   THEME ISOLATION (LOCKS)
+   Use these classes to force a specific theme on a section/component
+   regardless of the global site preference.
+   ======================================== */
+
+.theme-light {
+    /* Force Light Mode Variables */
+    --text-primary: #0b1121;
+    --text-secondary: #374151;
+    --text-muted: #6b7280;
+    --text-inverted: #ffffff;
+
+    --bg-page: #f9fafb;
+    --bg-surface: #ffffff;
+    --bg-elevated: #ffffff;
+    --bg-muted: #f3f4f6;
+
+    --border-default: #e5e7eb;
+    --border-muted: #f3f4f6;
+
+    --shadow-opacity: 0.1;
+
+    /* Apply base styles */
+    color: var(--text-primary);
+    background-color: var(--bg-surface);
+}
+
+.theme-dark {
+    /* Force Dark Mode Variables */
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --text-inverted: #0b1121;
+
+    --bg-page: #141517;
+    --bg-surface: #141517;
+    --bg-elevated: #0b1121;
+    --bg-muted: #0b1121;
+
+    --border-default: #1e293b;
+    --border-muted: #0f172a;
+
+    --shadow-opacity: 0.3;
+
+    /* Apply base styles */
+    color: var(--text-primary);
+    background-color: var(--bg-surface);
+}
+
+/* ========================================
+   THEME LOCKED / PURE BACKGROUND MODE
+   Used for promotional landing pages
+   ======================================== */
+.theme-locked-bg {
+    background-color: #141517 !important;
+    background-attachment: fixed !important;
+}
+
+.theme-locked-bg main,
+.theme-locked-bg section,
+.theme-locked-bg .site-footer {
+    background-color: transparent !important;
+    background-image: none !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+
+/* ========================================
+   BASE ELEMENT OVERRIDES
+   Apply semantic colors to common elements
+   ======================================== */
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   GLOBAL TYPOGRAPHY - Theme Aware
+   All headings and body text use semantic colors
+   ======================================== */
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* ========================================
+   DISPLAY TYPOGRAPHY UTILITIES
+   Centralized control for big headings (Hero, Section Titles)
+   ======================================== */
+.display-2xl {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.display-xl {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+.display-lg {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.display-md {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   REFINED HERO UTILITIES
+   Consistent Big Shoulders control across the site
+   ======================================== */
+
+.display-hero-home {
+    font-family: var(--font-display) !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(3rem, 10vw, 90px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+}
+
+.display-hero-page {
+    font-family: var(--font-display) !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(2.25rem, 7vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+}
+
+
+/* Custom Header Utilities */
+.main-header-h1 {
+    font-family: var(--font-display) !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 50px;
+    line-height: 1.1;
+}
+
+.main-header-h2 {
+    font-family: var(--font-display) !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 40px;
+    line-height: 1.1;
+}
+
+
+
+@media (min-width: 1024px) {
+    .main-header-h1 {
+        font-size: 100px;
+        line-height: 1;
+    }
+
+    .main-header-h2 {
+        font-size: 64px;
+        line-height: 1.1;
+    }
+}
+
+h1,
+.h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+}
+
+h2,
+.h2 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+}
+
+h3,
+.h3 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+h4,
+.h4 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
+
+h5,
+.h5 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
+
+h6,
+.h6 {
+    font-size: 1.125rem;
+    line-height: 1.4;
+}
+
+@media (min-width: 1024px) {
+
+    h1,
+    .h1 {
+        font-size: 64px;
+    }
+
+    h2,
+    .h2 {
+        font-size: 48px;
+    }
+
+    h3,
+    .h3 {
+        font-size: 36px;
+    }
+
+    h4,
+    .h4 {
+        font-size: 28px;
+    }
+
+    h5,
+    .h5 {
+        font-size: 24px;
+    }
+
+    h6,
+    .h6 {
+        font-size: 20px;
+    }
+}
+
+.paragraph-1 {
+    /* Usage: Hero description or supporting copy only */
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.paragraph-2 {
+    /* Usage: Standard body text */
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.paragraph-3 {
+    /* Usage: Fine print or small details */
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+p,
+li,
+td,
+th,
+label,
+span,
+div {
+    color: inherit;
+}
+
+/* Value Card Titles - used to override large global h3 */
+.value-card-title {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+}
+
+@media (min-width: 1024px) {
+    .value-card-title {
+        font-size: 2rem !important;
+    }
+}
+
+/* Body text defaults */
+p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+@layer base {
+    /* Add spacing around headings globally for body content flow */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-top: 2.5rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.2;
+    }
+}
+
+/* Prevent double spacing at top of containers */
+:first-child {
+    margin-top: 0 !important;
+}
+
+/* ========================================
+   RICH TEXT STYLES (Content within articles/blocks)
+   Overrides standard heading sizes for content flow
+   ======================================== */
+
+.rich-text h1 {
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.rich-text h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.rich-text h3 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.rich-text h4 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.rich-text h5 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.rich-text h6 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.rich-text p {
+    margin-bottom: 1.5rem;
+}
+
+/* Specific overrides for Tailwind Typography 'prose' to ensure breathability */
+.prose p {
+    margin-bottom: 1.6em !important;
+    line-height: 1.75 !important;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+    margin-top: 2.25em !important;
+    margin-bottom: 1em !important;
+}
+
+.prose ul,
+.prose ol {
+    margin-top: 1.5em !important;
+    margin-bottom: 1.5em !important;
+}
+
+.prose li {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}
+
+/* Ensure the John-style closer inherits these spacing rules */
+.font-serif p {
+    margin-bottom: 1.75rem;
+    line-height: 1.8;
+}
+
+/* Links */
+a {
+    color: inherit;
+}
+
+a:not([class]) {
+    color: var(--color-queens-secondary);
+}
+
+a:not([class]):hover {
+    color: var(--color-queens-light);
+}
+
+/* Cards and surfaces */
+.bg-white {
+    background-color: var(--bg-surface) !important;
+}
+
+/* Section backgrounds in Dark Mode - plain color only */
+/* .dark .bg-white removed to allow utility overrides */
+
+.bg-gray-50 {
+    background-color: var(--bg-page) !important;
+}
+
+/* Blue Shine for Cards in Dark Mode - REMOVED GRADIENT, Subtle Border Only */
+.dark .bg-white[class*="rounded"],
+.dark .bg-gray-50[class*="rounded"],
+.dark [class*="dark:bg-slate-800"][class*="rounded"] {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.bg-gray-100 {
+    background-color: var(--bg-muted) !important;
+}
+
+/* Dark Mode Shadows - Subtle Blue Shadow on HOVER only */
+.dark .hover\:shadow-lg:hover,
+.dark .hover\:shadow-xl:hover,
+.dark .hover\:shadow-2xl:hover {
+    --tw-shadow-color: rgba(20, 137, 225, 0.15) !important;
+    --tw-shadow: 0 8px 30px -6px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+
+
+
+/* Remove gradient glow from Header in Dark Mode */
+.dark #main-header,
+.dark #main-nav {
+    box-shadow: none !important;
+}
+
+
+
+
+
+
+
+/* Text colors */
+.text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+.text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+.text-gray-400 {
+    color: var(--text-muted) !important;
+}
+
+.text-gray-700 {
+    color: var(--text-secondary) !important;
+}
+
+/* Queens primary text - switch to light in dark mode */
+.text-queens-primary {
+    color: var(--text-primary) !important;
+}
+
+/* Primary text color override (CSS variable syntax) */
+.text-\[var\(--color-queens-primary\)\] {
+    color: var(--text-primary) !important;
+}
+
+/* Primary opacity text colors */
+.text-\[var\(--color-queens-primary\)\]\/60,
+.text-\[var\(--color-queens-primary\)\]\/70 {
+    color: var(--text-muted) !important;
+}
+
+/* Border colors */
+.border-gray-100,
+.border-gray-200,
+.border-gray-800 {
+    border-color: var(--border-default) !important;
+}
+
+/* Hover backgrounds */
+.hover\:bg-gray-50:hover,
+.hover\:bg-gray-100:hover {
+    background-color: var(--bg-elevated) !important;
+}
+
+/* Mobile menu panel */
+#mobile-menu .bg-white {
+    background-color: var(--bg-surface) !important;
+}
+
+#mobile-menu .border-gray-100 {
+    border-color: var(--border-default) !important;
+}
+
+#mobile-menu .text-gray-700 {
+    color: var(--text-primary) !important;
+}
+
+#mobile-menu .text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+#mobile-menu .bg-gray-100 {
+    background-color: var(--bg-muted) !important;
+}
+
+#mobile-menu .hover\:bg-gray-200:hover {
+    background-color: var(--bg-elevated) !important;
+}
+
+/* Shadows - adjust for dark mode */
+.shadow-lg,
+.shadow-xl {
+    --tw-shadow-color: rgba(0, 0, 0, var(--shadow-opacity));
+}
+
+/* ========================================
+   COMPREHENSIVE DARK MODE TEXT OVERRIDES
+   ======================================== */
+
+/* Queens brand colors - switch in dark mode */
+.text-queens-black {
+    color: var(--text-primary) !important;
+}
+
+/* Black text */
+.text-black {
+    color: var(--text-primary) !important;
+}
+
+/* Additional gray variants */
+.text-gray-800,
+.text-gray-900 {
+    color: var(--text-primary) !important;
+}
+
+.text-gray-300 {
+    color: var(--text-muted) !important;
+}
+
+/* Link colors in content areas */
+.dark a:not(.btn-primary):not(.btn-secondary):not([class*="text-queens-secondary"]):not([class*="text-white"]) {
+    color: var(--color-queens-light);
+}
+
+.dark a:not(.btn-primary):not(.btn-secondary):hover {
+    color: var(--color-queens-secondary);
+}
+
+/* City content area specific overrides */
+.city-content {
+    color: var(--text-secondary) !important;
+}
+
+.city-content h3 {
+    color: var(--text-primary) !important;
+}
+
+.city-content p {
+    color: var(--text-secondary) !important;
+}
+
+.city-content strong {
+    color: var(--text-primary) !important;
+}
+
+.city-content a {
+    color: var(--color-queens-secondary) !important;
+}
+
+.dark .city-content a:hover {
+    color: var(--color-queens-light) !important;
+}
+
+/* Cards with dark backgrounds should keep light text */
+.bg-queens-primary,
+.bg-queens-black,
+.bg-queens-dark {
+    color: white !important;
+}
+
+.bg-queens-primary *,
+.bg-queens-black *,
+.bg-queens-dark * {
+    color: inherit;
+}
+
+/* Ensure white text stays white */
+.text-white {
+    color: white !important;
+}
+
+/* Form inputs and interactive elements */
+.dark input,
+.dark textarea,
+.dark select {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    border-color: var(--border-default);
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* FAQ accordion in dark mode */
+.dark details {
+    background-color: var(--bg-surface) !important;
+    border-color: var(--border-default) !important;
+}
+
+.dark details summary {
+    color: var(--text-primary) !important;
+}
+
+.dark details>div {
+    background-color: var(--bg-elevated) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Service cards and feature boxes */
+/* .dark .bg-gray-50 removed */
+
+/* Stepper/Progress indicators */
+.dark .border-gray-300 {
+    border-color: var(--border-default) !important;
+}
+
+/* Ensure proper contrast on elevated surfaces */
+.dark .bg-white h1,
+.dark .bg-white h2,
+.dark .bg-white h3,
+.dark .bg-white h4,
+.dark .bg-white h5,
+.dark .bg-white h6 {
+    color: var(--text-primary) !important;
+}
+
+.dark .bg-white p {
+    color: var(--text-secondary) !important;
+}
+
+html {
+    scroll-behavior: auto;
+    scroll-padding-top: 5rem;
+    /* Match header height (h-20) */
+}
+
+@media (min-width: 1024px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+/* Skip to Content Link */
+.skip-to-content-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background-color: var(--color-queens-primary);
+    color: white;
+    padding: 8px 12px;
+    z-index: 10000;
+    border-radius: 0 0 8px 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: top 0.3s ease-in-out;
+}
+
+.skip-to-content-link:focus {
+    top: 0;
+    outline: 2px solid var(--color-queens-secondary);
+    outline-offset: 2px;
+}
+
+
+/* Standardized Primary Button */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #3b6eae;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1rem 3rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    color: #3b6eae;
+}
+
+.btn-primary::after {
+    content: "";
+    background: white;
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: transform 0.5s ease;
+}
+
+.btn-primary:hover::after {
+    transform: skewX(-45deg) scale(1, 1);
+}
+
+.btn-primary:disabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-primary:disabled:hover {
+    color: white;
+}
+
+.btn-primary:disabled::after {
+    display: none;
+}
+
+/* Secondary Button (Gray/Outline) - Theme Aware */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #0b1121;
+    border: 1px solid #e5e7eb;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    padding: 0.625rem 1.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.dark .btn-secondary {
+    background: rgba(2, 24, 40, 0.4) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px);
+}
+
+.dark .btn-secondary:hover {
+    background: rgba(2, 24, 40, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ========================================
+   FAQ ACCORDION DARK MODE STYLES
+   ======================================== */
+
+.faq-item {
+    transition: all 0.3s ease;
+}
+
+:where(.dark, .dark *) .faq-item,
+.faq-item:where(.dark, .dark *) {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+:where(.dark, .dark *) .faq-item:hover,
+.faq-item:hover:where(.dark, .dark *) {
+    border-color: rgba(59, 110, 174, 0.3) !important;
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4) !important;
+}
+
+:where(.dark, .dark *) .faq-item.active,
+.faq-item.active:where(.dark, .dark *) {
+    border-color: #3b6eae !important;
+    box-shadow: 0 0 30px rgba(59, 110, 174, 0.3), 0 0 60px rgba(59, 110, 174, 0.1) !important;
+}
+
+/* FAQ Question Text */
+:where(.dark, .dark *) .faq-trigger span span:last-child,
+.faq-trigger span span:last-child:where(.dark, .dark *) {
+    color: #f1f5f9 !important;
+}
+
+/* FAQ Answer Text */
+:where(.dark, .dark *) .faq-content p,
+.faq-content p:where(.dark, .dark *) {
+    color: #94a3b8 !important;
+}
+
+/* FAQ Icon Background */
+:where(.dark, .dark *) .faq-icon,
+.faq-icon:where(.dark, .dark *) {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+:where(.dark, .dark *) .faq-icon svg,
+.faq-icon svg:where(.dark, .dark *) {
+    color: #94a3b8 !important;
+}
+
+:where(.dark, .dark *) .faq-item:hover .faq-icon,
+.faq-item:hover .faq-icon:where(.dark, .dark *) {
+    background-color: rgba(59, 110, 174, 0.2) !important;
+}
+
+:where(.dark, .dark *) .faq-item:hover .faq-icon svg,
+.faq-item:hover .faq-icon svg:where(.dark, .dark *) {
+    color: #60a5fa !important;
+}
+
+/* FAQ Number Badge */
+:where(.dark, .dark *) .faq-trigger span span:first-child,
+.faq-trigger span span:first-child:where(.dark, .dark *) {
+    background-color: rgba(59, 110, 174, 0.2) !important;
+    color: #60a5fa !important;
+}
+
+/* FAQ Answer Border */
+:where(.dark, .dark *) .faq-content>div,
+.faq-content>div:where(.dark, .dark *) {
+    border-color: rgba(59, 110, 174, 0.3) !important;
+}
+
+/* City page FAQ styles (details/summary elements) - simplified transparent dark mode */
+:where(.dark, .dark *) details.group,
+details.group:where(.dark, .dark *) {
+    background: transparent !important;
+    background-image: none !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+:where(.dark, .dark *) details.group:hover,
+details.group:hover:where(.dark, .dark *) {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+:where(.dark, .dark *) details.group[open],
+details.group[open]:where(.dark, .dark *) {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: none !important;
+}
+
+:where(.dark, .dark *) details.group summary,
+details.group summary:where(.dark, .dark *) {
+    color: rgba(255, 255, 255, 0.9) !important;
+    background: transparent !important;
+    background-image: none !important;
+}
+
+:where(.dark, .dark *) details.group>div,
+details.group>div:where(.dark, .dark *) {
+    background: transparent !important;
+    background-image: none !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+
+/* Force HMR Rebuild */
+
+
+/* ========================================
+   SERVICE CARD THEMES (ALTERNATING)
+   Alternates card styles for visual interest
+   ======================================== */
+
+.service-card-section {
+    background-color: #f9fafc;
+}
+
+.dark .service-card-section {
+    background-color: var(--bg-page);
+}
+
+.service-card-item {
+    transition: all 0.3s ease;
+}
+
+/* ODD CARDS: White (Light Mode) / Dark Glass (Dark Mode) */
+.service-card-item:nth-child(odd) {
+    background-color: #ffffff;
+    border: 1px solid var(--border-default);
+}
+
+.dark .service-card-item:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* EVEN CARDS: Navy Accent (Light & Dark Mode) */
+.service-card-item:nth-child(even) {
+    background-color: #171f32 !important;
+    color: white !important;
+    border: 1px solid #171f32;
+}
+
+.dark .service-card-item:nth-child(even) {
+    /* In dark mode, keep the navy card but ensure it stands out or blends correctly */
+    background-color: #171f32 !important;
+    /* Slightly lighter than page bg #141517 */
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Text Overrides for Navy Cards */
+.service-card-item:nth-child(even) h2,
+.service-card-item:nth-child(even) h3,
+.service-card-item:nth-child(even) p,
+.service-card-item:nth-child(even) li,
+.service-card-item:nth-child(even) span {
+    color: white !important;
+}
+
+.service-card-item:nth-child(even) a {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.service-card-item:nth-child(even) a:hover {
+    color: white !important;
+}
+
+/* Adjust beam effect for Navy Cards (Make it clearer/white) */
+.service-card-item:nth-child(even) .glow-beam-sm {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.service-card-item:nth-child(even) .glow-beam-sm::before {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), white);
+}
+
+
+/* ========================================
+   GLOBAL ANIMATIONS
+   ======================================== */
+
+/* Elastic Bounce (Header) */
+@keyframes elasticBounce {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.06);
+    }
+
+    50% {
+        transform: scale(0.97);
+    }
+
+    70% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-elastic-bounce {
+    animation: elasticBounce 500ms ease-out forwards;
+}
+
+/* Rotate Beam (Hero Audio Player) */
+@keyframes rotate-beam {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-rotate-beam {
+    animation: rotate-beam 4s linear infinite;
+}
+
+/* Reveal Slide Up (SmoothReveal) */
+@keyframes revealSlideUp {
+    0% {
+        transform: translateY(40px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.animate-reveal-slide-up {
+    animation: revealSlideUp 1.2s ease-in-out forwards;
+}
+
+/* SmoothReveal Global Selectors */
+[data-reveal-item] {
+    opacity: 1;
+    transform: translateY(40px);
+}
+
+[data-reveal-item].reveal-item-animate {
+    animation: revealSlideUp 1.2s ease-in-out forwards;
+}
+
+/* ========================================
+   IMAGE REVEAL UTILITY
+   Custom transition for clip-path reveals
+   ======================================== */
+.image-reveal-transition {
+    transition-property: clip-path;
+    transition-duration: 1500ms;
+    transition-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+    will-change: clip-path;
+}
+
+/* ========================================
+   GLOWING BEAM ANIMATION
+   Reusable animated light beam effect
+   Usage: <div class="glow-beam"></div> or <div class="glow-beam-sm"></div>
+   ======================================== */
+
+@keyframes glow-beam-line {
+    0% {
+        transform: scaleX(0);
+        opacity: 0.5;
+    }
+
+    90% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+
+    92% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleX(1);
+        opacity: 0;
+    }
+}
+
+@keyframes glow-beam-particle {
+    0% {
+        transform: scale(0.3, 0.8) translateZ(0);
+        opacity: 0;
+    }
+
+    90% {
+        transform: scale(1, 1) translateX(var(--beam-width, 300px)) translateZ(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1, 1) translateX(var(--beam-width, 300px)) translateZ(0);
+        opacity: 0;
+    }
+}
+
+
+/* Small Glow Beam for cards (200px) */
+.glow-beam-sm {
+    --beam-width: 200px;
+    position: relative;
+    width: var(--beam-width);
+    height: 2px;
+    background: rgba(10, 121, 200, 0.1);
+    border-radius: 9999px;
+}
+
+.glow-beam-sm::before {
+    transform: scaleX(0);
+    transform-origin: 0 0;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,
+            rgba(10, 121, 200, 0.1) 10%,
+            rgba(10, 121, 200, 0.4) 80%,
+            #0a79c8);
+    border-radius: 9999px;
+}
+
+.glow-beam-sm::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    transform-origin: 0 50%;
+    margin-left: -16px;
+    top: -6px;
+    width: 20px;
+    height: 14px;
+    border-radius: 2px;
+    background: rgba(10, 121, 200, 0.55);
+    filter: blur(6px);
+    opacity: 0;
+    box-shadow: 0 0 8px 4px rgba(10, 121, 200, 0.4),
+        -15px 0 12px 3px rgba(10, 121, 200, 0.3),
+        -30px 0 12px 2px rgba(10, 121, 200, 0.2),
+        -45px 0 8px 1px rgba(10, 121, 200, 0.1);
+}
+
+/* Hover-activated beam (for cards) */
+.glow-beam-hover:hover .glow-beam-sm::before {
+    animation: glow-beam-line 3s infinite;
+}
+
+.glow-beam-hover:hover .glow-beam-sm::after {
+    animation: glow-beam-particle 3s infinite;
+}
+
+/* Staggered delays for synchronized swimming effect */
+.glow-beam-hover:nth-child(1):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(1):hover .glow-beam-sm::after {
+    animation-delay: 0s;
+}
+
+.glow-beam-hover:nth-child(2):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(2):hover .glow-beam-sm::after {
+    animation-delay: 0.15s;
+}
+
+.glow-beam-hover:nth-child(3):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(3):hover .glow-beam-sm::after {
+    animation-delay: 0.3s;
+}
+
+.glow-beam-hover:nth-child(4):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(4):hover .glow-beam-sm::after {
+    animation-delay: 0.45s;
+}
+
+.glow-beam-hover:nth-child(5):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(5):hover .glow-beam-sm::after {
+    animation-delay: 0.6s;
+}
+
+.glow-beam-hover:nth-child(6):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(6):hover .glow-beam-sm::after {
+    animation-delay: 0.75s;
+}
+
+.glow-beam-hover:nth-child(7):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(7):hover .glow-beam-sm::after {
+    animation-delay: 0.9s;
+}
+
+.glow-beam-hover:nth-child(8):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(8):hover .glow-beam-sm::after {
+    animation-delay: 1.05s;
+}
+
+.glow-beam-hover:nth-child(9):hover .glow-beam-sm::before,
+.glow-beam-hover:nth-child(9):hover .glow-beam-sm::after {
+    animation-delay: 1.2s;
+}
+
+/* ========================================
+   BOOKING FORM PROGRESS STEPS
+   Clean multi-step progress indicator
+   Numbers inside circles, border-based active state
+   ======================================== */
+.progress-steps {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto 1.5rem !important;
+}
+
+.progress-steps .progress-track {
+    width: 100% !important;
+    height: 3px !important;
+    background-color: #e0e0e0 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    transform: translateY(-50%) !important;
+    z-index: 0 !important;
+}
+
+.dark .progress-steps .progress-track {
+    background-color: #475569 !important;
+}
+
+.progress-steps .progress-bar {
+    position: absolute !important;
+    width: 0% !important;
+    height: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    background: var(--color-queens-secondary, #0a79c8) !important;
+    transition: width 0.5s ease !important;
+}
+
+.progress-steps .steps-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.progress-steps .step {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background-color: white !important;
+    border: 3px solid #e0e0e0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: default !important;
+    transition: border-color 0.3s ease, background-color 0.3s ease !important;
+}
+
+.progress-steps .step span {
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    color: #94a3b8 !important;
+    transition: color 0.3s ease !important;
+}
+
+.dark .progress-steps .step {
+    background-color: #1e293b !important;
+    border-color: #475569 !important;
+}
+
+.dark .progress-steps .step span {
+    color: #64748b !important;
+}
+
+.progress-steps .step.active {
+    border-color: var(--color-queens-secondary, #0a79c8) !important;
+}
+
+.progress-steps .step.active span {
+    color: var(--color-queens-secondary, #0a79c8) !important;
+}
+
+.dark .progress-steps .step.active {
+    border-color: var(--color-queens-secondary, #0a79c8) !important;
+}
+
+.progress-steps .step.completed {
+    border-color: var(--color-queens-secondary, #0a79c8) !important;
+    background-color: var(--color-queens-secondary, #0a79c8) !important;
+    cursor: pointer !important;
+}
+
+.progress-steps .step.completed span {
+    color: white !important;
+}

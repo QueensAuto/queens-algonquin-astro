@@ -1,0 +1,55 @@
+/* ========================================
+   FONT DEFINITIONS
+   Optimized for performance - WOFF2 only, unused fonts removed
+   ======================================== */
+
+/* Critical Display Font - Big Shoulders Display (Variable) */
+@font-face {
+  font-family: 'Big Shoulders Display';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/BigShoulders-VariableFont.woff2') format('woff2-variations');
+}
+
+/* Body Font - Instrument Sans (WOFF2) */
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/InstrumentSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/InstrumentSans-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/InstrumentSans-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/InstrumentSans-Bold.woff2') format('woff2');
+}
+
+/* Serif Font - Source Serif 4 (Italic Variable for accents) */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/SourceSerif4-Italic-VariableFont_opsz,wght.woff2') format('woff2-variations');
+}

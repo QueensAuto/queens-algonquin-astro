@@ -1,0 +1,494 @@
+---
+import TrustBadges from "./TrustBadges.astro";
+import type { BrandConfig } from "../brands";
+
+const { brand } = Astro.props as { brand: BrandConfig };
+---
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <!-- Column 1: Logo + About Text + Socials -->
+      <div class="footer-col">
+        <a href="/" class="footer-logo">
+          {
+            brand.logoPathWhite ? (
+              <img
+                src={brand.logoPathWhite}
+                alt={brand.name}
+                class="footer-logo-img"
+              />
+            ) : (
+              <span class="footer-logo-text">{brand.name}</span>
+            )
+          }
+        </a>
+        <p class="footer-about">
+          Elgin's trusted auto shop since 2007. Quality repairs, honest pricing,
+          and service that keeps you rolling.
+        </p>
+        <!-- Social Icons -->
+        <div class="footer-socials">
+          <a
+            href="https://www.youtube.com/@queenselgin4206"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+          >
+            <img
+              src="/images/social/youtube.svg"
+              alt="YouTube"
+              class="social-icon"
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61575036973222"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <img
+              src="/images/social/facebook.svg"
+              alt="Facebook"
+              class="social-icon"
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/queensautoserviceelgin"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <img
+              src="/images/social/instagram.svg"
+              alt="Instagram"
+              class="social-icon"
+            />
+          </a>
+          <a
+            href="https://x.com/queensautoelgin"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X (Twitter)"
+          >
+            <img src="/images/social/x.svg" alt="X" class="social-icon" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Services -->
+      <div class="footer-col">
+        <h2 class="footer-heading">Services</h2>
+        <ul class="footer-links">
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/services">Quality Car Repair</a></li>
+          <li><a href="/buy-new-tires" data-astro-reload>New Tires</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Location -->
+      <div class="footer-col">
+        <h2 class="footer-heading">Location</h2>
+        <address class="footer-address">
+          <strong>Queens Auto Services</strong>
+          1303 Dundee Ave, Elgin, IL 60120<br />
+          Tel: <a href="tel:2246353000">(224) 635-3000</a><br />
+          Hours: Mon-Fri 8:00 - 6:00<br />
+          Sat - 8:00 - 4:00
+        </address>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p>
+        &copy; Copyright {new Date().getFullYear()} Queens Auto Services Elgin All
+        Rights Reserved
+      </p>
+      <TrustBadges />
+      <div class="footer-legal">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Huge Brand Text & Tagline -->
+  <div class="footer-huge-container" id="footer-huge-container">
+    <div class="footer-huge-grid">
+      <div class="footer-huge-left">
+        <div class="footer-huge-wrapper">
+          <h2 class="footer-huge-text" id="footer-huge-text">
+            <span>Q</span><span>U</span><span>E</span><span>E</span><span
+              >N</span
+            ><span>S</span>
+          </h2>
+        </div>
+      </div>
+      <div class="footer-huge-right">
+        <p class="footer-tagline" id="footer-tagline">
+          Your Local Expert for<br class="hidden sm:block" />
+          Tires & Auto Repair.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let footerCtx: any;
+
+  function initFooterHugeText() {
+    // Cleanup previous context if any
+    if (footerCtx) footerCtx.revert();
+
+    // Small delay to ensure layout is final
+    setTimeout(() => {
+      const container = document.getElementById("footer-huge-container");
+      if (!container) return;
+
+      footerCtx = gsap.context(() => {
+        const letters = container.querySelectorAll("#footer-huge-text span");
+        const tagline = container.querySelector("#footer-tagline");
+
+        if (!letters.length) return;
+
+        // Force set initial hidden state
+        gsap.set(letters, { y: "110%", opacity: 0 });
+        if (tagline) gsap.set(tagline, { y: 30, opacity: 0 });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: container,
+            start: "top bottom-=50",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        });
+
+        tl.to(letters, {
+          y: "0%",
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.08,
+          ease: "power4.out",
+        });
+
+        if (tagline) {
+          tl.to(
+            tagline,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+            },
+            "-=0.8",
+          ); // Overlap with letters
+        }
+      }, container);
+
+      ScrollTrigger.refresh();
+    }, 100);
+  }
+
+  // Initialize
+  document.addEventListener("astro:page-load", initFooterHugeText);
+
+  // Cleanup on swap
+  document.addEventListener("astro:before-swap", () => {
+    if (footerCtx) footerCtx.revert();
+  });
+</script>
+
+<style>
+  .site-footer {
+    background: #000000;
+    color: #9ca3af;
+    padding: 3rem 0 0;
+    position: relative;
+    z-index: 50;
+    overflow: hidden;
+  }
+
+  .footer-huge-container {
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .footer-huge-grid {
+    max-width: 90rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-huge-grid {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+    }
+  }
+
+  .footer-huge-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-huge-left {
+      justify-content: flex-start;
+    }
+  }
+
+  .footer-huge-right {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-huge-wrapper {
+    overflow: hidden;
+  }
+
+  .footer-huge-text {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 15vw, 15rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+    padding: 0.1em 0;
+    color: #0a79c8;
+    text-transform: uppercase;
+    display: flex;
+    gap: 0.01em;
+    user-select: none;
+    pointer-events: none;
+    text-align: center;
+  }
+
+  .footer-huge-text span {
+    display: inline-block;
+    will-change: transform;
+  }
+
+  .footer-tagline {
+    font-size: clamp(1.25rem, 3vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 20ch;
+    text-align: center;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-huge-text {
+      font-size: 220px;
+      text-align: left;
+    }
+    .footer-huge-right {
+      text-align: right;
+      justify-content: flex-end;
+    }
+    .footer-tagline {
+      text-align: right;
+    }
+  }
+
+  .footer-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .footer-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: start;
+    }
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-logo {
+    display: inline-block;
+  }
+
+  .footer-logo-img {
+    height: 3rem;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .footer-logo-text {
+    color: #0a79c8;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .footer-about {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .footer-socials a:hover {
+    background: #0a79c8;
+    transform: translateY(-2px);
+  }
+
+  .social-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    filter: brightness(0) saturate(100%) invert(70%) sepia(5%) saturate(400%)
+      hue-rotate(180deg);
+    transition: filter 0.3s ease;
+  }
+
+  .footer-socials a:hover .social-icon {
+    filter: brightness(0) invert(1);
+  }
+
+  .footer-heading {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: #0a79c8;
+  }
+
+  .footer-address {
+    font-style: normal;
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.8;
+  }
+
+  .footer-address strong {
+    display: block;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .footer-address a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-address a:hover {
+    color: #0a79c8;
+  }
+
+  .footer-bottom {
+    padding-top: 1.5rem;
+    border-top: 1px solid #1f2937;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #6b7280;
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-legal a {
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-legal a:hover {
+    color: #0a79c8;
+  }
+</style>

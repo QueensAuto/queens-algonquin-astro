@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Luis Subias",
+        "stars": 5,
+        "text": "Came in to patch up a flat tire with a nail. They took me in as a walk in and fixed it super fast. Exceptional customer service, they took care of everything from fixing it to putting it back on the car.",
+        "source": "Google Reviews",
+        "image": "/images/reviewers/Andres Rivera.webp",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Sendy Ruiz",
+        "stars": 5,
+        "text": "Great prices and great ppl. Needed 4 tires. Went in was done in less than hr!",
+        "source": "Google Reviews",
+        "image": "/images/reviewers/Aleksanadra Blaszczyk.webp",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Daniel Schmidt",
+        "stars": 5,
+        "text": "Fast friendly help when I needed it really bad, pulled in with a totally ruined tire, they put a new one on in just a few minutes",
+        "source": "Google Reviews",
+        "image": "/images/reviewers/Danny Thomas.webp",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Mike Abene III",
+        "stars": 5,
+        "text": "Brought my 30ft RV to have 6 tires mounted... Great hospitable group of people working there from top to bottom.",
+        "source": "Google Reviews",
+        "image": "/images/reviewers/Ed Mungai.webp",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Lynette Flores",
+        "stars": 5,
+        "text": "Best place for new and used tires. Honest, fast and good priced.",
+        "source": "Google Reviews",
+        "image": "/images/reviewers/Ana Marie De La Cruz.webp",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Syed Ahmed",
+        "stars": 5,
+        "text": "Quick service, got 2 used tires for my 2002 Honda accord.",
+        "source": "Google Reviews",
+        "image": "/images/reviewers/Devin Mistry.webp",
+        "role": "Verified Customer"
+    }
+]

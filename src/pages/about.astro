@@ -1,0 +1,499 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SmoothReveal from "../components/SmoothReveal.astro";
+import CtaButton from "../components/CtaButton.astro";
+import CtaButtonSecondary from "../components/CtaButtonSecondary.astro";
+---
+
+<BaseLayout
+    title="About Us | Queens Auto Services"
+    description="Trusted auto repair and tire experts serving Elgin and the surrounding communities. Quality service, honest pricing, and experienced technicians."
+>
+    <SmoothReveal />
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-16 lg:pt-44 lg:pb-24 overflow-hidden">
+        <div class="site-canvas relative z-10" data-reveal>
+            <div class="max-w-4xl" data-reveal-item>
+                <span
+                    class="inline-block text-queens-secondary text-sm font-bold uppercase tracking-widest mb-6"
+                >
+                    About Us
+                </span>
+                <h1
+                    class="display-hero-page text-queens-primary dark:text-white mb-8"
+                >
+                    Your Trusted <span class="text-queens-secondary">Local</span
+                    > Auto Experts
+                </h1>
+                <p
+                    class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl"
+                >
+                    At Queens Auto Services, we believe in doing things the
+                    right way. Quality repairs, honest recommendations, and
+                    treating every customer like family.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="pb-20 lg:pb-28">
+        <div class="site-canvas" data-reveal>
+            <div class="max-w-5xl mx-auto" data-reveal-item>
+                <div
+                    class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-white/10"
+                >
+                    <script src="https://fast.wistia.com/player.js" async
+                    ></script>
+                    <script
+                        src="https://fast.wistia.com/embed/yfibgnnqeg.js"
+                        async
+                        type="module"></script>
+                    <style>
+                        wistia-player[media-id="yfibgnnqeg"]:not(:defined) {
+                            background: center / contain no-repeat
+                                url("https://fast.wistia.com/embed/medias/yfibgnnqeg/swatch");
+                            display: block;
+                            filter: blur(5px);
+                            padding-top: 56.25%;
+                        }
+                    </style>
+                    <wistia-player
+                        media-id="yfibgnnqeg"
+                        aspect="1.7777777777777777"
+                        class="absolute inset-0 w-full h-full"></wistia-player>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="py-20 lg:py-28 bg-gray-50 dark:bg-white/5">
+        <div class="site-canvas" data-reveal>
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div data-reveal-item>
+                    <span
+                        class="text-queens-secondary font-bold text-sm uppercase tracking-widest mb-4 block"
+                        >Our Story</span
+                    >
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-queens-primary dark:text-white mb-8"
+                    >
+                        Built on Trust, Driven by Excellence
+                    </h2>
+                    <div
+                        class="space-y-6 text-lg text-gray-600 dark:text-gray-300"
+                    >
+                        <p>
+                            What started as a small neighborhood shop has grown
+                            into one of Elgin's most trusted auto service
+                            centers. Our commitment to quality workmanship and
+                            honest service has earned us a loyal customer base
+                            that spans generations.
+                        </p>
+                        <p>
+                            We invest in the latest diagnostic equipment and
+                            ongoing training for our technicians because we
+                            believe your vehicle deserves the best care
+                            possible.
+                        </p>
+                        <p
+                            class="font-semibold text-queens-primary dark:text-white"
+                        >
+                            When you bring your car to us, you're not just
+                            another ticket — you're part of the Queens family.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4" data-reveal-item>
+                    <div class="space-y-4">
+                        <div
+                            class="rounded-2xl overflow-hidden shadow-lg aspect-[4/5]"
+                        >
+                            <img
+                                src="/images/shop/Queens-Auto-Front-Store-01.webp"
+                                alt="Queens Auto Services"
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div
+                            class="rounded-2xl overflow-hidden shadow-lg aspect-square"
+                        >
+                            <img
+                                src="/images/shop/Queens-Auto-Services-Front-Shot.webp"
+                                alt="Queens Auto Shop"
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                    <div class="pt-8 space-y-4">
+                        <div
+                            class="rounded-2xl overflow-hidden shadow-lg aspect-square"
+                        >
+                            <img
+                                src="/images/shop/Queens-Auto-Services-Elgin-Front-View-Shop-001.webp"
+                                alt="Queens Auto Elgin"
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div
+                            class="rounded-2xl overflow-hidden shadow-lg aspect-[4/5]"
+                        >
+                            <img
+                                src="/images/services/Queens%20Auto%20Services%20-%20Elgin%20Wheel%20Alignment.webp"
+                                alt="Queens Auto Services Wheel Alignment"
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="py-20 lg:py-28">
+        <div class="site-canvas" data-reveal>
+            <div class="text-center mb-16" data-reveal-item>
+                <span
+                    class="text-queens-secondary font-bold text-sm uppercase tracking-widest mb-4 block"
+                    >What We Stand For</span
+                >
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-queens-primary dark:text-white"
+                >
+                    Our Core Values
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Value 1 -->
+                <div
+                    class="bg-white dark:bg-white/5 p-10 rounded-2xl shadow-lg border border-gray-100 dark:border-white/10"
+                    data-reveal-item
+                >
+                    <div
+                        class="w-14 h-14 bg-queens-secondary/10 rounded-xl flex items-center justify-center mb-6 text-queens-secondary"
+                    >
+                        <svg
+                            class="w-7 h-7"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path></svg
+                        >
+                    </div>
+                    <h3
+                        class="value-card-title font-bold text-queens-primary dark:text-white mb-3"
+                    >
+                        Honest Service
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        We only recommend what your vehicle actually needs. No
+                        upsells, no pressure — just straightforward advice.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div
+                    class="bg-white dark:bg-white/5 p-10 rounded-2xl shadow-lg border border-gray-100 dark:border-white/10"
+                    data-reveal-item
+                >
+                    <div
+                        class="w-14 h-14 bg-queens-secondary/10 rounded-xl flex items-center justify-center mb-6 text-queens-secondary"
+                    >
+                        <svg
+                            class="w-7 h-7"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg
+                        >
+                    </div>
+                    <h3
+                        class="value-card-title font-bold text-queens-primary dark:text-white mb-3"
+                    >
+                        Quality Work
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        We use quality parts, modern equipment, and proven
+                        techniques to ensure every job is done right the first
+                        time.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div
+                    class="bg-white dark:bg-white/5 p-10 rounded-2xl shadow-lg border border-gray-100 dark:border-white/10"
+                    data-reveal-item
+                >
+                    <div
+                        class="w-14 h-14 bg-queens-secondary/10 rounded-xl flex items-center justify-center mb-6 text-queens-secondary"
+                    >
+                        <svg
+                            class="w-7 h-7"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            ><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                            ></path><path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                            ></path></svg
+                        >
+                    </div>
+                    <h3
+                        class="value-card-title font-bold text-queens-primary dark:text-white mb-3"
+                    >
+                        Community First
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        We're proud to be part of Elgin. We live here, work
+                        here, and take pride in keeping our neighbors safe on
+                        the road.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-20 bg-queens-primary">
+        <div class="site-canvas" data-reveal>
+            <div
+                class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
+                data-reveal-item
+            >
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2">
+                        <span class="stat-counter" data-target="18">0</span>+
+                    </div>
+                    <div
+                        class="text-white/60 text-sm uppercase tracking-widest"
+                    >
+                        Years Experience
+                    </div>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2">
+                        <span class="stat-counter" data-target="25">0</span>K+
+                    </div>
+                    <div
+                        class="text-white/60 text-sm uppercase tracking-widest"
+                    >
+                        Happy Customers
+                    </div>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2">
+                        <span class="stat-counter" data-target="50">0</span>+
+                    </div>
+                    <div
+                        class="text-white/60 text-sm uppercase tracking-widest"
+                    >
+                        Services Offered
+                    </div>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2">
+                        <span class="stat-counter" data-target="100">0</span>%
+                    </div>
+                    <div
+                        class="text-white/60 text-sm uppercase tracking-widest"
+                    >
+                        Satisfaction
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Hours -->
+    <section class="py-20 lg:py-28">
+        <div class="site-canvas" data-reveal>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Hours -->
+                <div
+                    class="bg-gray-50 dark:bg-white/5 rounded-2xl p-8 md:p-10"
+                    data-reveal-item
+                >
+                    <h3
+                        class="text-2xl font-bold text-queens-primary dark:text-white mb-8"
+                    >
+                        Hours of Operation
+                    </h3>
+                    <div class="space-y-4">
+                        <div
+                            class="flex justify-between py-3 border-b border-gray-200 dark:border-white/10"
+                        >
+                            <span class="text-gray-600 dark:text-gray-300"
+                                >Monday - Friday</span
+                            >
+                            <span
+                                class="font-semibold text-queens-primary dark:text-white"
+                                >7:30 AM - 6:00 PM</span
+                            >
+                        </div>
+                        <div
+                            class="flex justify-between py-3 border-b border-gray-200 dark:border-white/10"
+                        >
+                            <span class="text-gray-600 dark:text-gray-300"
+                                >Saturday</span
+                            >
+                            <span
+                                class="font-semibold text-queens-primary dark:text-white"
+                                >7:30 AM - 4:00 PM</span
+                            >
+                        </div>
+                        <div class="flex justify-between py-3">
+                            <span class="text-gray-600 dark:text-gray-300"
+                                >Sunday</span
+                            >
+                            <span class="text-gray-500">Closed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div
+                    class="bg-queens-secondary rounded-2xl p-8 md:p-10 text-white"
+                    data-reveal-item
+                >
+                    <h3 class="text-2xl font-bold mb-8 text-white">Visit Us</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-white text-sm mb-1 opacity-90">
+                                Address
+                            </p>
+                            <p class="text-lg font-medium text-white">
+                                1303 Dundee Ave, Elgin, IL 60120
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-white text-sm mb-1 opacity-90">
+                                Phone
+                            </p>
+                            <a
+                                href="tel:2246353000"
+                                class="text-lg font-medium text-white hover:underline"
+                                >(224) 635-3000</a
+                            >
+                        </div>
+                        <div>
+                            <p class="text-white text-sm mb-1 opacity-90">
+                                Email
+                            </p>
+                            <a
+                                href="mailto:info@queensautoservices.com"
+                                class="text-lg font-medium text-white hover:underline"
+                                >info@queensautoservices.com</a
+                            >
+                        </div>
+                    </div>
+                    <div class="mt-8 pt-6 border-t border-white/20">
+                        <a
+                            href="https://maps.app.goo.gl/piDCuk2RaWeGzLY76"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-white font-semibold hover:gap-3 transition-all"
+                        >
+                            Get Directions
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                ><path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-gray-50 dark:bg-white/5">
+        <div class="site-canvas" data-reveal>
+            <div class="text-center max-w-2xl mx-auto" data-reveal-item>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-queens-primary dark:text-white mb-6"
+                >
+                    Ready to Experience the Difference?
+                </h2>
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                    Whether you need routine maintenance or a major repair, our
+                    team is ready to help. Schedule your appointment today.
+                </p>
+                <div
+                    class="flex flex-col sm:flex-row gap-5 justify-center mt-4"
+                >
+                    <CtaButton
+                        href="/request-an-appointment"
+                        text="Book Appointment"
+                    />
+                    <CtaButtonSecondary href="/services" text="View Services" />
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initCounters() {
+        const counters = document.querySelectorAll(".stat-counter");
+
+        counters.forEach((counter) => {
+            const target = parseInt(counter.getAttribute("data-target") || "0");
+            const obj = { value: 0 };
+
+            gsap.to(obj, {
+                value: target,
+                duration: 2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: counter,
+                    start: "top 90%",
+                    once: true,
+                },
+                onUpdate: () => {
+                    if (counter instanceof HTMLElement) {
+                        counter.innerText = Math.ceil(obj.value).toString();
+                    }
+                },
+            });
+        });
+    }
+
+    // Run on page load
+    initCounters();
+
+    // Re-run on view transitions if using Astro transitions
+    document.addEventListener("astro:after-swap", initCounters);
+</script>

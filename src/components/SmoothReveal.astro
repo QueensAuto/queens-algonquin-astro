@@ -1,0 +1,100 @@
+---
+/**
+ * SmoothReveal - Premium scroll-based reveal animations
+ *
+ * Features slow, elegant slide-up animations with ease-in timing.
+ * Handles both full page loads AND Astro View Transitions navigation.
+ */
+---
+
+<script is:inline>
+    (function () {
+        "use strict";
+
+        function init() {
+            var sections = document.querySelectorAll("[data-reveal]");
+            var viewportHeight = window.innerHeight;
+
+            // Animate sections already in view (hero area)
+            sections.forEach(function (section) {
+                var rect = section.getBoundingClientRect();
+                if (rect.top < viewportHeight * 0.9) {
+                    // Section is in initial viewport - animate with delay
+                    setTimeout(function () {
+                        section.classList.add("reveal-visible");
+
+                        var children =
+                            section.querySelectorAll("[data-reveal-item]");
+                        children.forEach(function (child, index) {
+                            // 250ms stagger for relaxed, elegant reveal
+                            setTimeout(function () {
+                                child.classList.add("reveal-item-animate");
+                            }, index * 250);
+                        });
+                    }, 200); // Initial delay before first animation
+                }
+            });
+
+            // Create observer for scroll-based reveals
+            var observer = new IntersectionObserver(
+                function (entries) {
+                    entries.forEach(function (entry) {
+                        if (
+                            entry.isIntersecting &&
+                            !entry.target.classList.contains("reveal-visible")
+                        ) {
+                            var section = entry.target;
+                            section.classList.add("reveal-visible");
+
+                            // Animate children with generous stagger
+                            var children = section.querySelectorAll(
+                                "[data-reveal-item]:not(.reveal-item-animate)",
+                            );
+                            children.forEach(function (child, index) {
+                                // 250ms stagger for relaxed, elegant reveal
+                                setTimeout(function () {
+                                    child.classList.add("reveal-item-animate");
+                                }, index * 250);
+                            });
+
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    threshold: 0.1,
+                    rootMargin: "0px 0px -100px 0px",
+                },
+            );
+
+            // Observe all reveal sections
+            sections.forEach(function (section) {
+                if (!section.classList.contains("reveal-visible")) {
+                    observer.observe(section);
+                }
+            });
+        }
+
+        // Run on initial page load
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", function () {
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(init);
+                });
+            });
+        } else {
+            requestAnimationFrame(function () {
+                requestAnimationFrame(init);
+            });
+        }
+
+        // CRITICAL: Also run after Astro View Transitions navigation
+        // This event fires after client-side page swaps
+        document.addEventListener("astro:page-load", function () {
+            requestAnimationFrame(function () {
+                requestAnimationFrame(init);
+            });
+        });
+    })();
+</script>
+

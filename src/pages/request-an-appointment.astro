@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { mobileTiresBrand } from "../brands";
+import BookingForm from "../components/BookingForm.astro";
+
+const title = "Request an Appointment | Queens Auto Service";
+const description =
+    "Schedule your auto repair or tire service with Queens Auto Service in Elgin, IL.";
+---
+
+<BaseLayout brand={mobileTiresBrand} title={title} description={description}>
+    <div class="pt-36 pb-12">
+        <BookingForm
+            webhookUrl="https://n8n.queensautoservices.com/webhook/6e74632a-1fc8-4ff8-9465-ae6ed1c0c4ae"
+            promoCode="standard_booking_page"
+            step1TitlePrefix=""
+            step1TitleHighlight="Secure Your Spot"
+            step1Description="Step 1 of 2 — Your contact and vehicle details."
+        />
+    </div>
+</BaseLayout>

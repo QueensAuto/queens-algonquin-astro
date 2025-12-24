@@ -1,0 +1,28 @@
+{
+  "name": "queens-mobile-tires---astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.6.0",
+    "@fontsource/boldonse": "^5.2.4",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/source-serif-4": "^5.2.9",
+    "@tailwindcss/vite": "^4.1.17",
+    "alpinejs": "^3.15.2",
+    "astro": "^5.16.4",
+    "gsap": "^3.14.2",
+    "lenis": "^1.3.16",
+    "marked": "^17.0.1",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/alpinejs": "^3.13.11"
+  }
+}

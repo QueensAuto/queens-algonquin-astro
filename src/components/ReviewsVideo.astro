@@ -1,0 +1,408 @@
+---
+/**
+ * ReviewsVideo - Video testimonial section with auto-looping review cards
+ * Refactored with clean code to fix Chrome rendering issue
+ */
+
+import reviews from "../data/reviews.json";
+
+const getInitials = (name: string) =>
+    name
+        .split(" ")
+        .map((w) => w[0])
+        .join("")
+        .substring(0, 2)
+        .toUpperCase();
+
+const allReviews = [...reviews, ...reviews, ...reviews];
+const reviewCount = reviews.length;
+const visibleCount = 2; // Number of cards visible at a time
+---
+
+<section
+    class="rv-section pt-[45vh] pb-32 px-6"
+    data-visible-count={visibleCount}
+    data-total-count={reviewCount}
+>
+    <div class="rv-container max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <h2 class="rv-title display-xl mb-6">
+                WORDS FROM OUR <span class="text-queens-secondary">CLIENTS</span
+                >
+            </h2>
+            <p class="rv-subtitle text-lg max-w-xl mx-auto">
+                Real reviews from real customers. Our commitment to quality
+                service has earned us the trust of drivers across Northern
+                Illinois.
+            </p>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="rv-grid grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+            <!-- Left: Video Card (2 cols) -->
+            <div class="lg:col-span-2">
+                <div
+                    class="rv-video-card rounded-3xl overflow-hidden bg-transparent aspect-[3/4] relative"
+                >
+                    <video
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        poster="https://storage.googleapis.com/queens-videos/queenstestimonials.png"
+                        style="background-image:url('https://storage.googleapis.com/queens-videos/queenstestimonials.png'); background-size: cover; background-position: center; clip-path: inset(0 0 100% 0);"
+                        class="w-full h-full object-cover rv-video-reveal"
+                    >
+                        <source
+                            src="https://storage.googleapis.com/queens-videos/queenstestimonial.mp4"
+                            type="video/mp4"
+                        />
+                        Your browser does not support the video tag.
+                    </video>
+                    <div
+                        class="absolute top-6 left-6 right-6 flex justify-between items-center"
+                    >
+                        <span class="rv-star text-sm tracking-widest"
+                            >★★★★★</span
+                        >
+                        <span
+                            class="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full"
+                            >5/5</span
+                        >
+                    </div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <div class="font-semibold text-lg">
+                            Vanessa from Elgin
+                        </div>
+                        <div class="text-sm opacity-80">Video Testimonial</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Review Cards (3 cols) -->
+            <div class="lg:col-span-3">
+                <div class="rv-carousel" id="rv-carousel">
+                    <div class="rv-track flex flex-col gap-6" id="rv-track">
+                        {
+                            allReviews.map((review, i) => (
+                                <div
+                                    class="rv-card rounded-2xl p-6 border"
+                                    data-index={i}
+                                >
+                                    <div class="flex gap-1 mb-4">
+                                        {Array.from({
+                                            length: review.stars,
+                                        }).map(() => (
+                                            <span class="rv-star text-lg">
+                                                ★
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <blockquote class="rv-quote text-base leading-relaxed mb-6">
+                                        "{review.text}"
+                                    </blockquote>
+                                    <div class="flex items-center gap-3">
+                                        {review.image ? (
+                                            <img
+                                                src={review.image}
+                                                alt={review.name}
+                                                class="w-11 h-11 rounded-full object-cover shadow-md"
+                                            />
+                                        ) : (
+                                            <div class="rv-avatar w-11 h-11 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                                                {getInitials(review.name)}
+                                            </div>
+                                        )}
+                                        <div>
+                                            <div class="rv-name font-semibold">
+                                                {review.name}
+                                            </div>
+                                            <div class="rv-role text-sm">
+                                                {review.role}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Star rating color */
+    .rv-star {
+        color: #facc15;
+    }
+
+    /* Light mode defaults */
+    .rv-section {
+        background-color: #f5f5f5;
+    }
+    .rv-title {
+        color: #0f172a;
+    }
+    .rv-subtitle {
+        color: #64748b;
+    }
+    .rv-card {
+        background-color: #ffffff;
+        border-color: rgba(0, 0, 0, 0.06);
+    }
+    .rv-quote {
+        color: #0f172a;
+    }
+    .rv-name {
+        color: #0f172a;
+    }
+    .rv-role {
+        color: #64748b;
+    }
+    .rv-avatar {
+        background: linear-gradient(135deg, #0a79c8, #3b82f6);
+    }
+
+    /* Dark mode */
+    :global(.dark) .rv-section {
+        background-color: #000000;
+    }
+    :global(.dark) .rv-title {
+        color: #f8fafc;
+    }
+    :global(.dark) .rv-subtitle {
+        color: #94a3b8;
+    }
+    :global(.dark) .rv-card {
+        background-color: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    :global(.dark) .rv-quote {
+        color: #f8fafc;
+    }
+    :global(.dark) .rv-name {
+        color: #f8fafc;
+    }
+    :global(.dark) .rv-role {
+        color: #94a3b8;
+    }
+    :global(.dark) .rv-avatar {
+        background: linear-gradient(135deg, #22d3ee, #3b82f6);
+    }
+
+    /* Carousel container */
+    .rv-carousel {
+        overflow: hidden;
+        height: 500px;
+    }
+
+    /* Mobile: no animation, show all */
+    @media (max-width: 1023px) {
+        .rv-carousel {
+            height: auto;
+            overflow: visible;
+        }
+        .rv-track {
+            transform: none !important;
+        }
+        .rv-video-card {
+            max-width: 400px;
+            margin: 0 auto;
+            aspect-ratio: 1 / 1;
+        }
+    }
+</style>
+
+<script>
+    import gsap from "gsap";
+
+    let anim: gsap.core.Tween | null = null;
+
+    function initCarousel() {
+        if (anim) {
+            anim.kill();
+            anim = null;
+        }
+
+        if (window.innerWidth < 1024) return;
+
+        const section = document.querySelector(".rv-section");
+        const carousel = document.getElementById("rv-carousel");
+        const track = document.getElementById("rv-track");
+
+        if (!section || !carousel || !track) return;
+
+        const visibleCount = parseInt(
+            section.getAttribute("data-visible-count") || "2",
+            10,
+        );
+        const totalCount = parseInt(
+            section.getAttribute("data-total-count") || "6",
+            10,
+        );
+        const cards = track.querySelectorAll(".rv-card");
+        if (cards.length === 0) return;
+
+        const card = cards[0] as HTMLElement;
+        const cardH = card.offsetHeight;
+        const gap = parseFloat(getComputedStyle(track).gap) || 24;
+        // Calculate visible height based on visibleCount (2 cards)
+        const setH = cardH * visibleCount + gap * (visibleCount - 1);
+        // Calculate the full scroll distance for the animation loop
+        const scrollDistance = cardH * totalCount + gap * (totalCount - 1);
+
+        carousel.style.height = `${setH}px`;
+
+        anim = gsap.to(track, {
+            y: -(scrollDistance + gap),
+            duration: 15,
+            ease: "none",
+            repeat: -1,
+            modifiers: {
+                y: gsap.utils.unitize(
+                    gsap.utils.wrap(0, -(scrollDistance + gap)),
+                ),
+            },
+        });
+
+        carousel.addEventListener("mouseenter", () => anim?.pause());
+        carousel.addEventListener("mouseleave", () => anim?.resume());
+    }
+
+    // Separate function for entry animations
+    function initReviewsEntryAnimations() {
+        const section = document.querySelector(".rv-section");
+        if (!section) return;
+
+        // Import ScrollTrigger if not registered
+        import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Header elements
+            const title = section.querySelector(".rv-title");
+            const subtitle = section.querySelector(".rv-subtitle");
+            const headerElements = [title, subtitle].filter(Boolean);
+
+            if (headerElements.length > 0) {
+                gsap.fromTo(
+                    headerElements,
+                    { y: -40, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        stagger: 0.15,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 60%",
+                            once: true,
+                        },
+                    },
+                );
+            }
+
+            // Video card container - just fade in, the video itself has the clip-path reveal
+            const videoCardForFade = section.querySelector(".rv-video-card");
+            if (videoCardForFade) {
+                gsap.fromTo(
+                    videoCardForFade,
+                    { opacity: 0 },
+                    {
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 60%",
+                            once: true,
+                        },
+                    },
+                );
+            }
+
+            // Carousel container (animates whole carousel, not individual cards)
+            const carouselContainer = document.getElementById("rv-carousel");
+            if (carouselContainer) {
+                gsap.fromTo(
+                    carouselContainer,
+                    { x: 50, opacity: 0 },
+                    {
+                        x: 0,
+                        opacity: 1,
+                        duration: 0.9,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 50%",
+                            once: true,
+                        },
+                    },
+                );
+            }
+
+            // Video reveal (roll down effect) - animate the video inside the card
+            const reviewVideo = section.querySelector(".rv-video-reveal");
+            const videoCardTrigger = section.querySelector(".rv-video-card");
+
+            if (reviewVideo && videoCardTrigger) {
+                // Set initial state
+                gsap.set(reviewVideo, { clipPath: "inset(0 0 100% 0)" });
+
+                gsap.to(reviewVideo, {
+                    clipPath: "inset(0 0 0% 0)",
+                    duration: 1.2,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: videoCardTrigger,
+                        start: "top 70%",
+                        once: true,
+                    },
+                });
+            }
+        });
+    }
+
+    document.addEventListener("astro:page-load", () => {
+        initCarousel();
+        setTimeout(initReviewsEntryAnimations, 200);
+    });
+
+    if (document.readyState !== "loading") {
+        initCarousel();
+    } else {
+        document.addEventListener("DOMContentLoaded", initCarousel);
+    }
+
+    document.addEventListener("astro:before-swap", () => {
+        if (anim) {
+            anim.kill();
+            anim = null;
+        }
+    });
+
+    let rT: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", () => {
+        clearTimeout(rT);
+        rT = setTimeout(initCarousel, 250);
+    });
+
+    // Edge/browser autoplay fallback - force play on all videos
+    function forceVideoPlay() {
+        document.querySelectorAll("video").forEach((video) => {
+            video.play().catch(() => {
+                // Silent fail if blocked by browser policy
+            });
+        });
+    }
+
+    document.addEventListener("astro:page-load", forceVideoPlay);
+    if (document.readyState !== "loading") {
+        forceVideoPlay();
+    } else {
+        document.addEventListener("DOMContentLoaded", forceVideoPlay);
+    }
+</script>

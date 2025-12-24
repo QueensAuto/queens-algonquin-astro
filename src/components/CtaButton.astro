@@ -1,0 +1,110 @@
+---
+interface Props {
+  href?: string;
+  text?: string;
+  class?: string;
+  variant?: "standard" | "large";
+  reload?: boolean;
+}
+
+const {
+  href = "/request-an-appointment",
+  text = "Get in touch",
+  class: className = "",
+  variant = "standard",
+  reload = false,
+} = Astro.props;
+
+// Class mappings for variants
+const containerClasses = {
+  standard: "gap-2 p-1 pr-5",
+  large: "gap-6 p-1.5 pr-8 hover:scale-[1.02] shadow-lg",
+};
+
+const circleClasses = {
+  standard: "left-1 top-1 bottom-1 w-8 group-hover:w-[calc(100%-0.5rem)]",
+  large:
+    "left-1.5 top-1.5 bottom-1.5 aspect-square group-hover:w-[calc(100%-0.75rem)]",
+};
+
+const iconWrapperClasses = {
+  standard: "h-8 w-8",
+  large: "h-10 w-10 sm:h-12 sm:w-12",
+};
+
+const iconClasses = {
+  standard: "h-4 w-4",
+  large: "h-5 w-5 stroke-[2.5px] group-hover:translate-x-1",
+};
+
+const textWrapperClasses = {
+  standard: "",
+  large: "py-4",
+};
+
+const textClasses = {
+  standard: "text-sm font-bold",
+  large: "text-xs sm:text-sm font-black uppercase tracking-[0.15em]",
+};
+---
+
+<a
+  href={href}
+  data-astro-reload={reload || undefined}
+  class:list={[
+    "group relative inline-flex items-center rounded-full bg-queens-secondary transition-all duration-500 ease-out active:scale-95",
+    containerClasses[variant],
+    className,
+  ]}
+>
+  <!-- Expanding dark background -->
+  <span
+    class:list={[
+      "absolute rounded-full bg-queens-primary transition-all duration-500 ease-out",
+      circleClasses[variant],
+    ]}
+    aria-hidden="true"></span>
+
+  <!-- Arrow Icon -->
+  <span
+    class:list={[
+      "relative z-10 flex items-center justify-center text-white transition-all duration-500",
+      iconWrapperClasses[variant],
+    ]}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      class:list={["transition-transform duration-500", iconClasses[variant]]}
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+    </svg>
+  </span>
+
+  <!-- Text with slide-up animation -->
+  <span
+    class:list={["relative z-10 overflow-hidden", textWrapperClasses[variant]]}
+  >
+    <span
+      class:list={[
+        "block text-white transition-transform duration-500 ease-out group-hover:-translate-y-full whitespace-nowrap",
+        textClasses[variant],
+      ]}
+    >
+      {text}
+    </span>
+    <span
+      class:list={[
+        "absolute inset-0 flex items-center block text-white transition-transform duration-500 ease-out translate-y-full group-hover:translate-y-0 whitespace-nowrap",
+        textClasses[variant],
+      ]}
+    >
+      {text}
+    </span>
+  </span>
+</a>
