@@ -692,6 +692,16 @@ a:not([class]):hover {
     background-color: var(--bg-elevated) !important;
 }
 
+/* Menu link hover - must use !important to override .text-white */
+#mobile-menu .menu-link {
+    color: white;
+    transition: opacity 0.2s ease;
+}
+
+#mobile-menu .menu-link:hover {
+    opacity: 0.6 !important;
+}
+
 /* Shadows - adjust for dark mode */
 .shadow-lg,
 .shadow-xl {

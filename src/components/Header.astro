@@ -13,300 +13,125 @@ const firstName = nameParts[0];
 const secondName = nameParts.length > 1 ? nameParts[1] : "";
 ---
 
+<!-- LiftLab-Style Floating Header -->
 <div
   id="header-wrapper"
-  class="fixed top-0 left-0 right-0 z-50 flex pointer-events-none transition-transform duration-300"
+  class="fixed top-0 left-0 right-0 z-[100] pointer-events-none p-4 md:p-6"
 >
-  <header
-    id="main-nav"
-    class={`pointer-events-auto relative tracking-tight w-full transition-all duration-500
-    /* Base Styles */
-    bg-white dark:bg-[#141517] border-b border-gray-100 dark:border-gray-800 shadow-sm
-    /* Desktop Styles - No longer pill, full width */
-    md:rounded-none md:max-w-none
-    ${brand.logoPathWhite || "text-white"} 
-    transition-colors duration-300`}
-  >
-    <div class="mx-auto w-full max-w-[1400px] px-6 py-4 md:px-8 md:py-4 flex items-center justify-between">
-      <!-- Logo -->
-      <a
-        href={`/`}
-        class="group flex items-center gap-2 mr-auto md:mr-8 shrink-0"
+  <div class="mx-auto max-w-[1400px] flex items-center justify-between">
+    
+    <!-- LEFT PILL: Hamburger + Logo -->
+    <div 
+      id="header-left-pill"
+      class="pointer-events-auto flex items-center gap-3 px-4 py-2 rounded-full bg-queens-primary/90 backdrop-blur-md shadow-lg"
+    >
+      <!-- Hamburger Button -->
+      <button
+        id="mobile-menu-button"
+        class="group flex items-center justify-center w-8 h-8 rounded-full text-white hover:bg-white/10 transition-colors"
+        aria-label="Toggle Menu"
       >
+        <div id="hamburger-icon" class="relative w-5 h-3.5">
+          <span class="hamburger-line absolute top-0 left-0 w-full h-0.5 bg-current rounded-full"></span>
+          <span class="hamburger-line absolute top-1/2 left-0 w-full h-0.5 bg-current rounded-full -translate-y-1/2"></span>
+          <span class="hamburger-line absolute bottom-0 left-0 w-full h-0.5 bg-current rounded-full"></span>
+        </div>
+      </button>
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
         {
           brand.logoPath && brand.logoPath.includes("New-Logo") ? (
-            <>
-              {/* Standard Logo - Shown in Light Mode */}
-              <img
-                src={brand.logoPath}
-                alt={brand.name}
-                class={`h-8 w-auto object-contain block ${brand.logoPathWhite ? "dark:hidden" : ""}`}
-              />
-              {/* White/Dark Mode Logo - Shown in Dark Mode */}
-              {brand.logoPathWhite && (
-                <img
-                  src={brand.logoPathWhite}
-                  alt={brand.name}
-                  class="h-8 w-auto object-contain hidden dark:block"
-                />
-              )}
-            </>
+            <img
+              src={brand.logoPathWhite || brand.logoPath}
+              alt={brand.name}
+              class="h-6 md:h-7 w-auto object-contain"
+            />
           ) : (
-            <span
-              class={`text-xl font-bold tracking-tighter uppercase group-hover:text-queens-secondary transition-colors duration-300 ${inverse ? "text-white" : "text-queens-primary dark:text-white"}`}
-            >
+            <span class="text-lg font-bold tracking-tighter uppercase text-white">
               {firstName}{" "}
-              <span
-                class={`group-hover:text-queens-primary transition-colors duration-300 ${inverse ? "text-queens-secondary" : "text-queens-secondary"}`}
-              >
-                {secondName}
-              </span>
+              <span class="text-queens-secondary">{secondName}</span>
             </span>
           )
         }
       </a>
+    </div>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-1">
-        <a
-          href={`/`}
-          data-astro-prefetch="hover"
-          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-          >Home</a
-        >
-        <a
-          href={`/services`}
-          data-astro-prefetch="hover"
-          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-          >Services</a
-        >
-        <a
-          href={`/buy-new-tires`}
-          data-astro-reload
-          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-          >New Tires</a
-        >
-        <a
-          href={`/deals`}
-          data-astro-prefetch="hover"
-          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-          >Deals</a
-        >
-        <a
-          href={`/about`}
-          data-astro-prefetch="hover"
-          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-          >About</a
-        >
-        <a
-          href={`/contact`}
-          data-astro-prefetch="hover"
-          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-          >Contact</a
-        >
-      </nav>
+    <!-- RIGHT ACTIONS: Phone + CTA + Theme Toggle -->
+    <div class="pointer-events-auto flex items-center gap-4">
+      <!-- Phone Number (Desktop Only) -->
+      <a 
+        href={`tel:${brand.phone}`}
+        class="hidden md:flex items-center gap-2 text-white text-sm font-medium hover:text-queens-secondary transition-colors"
+      >
+        <span class="uppercase tracking-wide">Call {brand.phone}</span>
+      </a>
 
-      <!-- Right Side Actions -->
-      <div class="flex items-center gap-3 ml-auto md:ml-0 pl-0 md:pl-0">
-        <ThemeToggle inverse={inverse} />
+      <!-- Theme Toggle -->
+      <ThemeToggle inverse={true} />
 
-        <div class="hidden md:block">
-          <CtaButton href="/request-an-appointment" text="Book Appointment" />
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button
-          id="mobile-menu-button"
-          class={`md:hidden p-2 rounded-full transition-colors ${inverse ? "text-white hover:bg-white/10" : "text-queens-primary hover:bg-gray-100 dark:text-white dark:hover:bg-white/10"}`}
-          aria-label="Open Menu"
-        >
-          <!-- Grid Icon (smaller dots) -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            class="w-5 h-5"
-          >
-            <circle cx="5" cy="5" r="1.5" stroke="currentColor" stroke-width="1.5"
-            ></circle>
-            <circle
-              cx="12"
-              cy="5"
-              r="1.5"
-              stroke="currentColor"
-              stroke-width="1.5"></circle>
-            <circle
-              cx="19"
-              cy="5"
-              r="1.5"
-              stroke="currentColor"
-              stroke-width="1.5"></circle>
-            <circle
-              cx="5"
-              cy="12"
-              r="1.5"
-              stroke="currentColor"
-              stroke-width="1.5"></circle>
-            <circle
-              cx="12"
-              cy="12"
-              r="1.5"
-              stroke="currentColor"
-              stroke-width="1.5"></circle>
-            <circle
-              cx="19"
-              cy="12"
-              r="1.5"
-              stroke="currentColor"
-              stroke-width="1.5"></circle>
-            <circle
-              cx="5"
-              cy="19"
-              r="1.5"
-              stroke="currentColor"
-              stroke-width="1.5"></circle>
-            <circle
-              cx="12"
-              cy="19"
-              r="1.5"
-              stroke="currentColor"
-              stroke-width="1.5"></circle>
-            <circle
-              cx="19"
-              cy="19"
-              r="1.5"
-              stroke="currentColor"
-              stroke-width="1.5"></circle>
-          </svg>
-        </button>
+      <!-- CTA Button -->
+      <div class="hidden md:block">
+        <CtaButton href="/request-an-appointment" text="Book Now" />
       </div>
     </div>
-  </header>
+  </div>
 </div>
 
-<!-- Mobile Menu Overlay -->
+<!-- Full Screen Menu Overlay -->
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-[100] hidden md:hidden"
+  class="fixed inset-0 z-[90] hidden"
   aria-hidden="true"
 >
-  <!-- Click-to-close backdrop (invisible, for clicking outside) -->
-  <div id="mobile-menu-backdrop" class="absolute inset-0"></div>
-
-  <!-- Dark Layer - FULL WIDTH, semi-transparent (slides in FIRST, slides out LAST) -->
-  <div
-    id="mobile-menu-dark-layer"
-    class="absolute inset-0 bg-black/70 backdrop-blur-sm transform -translate-x-full transition-transform duration-500 ease-out"
+  <!-- Background Image + Dark Overlay -->
+  <div 
+    id="menu-bg-overlay"
+    class="absolute inset-0 opacity-0"
   >
+    <!-- Background Image -->
+    <img 
+      src="/images/services/Hero-mechanic-fixing-car-on-lift-copy.webp" 
+      alt="" 
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-queens-dark/85"></div>
   </div>
 
-  <!-- Menu Panel (slides in SECOND on open, slides out FIRST on close) -->
+  <!-- Menu Content Panel -->
   <div
-    id="mobile-menu-panel"
-    class="absolute top-0 left-0 bottom-0 w-[85%] max-w-sm bg-white dark:bg-slate-900 shadow-2xl transform -translate-x-full transition-transform duration-500 ease-out"
+    id="menu-content-panel"
+    class="absolute inset-0 flex items-center justify-center opacity-0 translate-y-8"
   >
-    <div class="flex flex-col h-full">
-      <!-- Header -->
-      <div
-        class="flex justify-between items-center p-6 border-b border-gray-100 dark:border-gray-800"
-      >
-        <!-- Logo (Dynamic Theme Support) -->
-        <a href="/" class="group flex items-center gap-2">
-          {
-            brand.logoPath && brand.logoPath.includes("New-Logo") ? (
-              <>
-                {/* Standard Logo - Shown in Light Mode */}
-                <img
-                  src={brand.logoPath}
-                  alt={brand.name}
-                  class={`h-8 w-auto object-contain block ${brand.logoPathWhite ? "dark:hidden" : ""}`}
-                />
-                {/* White/Dark Mode Logo - Shown in Dark Mode */}
-                {brand.logoPathWhite && (
-                  <img
-                    src={brand.logoPathWhite}
-                    alt={brand.name}
-                    class="h-8 w-auto object-contain hidden dark:block"
-                  />
-                )}
-              </>
-            ) : (
-              <span class="text-xl font-bold tracking-tighter uppercase text-queens-primary dark:text-white">
-                {firstName}{" "}
-                <span class="text-queens-secondary">{secondName}</span>
-              </span>
-            )
-          }
-        </a>
-        <button
-          id="mobile-menu-close"
-          class="p-2 -mr-2 text-gray-400 hover:text-gray-700 dark:hover:text-white transition-colors"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Links (Centered, Big Text, Animated) -->
-      <nav
-        id="mobile-menu-links"
-        class="flex-1 flex flex-col items-center justify-center space-y-6 opacity-0 translate-y-8 transition-all duration-700 ease-out"
-      >
-        <a
-          href={`/`}
-          class="text-2xl font-bold text-gray-900 dark:text-white hover:text-queens-primary transition-colors"
-        >
-          Home
-        </a>
-        <a
-          href={`/services`}
-          class="text-2xl font-bold text-gray-900 dark:text-white hover:text-queens-primary transition-colors"
-        >
-          Services
-        </a>
-        <a
-          href={`/buy-new-tires`}
-          data-astro-reload
-          class="text-2xl font-bold text-gray-900 dark:text-white hover:text-queens-primary transition-colors"
-        >
-          New Tires
-        </a>
-        <a
-          href={`/deals`}
-          class="text-2xl font-bold text-gray-900 dark:text-white hover:text-queens-primary transition-colors"
-        >
-          Deals
-        </a>
-        <a
-          href={`/about`}
-          class="text-2xl font-bold text-gray-900 dark:text-white hover:text-queens-primary transition-colors"
-        >
-          About
-        </a>
-        <a
-          href={`/contact`}
-          class="text-2xl font-bold text-gray-900 dark:text-white hover:text-queens-primary transition-colors"
-        >
-          Contact
-        </a>
-
-        <div class="pt-8 w-full max-w-xs px-4 flex justify-center">
-          <CtaButton href="/request-an-appointment" text="Book Appointment" />
-        </div>
+    <!-- Centered Menu Card -->
+    <div class="w-full max-w-2xl mx-6 p-8 md:p-12 rounded-2xl bg-queens-secondary shadow-2xl">
+      <!-- 2-Column Link Grid -->
+      <nav class="grid grid-cols-2 gap-x-8 gap-y-6">
+        {
+          [
+            { label: "Home", href: "/" },
+            { label: "Services", href: "/services" },
+            { label: "New Tires", href: "/buy-new-tires", reload: true },
+            { label: "Deals", href: "/deals" },
+            { label: "About Us", href: "/about" },
+            { label: "Contact", href: "/contact" },
+          ].map((item) => (
+            <a
+              href={item.href}
+              data-astro-reload={item.reload || undefined}
+              class="menu-link text-xl md:text-2xl font-bold text-white uppercase tracking-wide hover:opacity-70 transition-opacity duration-200"
+            >
+              {item.label}
+            </a>
+          ))
+        }
       </nav>
+
+      <!-- Mobile CTA -->
+      <div class="mt-10 flex justify-center md:hidden">
+        <CtaButton href="/request-an-appointment" text="Book Appointment" />
+      </div>
     </div>
   </div>
 </div>
@@ -318,145 +143,140 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
   gsap.registerPlugin(ScrollTrigger);
 
   function setupHeader() {
-    const nav = document.getElementById("main-nav");
     const wrapper = document.getElementById("header-wrapper");
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const mobileMenuDarkLayer = document.getElementById(
-      "mobile-menu-dark-layer",
-    );
-    const mobileMenuPanel = document.getElementById("mobile-menu-panel");
-    const mobileMenuLinks = document.getElementById("mobile-menu-links");
-    const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
-    const mobileMenuClose = document.getElementById("mobile-menu-close");
+    const menuBtn = document.getElementById("mobile-menu-button");
+    const menu = document.getElementById("mobile-menu");
+    const bgOverlay = document.getElementById("menu-bg-overlay");
+    const contentPanel = document.getElementById("menu-content-panel");
+    const hamburgerLines = document.querySelectorAll(".hamburger-line");
 
-    if (!nav || !wrapper) return;
+    if (!wrapper || !menuBtn || !menu || !bgOverlay || !contentPanel) return;
+
+    let isOpen = false;
+    let isAnimating = false;
 
     // --- Sticky Scroll Animation ---
-    let lastScrollY = window.scrollY;
     let isHidden = false;
-
     ScrollTrigger.create({
       start: "top top",
-      end: 999999,
       onUpdate: (self) => {
+        if (isOpen) return; // Don't hide while menu is open
         const currentScrollY = self.scroll();
-
-        // Only hide if we've scrolled down more than 100px
         if (currentScrollY > 100) {
           if (self.direction === 1 && !isHidden) {
-            // Scrolling down - hide
-            gsap.to(wrapper, {
-              yPercent: -100,
-              duration: 0.4,
-              ease: "power2.inOut",
-            });
+            gsap.to(wrapper, { yPercent: -100, duration: 0.4, ease: "power2.inOut" });
             isHidden = true;
           } else if (self.direction === -1 && isHidden) {
-            // Scrolling up - show
-            gsap.to(wrapper, {
-              yPercent: 0,
-              duration: 0.4,
-              ease: "power2.out",
-            });
+            gsap.to(wrapper, { yPercent: 0, duration: 0.4, ease: "power2.out" });
             isHidden = false;
           }
         } else {
-          // Always show at top
-          gsap.to(wrapper, {
-            yPercent: 0,
-            duration: 0.4,
-            ease: "power2.out",
-          });
+          gsap.to(wrapper, { yPercent: 0, duration: 0.4, ease: "power2.out" });
           isHidden = false;
         }
-
-        lastScrollY = currentScrollY;
       },
     });
 
-    // --- Mobile Menu Logic ---
-    if (
-      !mobileMenuButton ||
-      !mobileMenu ||
-      !mobileMenuPanel ||
-      !mobileMenuDarkLayer
-    )
-      return;
-
-    const openMobileMenu = () => {
-      mobileMenu.classList.remove("hidden");
+    // --- Menu Open/Close ---
+    const openMenu = () => {
+      if (isAnimating) return;
+      isAnimating = true;
+      isOpen = true;
+      menu.classList.remove("hidden");
       document.body.style.overflow = "hidden";
 
-      gsap.to(mobileMenuDarkLayer, {
-        x: "0%",
-        duration: 0.5,
-        ease: "power3.out",
+      const tl = gsap.timeline({
+        onComplete: () => { isAnimating = false; }
       });
-      gsap.to(mobileMenuPanel, {
-        x: "0%",
-        duration: 0.5,
-        ease: "power3.out",
-        delay: 0.1,
-      });
-      gsap.to(mobileMenuLinks, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        delay: 0.3,
-        ease: "power3.out",
-      });
+
+      // Hamburger to X - lines move to center and rotate
+      tl.to(hamburgerLines[0], { rotate: 45, y: 7, transformOrigin: "center center", duration: 0.3, ease: "power2.out" }, 0)
+        .to(hamburgerLines[1], { scaleX: 0, opacity: 0, duration: 0.2 }, 0)
+        .to(hamburgerLines[2], { rotate: -45, y: -7, transformOrigin: "center center", duration: 0.3, ease: "power2.out" }, 0);
+
+      // Background fade in
+      tl.to(bgOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0);
+
+      // Content panel reveal
+      tl.to(contentPanel, { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }, 0.2);
+
+      // Stagger menu links
+      tl.fromTo(".menu-link", 
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, stagger: 0.05, duration: 0.4, ease: "power2.out" },
+        0.3
+      );
     };
 
-    const closeMobileMenu = () => {
-      gsap.to(mobileMenuLinks, { opacity: 0, y: 30, duration: 0.3 });
-      gsap.to(mobileMenuPanel, {
-        x: "-100%",
-        duration: 0.5,
-        ease: "power3.in",
-      });
-      gsap.to(mobileMenuDarkLayer, {
-        x: "-100%",
-        duration: 0.5,
-        ease: "power3.in",
-        delay: 0.1,
+    const closeMenu = () => {
+      if (isAnimating) return;
+      isAnimating = true;
+      isOpen = false;
+
+      const tl = gsap.timeline({
         onComplete: () => {
-          mobileMenu.classList.add("hidden");
+          menu.classList.add("hidden");
           document.body.style.overflow = "";
-        },
+          isAnimating = false;
+        }
       });
+
+      // Menu links fade out
+      tl.to(".menu-link", { opacity: 0, y: -10, stagger: 0.02, duration: 0.2 }, 0);
+
+      // Content panel hide
+      tl.to(contentPanel, { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, 0.1);
+
+      // Background fade out
+      tl.to(bgOverlay, { opacity: 0, duration: 0.4, ease: "power2.in" }, 0.15);
+
+      // X back to Hamburger
+      tl.to(hamburgerLines[0], { rotate: 0, y: 0, duration: 0.3, ease: "power2.out" }, 0.2)
+        .to(hamburgerLines[1], { scaleX: 1, opacity: 1, duration: 0.2 }, 0.25)
+        .to(hamburgerLines[2], { rotate: 0, y: 0, duration: 0.3, ease: "power2.out" }, 0.2);
     };
 
-    mobileMenuButton.addEventListener("click", openMobileMenu);
-    mobileMenuClose?.addEventListener("click", closeMobileMenu);
-    mobileMenuBackdrop?.addEventListener("click", closeMobileMenu);
+    const toggleMenu = () => {
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
 
-    mobileMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", (e) => {
-        if (link.dataset.isClosing === "true") return;
-        if (
-          e.metaKey ||
-          e.ctrlKey ||
-          e.shiftKey ||
-          e.altKey ||
-          (link as HTMLAnchorElement).target === "_blank"
-        )
-          return;
+    menuBtn.addEventListener("click", toggleMenu);
 
-        e.preventDefault();
-        closeMobileMenu();
-        setTimeout(() => {
-          link.dataset.isClosing = "true";
-          link.click();
-        }, 500);
+    // Click outside to close
+    bgOverlay.addEventListener("click", () => {
+      if (isOpen) closeMenu();
+    });
+
+    // Link clicks - close immediately
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (isOpen) {
+          // Allow navigation to proceed, close menu without delay
+          isOpen = false;
+          document.body.style.overflow = "";
+          gsap.set(menu, { display: "none" });
+          gsap.set(bgOverlay, { opacity: 0 });
+          gsap.set(contentPanel, { opacity: 0, y: 8 });
+          gsap.set(hamburgerLines[0], { rotate: 0, y: 0 });
+          gsap.set(hamburgerLines[1], { scaleX: 1, opacity: 1 });
+          gsap.set(hamburgerLines[2], { rotate: 0, y: 0 });
+        }
       });
     });
 
-    document.addEventListener("astro:before-swap", () => closeMobileMenu(), {
-      once: true,
-    });
+    // Cleanup on page transitions
+    document.addEventListener("astro:before-swap", () => {
+      if (isOpen) {
+        isOpen = false;
+        document.body.style.overflow = "";
+        menu.classList.add("hidden");
+      }
+    }, { once: true });
   }
 
-  // Use ONLY astro:page-load for consistent cross-page behavior
   document.addEventListener("astro:page-load", setupHeader);
 </script>
