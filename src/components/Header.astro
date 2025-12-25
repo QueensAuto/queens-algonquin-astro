@@ -15,171 +15,173 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
 <div
   id="header-wrapper"
-  class="fixed top-0 left-0 right-0 z-50 flex justify-center md:pt-6 md:px-4 pointer-events-none transition-transform duration-300"
+  class="fixed top-0 left-0 right-0 z-50 flex pointer-events-none transition-transform duration-300"
 >
   <header
     id="main-nav"
-    class={`pointer-events-auto relative tracking-tight flex items-center justify-between w-full transition-all duration-500
-    /* Mobile Styles */
-    px-6 py-4 bg-white/0 dark:bg-slate-900/0 border-b border-transparent
-    /* Desktop Styles */
-    md:rounded-full md:px-6 md:py-3 md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] md:border md:border-white/20 md:dark:border-white/10 md:max-w-6xl
+    class={`pointer-events-auto relative tracking-tight w-full transition-all duration-500
+    /* Base Styles */
+    bg-white dark:bg-[#141517] border-b border-gray-100 dark:border-gray-800 shadow-sm
+    /* Desktop Styles - No longer pill, full width */
+    md:rounded-none md:max-w-none
     ${brand.logoPathWhite || "text-white"} 
-    ${"md:bg-white md:dark:bg-[#141517] md:shadow-sm md:border md:border-gray-100 md:dark:border-gray-800 transition-colors duration-300"}`}
+    transition-colors duration-300`}
   >
-    <!-- Logo -->
-    <a
-      href={`/`}
-      class="group flex items-center gap-2 mr-auto md:mr-8 shrink-0"
-    >
-      {
-        brand.logoPath && brand.logoPath.includes("New-Logo") ? (
-          <>
-            {/* Standard Logo - Shown in Light Mode */}
-            <img
-              src={brand.logoPath}
-              alt={brand.name}
-              class={`h-8 w-auto object-contain block ${brand.logoPathWhite ? "dark:hidden" : ""}`}
-            />
-            {/* White/Dark Mode Logo - Shown in Dark Mode */}
-            {brand.logoPathWhite && (
-              <img
-                src={brand.logoPathWhite}
-                alt={brand.name}
-                class="h-8 w-auto object-contain hidden dark:block"
-              />
-            )}
-          </>
-        ) : (
-          <span
-            class={`text-xl font-bold tracking-tighter uppercase group-hover:text-queens-secondary transition-colors duration-300 ${inverse ? "text-white" : "text-queens-primary dark:text-white"}`}
-          >
-            {firstName}{" "}
-            <span
-              class={`group-hover:text-queens-primary transition-colors duration-300 ${inverse ? "text-queens-secondary" : "text-queens-secondary"}`}
-            >
-              {secondName}
-            </span>
-          </span>
-        )
-      }
-    </a>
-
-    <!-- Desktop Navigation -->
-    <nav class="hidden md:flex items-center gap-1">
+    <div class="mx-auto w-full max-w-[1400px] px-6 py-4 md:px-8 md:py-4 flex items-center justify-between">
+      <!-- Logo -->
       <a
         href={`/`}
-        data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-        >Home</a
+        class="group flex items-center gap-2 mr-auto md:mr-8 shrink-0"
       >
-      <a
-        href={`/services`}
-        data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-        >Services</a
-      >
-      <a
-        href={`/buy-new-tires`}
-        data-astro-reload
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-        >New Tires</a
-      >
-      <a
-        href={`/deals`}
-        data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-        >Deals</a
-      >
-      <a
-        href={`/about`}
-        data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-        >About</a
-      >
-      <a
-        href={`/contact`}
-        data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
-        >Contact</a
-      >
-    </nav>
+        {
+          brand.logoPath && brand.logoPath.includes("New-Logo") ? (
+            <>
+              {/* Standard Logo - Shown in Light Mode */}
+              <img
+                src={brand.logoPath}
+                alt={brand.name}
+                class={`h-8 w-auto object-contain block ${brand.logoPathWhite ? "dark:hidden" : ""}`}
+              />
+              {/* White/Dark Mode Logo - Shown in Dark Mode */}
+              {brand.logoPathWhite && (
+                <img
+                  src={brand.logoPathWhite}
+                  alt={brand.name}
+                  class="h-8 w-auto object-contain hidden dark:block"
+                />
+              )}
+            </>
+          ) : (
+            <span
+              class={`text-xl font-bold tracking-tighter uppercase group-hover:text-queens-secondary transition-colors duration-300 ${inverse ? "text-white" : "text-queens-primary dark:text-white"}`}
+            >
+              {firstName}{" "}
+              <span
+                class={`group-hover:text-queens-primary transition-colors duration-300 ${inverse ? "text-queens-secondary" : "text-queens-secondary"}`}
+              >
+                {secondName}
+              </span>
+            </span>
+          )
+        }
+      </a>
 
-    <!-- Right Side Actions -->
-    <div class="flex items-center gap-3 ml-auto md:ml-0 pl-0 md:pl-0">
-      <ThemeToggle inverse={inverse} />
-
-      <div class="hidden md:block">
-        <CtaButton href="/request-an-appointment" text="Book Appointment" />
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <button
-        id="mobile-menu-button"
-        class={`md:hidden p-2 rounded-full transition-colors ${inverse ? "text-white hover:bg-white/10" : "text-queens-primary hover:bg-gray-100 dark:text-white dark:hover:bg-white/10"}`}
-        aria-label="Open Menu"
-      >
-        <!-- Grid Icon (smaller dots) -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          class="w-5 h-5"
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-1">
+        <a
+          href={`/`}
+          data-astro-prefetch="hover"
+          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
+          >Home</a
         >
-          <circle cx="5" cy="5" r="1.5" stroke="currentColor" stroke-width="1.5"
-          ></circle>
-          <circle
-            cx="12"
-            cy="5"
-            r="1.5"
-            stroke="currentColor"
-            stroke-width="1.5"></circle>
-          <circle
-            cx="19"
-            cy="5"
-            r="1.5"
-            stroke="currentColor"
-            stroke-width="1.5"></circle>
-          <circle
-            cx="5"
-            cy="12"
-            r="1.5"
-            stroke="currentColor"
-            stroke-width="1.5"></circle>
-          <circle
-            cx="12"
-            cy="12"
-            r="1.5"
-            stroke="currentColor"
-            stroke-width="1.5"></circle>
-          <circle
-            cx="19"
-            cy="12"
-            r="1.5"
-            stroke="currentColor"
-            stroke-width="1.5"></circle>
-          <circle
-            cx="5"
-            cy="19"
-            r="1.5"
-            stroke="currentColor"
-            stroke-width="1.5"></circle>
-          <circle
-            cx="12"
-            cy="19"
-            r="1.5"
-            stroke="currentColor"
-            stroke-width="1.5"></circle>
-          <circle
-            cx="19"
-            cy="19"
-            r="1.5"
-            stroke="currentColor"
-            stroke-width="1.5"></circle>
-        </svg>
-      </button>
+        <a
+          href={`/services`}
+          data-astro-prefetch="hover"
+          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
+          >Services</a
+        >
+        <a
+          href={`/buy-new-tires`}
+          data-astro-reload
+          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
+          >New Tires</a
+        >
+        <a
+          href={`/deals`}
+          data-astro-prefetch="hover"
+          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
+          >Deals</a
+        >
+        <a
+          href={`/about`}
+          data-astro-prefetch="hover"
+          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
+          >About</a
+        >
+        <a
+          href={`/contact`}
+          data-astro-prefetch="hover"
+          class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
+          >Contact</a
+        >
+      </nav>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center gap-3 ml-auto md:ml-0 pl-0 md:pl-0">
+        <ThemeToggle inverse={inverse} />
+
+        <div class="hidden md:block">
+          <CtaButton href="/request-an-appointment" text="Book Appointment" />
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-button"
+          class={`md:hidden p-2 rounded-full transition-colors ${inverse ? "text-white hover:bg-white/10" : "text-queens-primary hover:bg-gray-100 dark:text-white dark:hover:bg-white/10"}`}
+          aria-label="Open Menu"
+        >
+          <!-- Grid Icon (smaller dots) -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            class="w-5 h-5"
+          >
+            <circle cx="5" cy="5" r="1.5" stroke="currentColor" stroke-width="1.5"
+            ></circle>
+            <circle
+              cx="12"
+              cy="5"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"></circle>
+            <circle
+              cx="19"
+              cy="5"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"></circle>
+            <circle
+              cx="5"
+              cy="12"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"></circle>
+            <circle
+              cx="12"
+              cy="12"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"></circle>
+            <circle
+              cx="19"
+              cy="12"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"></circle>
+            <circle
+              cx="5"
+              cy="19"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"></circle>
+            <circle
+              cx="12"
+              cy="19"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"></circle>
+            <circle
+              cx="19"
+              cy="19"
+              r="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"></circle>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 </div>
