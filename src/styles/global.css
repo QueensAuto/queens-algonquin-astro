@@ -36,14 +36,15 @@ html.lenis body {
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-queens-primary: #0a79c8;
-    --color-queens-primary-inverse: #ffffff;
+    --color-queens-primary: var(--queens-primary);
+    --color-queens-primary-inverse: var(--queens-primary-inverse);
+    --color-queens-secondary: var(--queens-secondary);
+    --color-queens-secondary-inverse: var(--queens-secondary-inverse);
+    
     --color-queens-secondary-ultra-dark: #021828;
     --color-queens-secondary-darker: #043050;
     --color-queens-secondary-dark: #064978;
     --color-queens-secondary-medium-dark: #0861a0;
-    --color-queens-secondary: #0b1121;
-    --color-queens-secondary-inverse: #cee4f4;
     --color-queens-secondary-medium-light: #3b94d3;
     --color-queens-secondary-light: #6cafde;
     --color-queens-secondary-lighter: #9dc9e9;
@@ -68,40 +69,21 @@ html.lenis body {
    ======================================== */
 
 .text-queens-secondary {
-    color: #0b1121;
-}
-
-/* Dark mode visibility for secondary color */
-.dark .text-queens-secondary {
-    color: #ffffff;
+    color: var(--queens-secondary);
 }
 
 .text-queens-primary {
-    color: #0a79c8;
+    color: var(--queens-primary);
 }
 
-/* Dark mode visibility for primary color */
-.dark .text-queens-primary {
-    color: #1489e1;
-}
-
-/* Hover states for secondary color */
+/* Hover states */
 .hover\:text-queens-secondary:hover {
-    color: #0a79c8;
+    color: var(--queens-primary);
 }
 
-/* Dark mode hover for secondary */
-.dark .hover\:text-queens-secondary:hover {
-    color: #cee4f4;
-}
-
-/* Group hover for icons and nested elements */
+/* Group hover */
 .group:hover .group-hover\:text-queens-secondary {
-    color: #0a79c8;
-}
-
-.dark .group:hover .group-hover\:text-queens-secondary {
-    color: #cee4f4;
+    color: var(--queens-primary);
 }
 
 /* ========================================
@@ -111,6 +93,11 @@ html.lenis body {
 
 :root {
     /* Brand Colors */
+    --queens-primary: #0a79c8;
+    --queens-primary-inverse: #ffffff;
+    --queens-secondary: #0b1121;
+    --queens-secondary-inverse: #cee4f4;
+    
     --color-queens-dark-bg: #141517;
 
     /* Text Colors */
@@ -134,6 +121,12 @@ html.lenis body {
 }
 
 .dark {
+    /* Brand Colors - Inverted for visibility */
+    --queens-primary: #1489e1;
+    --queens-primary-inverse: #ffffff;
+    --queens-secondary: #ffffff;
+    --queens-secondary-inverse: #0b1121;
+
     /* Text Colors - inverted for dark mode */
     --text-primary: #f9fafb;
     --text-secondary: #d1d5db;
@@ -456,13 +449,13 @@ div {
 
 /* Value Card Titles - used to override large global h3 */
 .value-card-title {
-    font-size: 1.5rem !important;
-    line-height: 1.2 !important;
+    font-size: 1.5rem;
+    line-height: 1.2;
 }
 
 @media (min-width: 1024px) {
     .value-card-title {
-        font-size: 2rem !important;
+        font-size: 2rem;
     }
 }
 
@@ -591,7 +584,7 @@ a:not([class]):hover {
 
 /* Cards and surfaces */
 .bg-white {
-    background-color: var(--bg-surface) !important;
+    background-color: var(--bg-surface);
 }
 
 /* Section backgrounds in Dark Mode - plain color only */
@@ -601,8 +594,8 @@ a:not([class]):hover {
     background-color: var(--bg-page);
 }
 
-.dark .bg-white[class*="rounded"],
-.dark .bg-gray-50[class*="rounded"] {
+/* Reduced greedy dark mode overrides */
+.dark .card-glass {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -636,73 +629,62 @@ a:not([class]):hover {
 
 /* Text colors */
 .text-gray-600 {
-    color: var(--text-secondary) !important;
+    color: var(--text-secondary);
 }
 
 .text-gray-500 {
-    color: var(--text-muted) !important;
+    color: var(--text-muted);
 }
 
 .text-gray-400 {
-    color: var(--text-muted) !important;
+    color: var(--text-muted);
 }
 
 .text-gray-700 {
-    color: var(--text-secondary) !important;
+    color: var(--text-secondary);
 }
 
 /* Queens primary text - ensure it uses brand blue */
 .text-queens-primary {
-    color: var(--color-queens-primary) !important;
-}
-
-/* Primary text color override (CSS variable syntax) */
-.text-\[var\(--color-queens-primary\)\] {
-    color: var(--text-primary) !important;
-}
-
-/* Primary opacity text colors */
-.text-\[var\(--color-queens-primary\)\]\/60,
-.text-\[var\(--color-queens-primary\)\]\/70 {
-    color: var(--text-muted) !important;
+    color: var(--color-queens-primary);
 }
 
 /* Border colors */
 .border-gray-100,
 .border-gray-200,
 .border-gray-800 {
-    border-color: var(--border-default) !important;
+    border-color: var(--border-default);
 }
 
 /* Hover backgrounds */
 .hover\:bg-gray-50:hover,
 .hover\:bg-gray-100:hover {
-    background-color: var(--bg-elevated) !important;
+    background-color: var(--bg-elevated);
 }
 
-/* Mobile menu panel */
+/* Mobile menu panel utility consistency */
 #mobile-menu .bg-white {
-    background-color: var(--bg-surface) !important;
+    background-color: var(--bg-surface);
 }
 
 #mobile-menu .border-gray-100 {
-    border-color: var(--border-default) !important;
+    border-color: var(--border-default);
 }
 
 #mobile-menu .text-gray-700 {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
 #mobile-menu .text-gray-500 {
-    color: var(--text-muted) !important;
+    color: var(--text-muted);
 }
 
 #mobile-menu .bg-gray-100 {
-    background-color: var(--bg-muted) !important;
+    background-color: var(--bg-muted);
 }
 
 #mobile-menu .hover\:bg-gray-200:hover {
-    background-color: var(--bg-elevated) !important;
+    background-color: var(--bg-elevated);
 }
 
 /* Menu link hover - must use !important to override .text-white */
@@ -712,7 +694,7 @@ a:not([class]):hover {
 }
 
 #mobile-menu .menu-link:hover {
-    opacity: 0.6 !important;
+    opacity: 0.6;
 }
 
 /* Shadows - adjust for dark mode */
@@ -727,12 +709,12 @@ a:not([class]):hover {
 
 /* Queens brand colors - switch in dark mode */
 .text-queens-black {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
 /* Black text */
 .text-black {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
 /* Additional gray variants */
@@ -783,7 +765,7 @@ a:not([class]):hover {
 .bg-queens-primary,
 .bg-queens-black,
 .bg-queens-dark {
-    color: white !important;
+    color: white;
 }
 
 .bg-queens-primary *,
@@ -827,26 +809,12 @@ a:not([class]):hover {
 }
 
 /* Service cards and feature boxes */
-/* .dark .bg-gray-50 removed */
-
 /* Stepper/Progress indicators */
 .dark .border-gray-300 {
-    border-color: var(--border-default) !important;
+    border-color: var(--border-default);
 }
 
 /* Ensure proper contrast on elevated surfaces */
-.dark .bg-white h1,
-.dark .bg-white h2,
-.dark .bg-white h3,
-.dark .bg-white h4,
-.dark .bg-white h5,
-.dark .bg-white h6 {
-    color: var(--text-primary) !important;
-}
-
-.dark .bg-white p {
-    color: var(--text-secondary) !important;
-}
 
 html {
     scroll-behavior: auto;
@@ -966,7 +934,7 @@ html {
 
 .dark .btn-secondary {
     background: rgba(255, 255, 255, 0.05);
-    color: #ffffff !important;
+    color: var(--text-primary);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -978,99 +946,95 @@ html {
 
 :where(.dark, .dark *) .faq-item,
 .faq-item:where(.dark, .dark *) {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
+    background: var(--bg-surface);
+    border-color: var(--border-default);
 }
 
 :where(.dark, .dark *) .faq-item:hover,
 .faq-item:hover:where(.dark, .dark *) {
-    border-color: rgba(59, 110, 174, 0.3) !important;
-    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4) !important;
+    border-color: var(--queens-primary);
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4);
 }
 
 :where(.dark, .dark *) .faq-item.active,
 .faq-item.active:where(.dark, .dark *) {
-    border-color: #3b6eae !important;
-    box-shadow: 0 0 30px rgba(59, 110, 174, 0.3), 0 0 60px rgba(59, 110, 174, 0.1) !important;
+    border-color: var(--queens-primary);
+    box-shadow: 0 0 30px rgba(10, 121, 200, 0.2);
 }
 
 /* FAQ Question Text */
 :where(.dark, .dark *) .faq-trigger span span:last-child,
 .faq-trigger span span:last-child:where(.dark, .dark *) {
-    color: #f1f5f9 !important;
+    color: var(--text-primary);
 }
 
 /* FAQ Answer Text */
 :where(.dark, .dark *) .faq-content p,
 .faq-content p:where(.dark, .dark *) {
-    color: #94a3b8 !important;
+    color: var(--text-secondary);
 }
 
 /* FAQ Icon Background */
 :where(.dark, .dark *) .faq-icon,
 .faq-icon:where(.dark, .dark *) {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 :where(.dark, .dark *) .faq-icon svg,
 .faq-icon svg:where(.dark, .dark *) {
-    color: #94a3b8 !important;
+    color: var(--text-muted);
 }
 
 :where(.dark, .dark *) .faq-item:hover .faq-icon,
 .faq-item:hover .faq-icon:where(.dark, .dark *) {
-    background-color: rgba(59, 110, 174, 0.2) !important;
+    background-color: rgba(10, 121, 200, 0.15);
 }
 
 :where(.dark, .dark *) .faq-item:hover .faq-icon svg,
 .faq-item:hover .faq-icon svg:where(.dark, .dark *) {
-    color: #60a5fa !important;
+    color: var(--queens-primary);
 }
 
 /* FAQ Number Badge */
 :where(.dark, .dark *) .faq-trigger span span:first-child,
 .faq-trigger span span:first-child:where(.dark, .dark *) {
-    background-color: rgba(59, 110, 174, 0.2) !important;
-    color: #60a5fa !important;
+    background-color: rgba(10, 121, 200, 0.15);
+    color: var(--queens-primary);
 }
 
 /* FAQ Answer Border */
 :where(.dark, .dark *) .faq-content>div,
 .faq-content>div:where(.dark, .dark *) {
-    border-color: rgba(59, 110, 174, 0.3) !important;
+    border-color: var(--border-default);
 }
 
 /* City page FAQ styles (details/summary elements) - simplified transparent dark mode */
 :where(.dark, .dark *) details.group,
 details.group:where(.dark, .dark *) {
-    background: transparent !important;
-    background-image: none !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
+    background: transparent;
+    background-image: none;
+    border-color: var(--border-default);
 }
 
 :where(.dark, .dark *) details.group:hover,
 details.group:hover:where(.dark, .dark *) {
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: var(--queens-primary);
 }
 
 :where(.dark, .dark *) details.group[open],
 details.group[open]:where(.dark, .dark *) {
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    box-shadow: none !important;
+    border-color: var(--queens-primary);
 }
 
 :where(.dark, .dark *) details.group summary,
 details.group summary:where(.dark, .dark *) {
-    color: rgba(255, 255, 255, 0.9) !important;
-    background: transparent !important;
-    background-image: none !important;
+    color: var(--text-primary);
 }
 
 :where(.dark, .dark *) details.group>div,
 details.group>div:where(.dark, .dark *) {
-    background: transparent !important;
-    background-image: none !important;
-    color: rgba(255, 255, 255, 0.7) !important;
+    background: transparent;
+    color: var(--text-secondary);
 }
 
 
@@ -1106,16 +1070,15 @@ details.group>div:where(.dark, .dark *) {
 }
 
 /* EVEN CARDS: Navy Accent (Light & Dark Mode) */
+/* EVEN CARDS: Navy Accent (Light & Dark Mode) */
 .service-card-item:nth-child(even) {
-    background-color: #171f32 !important;
-    color: white !important;
+    background-color: #0b1121; /* Queens Secondary (Navy) */
+    color: #ffffff;
     border: 1px solid #171f32;
 }
 
 .dark .service-card-item:nth-child(even) {
-    /* In dark mode, keep the navy card but ensure it stands out or blends correctly */
-    background-color: #171f32 !important;
-    /* Slightly lighter than page bg #141517 */
+    background-color: #0b1121;
     border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -1125,15 +1088,15 @@ details.group>div:where(.dark, .dark *) {
 .service-card-item:nth-child(even) p,
 .service-card-item:nth-child(even) li,
 .service-card-item:nth-child(even) span {
-    color: white !important;
+    color: #ffffff;
 }
 
 .service-card-item:nth-child(even) a {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .service-card-item:nth-child(even) a:hover {
-    color: white !important;
+    color: #ffffff;
 }
 
 /* Adjust beam effect for Navy Cards (Make it clearer/white) */
@@ -1378,91 +1341,74 @@ details.group>div:where(.dark, .dark *) {
    Numbers inside circles, border-based active state
    ======================================== */
 .progress-steps {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 280px !important;
-    margin: 0 auto 1.5rem !important;
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 1.5rem;
 }
 
 .progress-steps .progress-track {
-    width: 100% !important;
-    height: 3px !important;
-    background-color: #e0e0e0 !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 0 !important;
-    transform: translateY(-50%) !important;
-    z-index: 0 !important;
-}
-
-.dark .progress-steps .progress-track {
-    background-color: #475569 !important;
+    width: 100%;
+    height: 3px;
+    background-color: var(--border-default);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 0;
 }
 
 .progress-steps .progress-bar {
-    position: absolute !important;
-    width: 0% !important;
-    height: 100% !important;
-    left: 0 !important;
-    top: 0 !important;
-    background: var(--color-queens-secondary, #0a79c8) !important;
-    transition: width 0.5s ease !important;
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: var(--queens-primary);
+    transition: width 0.5s ease;
 }
 
 .progress-steps .steps-container {
-    display: flex !important;
-    justify-content: space-between !important;
-    position: relative !important;
-    z-index: 1 !important;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
 }
 
 .progress-steps .step {
-    width: 36px !important;
-    height: 36px !important;
-    border-radius: 50% !important;
-    background-color: white !important;
-    border: 3px solid #e0e0e0 !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    cursor: default !important;
-    transition: border-color 0.3s ease, background-color 0.3s ease !important;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--bg-surface);
+    border: 3px solid var(--border-default);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .progress-steps .step span {
-    font-weight: 600 !important;
-    font-size: 0.875rem !important;
-    color: #94a3b8 !important;
-    transition: color 0.3s ease !important;
-}
-
-.dark .progress-steps .step {
-    background-color: #1e293b !important;
-    border-color: #475569 !important;
-}
-
-.dark .progress-steps .step span {
-    color: #64748b !important;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
 }
 
 .progress-steps .step.active {
-    border-color: var(--color-queens-secondary, #0a79c8) !important;
+    border-color: var(--queens-primary);
 }
 
 .progress-steps .step.active span {
-    color: var(--color-queens-secondary, #0a79c8) !important;
-}
-
-.dark .progress-steps .step.active {
-    border-color: var(--color-queens-secondary, #0a79c8) !important;
+    color: var(--queens-primary);
 }
 
 .progress-steps .step.completed {
-    border-color: var(--color-queens-secondary, #0a79c8) !important;
-    background-color: var(--color-queens-secondary, #0a79c8) !important;
-    cursor: pointer !important;
+    border-color: var(--queens-primary);
+    background-color: var(--queens-primary);
+    cursor: pointer;
 }
 
 .progress-steps .step.completed span {
-    color: white !important;
+    color: var(--queens-primary-inverse);
 }

@@ -52,24 +52,24 @@ const textClasses = {
   href={href}
   data-astro-reload={reload || undefined}
   class:list={[
-    "btn-cta-premium group relative inline-flex items-center gap-2 rounded-full bg-white dark:bg-queens-primary px-2 py-1.5 transition-all duration-300 ease-out hover:scale-105 shadow-md",
+    "btn-cta-premium group relative inline-flex items-center gap-2 rounded-full px-2 py-1.5 transition-all duration-300 ease-out hover:scale-105 shadow-md",
     className,
   ]}
 >
   <!-- Text Section with Vertical Scroll -->
   <span class="relative h-5 overflow-hidden pl-4 pr-1">
     <span class="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
-      <span class="flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em] text-queens-primary dark:text-white">
+      <span class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]">
         {text}
       </span>
-      <span class="flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em] text-queens-primary dark:text-white">
+      <span class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]">
         {text}
       </span>
     </span>
   </span>
 
   <!-- Icon Circle Badge with Horizontal Slide -->
-  <div class="relative flex items-center justify-center overflow-hidden h-8 w-8 rounded-full bg-queens-primary dark:bg-queens-secondary">
+  <div class="badge relative flex items-center justify-center overflow-hidden h-8 w-8 rounded-full">
     <!-- First Arrow -->
     <div class="flex h-full w-full items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-full">
       <svg
@@ -78,7 +78,7 @@ const textClasses = {
         viewBox="0 0 24 24"
         stroke-width="3"
         stroke="currentColor"
-        class="h-3.5 w-3.5 text-white"
+        class="btn-icon h-3.5 w-3.5"
       >
         <path
           stroke-linecap="round"
@@ -94,7 +94,7 @@ const textClasses = {
         viewBox="0 0 24 24"
         stroke-width="3"
         stroke="currentColor"
-        class="h-3.5 w-3.5 text-white"
+        class="btn-icon h-3.5 w-3.5"
       >
         <path
           stroke-linecap="round"
@@ -104,3 +104,33 @@ const textClasses = {
     </div>
   </div>
 </a>
+
+<style>
+  /* Light Mode (Default) */
+  .btn-cta-premium {
+    background-color: #ffffff !important;
+  }
+  .btn-cta-premium .btn-text {
+    color: var(--color-queens-primary) !important;
+  }
+  .btn-cta-premium .badge {
+    background-color: var(--color-queens-primary) !important;
+  }
+  .btn-cta-premium .btn-icon {
+    color: #ffffff !important;
+  }
+
+  /* Dark Mode */
+  :global(.dark) .btn-cta-premium {
+    background-color: var(--color-queens-primary) !important;
+  }
+  :global(.dark) .btn-cta-premium .btn-text {
+    color: #ffffff !important;
+  }
+  :global(.dark) .btn-cta-premium .badge {
+    background-color: #0b1121 !important; /* Queens Navy */
+  }
+  :global(.dark) .btn-cta-premium .btn-icon {
+    color: #ffffff !important;
+  }
+</style>
