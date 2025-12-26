@@ -13,4 +13,9 @@ export type BrandConfig = {
     googleMapsUrl?: string;
     gaId?: string;
     metaPixelId?: string;
+    hours?: {
+        monFri: string;
+        sat: string;
+        sun?: string;
+    };
 };

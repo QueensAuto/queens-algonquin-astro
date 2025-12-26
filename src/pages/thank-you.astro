@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mobileTiresBrand } from "../brands";
 
+const brand = mobileTiresBrand;
 const title = "Thank You | Queens Auto Service";
 const description =
     "Your appointment is confirmed. We look forward to seeing you!";
@@ -324,7 +325,7 @@ const description =
                             <span
                                 class="font-bold text-gray-900 dark:text-white"
                                 data-translate-key="locationName"
-                                >Queens Auto — Elgin</span
+                                >Queens Auto — Algonquin</span
                             >
                         </div>
                     </div>
@@ -403,10 +404,10 @@ const description =
                             time for you.
                         </p>
                         <a
-                            href="tel:+12246353000"
+                            href={brand.phone}
                             class="btn-gradient inline-flex items-center justify-center px-8 py-3 text-white font-bold rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all"
                         >
-                            (224) 635-3000
+                            {brand.phone}
                         </a>
                     </div>
                     <div
@@ -422,10 +423,10 @@ const description =
                             class="text-gray-600 dark:text-slate-400 mt-3 mb-6"
                             data-translate-key="findUsBody"
                         >
-                            1303 Dundee Ave, Elgin, IL 60120
+                            {brand.address}
                         </p>
                         <a
-                            href="https://maps.google.com/?q=Queens+Auto+Service+1303+Dundee+Ave+Elgin+IL"
+                            href={brand.googleMapsUrl}
                             target="_blank"
                             class="bg-gray-200 dark:bg-white/10 text-gray-900 dark:text-white inline-flex items-center justify-center px-8 py-3 font-bold rounded-full hover:bg-gray-300 dark:hover:bg-white/20 transition-all"
                         >

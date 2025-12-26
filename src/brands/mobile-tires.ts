@@ -1,16 +1,21 @@
 import type { BrandConfig } from "./types";
 
 export const mobileTiresBrand: BrandConfig = {
-    id: "mobile-tires",
-    name: "Queens Auto Service",
-    domain: "queensautoserviceselgin.com",
-    logoPath: "/images/logos/site logos/New-Logo.webp",
-    logoPathWhite: "/images/logos/site logos/Logo-White.webp",
-    primaryColor: "#0b1121", // queens-primary from tailwind config
-    accentColor: "#0e79c9", // queens-secondary from tailwind config
-    phone: "(224) 635-3000",
-    email: "info@queensautoserviceselgin.com",
-    address: "1303 Dundee Ave, Elgin, IL 60120",
-    cityLabel: "Professional Auto Service – Elgin, IL",
-    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=1303+Dundee+Ave+Elgin+IL+60120",
+    id: "queens-algonquin",
+    name: "Queens Auto Service Algonquin",
+    domain: "queensautoservices.com",
+    logoPath: "/images/logos/queens-logo.svg",
+    logoPathWhite: "/images/logos/queens-logo-white.svg",
+    primaryColor: "#0a79c8", // Vibrant Blue
+    accentColor: "#0a79c8",
+    phone: "(847) 844-1700",
+    email: "service@queensautoservices.com",
+    address: "2401 E Algonquin Rd, Algonquin, IL 60102",
+    cityLabel: "Algonquin, IL",
+    googleMapsUrl: "https://www.google.com/maps/place/2401+E+Algonquin+Rd,+Algonquin,+IL+60102/@42.1491761,-88.2619717,17z/",
+    hours: {
+        monFri: "7:30 - 6:00 pm",
+        sat: "7:30 - 4:00 pm",
+        sun: "Closed"
+    },
 };

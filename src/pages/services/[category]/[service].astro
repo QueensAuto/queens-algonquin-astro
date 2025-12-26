@@ -33,8 +33,8 @@ export async function getStaticPaths() {
 }
 
 const { category, service } = Astro.props as { category: any; service: any };
-const title = `${service.title} | Queens Auto Service`;
-const description = `Professional ${service.title} services in Elgin, IL. Quality care and expert technicians for all your ${category.title.toLowerCase()} needs.`;
+const title = `${service.title} | Queens Auto Service Algonquin`;
+const description = `Professional ${service.title} services in Algonquin, IL. Quality care and expert technicians for all your ${category.title.toLowerCase()} needs.`;
 
 const parsedContent = service.fullContent
     ? marked.parse(service.fullContent)
@@ -92,7 +92,7 @@ const serviceFaqs = [
         >
             <!-- Background Image (Full Width) -->
             <img
-                src="/images/shop/Queens-Auto-Services-Elgin-a-view-from-outside.webp"
+                src="/images/shop/Queens-Auto-Services-Algonquin-a-view-from-outside.webp"
                 alt="Shop View"
                 class="absolute inset-0 w-full h-full object-cover"
             />
@@ -138,7 +138,7 @@ const serviceFaqs = [
                         >
                             {
                                 service.pitch ||
-                                    `Professional ${service.title} services at Queens Auto Service. Our expert technicians ensure your vehicle remains safe and reliable on the Elgin roads.`
+                                    `Professional ${service.title} services at Queens Auto Service. Our expert technicians ensure your vehicle remains safe and reliable on the Algonquin roads.`
                             }
                         </div>
                     </div>
@@ -176,8 +176,8 @@ const serviceFaqs = [
                             <p class="lead text-xl text-gray-600 dark:text-gray-300">
                                 Experience quality automotive care with our
                                 professional {service.title} service. Our expert
-                                technicians are dedicated to providing the best
-                                service in Elgin.
+                                 technicians are dedicated to providing the best
+                                 service in Algonquin.
                             </p>
                         </div>
                     )
@@ -207,7 +207,7 @@ const serviceFaqs = [
 
                     <!-- Banner 1: Auto Repair -->
                     <a
-                        href="https://queensautoserviceselgin.com/auto-repair-landing-page/?banner=sidebar_auto_repair_01"
+                        href="https://queensautoservices.com/auto-repair-landing-page/?banner=sidebar_auto_repair_01"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-white/5"
@@ -226,7 +226,7 @@ const serviceFaqs = [
 
                     <!-- Banner 2: Brakes -->
                     <a
-                        href="https://queensautoserviceselgin.com/brakes/booking.htm?banner=sidebar_brakes_01"
+                        href="https://queensautoservices.com/brakes/booking.htm?banner=sidebar_brakes_01"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-slate-800"
@@ -246,7 +246,7 @@ const serviceFaqs = [
 
                     <!-- Banner 3: Alignment -->
                     <a
-                        href="https://queensautoserviceselgin.com/wheel-alignment/special-offer.htm?banner=sidebar_alignment_01"
+                        href="https://queensautoservices.com/wheel-alignment/special-offer.htm?banner=sidebar_alignment_01"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-slate-800"
@@ -290,8 +290,8 @@ const serviceFaqs = [
                 data-reveal-item
             >
                 <img
-                    src="/images/services/Queens-Auto-Services-Elgin-Auto-Repair-001.webp"
-                    alt="Auto Services Elgin"
+                    src="/images/services/Queens-Auto-Services-Algonquin-Auto-Repair-001.webp"
+                    alt="Auto Services Algonquin"
                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     onerror="this.src='https://placehold.co/600x400/1e293b/white?text=Service+Bay'"

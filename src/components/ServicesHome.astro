@@ -1,6 +1,6 @@
 ---
 // src/components/ServicesHome.astro
-// Refactored for Queens Auto Services Elgin (the shop)
+// Refactored for Queens Auto Services Algonquin (the shop)
 import type { BrandConfig } from "../brands";
 import { mobileTiresBrand } from "../brands";
 import CtaButtonSecondary from "./CtaButtonSecondary.astro";
@@ -32,10 +32,10 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
       </div>
       <h2 class="display-xl text-queens-secondary dark:text-white mb-8">
         Expert Auto Care. <br />
-        <span class="text-queens-primary">Right Here in Elgin.</span>
+        <span class="text-queens-primary">Right Here in Algonquin.</span>
       </h2>
       <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-        Queens Auto Services has been the trusted auto repair shop in Elgin, IL
+        Queens Auto Services has been the trusted auto repair shop in Algonquin, IL
         for over a decade. From oil changes to complete engine overhauls, our
         experienced technicians handle it all.
       </p>
@@ -234,7 +234,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
     allSections.forEach((sec) => {
       if (
         sec.textContent?.includes("Expert Auto Care") &&
-        sec.textContent?.includes("Right Here in Elgin")
+        sec.textContent?.includes("Right Here in Algonquin")
       ) {
         section = sec;
       }

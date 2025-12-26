@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { mobileTiresBrand } from "../brands";
 ---
 
-<BaseLayout title="Select Date & Time | Queens Mobile Tires">
+<BaseLayout title={`Select Date & Time | ${mobileTiresBrand.name}`}>
     <div class="min-h-screen bg-gray-100 py-8 font-sans">
         <!-- Progress Steps -->
         <div class="container mx-auto max-w-4xl mb-8 px-4">
@@ -180,13 +181,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                                 :key="day.date"
                             >
                                 <button
-                                    :class="{
-                    'bg-[#3b6eae] text-white font-bold': day.isSelected,
-                    'bg-gray-100 text-gray-800 hover:bg-blue-100': day.isAvailable && !day.isSelected,
-                    'text-gray-300 cursor-not-allowed': !day.isAvailable,
-                    'text-red-400': day.isSunday && !day.isSelected,
-                    'ring-2 ring-[#3b6eae]': day.isToday && !day.isSelected
-                  }"
+                                    :class="{'bg-[#3b6eae] text-white font-bold': day.isSelected, 'bg-gray-100 text-gray-800 hover:bg-blue-100': day.isAvailable && !day.isSelected, 'text-gray-300 cursor-not-allowed': !day.isAvailable, 'text-red-400': day.isSunday && !day.isSelected, 'ring-2 ring-[#3b6eae]': day.isToday && !day.isSelected}"
                                     class="w-10 h-10 rounded-full flex items-center justify-center text-sm transition-all"
                                     :disabled="!day.isAvailable"
                                     @click="selectDate(day)"

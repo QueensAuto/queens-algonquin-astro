@@ -46,21 +46,21 @@ const localBusinessSchema = {
         width: "512",
         height: "512",
     },
-    image: `https://${brand.domain}/images/shop/Queens-Auto-Services-Elgin-a-view-from-outside.webp`,
+    image: `https://${brand.domain}/images/shop/Queens-Auto-Banner-001.webp`,
     telephone: brand.phone,
     email: brand.email,
     address: {
         "@type": "PostalAddress",
-        streetAddress: "1303 Dundee Ave",
-        addressLocality: "Elgin",
+        streetAddress: "2401 E Algonquin Rd",
+        addressLocality: "Algonquin",
         addressRegion: "IL",
-        postalCode: "60120",
+        postalCode: "60102",
         addressCountry: "US",
     },
     geo: {
         "@type": "GeoCoordinates",
-        latitude: 42.0537,
-        longitude: -88.2638,
+        latitude: 42.1504838,
+        longitude: -88.2571728,
     },
     hasMap: brand.googleMapsUrl,
     openingHoursSpecification: [
@@ -78,8 +78,7 @@ const localBusinessSchema = {
         },
     ],
     sameAs: [
-        "https://www.facebook.com/queensautoservice/",
-        "https://www.instagram.com/queensautoservice/",
+        "https://www.facebook.com/p/Queens-Auto-Services-Algonquin-100076608098799/",
     ],
     priceRange: "$$",
     aggregateRating: {
@@ -118,8 +117,8 @@ if (serviceData) {
         },
         areaServed: {
             "@type": "City",
-            name: "Elgin",
-            sameAs: "https://en.wikipedia.org/wiki/Elgin,_Illinois",
+            name: "Algonquin",
+            sameAs: "https://en.wikipedia.org/wiki/Algonquin,_Illinois",
         },
         description: serviceData.pitch || description,
         offers: {

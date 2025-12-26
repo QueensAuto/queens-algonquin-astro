@@ -11,15 +11,15 @@ const description =
 const faqs = [
     {
         question: "What are your hours of operation?",
-        answer: "We're open Monday through Friday 7:30 AM - 6:00 PM, and Saturday 7:30 AM - 4:00 PM. We're closed on Sundays.",
+        answer: `We're open Monday through Friday ${mobileTiresBrand.hours?.monFri}, and Saturday ${mobileTiresBrand.hours?.sat}. We're closed on Sundays.`,
     },
     {
         question: "Do you offer mobile tire installation?",
-        answer: "Yes! We offer convenient mobile tire installation throughout Elgin and surrounding areas. Book through our appointment page.",
+        answer: "Yes! We offer convenient mobile tire installation throughout Algonquin and surrounding areas. Book through our appointment page.",
     },
     {
         question: "How do I schedule an appointment?",
-        answer: "Visit our Request an Appointment page to book online, or give us a call at (224) 635-3000.",
+        answer: `Visit our Request an Appointment page to book online, or give us a call at ${mobileTiresBrand.phone}.`,
     },
     {
         question: "What payment methods do you accept?",
@@ -89,10 +89,10 @@ const faqs = [
                                         Email
                                     </p>
                                     <a
-                                        href="mailto:info@queensautoservices.com"
+                                        href={`mailto:${mobileTiresBrand.email}`}
                                         class="text-white font-medium hover:text-queens-secondary transition-colors"
                                     >
-                                        info@queensautoservices.com
+                                        {mobileTiresBrand.email}
                                     </a>
                                 </div>
                             </div>
@@ -120,10 +120,10 @@ const faqs = [
                                         Phone
                                     </p>
                                     <a
-                                        href="tel:2246353000"
+                                        href={`tel:${mobileTiresBrand.phone.replace(/\D/g, "")}`}
                                         class="text-white font-medium hover:text-queens-secondary transition-colors"
                                     >
-                                        (224) 635-3000
+                                        {mobileTiresBrand.phone}
                                     </a>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@ const faqs = [
                                         Address
                                     </p>
                                     <p class="text-white font-medium">
-                                        1303 Dundee Ave, Elgin, IL 60120
+                                        {mobileTiresBrand.address}
                                     </p>
                                 </div>
                             </div>
@@ -185,8 +185,8 @@ const faqs = [
                                         Hours
                                     </p>
                                     <p class="text-white font-medium">
-                                        Mon-Fri: 7:30 AM - 6:00 PM<br />
-                                        Sat: 7:30 AM - 4:00 PM<br />
+                                        Mon-Fri: {mobileTiresBrand.hours?.monFri}<br />
+                                        Sat: {mobileTiresBrand.hours?.sat}<br />
                                         <span class="text-white/60"
                                             >Sun: Closed</span
                                         >
@@ -423,7 +423,7 @@ const faqs = [
                         Still have questions?
                     </h3>
                     <a
-                        href="tel:2246353000"
+                        href={`tel:${mobileTiresBrand.phone.replace(/\D/g, "")}`}
                         class="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors group"
                     >
                         <span>Call us</span>

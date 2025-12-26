@@ -24,25 +24,13 @@ const { brand } = Astro.props as { brand: BrandConfig };
           }
         </a>
         <p class="footer-about">
-          Elgin's trusted auto shop since 2007. Quality repairs, honest pricing,
+          Algonquin's trusted auto shop since 2007. Quality repairs, honest pricing,
           and service that keeps you rolling.
         </p>
         <!-- Social Icons -->
         <div class="footer-socials">
           <a
-            href="https://www.youtube.com/@queenselgin4206"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="YouTube"
-          >
-            <img
-              src="/images/social/youtube.svg"
-              alt="YouTube"
-              class="social-icon"
-            />
-          </a>
-          <a
-            href="https://www.facebook.com/profile.php?id=61575036973222"
+            href="https://www.facebook.com/p/Queens-Auto-Services-Algonquin-100076608098799/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
@@ -52,26 +40,6 @@ const { brand } = Astro.props as { brand: BrandConfig };
               alt="Facebook"
               class="social-icon"
             />
-          </a>
-          <a
-            href="https://www.instagram.com/queensautoserviceelgin"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <img
-              src="/images/social/instagram.svg"
-              alt="Instagram"
-              class="social-icon"
-            />
-          </a>
-          <a
-            href="https://x.com/queensautoelgin"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="X (Twitter)"
-          >
-            <img src="/images/social/x.svg" alt="X" class="social-icon" />
           </a>
         </div>
       </div>
@@ -91,11 +59,11 @@ const { brand } = Astro.props as { brand: BrandConfig };
       <div class="footer-col">
         <h2 class="footer-heading">Location</h2>
         <address class="footer-address">
-          <strong>Queens Auto Services</strong>
-          1303 Dundee Ave, Elgin, IL 60120<br />
-          Tel: <a href="tel:2246353000">(224) 635-3000</a><br />
-          Hours: Mon-Fri 8:00 - 6:00<br />
-          Sat - 8:00 - 4:00
+          <strong>{brand.name}</strong>
+          {brand.address}<br />
+          Tel: <a href={`tel:${brand.phone.replace(/\D/g, "")}`}>{brand.phone}</a><br />
+          Hours: Mon-Fri {brand.hours?.monFri}<br />
+          Sat - {brand.hours?.sat}
         </address>
       </div>
     </div>
@@ -103,7 +71,7 @@ const { brand } = Astro.props as { brand: BrandConfig };
     <!-- Bottom Bar -->
     <div class="footer-bottom">
       <p>
-        &copy; Copyright {new Date().getFullYear()} Queens Auto Services Elgin All
+        &copy; Copyright {new Date().getFullYear()} {brand.name} All
         Rights Reserved
       </p>
       <TrustBadges />
