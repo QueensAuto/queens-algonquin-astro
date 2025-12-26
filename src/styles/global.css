@@ -301,7 +301,7 @@ h6,
    ======================================== */
 
 .display-hero-home {
-    font-family: var(--font-display) !important;
+    font-family: var(--font-display);
     font-weight: 800;
     text-transform: uppercase;
     font-size: clamp(3rem, 10vw, 90px);
@@ -310,7 +310,7 @@ h6,
 }
 
 .display-hero-page {
-    font-family: var(--font-display) !important;
+    font-family: var(--font-display);
     font-weight: 800;
     text-transform: uppercase;
     font-size: clamp(2.25rem, 7vw, 64px);
@@ -321,7 +321,7 @@ h6,
 
 /* Custom Header Utilities */
 .main-header-h1 {
-    font-family: var(--font-display) !important;
+    font-family: var(--font-display);
     font-weight: 800;
     text-transform: uppercase;
     font-size: 50px;
@@ -329,7 +329,7 @@ h6,
 }
 
 .main-header-h2 {
-    font-family: var(--font-display) !important;
+    font-family: var(--font-display);
     font-weight: 800;
     text-transform: uppercase;
     font-size: 40px;
@@ -483,9 +483,10 @@ p:last-child {
     }
 }
 
-/* Prevent double spacing at top of containers */
-:first-child {
-    margin-top: 0 !important;
+/* Prevent double spacing at top of rich text containers */
+.rich-text > :first-child,
+.prose > :first-child {
+    margin-top: 0;
 }
 
 /* ========================================
@@ -644,10 +645,7 @@ a:not([class]):hover {
     color: var(--text-secondary);
 }
 
-/* Queens primary text - ensure it uses brand blue */
-.text-queens-primary {
-    color: var(--color-queens-primary);
-}
+/* Queens primary text - defined above in BRAND COLOR UTILITIES */
 
 /* Border colors */
 .border-gray-100,
@@ -912,8 +910,8 @@ html {
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.1);
-    color: #0b1121;
-    border: 1px solid rgba(11, 17, 33, 0.1);
+    color: var(--text-primary);
+    border: 1px solid var(--border-default);
     border-radius: 9999px;
     font-size: 0.75rem;
     font-weight: 800;
@@ -927,8 +925,8 @@ html {
 }
 
 .btn-secondary:hover {
-    background: rgba(11, 17, 33, 0.05);
-    border-color: rgba(11, 17, 33, 0.2);
+    background: var(--bg-elevated);
+    border-color: var(--queens-primary);
     transform: translateY(-1px);
 }
 
@@ -944,101 +942,84 @@ html {
     transition: all 0.3s ease;
 }
 
-:where(.dark, .dark *) .faq-item,
-.faq-item:where(.dark, .dark *) {
+.dark .faq-item {
     background: var(--bg-surface);
     border-color: var(--border-default);
 }
 
-:where(.dark, .dark *) .faq-item:hover,
-.faq-item:hover:where(.dark, .dark *) {
+.dark .faq-item:hover {
     border-color: var(--queens-primary);
     box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4);
 }
 
-:where(.dark, .dark *) .faq-item.active,
-.faq-item.active:where(.dark, .dark *) {
+.dark .faq-item.active {
     border-color: var(--queens-primary);
     box-shadow: 0 0 30px rgba(10, 121, 200, 0.2);
 }
 
 /* FAQ Question Text */
-:where(.dark, .dark *) .faq-trigger span span:last-child,
-.faq-trigger span span:last-child:where(.dark, .dark *) {
+.dark .faq-trigger span span:last-child {
     color: var(--text-primary);
 }
 
 /* FAQ Answer Text */
-:where(.dark, .dark *) .faq-content p,
-.faq-content p:where(.dark, .dark *) {
+.dark .faq-content p {
     color: var(--text-secondary);
 }
 
 /* FAQ Icon Background */
-:where(.dark, .dark *) .faq-icon,
-.faq-icon:where(.dark, .dark *) {
+.dark .faq-icon {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-:where(.dark, .dark *) .faq-icon svg,
-.faq-icon svg:where(.dark, .dark *) {
+.dark .faq-icon svg {
     color: var(--text-muted);
 }
 
-:where(.dark, .dark *) .faq-item:hover .faq-icon,
-.faq-item:hover .faq-icon:where(.dark, .dark *) {
+.dark .faq-item:hover .faq-icon {
     background-color: rgba(10, 121, 200, 0.15);
 }
 
-:where(.dark, .dark *) .faq-item:hover .faq-icon svg,
-.faq-item:hover .faq-icon svg:where(.dark, .dark *) {
+.dark .faq-item:hover .faq-icon svg {
     color: var(--queens-primary);
 }
 
 /* FAQ Number Badge */
-:where(.dark, .dark *) .faq-trigger span span:first-child,
-.faq-trigger span span:first-child:where(.dark, .dark *) {
+.dark .faq-trigger span span:first-child {
     background-color: rgba(10, 121, 200, 0.15);
     color: var(--queens-primary);
 }
 
 /* FAQ Answer Border */
-:where(.dark, .dark *) .faq-content>div,
-.faq-content>div:where(.dark, .dark *) {
+.dark .faq-content>div {
     border-color: var(--border-default);
 }
 
-/* City page FAQ styles (details/summary elements) - simplified transparent dark mode */
-:where(.dark, .dark *) details.group,
-details.group:where(.dark, .dark *) {
+/* City page FAQ styles (details/summary elements) */
+.dark details.group {
     background: transparent;
     background-image: none;
     border-color: var(--border-default);
 }
 
-:where(.dark, .dark *) details.group:hover,
-details.group:hover:where(.dark, .dark *) {
+.dark details.group:hover {
     border-color: var(--queens-primary);
 }
 
-:where(.dark, .dark *) details.group[open],
-details.group[open]:where(.dark, .dark *) {
+.dark details.group[open] {
     border-color: var(--queens-primary);
 }
 
-:where(.dark, .dark *) details.group summary,
-details.group summary:where(.dark, .dark *) {
+.dark details.group summary {
     color: var(--text-primary);
 }
 
-:where(.dark, .dark *) details.group>div,
-details.group>div:where(.dark, .dark *) {
+.dark details.group>div {
     background: transparent;
     color: var(--text-secondary);
 }
 
 
-/* Force HMR Rebuild */
 
 
 /* ========================================
@@ -1060,7 +1041,7 @@ details.group>div:where(.dark, .dark *) {
 
 /* ODD CARDS: White (Light Mode) / Dark Glass (Dark Mode) */
 .service-card-item:nth-child(odd) {
-    background-color: #ffffff;
+    background-color: var(--bg-surface);
     border: 1px solid var(--border-default);
 }
 
@@ -1070,11 +1051,10 @@ details.group>div:where(.dark, .dark *) {
 }
 
 /* EVEN CARDS: Navy Accent (Light & Dark Mode) */
-/* EVEN CARDS: Navy Accent (Light & Dark Mode) */
 .service-card-item:nth-child(even) {
-    background-color: #0b1121; /* Queens Secondary (Navy) */
+    background-color: var(--queens-secondary-inverse); /* Navy in dark mode */
     color: #ffffff;
-    border: 1px solid #171f32;
+    border: 1px solid var(--border-muted);
 }
 
 .dark .service-card-item:nth-child(even) {
