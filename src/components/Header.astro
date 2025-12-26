@@ -41,12 +41,21 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       <!-- Logo (Colored Version) -->
       <a href="/" id="header-logo" class="flex items-center gap-2">
         {
-          brand.logoPath && brand.logoPath.includes("New-Logo") ? (
-            <img
-              src={brand.logoPath}
-              alt={brand.name}
-              class="h-7 md:h-8 w-auto object-contain"
-            />
+          brand.logoPath ? (
+            <>
+              <img
+                id="logo-color"
+                src={brand.logoPath}
+                alt={brand.name}
+                class="h-7 md:h-8 w-auto object-contain block dark:hidden"
+              />
+              <img
+                id="logo-white"
+                src={brand.logoPathWhite}
+                alt={brand.name}
+                class="h-7 md:h-8 w-auto object-contain hidden dark:block"
+              />
+            </>
           ) : (
             <span class="text-lg font-bold tracking-tighter uppercase text-queens-secondary dark:text-white">
               {firstName}{" "}
@@ -155,10 +164,9 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     let isAnimating = false;
 
     // Get elements for color swap
-    const headerLogo = document.getElementById("header-logo");
     const headerPhone = document.getElementById("header-phone");
-    const logoImg = headerLogo?.querySelector("img");
-    const logoText = headerLogo?.querySelector("span");
+    const logoColor = document.getElementById("logo-color");
+    const logoWhite = document.getElementById("logo-white");
 
     // --- Menu Open/Close ---
     const openMenu = () => {
@@ -171,15 +179,13 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       // Swap to white colors
       menuBtn.classList.add("!text-white");
       if (headerPhone) headerPhone.classList.add("!text-white");
-      if (logoImg) {
-        // Swap to white logo
-        const currentSrc = logoImg.getAttribute("src") || "";
-        if (currentSrc.includes("New-Logo")) {
-          logoImg.setAttribute("data-original-src", currentSrc);
-          logoImg.setAttribute("src", "/images/logos/site logos/Logo-White.webp");
-        }
+      
+      // Force white logo visibility
+      if (logoColor) logoColor.classList.add("!hidden");
+      if (logoWhite) {
+          logoWhite.classList.remove("hidden");
+          logoWhite.classList.add("!block");
       }
-      if (logoText) logoText.classList.add("!text-white");
 
       const tl = gsap.timeline({
         onComplete: () => { isAnimating = false; }
@@ -212,14 +218,13 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       // Restore original colors
       menuBtn.classList.remove("!text-white");
       if (headerPhone) headerPhone.classList.remove("!text-white");
-      if (logoImg) {
-        const originalSrc = logoImg.getAttribute("data-original-src");
-        if (originalSrc) {
-          logoImg.setAttribute("src", originalSrc);
-          logoImg.removeAttribute("data-original-src");
-        }
+      
+      // Restore logo visibility logic
+      if (logoColor) logoColor.classList.remove("!hidden");
+      if (logoWhite) {
+          logoWhite.classList.add("hidden"); // Reset to default state (let CSS handle it)
+          logoWhite.classList.remove("!block");
       }
-      if (logoText) logoText.classList.remove("!text-white");
 
       const tl = gsap.timeline({
         onComplete: () => {

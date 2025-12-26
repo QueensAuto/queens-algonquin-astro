@@ -1052,7 +1052,7 @@ html {
 
 /* EVEN CARDS: Navy Accent (Light & Dark Mode) */
 .service-card-item:nth-child(even) {
-    background-color: var(--queens-secondary-inverse); /* Navy in dark mode */
+    background-color: var(--queens-secondary);
     color: #ffffff;
     border: 1px solid var(--border-muted);
 }
