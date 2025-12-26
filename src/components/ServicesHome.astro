@@ -10,7 +10,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
 <section class="py-24 relative overflow-hidden">
   <div
-    class="absolute -left-20 top-40 w-64 h-64 bg-queens-secondary/5 rounded-full blur-3xl pointer-events-none"
+    class="absolute -left-20 top-40 w-64 h-64 bg-queens-primary/5 rounded-full blur-3xl pointer-events-none"
   >
   </div>
 
@@ -22,17 +22,17 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
       >
         <span class="relative flex h-2 w-2">
           <span
-            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-queens-secondary dark:bg-queens-secondary-ultra-light opacity-75"
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-queens-primary dark:bg-queens-secondary-ultra-light opacity-75"
           ></span>
           <span
-            class="relative inline-flex rounded-full h-2 w-2 bg-queens-secondary dark:bg-queens-secondary-ultra-light"
+            class="relative inline-flex rounded-full h-2 w-2 bg-queens-primary dark:bg-queens-secondary-ultra-light"
           ></span>
         </span>
         Full Service Auto Shop
       </div>
-      <h2 class="display-xl text-queens-primary dark:text-white mb-8">
+      <h2 class="display-xl text-queens-secondary dark:text-white mb-8">
         Expert Auto Care. <br />
-        <span class="text-queens-secondary">Right Here in Elgin.</span>
+        <span class="text-queens-primary">Right Here in Elgin.</span>
       </h2>
       <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
         Queens Auto Services has been the trusted auto repair shop in Elgin, IL
@@ -45,12 +45,12 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {/* CARD 1: COMPLETE AUTO REPAIR */}
       <div
-        class="md:col-span-2 rounded-3xl p-8 shadow-2xl hover:shadow-queens-secondary/20 transition duration-500 group relative overflow-hidden border border-gray-800"
+        class="md:col-span-2 rounded-3xl p-8 shadow-2xl hover:shadow-queens-primary/20 transition duration-500 group relative overflow-hidden border border-gray-800"
         style="background: linear-gradient(135deg, #0D1B2A 0%, #0D1B2A 60%, #132F4C 100%);"
       >
         <div class="relative z-10">
           <div
-            class="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center mb-6 text-queens-secondary group-hover:scale-110 transition duration-500"
+            class="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center mb-6 text-queens-primary group-hover:scale-110 transition duration-500"
           >
             {/* WRENCH ICON */}
             <svg
@@ -99,10 +99,10 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
       {/* CARD 2: BRAKE SERVICE */}
       <div
-        class="bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl dark:shadow-queens-secondary/5 dark:hover:shadow-queens-secondary/20 transition duration-500 group"
+        class="bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl dark:shadow-queens-primary/5 dark:hover:shadow-queens-primary/20 transition duration-500 group"
       >
         <div
-          class="w-14 h-14 bg-queens-primary rounded-2xl flex items-center justify-center mb-6 text-white group-hover:bg-queens-secondary transition duration-300"
+          class="w-14 h-14 bg-queens-secondary rounded-2xl flex items-center justify-center mb-6 text-white group-hover:bg-queens-primary transition duration-300"
         >
           {/* STOP ICON */}
           <svg
@@ -124,7 +124,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
             ></path>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-queens-primary dark:text-white mb-2">
+        <h3 class="text-xl font-bold text-queens-secondary dark:text-white mb-2">
           Brake Service
         </h3>
         <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
@@ -135,10 +135,10 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
       {/* CARD 3: OIL CHANGE */}
       <div
-        class="bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl dark:shadow-queens-secondary/5 dark:hover:shadow-queens-secondary/20 transition duration-500 group"
+        class="bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl dark:shadow-queens-primary/5 dark:hover:shadow-queens-primary/20 transition duration-500 group"
       >
         <div
-          class="w-14 h-14 bg-queens-primary rounded-2xl flex items-center justify-center mb-6 text-white group-hover:bg-queens-secondary transition duration-300"
+          class="w-14 h-14 bg-queens-secondary rounded-2xl flex items-center justify-center mb-6 text-white group-hover:bg-queens-primary transition duration-300"
         >
           {/* DROP ICON */}
           <svg
@@ -156,7 +156,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
             ></path>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-queens-primary dark:text-white mb-2">
+        <h3 class="text-xl font-bold text-queens-secondary dark:text-white mb-2">
           Oil Changes
         </h3>
         <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
@@ -167,11 +167,11 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
       {/* CARD 4: TIRE SHOP */}
       <div
-        class="md:col-span-2 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl dark:shadow-queens-secondary/5 dark:hover:shadow-queens-secondary/20 transition duration-500 flex flex-col md:flex-row items-end gap-8 group"
+        class="md:col-span-2 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-3xl p-8 shadow-lg hover:shadow-2xl dark:shadow-queens-primary/5 dark:hover:shadow-queens-primary/20 transition duration-500 flex flex-col md:flex-row items-end gap-8 group"
       >
         <div class="flex-grow">
           <div
-            class="w-14 h-14 bg-queens-primary rounded-2xl flex items-center justify-center mb-6 text-white group-hover:bg-queens-secondary transition duration-300"
+            class="w-14 h-14 bg-queens-secondary rounded-2xl flex items-center justify-center mb-6 text-white group-hover:bg-queens-primary transition duration-300"
           >
             {/* TIRE/WHEEL ICON */}
             <svg
@@ -194,7 +194,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
             </svg>
           </div>
           <h3
-            class="text-2xl font-bold text-queens-primary dark:text-white mb-3"
+            class="text-2xl font-bold text-queens-secondary dark:text-white mb-3"
           >
             Full Tire Shop
           </h3>

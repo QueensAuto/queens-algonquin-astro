@@ -10,21 +10,11 @@ export default {
       },
       colors: {
         'queens': {
-          DEFAULT: '#0a79c8', // Brand Blue (Secondary)
-          primary: '#0b1121', // Dark Navy (Primary)
-          secondary: {
-            'ultra-dark': '#021828',
-            'darker': '#043050',
-            'dark': '#064978',
-            'medium-dark': '#0861a0',
-            DEFAULT: '#0a79c8',
-            'medium-light': '#3b94d3',
-            'light': '#6cafde',
-            'lighter': '#9dc9e9',
-            'ultra-light': '#cee4f4',
-          },
-          dark: '#040613',    // Darker shade of primary
-          light: '#1489e1',   // Lighter shade of secondary
+          DEFAULT: '#0a79c8', // Brand Blue
+          primary: '#0a79c8', // Brand Blue (Primary - main CTA color)
+          secondary: '#0b1121', // Dark Navy (Secondary - text/accents)
+          dark: '#040613',    // Darker shade
+          light: '#1489e1',   // Lighter shade of primary
           white: '#ffffff',
           gray: '#f4f4f4',
         }

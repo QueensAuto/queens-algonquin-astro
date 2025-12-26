@@ -13,22 +13,22 @@ const firstName = nameParts[0];
 const secondName = nameParts.length > 1 ? nameParts[1] : "";
 ---
 
-<!-- LiftLab-Style Floating Header -->
+<!-- LiftLab-Style Header -->
 <div
   id="header-wrapper"
-  class="fixed top-0 left-0 right-0 z-[100] pointer-events-none p-4 md:p-6"
+  class="absolute top-0 left-0 right-0 z-[100] pointer-events-none p-4 md:p-6"
 >
   <div class="mx-auto max-w-[1400px] flex items-center justify-between">
     
-    <!-- LEFT PILL: Hamburger + Logo -->
+    <!-- LEFT: Hamburger + Logo (Clean, No Pill) -->
     <div 
-      id="header-left-pill"
-      class="pointer-events-auto flex items-center gap-3 px-4 py-2 rounded-full bg-queens-primary/90 backdrop-blur-md shadow-lg"
+      id="header-left-section"
+      class="pointer-events-auto flex items-center gap-3"
     >
       <!-- Hamburger Button -->
       <button
         id="mobile-menu-button"
-        class="group flex items-center justify-center w-8 h-8 rounded-full text-white hover:bg-white/10 transition-colors"
+        class="group flex items-center justify-center w-10 h-10 rounded-full text-queens-secondary dark:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors menu-open:text-white"
         aria-label="Toggle Menu"
       >
         <div id="hamburger-icon" class="relative w-5 h-3.5">
@@ -38,19 +38,19 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
         </div>
       </button>
 
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-2">
+      <!-- Logo (Colored Version) -->
+      <a href="/" id="header-logo" class="flex items-center gap-2">
         {
           brand.logoPath && brand.logoPath.includes("New-Logo") ? (
             <img
-              src={brand.logoPathWhite || brand.logoPath}
+              src={brand.logoPath}
               alt={brand.name}
-              class="h-6 md:h-7 w-auto object-contain"
+              class="h-7 md:h-8 w-auto object-contain"
             />
           ) : (
-            <span class="text-lg font-bold tracking-tighter uppercase text-white">
+            <span class="text-lg font-bold tracking-tighter uppercase text-queens-secondary dark:text-white">
               {firstName}{" "}
-              <span class="text-queens-secondary">{secondName}</span>
+              <span class="text-queens-primary">{secondName}</span>
             </span>
           )
         }
@@ -58,19 +58,21 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     </div>
 
     <!-- RIGHT ACTIONS: Phone + CTA + Theme Toggle -->
-    <div class="pointer-events-auto flex items-center gap-4">
+    <div class="pointer-events-auto flex items-center gap-6 md:gap-8">
+      
       <!-- Phone Number (Desktop Only) -->
       <a 
+        id="header-phone"
         href={`tel:${brand.phone}`}
-        class="hidden md:flex items-center gap-2 text-white text-sm font-medium hover:text-queens-secondary transition-colors"
+        class="hidden md:flex items-center gap-2 text-queens-secondary dark:text-white transition-colors hover:text-queens-primary"
       >
-        <span class="uppercase tracking-wide">Call {brand.phone}</span>
+        <span class="text-sm font-black uppercase tracking-[0.15em]">Call {brand.phone}</span>
       </a>
 
       <!-- Theme Toggle -->
-      <ThemeToggle inverse={true} />
+      <ThemeToggle />
 
-      <!-- CTA Button -->
+      <!-- CTA Button (Desktop Only) -->
       <div class="hidden md:block">
         <CtaButton href="/request-an-appointment" text="Book Now" />
       </div>
@@ -105,7 +107,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     class="absolute inset-0 flex items-center justify-center opacity-0 translate-y-8"
   >
     <!-- Centered Menu Card -->
-    <div class="w-full max-w-2xl mx-6 p-8 md:p-12 rounded-2xl bg-queens-secondary shadow-2xl">
+    <div class="w-full max-w-2xl mx-6 p-8 md:p-12 rounded-2xl bg-queens-primary shadow-2xl">
       <!-- 2-Column Link Grid -->
       <nav class="grid grid-cols-2 gap-x-8 gap-y-6">
         {
@@ -138,9 +140,6 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
 <script>
   import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
 
   function setupHeader() {
     const wrapper = document.getElementById("header-wrapper");
@@ -155,27 +154,11 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     let isOpen = false;
     let isAnimating = false;
 
-    // --- Sticky Scroll Animation ---
-    let isHidden = false;
-    ScrollTrigger.create({
-      start: "top top",
-      onUpdate: (self) => {
-        if (isOpen) return; // Don't hide while menu is open
-        const currentScrollY = self.scroll();
-        if (currentScrollY > 100) {
-          if (self.direction === 1 && !isHidden) {
-            gsap.to(wrapper, { yPercent: -100, duration: 0.4, ease: "power2.inOut" });
-            isHidden = true;
-          } else if (self.direction === -1 && isHidden) {
-            gsap.to(wrapper, { yPercent: 0, duration: 0.4, ease: "power2.out" });
-            isHidden = false;
-          }
-        } else {
-          gsap.to(wrapper, { yPercent: 0, duration: 0.4, ease: "power2.out" });
-          isHidden = false;
-        }
-      },
-    });
+    // Get elements for color swap
+    const headerLogo = document.getElementById("header-logo");
+    const headerPhone = document.getElementById("header-phone");
+    const logoImg = headerLogo?.querySelector("img");
+    const logoText = headerLogo?.querySelector("span");
 
     // --- Menu Open/Close ---
     const openMenu = () => {
@@ -184,6 +167,19 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       isOpen = true;
       menu.classList.remove("hidden");
       document.body.style.overflow = "hidden";
+
+      // Swap to white colors
+      menuBtn.classList.add("!text-white");
+      if (headerPhone) headerPhone.classList.add("!text-white");
+      if (logoImg) {
+        // Swap to white logo
+        const currentSrc = logoImg.getAttribute("src") || "";
+        if (currentSrc.includes("New-Logo")) {
+          logoImg.setAttribute("data-original-src", currentSrc);
+          logoImg.setAttribute("src", "/images/logos/site logos/Logo-White.webp");
+        }
+      }
+      if (logoText) logoText.classList.add("!text-white");
 
       const tl = gsap.timeline({
         onComplete: () => { isAnimating = false; }
@@ -212,6 +208,18 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       if (isAnimating) return;
       isAnimating = true;
       isOpen = false;
+
+      // Restore original colors
+      menuBtn.classList.remove("!text-white");
+      if (headerPhone) headerPhone.classList.remove("!text-white");
+      if (logoImg) {
+        const originalSrc = logoImg.getAttribute("data-original-src");
+        if (originalSrc) {
+          logoImg.setAttribute("src", originalSrc);
+          logoImg.removeAttribute("data-original-src");
+        }
+      }
+      if (logoText) logoText.classList.remove("!text-white");
 
       const tl = gsap.timeline({
         onComplete: () => {

@@ -52,59 +52,55 @@ const textClasses = {
   href={href}
   data-astro-reload={reload || undefined}
   class:list={[
-    "group relative inline-flex items-center rounded-full bg-queens-secondary transition-all duration-500 ease-out active:scale-95",
-    containerClasses[variant],
+    "btn-cta-premium group relative inline-flex items-center gap-2 rounded-full bg-white dark:bg-queens-primary px-2 py-1.5 transition-all duration-300 ease-out hover:scale-105 shadow-md",
     className,
   ]}
 >
-  <!-- Expanding dark background -->
-  <span
-    class:list={[
-      "absolute rounded-full bg-queens-primary transition-all duration-500 ease-out",
-      circleClasses[variant],
-    ]}
-    aria-hidden="true"></span>
-
-  <!-- Arrow Icon -->
-  <span
-    class:list={[
-      "relative z-10 flex items-center justify-center text-white transition-all duration-500",
-      iconWrapperClasses[variant],
-    ]}
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      class:list={["transition-transform duration-500", iconClasses[variant]]}
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
-    </svg>
-  </span>
-
-  <!-- Text with slide-up animation -->
-  <span
-    class:list={["relative z-10 overflow-hidden", textWrapperClasses[variant]]}
-  >
-    <span
-      class:list={[
-        "block text-white transition-transform duration-500 ease-out group-hover:-translate-y-full whitespace-nowrap",
-        textClasses[variant],
-      ]}
-    >
-      {text}
-    </span>
-    <span
-      class:list={[
-        "absolute inset-0 flex items-center block text-white transition-transform duration-500 ease-out translate-y-full group-hover:translate-y-0 whitespace-nowrap",
-        textClasses[variant],
-      ]}
-    >
-      {text}
+  <!-- Text Section with Vertical Scroll -->
+  <span class="relative h-5 overflow-hidden pl-4 pr-1">
+    <span class="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
+      <span class="flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em] text-queens-primary dark:text-white">
+        {text}
+      </span>
+      <span class="flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em] text-queens-primary dark:text-white">
+        {text}
+      </span>
     </span>
   </span>
+
+  <!-- Icon Circle Badge with Horizontal Slide -->
+  <div class="relative flex items-center justify-center overflow-hidden h-8 w-8 rounded-full bg-queens-primary dark:bg-queens-secondary">
+    <!-- First Arrow -->
+    <div class="flex h-full w-full items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-full">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="3"
+        stroke="currentColor"
+        class="h-3.5 w-3.5 text-white"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+      </svg>
+    </div>
+    <!-- Entering Arrow -->
+    <div class="absolute inset-0 flex items-center justify-center -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="3"
+        stroke="currentColor"
+        class="h-3.5 w-3.5 text-white"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+      </svg>
+    </div>
+  </div>
 </a>

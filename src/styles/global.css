@@ -36,17 +36,19 @@ html.lenis body {
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-queens-primary: #0b1121;
+    --color-queens-primary: #0a79c8;
+    --color-queens-primary-inverse: #ffffff;
     --color-queens-secondary-ultra-dark: #021828;
     --color-queens-secondary-darker: #043050;
     --color-queens-secondary-dark: #064978;
     --color-queens-secondary-medium-dark: #0861a0;
-    --color-queens-secondary: #0a79c8;
+    --color-queens-secondary: #0b1121;
+    --color-queens-secondary-inverse: #cee4f4;
     --color-queens-secondary-medium-light: #3b94d3;
     --color-queens-secondary-light: #6cafde;
     --color-queens-secondary-lighter: #9dc9e9;
     --color-queens-secondary-ultra-light: #cee4f4;
-    --color-queens-dark: #141517;
+    --color-queens-dark: #040613;
     --color-queens-light: #1489e1;
     --color-queens-orange: #f97316;
     --color-queens-black: #050505;
@@ -65,28 +67,41 @@ html.lenis body {
    Override heading color rules for brand colors
    ======================================== */
 
-.text-queens-secondary,
-h1 .text-queens-secondary,
-h2 .text-queens-secondary,
-h3 .text-queens-secondary,
-span.text-queens-secondary {
-    color: #0a79c8 !important;
+.text-queens-secondary {
+    color: #0b1121;
+}
+
+/* Dark mode visibility for secondary color */
+.dark .text-queens-secondary {
+    color: #ffffff;
 }
 
 .text-queens-primary {
-    color: #0b1121 !important;
+    color: #0a79c8;
+}
+
+/* Dark mode visibility for primary color */
+.dark .text-queens-primary {
+    color: #1489e1;
 }
 
 /* Hover states for secondary color */
-.hover\:text-queens-secondary:hover,
-a.hover\:text-queens-secondary:hover,
-nav a.hover\:text-queens-secondary:hover {
-    color: #0a79c8 !important;
+.hover\:text-queens-secondary:hover {
+    color: #0a79c8;
+}
+
+/* Dark mode hover for secondary */
+.dark .hover\:text-queens-secondary:hover {
+    color: #cee4f4;
 }
 
 /* Group hover for icons and nested elements */
 .group:hover .group-hover\:text-queens-secondary {
-    color: #0a79c8 !important;
+    color: #0a79c8;
+}
+
+.dark .group:hover .group-hover\:text-queens-secondary {
+    color: #cee4f4;
 }
 
 /* ========================================
@@ -123,16 +138,16 @@ nav a.hover\:text-queens-secondary:hover {
     --text-primary: #f9fafb;
     --text-secondary: #d1d5db;
     --text-muted: #9ca3af;
-    --text-inverted: #0b1121;
+    --text-inverted: #ffffff;
 
     /* Background Colors - dark surfaces */
-    --bg-page: var(--color-queens-dark-bg);
+    --bg-page: #040613;
     /* Queens Dark */
     --bg-surface: #141517;
     --bg-elevated: #0b1121;
-    /* Queens Primary */
+    /* Queens Navy */
     --bg-muted: #0b1121;
-    /* Queens Primary */
+    /* Queens Navy */
 
     /* Border Colors */
     --border-default: #1e293b;
@@ -180,7 +195,7 @@ nav a.hover\:text-queens-secondary:hover {
     --text-primary: #f9fafb;
     --text-secondary: #d1d5db;
     --text-muted: #9ca3af;
-    --text-inverted: #0b1121;
+    --text-inverted: #ffffff;
 
     --bg-page: #141517;
     --bg-surface: #141517;
@@ -583,19 +598,17 @@ a:not([class]):hover {
 /* .dark .bg-white removed to allow utility overrides */
 
 .bg-gray-50 {
-    background-color: var(--bg-page) !important;
+    background-color: var(--bg-page);
 }
 
-/* Blue Shine for Cards in Dark Mode - REMOVED GRADIENT, Subtle Border Only */
 .dark .bg-white[class*="rounded"],
-.dark .bg-gray-50[class*="rounded"],
-.dark [class*="dark:bg-slate-800"][class*="rounded"] {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+.dark .bg-gray-50[class*="rounded"] {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .bg-gray-100 {
-    background-color: var(--bg-muted) !important;
+    background-color: var(--bg-muted);
 }
 
 /* Dark Mode Shadows - Subtle Blue Shadow on HOVER only */
@@ -638,9 +651,9 @@ a:not([class]):hover {
     color: var(--text-secondary) !important;
 }
 
-/* Queens primary text - switch to light in dark mode */
+/* Queens primary text - ensure it uses brand blue */
 .text-queens-primary {
-    color: var(--text-primary) !important;
+    color: var(--color-queens-primary) !important;
 }
 
 /* Primary text color override (CSS variable syntax) */
@@ -725,11 +738,11 @@ a:not([class]):hover {
 /* Additional gray variants */
 .text-gray-800,
 .text-gray-900 {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
 .text-gray-300 {
-    color: var(--text-muted) !important;
+    color: var(--text-muted);
 }
 
 /* Link colors in content areas */
@@ -743,27 +756,27 @@ a:not([class]):hover {
 
 /* City content area specific overrides */
 .city-content {
-    color: var(--text-secondary) !important;
+    color: var(--text-secondary);
 }
 
 .city-content h3 {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
 .city-content p {
-    color: var(--text-secondary) !important;
+    color: var(--text-secondary);
 }
 
 .city-content strong {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
 .city-content a {
-    color: var(--color-queens-secondary) !important;
+    color: var(--color-queens-secondary);
 }
 
 .dark .city-content a:hover {
-    color: var(--color-queens-light) !important;
+    color: var(--color-queens-light);
 }
 
 /* Cards with dark backgrounds should keep light text */
@@ -781,7 +794,7 @@ a:not([class]):hover {
 
 /* Ensure white text stays white */
 .text-white {
-    color: white !important;
+    color: white;
 }
 
 /* Form inputs and interactive elements */
@@ -800,17 +813,17 @@ a:not([class]):hover {
 
 /* FAQ accordion in dark mode */
 .dark details {
-    background-color: var(--bg-surface) !important;
-    border-color: var(--border-default) !important;
+    background-color: var(--bg-surface);
+    border-color: var(--border-default);
 }
 
 .dark details summary {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
 .dark details>div {
-    background-color: var(--bg-elevated) !important;
-    color: var(--text-secondary) !important;
+    background-color: var(--bg-elevated);
+    color: var(--text-secondary);
 }
 
 /* Service cards and feature boxes */
@@ -869,104 +882,95 @@ html {
 }
 
 
-/* Standardized Primary Button */
+/* Standardized Primary Button - LiftLab Style */
 .btn-primary {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    background: #3b6eae;
-    color: white;
+    justify-content: space-between;
+    background: #ffffff;
+    color: var(--color-queens-primary);
     border: none;
     border-radius: 9999px;
-    font-size: 1.125rem;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 900;
     cursor: pointer;
     position: relative;
     z-index: 1;
     overflow: hidden;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 1rem 3rem;
-    transition: color 0.3s ease;
+    letter-spacing: 0.15em;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    transition: all 0.3s ease-out;
     text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    gap: 1.5rem;
 }
 
 .btn-primary:hover {
-    color: #3b6eae;
+    transform: scale(1.05);
+    background: #ffffff;
+    color: var(--color-queens-primary);
 }
 
+/* Simulated Badge for global class */
 .btn-primary::after {
-    content: "";
-    background: white;
-    position: absolute;
-    z-index: -1;
-    left: -20%;
-    right: -20%;
-    top: 0;
-    bottom: 0;
-    transform: skewX(-45deg) scale(0, 1);
-    transition: transform 0.5s ease;
+    content: "»";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-queens-primary);
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    font-weight: normal;
+    transition: transform 0.3s ease;
 }
 
 .btn-primary:hover::after {
-    transform: skewX(-45deg) scale(1, 1);
+    transform: translateX(2px);
 }
 
 .btn-primary:disabled {
     background: #d1d5db;
     cursor: not-allowed;
-    pointer-events: none;
+    opacity: 0.6;
 }
 
-.btn-primary:disabled:hover {
-    color: white;
-}
-
-.btn-primary:disabled::after {
-    display: none;
-}
-
-/* Secondary Button (Gray/Outline) - Theme Aware */
+/* Secondary Button (Refined Minimalism) */
 .btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
     color: #0b1121;
-    border: 1px solid #e5e7eb;
+    border: 1px solid rgba(11, 17, 33, 0.1);
     border-radius: 9999px;
-    font-size: 0.875rem;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 800;
     cursor: pointer;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    padding: 0.625rem 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 2rem;
     transition: all 0.3s ease;
     text-decoration: none;
+    backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-    background: #f9fafb;
-    border-color: #d1d5db;
+    background: rgba(11, 17, 33, 0.05);
+    border-color: rgba(11, 17, 33, 0.2);
     transform: translateY(-1px);
 }
 
 .dark .btn-secondary {
-    background: rgba(2, 24, 40, 0.4) !important;
+    background: rgba(255, 255, 255, 0.05);
     color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.dark .btn-secondary:hover {
-    background: rgba(2, 24, 40, 0.6) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-/* ========================================
-   FAQ ACCORDION DARK MODE STYLES
-   ======================================== */
+/* FAQ ACCORDION DARK MODE STYLES */
 
 .faq-item {
     transition: all 0.3s ease;
