@@ -262,7 +262,7 @@ import { mobileTiresBrand } from "../brands";
     </div>
 </BaseLayout>
 
-<script>
+<script lang="ts">
     import Alpine from "alpinejs";
 
     document.addEventListener("alpine:init", () => {
@@ -421,6 +421,7 @@ import { mobileTiresBrand } from "../brands";
                 }
             },
 
+            // @ts-ignore
             selectDate(day) {
                 if (day.isAvailable) {
                     this.selectedDate = day.date;
@@ -428,6 +429,7 @@ import { mobileTiresBrand } from "../brands";
                 }
             },
 
+            // @ts-ignore
             selectTime(slot) {
                 this.selectedTime = slot;
             },
