@@ -1,0 +1,131 @@
+---
+/**
+ * ClickBurst - Global interaction effect that spawns a radial burst of curvy lines on click.
+ */
+---
+
+<div
+    id="click-burst-container"
+    class="fixed inset-0 pointer-events-none z-[9999] overflow-hidden"
+>
+</div>
+
+<script>
+    import { gsap } from "gsap";
+
+    class ClickBurst {
+        private container: HTMLElement;
+        private burstColor: string = "#FCD718"; // Bright Damas yellow
+
+        constructor() {
+            this.container = document.getElementById("click-burst-container")!;
+            if (!this.container) return;
+            this.init();
+        }
+
+        private init() {
+            window.addEventListener("mousedown", (e) =>
+                this.spawnBurst(e.clientX, e.clientY),
+            );
+        }
+
+        private spawnBurst(x: number, y: number) {
+            const burstSize = 100;
+            const svg = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "svg",
+            );
+
+            // Damas paths from analysis
+            const pathData = [
+                "M 57 42 Q 67 25 71 28 T 85 14", // Top-right
+                "M 50 40 Q 45 20 50 20 T 50 0", // Up
+                "M 42 42 Q 25 32 28 28 T 14 14", // Top-left
+                "M 40 50 Q 20 55 20 50 T 0 50", // Left
+            ];
+
+            svg.setAttribute("viewBox", "0 0 100 100");
+            svg.style.position = "absolute";
+            svg.style.width = "100px";
+            svg.style.height = "100px";
+            svg.style.left = `${x - 50}px`;
+            svg.style.top = `${y - 50}px`;
+            svg.style.pointerEvents = "none";
+            svg.style.overflow = "visible";
+
+            const paths: SVGPathElement[] = [];
+
+            pathData.forEach((d) => {
+                const path = document.createElementNS(
+                    "http://www.w3.org/2000/svg",
+                    "path",
+                );
+                path.setAttribute("d", d);
+                path.setAttribute("stroke", this.burstColor);
+                path.setAttribute("stroke-width", "3");
+                path.setAttribute("stroke-linecap", "round");
+                path.setAttribute("fill", "none");
+
+                // Initialize dash for "crawling" effect
+                const length = 40; // Approx length of these paths
+                path.style.strokeDasharray = `0 ${length}`;
+                path.style.strokeDashoffset = "0";
+
+                svg.appendChild(path);
+                paths.push(path);
+            });
+
+            this.container.appendChild(svg);
+
+            // Animate each path with the "crawling" effect
+            paths.forEach((path, i) => {
+                const length = path.getTotalLength();
+                const sparkLength = 12; // Short, snappy spark
+
+                // Reset initial state for GSAP
+                gsap.set(path, {
+                    strokeDasharray: `0 ${length}`,
+                    strokeDashoffset: 0,
+                });
+
+                const tl = gsap.timeline({
+                    delay: i * 0.01, // Very slight stagger
+                    onComplete: () => {
+                        if (svg.parentElement && i === paths.length - 1) {
+                            svg.remove();
+                        }
+                    },
+                });
+
+                // 1. Grow to small spark segment
+                tl.to(path, {
+                    strokeDasharray: `${sparkLength} ${length}`,
+                    duration: 0.1,
+                    ease: "power2.out",
+                })
+                    // 2. Travel the full length
+                    .to(
+                        path,
+                        {
+                            strokeDashoffset: -length,
+                            duration: 0.4,
+                            ease: "power1.inOut",
+                        },
+                        "-=0.05",
+                    );
+            });
+        }
+    }
+
+    // Initialize on page load
+    document.addEventListener("astro:page-load", () => {
+        new ClickBurst();
+    });
+</script>
+
+<style>
+    #click-burst-container {
+        /* Subtle glow/blend */
+        mix-blend-mode: plus-lighter;
+    }
+</style>
