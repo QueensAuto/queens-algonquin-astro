@@ -40,7 +40,7 @@ html.lenis body {
     --color-queens-primary-inverse: var(--queens-primary-inverse);
     --color-queens-secondary: var(--queens-secondary);
     --color-queens-secondary-inverse: var(--queens-secondary-inverse);
-    
+
     --color-queens-secondary-ultra-dark: #021828;
     --color-queens-secondary-darker: #043050;
     --color-queens-secondary-dark: #064978;
@@ -97,7 +97,7 @@ html.lenis body {
     --queens-primary-inverse: #ffffff;
     --queens-secondary: #0b1121;
     --queens-secondary-inverse: #cee4f4;
-    
+
     --color-queens-dark-bg: #141517;
 
     /* Text Colors */
@@ -227,11 +227,13 @@ html.lenis body {
    BASE ELEMENT OVERRIDES
    Apply semantic colors to common elements
    ======================================== */
-body {
-    font-family: var(--font-sans);
-    background-color: var(--bg-page);
-    color: var(--text-primary);
-    transition: background-color 0.3s ease, color 0.3s ease;
+@layer base {
+    body {
+        font-family: var(--font-sans);
+        background-color: var(--bg-page);
+        color: var(--text-primary);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
 }
 
 /* ========================================
@@ -239,22 +241,25 @@ body {
    All headings and body text use semantic colors
    ======================================== */
 
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-    font-family: var(--font-sans);
-    color: var(--text-primary);
-    font-weight: 500;
-    line-height: 1.2;
+@layer base {
+
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6 {
+        font-family: var(--font-sans);
+        color: var(--text-primary);
+        font-weight: 500;
+        line-height: 1.2;
+    }
 }
 
 /* ========================================
@@ -350,40 +355,43 @@ h6,
     }
 }
 
-h1,
-.h1 {
-    font-size: 3rem;
-    line-height: 1.1;
-}
+@layer base {
 
-h2,
-.h2 {
-    font-size: 2.25rem;
-    line-height: 1.2;
-}
+    h1,
+    .h1 {
+        font-size: 3rem;
+        line-height: 1.1;
+    }
 
-h3,
-.h3 {
-    font-size: 1.75rem;
-    line-height: 1.2;
-}
+    h2,
+    .h2 {
+        font-size: 2.25rem;
+        line-height: 1.2;
+    }
 
-h4,
-.h4 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-}
+    h3,
+    .h3 {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
 
-h5,
-.h5 {
-    font-size: 1.25rem;
-    line-height: 1.4;
-}
+    h4,
+    .h4 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+    }
 
-h6,
-.h6 {
-    font-size: 1.125rem;
-    line-height: 1.4;
+    h5,
+    .h5 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    h6,
+    .h6 {
+        font-size: 1.125rem;
+        line-height: 1.4;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -470,6 +478,7 @@ p:last-child {
 }
 
 @layer base {
+
     /* Add spacing around headings globally for body content flow */
     h1,
     h2,
@@ -484,8 +493,8 @@ p:last-child {
 }
 
 /* Prevent double spacing at top of rich text containers */
-.rich-text > :first-child,
-.prose > :first-child {
+.rich-text> :first-child,
+.prose> :first-child {
     margin-top: 0;
 }
 
