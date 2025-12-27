@@ -134,8 +134,8 @@ html.lenis body {
     --text-inverted: #ffffff;
 
     /* Background Colors - dark surfaces */
-    --bg-page: #040613;
-    /* Queens Dark */
+    --bg-page: #09090b;
+    /* Queens Darkest */
     --bg-surface: #141517;
     --bg-elevated: #0b1121;
     /* Queens Navy */
@@ -190,7 +190,7 @@ html.lenis body {
     --text-muted: #9ca3af;
     --text-inverted: #ffffff;
 
-    --bg-page: #141517;
+    --bg-page: #09090b;
     --bg-surface: #141517;
     --bg-elevated: #0b1121;
     --bg-muted: #0b1121;
@@ -210,7 +210,7 @@ html.lenis body {
    Used for promotional landing pages
    ======================================== */
 .theme-locked-bg {
-    background-color: #141517 !important;
+    background-color: #09090b !important;
     background-attachment: fixed !important;
 }
 

@@ -102,7 +102,7 @@ import CtaButton from "./CtaButton.astro";
 
 <style>
     .process-section {
-        --section-bg: #fafafa;
+        --section-bg: transparent;
         --card-bg: #ffffff;
         --card-border: rgba(0, 0, 0, 0.08);
         --text-primary: #0f172a;
@@ -118,7 +118,7 @@ import CtaButton from "./CtaButton.astro";
     }
 
     :global(.dark) .process-section {
-        --section-bg: #0a0a0b;
+        --section-bg: transparent;
         --card-bg: rgba(255, 255, 255, 0.03);
         --card-border: rgba(255, 255, 255, 0.08);
         --text-primary: #f8fafc;
@@ -212,7 +212,7 @@ import CtaButton from "./CtaButton.astro";
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background: var(--section-bg);
+        background: var(--bg-page);
         border: 2px solid var(--card-border);
         transition: all 0.3s ease;
         display: flex;
