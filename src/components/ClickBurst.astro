@@ -15,7 +15,7 @@
 
     class ClickBurst {
         private container: HTMLElement;
-        private burstColor: string = "#FCD718"; // Bright Damas yellow
+        private burstColor: string = "var(--queens-primary)"; // Brand primary blue
 
         constructor() {
             this.container = document.getElementById("click-burst-container")!;
@@ -68,8 +68,9 @@
 
                 // Initialize dash for "crawling" effect
                 const length = 40; // Approx length of these paths
-                path.style.strokeDasharray = `0 ${length}`;
+                path.style.strokeDasharray = `0 ${length * 4}`; // Larger gap to prevent repeats
                 path.style.strokeDashoffset = "0";
+                path.style.opacity = "0"; // Start invisible
 
                 svg.appendChild(path);
                 paths.push(path);
@@ -84,12 +85,13 @@
 
                 // Reset initial state for GSAP
                 gsap.set(path, {
-                    strokeDasharray: `0 ${length}`,
+                    strokeDasharray: `0 ${length * 4}`,
                     strokeDashoffset: 0,
+                    opacity: 0,
                 });
 
                 const tl = gsap.timeline({
-                    delay: i * 0.01, // Very slight stagger
+                    delay: i * 0.01,
                     onComplete: () => {
                         if (svg.parentElement && i === paths.length - 1) {
                             svg.remove();
@@ -97,17 +99,19 @@
                     },
                 });
 
-                // 1. Grow to small spark segment
+                // 1. Fade in and grow to small spark segment
                 tl.to(path, {
-                    strokeDasharray: `${sparkLength} ${length}`,
+                    opacity: 1,
+                    strokeDasharray: `${sparkLength} ${length * 4}`,
                     duration: 0.1,
                     ease: "power2.out",
                 })
-                    // 2. Travel the full length
+                    // 2. Travel and fade out
                     .to(
                         path,
                         {
                             strokeDashoffset: -length,
+                            opacity: 0,
                             duration: 0.4,
                             ease: "power1.inOut",
                         },
