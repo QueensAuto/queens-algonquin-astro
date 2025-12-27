@@ -2,49 +2,86 @@
     {
         "name": "Luis Subias",
         "stars": 5,
-        "text": "Came in to patch up a flat tire with a nail. They took me in as a walk in and fixed it super fast. Exceptional customer service, they took care of everything from fixing it to putting it back on the car.",
+        "text": "Came in to patch up a flat tire with a nail. They took me in as a walk in and fixed it super fast. Exceptional customer service, they took care of everything from fixing it to putting it back on the car. Definitely coming back.",
         "source": "Google Reviews",
-        "image": "/images/reviewers/Andres Rivera.webp",
         "role": "Verified Customer"
     },
     {
-        "name": "Sendy Ruiz",
+        "name": "Emerick",
         "stars": 5,
-        "text": "Great prices and great ppl. Needed 4 tires. Went in was done in less than hr!",
+        "text": "Great spot great customer service. Fast and reliable service can’t complain definitely will recommend 💯",
         "source": "Google Reviews",
-        "image": "/images/reviewers/Aleksanadra Blaszczyk.webp",
         "role": "Verified Customer"
     },
     {
-        "name": "Daniel Schmidt",
+        "name": "Jacob P",
         "stars": 5,
-        "text": "Fast friendly help when I needed it really bad, pulled in with a totally ruined tire, they put a new one on in just a few minutes",
+        "text": "Had a screw in tire, everybody was great and kind. Was in and out in under 20 minutes without appointment.",
+        "source": "Google Reviews",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Itiel Zazueta",
+        "stars": 5,
+        "text": "I came in because I had gotten a flat tire and needed a new one. The guys from Queens Auto Services were very helpful, quick, reasonable, and friendly.",
+        "source": "Google Reviews",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Matthew R.",
+        "stars": 5,
+        "text": "These guys are the absolute best in town they all have real nice personalities they make you feel comfortable there they are also very quick and efficient. Al at the front will definitely take care of you 💯🚗",
+        "source": "Google Reviews",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Olivia Bronowicki",
+        "stars": 5,
+        "text": "My mazda has been having continuous issues, the dealership quoted me $5400, and Queens has fixed my problem for $400. Al is very honest, and he knows what he is doing. The customer service is great.",
+        "source": "Google Reviews",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Gloria Parra",
+        "stars": 5,
+        "text": "I Brought my car to this shop in less then half hour they had my car ready and it indeed was my tire. Pricing was reasonable and Baltazar in the front was very helpful, professional, and nice.",
+        "source": "Google Reviews",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Krz Tn",
+        "stars": 5,
+        "text": "I have been going here for years, and won't go anywhere else. They recommend what really needs to be done and everything is charged fairly. They've helped me out big time with my older cars.",
+        "source": "Google Reviews",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Angelica Santoro",
+        "stars": 5,
+        "text": "Great service quality work! They go above and beyond to fix your car for incredibly fair prices. I won’t take my car anywhere else.",
+        "source": "Google Reviews",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Jen Lessner",
+        "stars": 5,
+        "text": "Finally, an honest affordable mechanic shop! The owner and his staff treat you like you are family. They have done an excellent job in getting my truck taken care of. Definitely a RARE find!",
+        "source": "Google Reviews",
+        "role": "Verified Customer"
+    },
+    {
+        "name": "Danny Thomas",
+        "stars": 5,
+        "text": "I always take all of my vehicles to queen auto and have been for years. The owner is very friendly and provided quality service and an affordable price!",
         "source": "Google Reviews",
         "image": "/images/reviewers/Danny Thomas.webp",
         "role": "Verified Customer"
     },
     {
-        "name": "Mike Abene III",
+        "name": "Ana Careaga",
         "stars": 5,
-        "text": "Brought my 30ft RV to have 6 tires mounted... Great hospitable group of people working there from top to bottom.",
+        "text": "Awesome!!!! We have been coming here for almost 2 years... always fast and friendly. Recommend if you are on a budget and need a fast fix!",
         "source": "Google Reviews",
-        "image": "/images/reviewers/Ed Mungai.webp",
-        "role": "Verified Customer"
-    },
-    {
-        "name": "Lynette Flores",
-        "stars": 5,
-        "text": "Best place for new and used tires. Honest, fast and good priced.",
-        "source": "Google Reviews",
-        "image": "/images/reviewers/Ana Marie De La Cruz.webp",
-        "role": "Verified Customer"
-    },
-    {
-        "name": "Syed Ahmed",
-        "stars": 5,
-        "text": "Quick service, got 2 used tires for my 2002 Honda accord.",
-        "source": "Google Reviews",
-        "image": "/images/reviewers/Devin Mistry.webp",
         "role": "Verified Customer"
     }
 ]
