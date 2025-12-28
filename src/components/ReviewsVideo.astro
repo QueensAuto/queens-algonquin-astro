@@ -20,7 +20,7 @@ const visibleCount = 2; // Number of cards visible at a time
 ---
 
 <section
-    class="rv-section pt-[45vh] pb-32 px-6"
+    class="rv-section pt-16 lg:pt-[45vh] pb-12 lg:pb-32 px-6"
     data-visible-count={visibleCount}
     data-total-count={reviewCount}
 >
@@ -84,7 +84,7 @@ const visibleCount = 2; // Number of cards visible at a time
                         {
                             allReviews.map((review, i) => (
                                 <div
-                                    class="rv-card rounded-2xl p-6 border"
+                                    class={`rv-card rounded-2xl p-6 border flex-shrink-0 w-[80vw] sm:w-[400px] lg:w-full ${i >= reviewCount ? 'hidden lg:block' : ''}`}
                                     data-index={i}
                                 >
                                     <div class="flex gap-1 mb-4">
@@ -105,6 +105,7 @@ const visibleCount = 2; // Number of cards visible at a time
                                                 src={review.image}
                                                 alt={review.name}
                                                 class="w-11 h-11 rounded-full object-cover shadow-md"
+                                                loading="lazy"
                                             />
                                         ) : (
                                             <div class="rv-avatar w-11 h-11 rounded-full flex items-center justify-center text-white font-semibold text-sm">
@@ -125,6 +126,14 @@ const visibleCount = 2; // Number of cards visible at a time
                         }
                     </div>
                 </div>
+
+                <!-- Swipe Indicator (Mobile Only) -->
+                <div class="flex items-center justify-center gap-2 mt-4 lg:hidden opacity-60">
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-queens-primary">Swipe to read more</span>
+                    <div class="w-12 h-[1px] bg-queens-primary/30 relative">
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t border-r border-queens-primary rotate-45"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -139,6 +148,8 @@ const visibleCount = 2; // Number of cards visible at a time
     /* Light mode defaults */
     .rv-section {
         background-color: transparent;
+        position: relative;
+        z-index: 20; /* Ensure it stays above the pulled-up footer but doesn't break flow */
     }
     .rv-title {
         color: #0f172a;
@@ -149,6 +160,7 @@ const visibleCount = 2; // Number of cards visible at a time
     .rv-card {
         background-color: #ffffff;
         border-color: rgba(0, 0, 0, 0.06);
+        scroll-snap-align: center;
     }
     .rv-quote {
         color: #0f172a;
@@ -196,14 +208,26 @@ const visibleCount = 2; // Number of cards visible at a time
         height: 500px;
     }
 
-    /* Mobile: no animation, show all */
+    /* Mobile: horizontal scroll snap */
     @media (max-width: 1023px) {
         .rv-carousel {
             height: auto;
-            overflow: visible;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+            padding-bottom: 2rem;
+            margin: 0 -1.5rem; /* Full bleed padding offset */
+            padding: 0 1.5rem 2rem;
+        }
+        .rv-carousel::-webkit-scrollbar {
+            display: none; /* Hide scrollbar Chrome/Safari */
         }
         .rv-track {
+            flex-direction: row !important;
             transform: none !important;
+            width: max-content;
         }
         .rv-video-card {
             max-width: 400px;
