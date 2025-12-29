@@ -20,7 +20,7 @@ const visibleCount = 2; // Number of cards visible at a time
 ---
 
 <section
-    class="rv-section pt-16 lg:pt-[45vh] pb-12 lg:pb-32 px-6"
+    class="rv-section pt-16 lg:pt-24 pb-12 lg:pb-32 px-6"
     data-visible-count={visibleCount}
     data-total-count={reviewCount}
 >
@@ -84,7 +84,7 @@ const visibleCount = 2; // Number of cards visible at a time
                         {
                             allReviews.map((review, i) => (
                                 <div
-                                    class={`rv-card rounded-2xl p-6 border flex-shrink-0 w-[80vw] sm:w-[400px] lg:w-full ${i >= reviewCount ? 'hidden lg:block' : ''}`}
+                                    class={`rv-card rounded-2xl p-6 border flex-shrink-0 w-[80vw] sm:w-[400px] lg:w-full ${i >= reviewCount ? "hidden lg:block" : ""}`}
                                     data-index={i}
                                 >
                                     <div class="flex gap-1 mb-4">
@@ -128,10 +128,18 @@ const visibleCount = 2; // Number of cards visible at a time
                 </div>
 
                 <!-- Swipe Indicator (Mobile Only) -->
-                <div class="flex items-center justify-center gap-2 mt-4 lg:hidden opacity-60">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-queens-primary">Swipe to read more</span>
+                <div
+                    class="flex items-center justify-center gap-2 mt-4 lg:hidden opacity-60"
+                >
+                    <span
+                        class="text-[10px] font-bold uppercase tracking-widest text-queens-primary"
+                        >Swipe to read more</span
+                    >
                     <div class="w-12 h-[1px] bg-queens-primary/30 relative">
-                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t border-r border-queens-primary rotate-45"></div>
+                        <div
+                            class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 border-t border-r border-queens-primary rotate-45"
+                        >
+                        </div>
                     </div>
                 </div>
             </div>
