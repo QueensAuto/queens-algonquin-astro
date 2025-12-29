@@ -7,6 +7,19 @@ import CtaButton from "./CtaButton.astro";
 ---
 
 <section class="process-section" id="process-section">
+    <!-- Section Header -->
+    <div class="process-header site-canvas">
+        <span class="process-eyebrow">— How It Works</span>
+        <h2 class="process-main-title display-xl">
+            YOUR SERVICE <br />
+            <span class="text-queens-primary">EXPERIENCE</span>
+        </h2>
+        <p class="process-intro">
+            From the moment you contact us to when you drive away, we make every
+            step simple, transparent, and stress-free.
+        </p>
+    </div>
+
     <div class="process-container">
         <!-- Left Column -->
         <div class="process-left">
@@ -133,13 +146,43 @@ import CtaButton from "./CtaButton.astro";
         --accent-light: rgba(10, 121, 200, 0.15);
     }
 
+    /* Section Header */
+    .process-header {
+        text-align: center;
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+
+    .process-eyebrow {
+        display: inline-block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--accent);
+        margin-bottom: 1rem;
+    }
+
+    .process-main-title {
+        color: var(--text-primary);
+        margin: 0 0 1.5rem;
+    }
+
+    .process-intro {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
     .process-container {
         display: grid;
         grid-template-columns: 1fr 80px 1.3fr;
         gap: 2rem;
         max-width: 1280px;
         margin: 0 auto;
-        padding: 6rem 1.5rem;
+        padding: 2rem 1.5rem 6rem;
     }
 
     /* Left Column - GSAP will pin this */
