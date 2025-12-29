@@ -1,0 +1,181 @@
+---
+import CtaButton from "./CtaButton.astro";
+
+/**
+ * NewTiresMasonry - Masonry Grid Background with Premium Micro-Interactions
+ * - Background: Full masonry grid of mid-sized images
+ * - Overlay: Dark overlay for text readability
+ * - Content: Centered headline and CTA with GSAP animations on scroll
+ */
+
+const slides = [
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 1.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 2.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 3.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 4.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 5.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 6.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 7.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 8.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 9.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 10.webp",
+];
+
+// Create a larger set for the grid to ensure coverage
+const baseImages = [...slides, ...slides, ...slides, ...slides];
+
+// Shuffle function to randomize layout and minimize visible repetition
+function shuffle(array: string[]) {
+    let currentIndex = array.length,
+        randomIndex;
+
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+        ];
+    }
+
+    return array;
+}
+
+const gridImages = shuffle([...baseImages]);
+---
+
+<section
+    id="new-tires-section"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#09090b]"
+>
+    <!-- Masonry Grid Background -->
+    <div class="absolute inset-0 z-0 opacity-80 overflow-hidden">
+        <div
+            class="w-full p-3 columns-3 gap-3 sm:columns-4 sm:gap-4 lg:columns-6 xl:columns-8"
+        >
+            {
+                gridImages.map((src, index) => (
+                    <div class="mb-3 sm:mb-4 bg-slate-800 rounded-xl overflow-hidden break-inside-avoid">
+                        <img
+                            src={src}
+                            alt=""
+                            loading={index < 12 ? "eager" : "lazy"}
+                            draggable="false"
+                            class="block w-full h-auto object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <!-- Dark Overlay -->
+    <div
+        class="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0.7)_100%)] backdrop-blur-[1px]"
+    >
+    </div>
+
+    <!-- Centered Content -->
+    <div
+        class="nts-content relative z-20 text-center p-8 max-w-[900px] flex flex-col items-center"
+    >
+        <div class="mb-6">
+            <h2
+                class="nts-headline display-hero-home mb-6 text-white drop-shadow-lg opacity-0 translate-y-10"
+            >
+                Grip The Road Like You Mean It.
+            </h2>
+            <p
+                class="nts-subtext font-body font-medium tracking-widest uppercase text-white mb-10 bg-black/60 inline-block px-4 py-2 rounded-full backdrop-blur-sm text-base sm:text-lg opacity-0 translate-y-8"
+            >
+                Top-tier tires at prices you'll love. <span
+                    class="text-queens-primary font-bold italic"
+                    >Find your next tires!</span
+                >
+            </p>
+        </div>
+
+        <div class="nts-cta flex justify-center opacity-0 translate-y-6">
+            <CtaButton
+                href="/buy-new-tires"
+                text="Shop New Tires"
+                reload={true}
+            />
+        </div>
+    </div>
+</section>
+
+<script>
+    import gsap from "gsap";
+
+    function initMasonryAnimations() {
+        const section = document.getElementById("new-tires-section");
+        if (!section) return;
+
+        const headline = section.querySelector(".nts-headline");
+        const subtext = section.querySelector(".nts-subtext");
+        const cta = section.querySelector(".nts-cta");
+
+        if (!headline || !subtext || !cta) return;
+
+        // Use IntersectionObserver for reliable viewport detection
+        const observerOptions = {
+            root: null,
+            rootMargin: "0px 0px -20% 0px",
+            threshold: 0,
+        };
+
+        const contentObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Animate headline
+                    gsap.to(headline, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.8,
+                        ease: "power3.out",
+                    });
+
+                    // Animate subtext with delay
+                    gsap.to(subtext, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        delay: 0.2,
+                        ease: "power2.out",
+                    });
+
+                    // Animate CTA with bounce
+                    gsap.to(cta, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.5,
+                        delay: 0.4,
+                        ease: "back.out(1.7)",
+                    });
+
+                    // Unobserve after animation triggers
+                    contentObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe the content wrapper
+        const content = section.querySelector(".nts-content");
+        if (content) {
+            contentObserver.observe(content);
+        }
+    }
+
+    // Run on Astro page load
+    document.addEventListener("astro:page-load", initMasonryAnimations);
+
+    // Fallback for non-Astro navigation
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initMasonryAnimations);
+    } else {
+        initMasonryAnimations();
+    }
+</script>
