@@ -116,7 +116,7 @@ const services = [
 
   @media (max-width: 1023px) {
     .deals-container {
-      grid-template-columns: 100px 1fr;
+      grid-template-columns: 80px 1fr;
       gap: 2rem;
     }
   }
@@ -124,12 +124,16 @@ const services = [
   @media (max-width: 640px) {
     .deals-container {
       grid-template-columns: 1fr;
-      padding-top: 4rem;
+      padding-top: 2rem;
+      gap: 1rem;
     }
+    
+    /* On mobile, keep it in flow but compact */
     .deals-number-column {
-      position: absolute;
-      top: 2rem;
-      left: 1.5rem;
+      position: relative;
+      top: auto;
+      left: auto;
+      margin-bottom: -1rem; /* Tighten up spacing to content */
       z-index: 10;
     }
   }
@@ -139,12 +143,13 @@ const services = [
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 1.5rem; /* Reduced gap */
   }
 
   .deals-number {
     font-family: var(--font-display);
-    font-size: clamp(6rem, 12vw, 10rem);
+    /* Significantly reduced size */
+    font-size: clamp(4rem, 10vw, 7rem); 
     font-weight: 900;
     line-height: 0.85;
     color: #0f172a;
