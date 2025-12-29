@@ -49,13 +49,33 @@ const gridImages = shuffle([...baseImages]);
     class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#09090b]"
 >
     <!-- Masonry Grid Background -->
-    <div class="absolute inset-0 z-0 opacity-80 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-80">
+        <!-- Mobile: CSS Grid for seamless layout -->
         <div
-            class="w-full p-3 columns-3 gap-3 sm:columns-4 sm:gap-4 lg:columns-6 xl:columns-8"
+            class="nts-grid-mobile grid grid-cols-3 gap-0 sm:hidden"
+            style="width: calc(100% + 8px); margin-left: -4px; margin-top: -4px;"
+        >
+            {
+                gridImages.slice(0, 30).map((src, index) => (
+                    <div class="overflow-hidden aspect-[3/4]">
+                        <img
+                            src={src}
+                            alt=""
+                            loading={index < 12 ? "eager" : "lazy"}
+                            draggable="false"
+                            class="block w-full h-full object-cover"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+        <!-- Tablet+: Masonry columns layout -->
+        <div
+            class="hidden sm:block w-full p-3 columns-4 gap-3 lg:columns-6 lg:gap-4 xl:columns-8"
         >
             {
                 gridImages.map((src, index) => (
-                    <div class="mb-3 sm:mb-4 bg-slate-800 rounded-xl overflow-hidden break-inside-avoid">
+                    <div class="mb-3 lg:mb-4 bg-slate-800 rounded-xl overflow-hidden break-inside-avoid">
                         <img
                             src={src}
                             alt=""
