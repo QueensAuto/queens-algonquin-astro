@@ -1,10 +1,9 @@
 ---
+import CtaButton from "./CtaButton.astro";
+
 /**
- * NewTiresSlideshow - Premium crossfade slideshow with animated title
- * Features:
- * - 9:16 vertical image slideshow with crossfade transitions
- * - Large title that animates from right to left on scroll
- * - Clean separation between images and title
+ * NewTiresSlideshow - Premium section with tall vertical slideshow
+ * Left: Vertical image slideshow, Right: Bold impactful content
  */
 
 const slides = [
@@ -23,75 +22,145 @@ const slides = [
 
 <section id="new-tires-section" class="nts-section">
     <div class="nts-container">
-        <!-- Slideshow -->
-        <div class="nts-slideshow">
-            {
-                slides.map((src, index) => (
-                    <div
-                        class={`nts-slide ${index === 0 ? "active" : ""}`}
-                        data-index={index}
-                    >
+        <!-- Left: Vertical Slideshow -->
+        <div class="nts-slideshow-col">
+            <div class="nts-slideshow">
+                {
+                    slides.map((src, index) => (
                         <img
                             src={src}
-                            alt={`New Tires Slide ${index + 1}`}
+                            alt={`Premium Tires ${index + 1}`}
                             loading={index === 0 ? "eager" : "lazy"}
+                            class={`nts-slide ${index === 0 ? "active" : ""}`}
+                            data-index={index}
                         />
-                    </div>
-                ))
-            }
+                    ))
+                }
+            </div>
         </div>
-    </div>
 
-    <!-- Animated Title -->
-    <div class="nts-title-wrapper">
-        <h2 class="nts-title" id="nts-animated-title">
-            <span class="nts-title-text">New Tires</span>
-        </h2>
+        <!-- Right: Premium Content -->
+        <div class="nts-content-col">
+            <div class="nts-content">
+                <!-- Eyebrow -->
+                <span class="nts-eyebrow">New Tire Selection</span>
+
+                <!-- Main Headline - Large & Bold -->
+                <h2 class="nts-headline">
+                    Need new tires?<br />
+                    Shop brands you trust<br />
+                    <span class="nts-headline-accent">— installed today.</span>
+                </h2>
+
+                <!-- Subtext -->
+                <p class="nts-subtext">
+                    Browse Michelin, Bridgestone, Cooper & more. Professional
+                    installation included. Buy 4 tires, get a <strong
+                        >FREE alignment</strong
+                    >.
+                </p>
+
+                <!-- CTA Button -->
+                <div class="nts-cta">
+                    <CtaButton
+                        href="/buy-new-tires"
+                        text="Shop Tires"
+                        reload={true}
+                    />
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
 <style>
     .nts-section {
         position: relative;
-        padding: 6rem 0 8rem;
-        overflow: hidden;
-        background-color: transparent;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 5rem 0;
+        background-color: #fafafa;
+    }
+
+    :global(.dark) .nts-section {
+        background-color: #09090b;
     }
 
     .nts-container {
-        max-width: 1400px;
+        width: 100%;
+        max-width: 1440px;
         margin: 0 auto;
-        padding: 0 1.5rem;
+        padding: 0 2rem;
         display: flex;
-        justify-content: flex-start;
+        flex-direction: column;
+        gap: 3.5rem;
+        align-items: center;
     }
 
-    /* Slideshow Container */
+    @media (min-width: 1024px) {
+        .nts-container {
+            flex-direction: row;
+            gap: 6rem;
+            padding: 0 5rem;
+            align-items: center;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .nts-container {
+            gap: 8rem;
+            padding: 0 6rem;
+        }
+    }
+
+    /* ========================
+       LEFT: VERTICAL SLIDESHOW
+       ======================== */
+    .nts-slideshow-col {
+        flex-shrink: 0;
+    }
+
     .nts-slideshow {
         position: relative;
-        width: 100%;
-        max-width: 400px;
-        aspect-ratio: 9 / 16;
-        border-radius: 1.5rem;
+        width: 320px;
+        height: 427px; /* 3:4 ratio */
         overflow: hidden;
+        border-radius: 0;
         box-shadow:
-            0 25px 50px -12px rgba(0, 0, 0, 0.25),
-            0 0 0 1px rgba(0, 0, 0, 0.05);
+            0 30px 60px -15px rgba(0, 0, 0, 0.25),
+            0 15px 30px -10px rgba(0, 0, 0, 0.15);
+        background: #e2e8f0;
     }
 
     :global(.dark) .nts-slideshow {
+        background: #1e293b;
         box-shadow:
-            0 25px 50px -12px rgba(0, 0, 0, 0.5),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
+            0 30px 60px -15px rgba(0, 0, 0, 0.5),
+            0 15px 30px -10px rgba(0, 0, 0, 0.3);
     }
 
-    /* Individual Slides */
+    @media (min-width: 768px) {
+        .nts-slideshow {
+            width: 380px;
+            height: 507px;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .nts-slideshow {
+            width: 420px;
+            height: 560px;
+        }
+    }
+
     .nts-slide {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        object-fit: cover;
         opacity: 0;
         transition: opacity 1s ease-in-out;
     }
@@ -100,174 +169,159 @@ const slides = [
         opacity: 1;
     }
 
-    .nts-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* Title Wrapper */
-    .nts-title-wrapper {
-        position: relative;
-        width: 100%;
-        margin-top: 3rem;
-        overflow: hidden;
-    }
-
-    .nts-title {
-        font-family: var(--font-display);
-        font-size: clamp(4rem, 15vw, 12rem);
-        font-weight: 900;
-        text-transform: uppercase;
-        line-height: 1;
-        margin: 0;
-        white-space: nowrap;
-        color: #0f172a;
-        text-align: center;
-        will-change: transform;
-    }
-
-    :global(.dark) .nts-title {
-        color: #f8fafc;
-    }
-
-    .nts-title-text {
-        display: inline-block;
-        background: linear-gradient(
-            135deg,
-            #0a79c8 0%,
-            #3b82f6 50%,
-            #0a79c8 100%
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    :global(.dark) .nts-title-text {
-        background: linear-gradient(
-            135deg,
-            #38bdf8 0%,
-            #60a5fa 50%,
-            #38bdf8 100%
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .nts-section {
-            padding: 4rem 0 6rem;
-        }
-
-        .nts-container {
-            justify-content: center;
-        }
-
-        .nts-slideshow {
-            max-width: 280px;
-        }
-
-        .nts-title-wrapper {
-            margin-top: 2rem;
-        }
+    /* ========================
+       RIGHT: PREMIUM CONTENT
+       ======================== */
+    .nts-content-col {
+        flex: 1;
+        display: flex;
+        justify-content: center;
     }
 
     @media (min-width: 1024px) {
-        .nts-container {
-            padding-left: 8%;
+        .nts-content-col {
+            justify-content: flex-start;
+        }
+    }
+
+    .nts-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        max-width: 560px;
+    }
+
+    @media (min-width: 1024px) {
+        .nts-content {
+            text-align: left;
+            gap: 1.75rem;
+        }
+    }
+
+    /* Eyebrow */
+    .nts-eyebrow {
+        display: inline-block;
+        font-family: var(--font-body);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--color-queens-primary, #0a79c8);
+    }
+
+    :global(.dark) .nts-eyebrow {
+        color: #38bdf8;
+    }
+
+    /* Headline - BIG & BOLD */
+    .nts-headline {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4.5vw, 3.25rem);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+        margin: 0;
+        color: #0f172a;
+    }
+
+    :global(.dark) .nts-headline {
+        color: #f8fafc;
+    }
+
+    .nts-headline-accent {
+        display: block;
+        color: var(--color-queens-primary, #0a79c8);
+        font-style: italic;
+        font-weight: 700;
+    }
+
+    :global(.dark) .nts-headline-accent {
+        color: #38bdf8;
+    }
+
+    /* Subtext */
+    .nts-subtext {
+        font-family: var(--font-body);
+        font-size: 1.0625rem;
+        line-height: 1.7;
+        color: #64748b;
+        margin: 0;
+        max-width: 440px;
+    }
+
+    @media (min-width: 1024px) {
+        .nts-subtext {
+            font-size: 1.125rem;
+        }
+    }
+
+    :global(.dark) .nts-subtext {
+        color: #94a3b8;
+    }
+
+    .nts-subtext strong {
+        color: #0f172a;
+        font-weight: 700;
+    }
+
+    :global(.dark) .nts-subtext strong {
+        color: #f1f5f9;
+    }
+
+    /* CTA */
+    .nts-cta {
+        padding-top: 0.5rem;
+    }
+
+    @media (min-width: 1024px) {
+        .nts-cta {
+            padding-top: 0.75rem;
+        }
+    }
+
+    /* Center content elements on mobile */
+    @media (max-width: 1023px) {
+        .nts-eyebrow,
+        .nts-subtext {
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .nts-slideshow {
-            max-width: 350px;
+        .nts-cta {
+            display: flex;
+            justify-content: center;
         }
     }
 </style>
 
 <script>
-    import gsap from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
     let slideInterval: ReturnType<typeof setInterval> | null = null;
-    let ctx: gsap.Context | null = null;
 
     function initNewTiresSection() {
-        // Cleanup previous
         if (slideInterval) {
             clearInterval(slideInterval);
             slideInterval = null;
-        }
-        if (ctx) {
-            ctx.revert();
-            ctx = null;
         }
 
         const section = document.getElementById("new-tires-section");
         if (!section) return;
 
-        const slides = section.querySelectorAll(".nts-slide");
-        const title = document.getElementById("nts-animated-title");
-
-        if (!slides.length || !title) return;
+        const slides = section.querySelectorAll<HTMLImageElement>(".nts-slide");
+        if (!slides.length) return;
 
         let currentIndex = 0;
         const totalSlides = slides.length;
 
-        // Crossfade slideshow
         function nextSlide() {
             slides[currentIndex].classList.remove("active");
             currentIndex = (currentIndex + 1) % totalSlides;
             slides[currentIndex].classList.add("active");
         }
 
-        slideInterval = setInterval(nextSlide, 3000);
-
-        // GSAP scroll animation for title
-        ctx = gsap.context(() => {
-            // Title moves from right to center on scroll
-            gsap.fromTo(
-                title,
-                { x: "30%" },
-                {
-                    x: "-10%",
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: 1,
-                    },
-                },
-            );
-
-            // Section entrance animation
-            const slideshow = section.querySelector(".nts-slideshow");
-            if (slideshow) {
-                gsap.fromTo(
-                    slideshow,
-                    { y: 60, opacity: 0, scale: 0.95 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        scale: 1,
-                        duration: 1,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 70%",
-                            once: true,
-                        },
-                    },
-                );
-            }
-        }, section);
+        slideInterval = setInterval(nextSlide, 3500);
     }
 
-    // Initialize
     document.addEventListener("astro:page-load", initNewTiresSection);
 
     if (document.readyState === "loading") {
@@ -276,15 +330,10 @@ const slides = [
         initNewTiresSection();
     }
 
-    // Cleanup
     document.addEventListener("astro:before-swap", () => {
         if (slideInterval) {
             clearInterval(slideInterval);
             slideInterval = null;
-        }
-        if (ctx) {
-            ctx.revert();
-            ctx = null;
         }
     });
 </script>
