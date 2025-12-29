@@ -1,0 +1,290 @@
+---
+/**
+ * NewTiresSlideshow - Premium crossfade slideshow with animated title
+ * Features:
+ * - 9:16 vertical image slideshow with crossfade transitions
+ * - Large title that animates from right to left on scroll
+ * - Clean separation between images and title
+ */
+
+const slides = [
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 1.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 2.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 3.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 4.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 5.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 6.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 7.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 8.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 9.webp",
+    "/images/Queens New Tires Slides/Queens Auto Services - New Tires Slide 10.webp",
+];
+---
+
+<section id="new-tires-section" class="nts-section">
+    <div class="nts-container">
+        <!-- Slideshow -->
+        <div class="nts-slideshow">
+            {
+                slides.map((src, index) => (
+                    <div
+                        class={`nts-slide ${index === 0 ? "active" : ""}`}
+                        data-index={index}
+                    >
+                        <img
+                            src={src}
+                            alt={`New Tires Slide ${index + 1}`}
+                            loading={index === 0 ? "eager" : "lazy"}
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <!-- Animated Title -->
+    <div class="nts-title-wrapper">
+        <h2 class="nts-title" id="nts-animated-title">
+            <span class="nts-title-text">New Tires</span>
+        </h2>
+    </div>
+</section>
+
+<style>
+    .nts-section {
+        position: relative;
+        padding: 6rem 0 8rem;
+        overflow: hidden;
+        background-color: transparent;
+    }
+
+    .nts-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    /* Slideshow Container */
+    .nts-slideshow {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        aspect-ratio: 9 / 16;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        box-shadow:
+            0 25px 50px -12px rgba(0, 0, 0, 0.25),
+            0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+
+    :global(.dark) .nts-slideshow {
+        box-shadow:
+            0 25px 50px -12px rgba(0, 0, 0, 0.5),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Individual Slides */
+    .nts-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .nts-slide.active {
+        opacity: 1;
+    }
+
+    .nts-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Title Wrapper */
+    .nts-title-wrapper {
+        position: relative;
+        width: 100%;
+        margin-top: 3rem;
+        overflow: hidden;
+    }
+
+    .nts-title {
+        font-family: var(--font-display);
+        font-size: clamp(4rem, 15vw, 12rem);
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 1;
+        margin: 0;
+        white-space: nowrap;
+        color: #0f172a;
+        text-align: center;
+        will-change: transform;
+    }
+
+    :global(.dark) .nts-title {
+        color: #f8fafc;
+    }
+
+    .nts-title-text {
+        display: inline-block;
+        background: linear-gradient(
+            135deg,
+            #0a79c8 0%,
+            #3b82f6 50%,
+            #0a79c8 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    :global(.dark) .nts-title-text {
+        background: linear-gradient(
+            135deg,
+            #38bdf8 0%,
+            #60a5fa 50%,
+            #38bdf8 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .nts-section {
+            padding: 4rem 0 6rem;
+        }
+
+        .nts-container {
+            justify-content: center;
+        }
+
+        .nts-slideshow {
+            max-width: 280px;
+        }
+
+        .nts-title-wrapper {
+            margin-top: 2rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .nts-container {
+            padding-left: 8%;
+        }
+
+        .nts-slideshow {
+            max-width: 350px;
+        }
+    }
+</style>
+
+<script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    let slideInterval: ReturnType<typeof setInterval> | null = null;
+    let ctx: gsap.Context | null = null;
+
+    function initNewTiresSection() {
+        // Cleanup previous
+        if (slideInterval) {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        }
+        if (ctx) {
+            ctx.revert();
+            ctx = null;
+        }
+
+        const section = document.getElementById("new-tires-section");
+        if (!section) return;
+
+        const slides = section.querySelectorAll(".nts-slide");
+        const title = document.getElementById("nts-animated-title");
+
+        if (!slides.length || !title) return;
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        // Crossfade slideshow
+        function nextSlide() {
+            slides[currentIndex].classList.remove("active");
+            currentIndex = (currentIndex + 1) % totalSlides;
+            slides[currentIndex].classList.add("active");
+        }
+
+        slideInterval = setInterval(nextSlide, 3000);
+
+        // GSAP scroll animation for title
+        ctx = gsap.context(() => {
+            // Title moves from right to center on scroll
+            gsap.fromTo(
+                title,
+                { x: "30%" },
+                {
+                    x: "-10%",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1,
+                    },
+                },
+            );
+
+            // Section entrance animation
+            const slideshow = section.querySelector(".nts-slideshow");
+            if (slideshow) {
+                gsap.fromTo(
+                    slideshow,
+                    { y: 60, opacity: 0, scale: 0.95 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 70%",
+                            once: true,
+                        },
+                    },
+                );
+            }
+        }, section);
+    }
+
+    // Initialize
+    document.addEventListener("astro:page-load", initNewTiresSection);
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initNewTiresSection);
+    } else {
+        initNewTiresSection();
+    }
+
+    // Cleanup
+    document.addEventListener("astro:before-swap", () => {
+        if (slideInterval) {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        }
+        if (ctx) {
+            ctx.revert();
+            ctx = null;
+        }
+    });
+</script>
