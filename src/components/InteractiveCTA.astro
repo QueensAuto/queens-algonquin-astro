@@ -1,0 +1,207 @@
+---
+import CtaButtonSecondary from "./CtaButtonSecondary.astro";
+---
+
+<section
+    class="interactive-cta-section relative w-full bg-black overflow-hidden py-24 sm:py-32 flex flex-col items-center justify-center text-center"
+>
+    <!-- Content Container (Z-Index 20 to sit above noise/canvas) -->
+    <div class="relative z-20 max-w-4xl px-6 lg:px-8">
+        <h2 class="display-xl text-white mb-6">
+            Fast & Reliable <span class="text-queens-primary">Service</span>
+        </h2>
+        <p class="text-white text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+            Don't let car troubles slow you down. We bring expert auto repair
+            directly to you, getting you back on the road in record time.
+        </p>
+        <div class="flex justify-center">
+            <CtaButtonSecondary
+                href="/request-an-appointment"
+                text="Schedule Now"
+                class="!bg-white !text-gray-900 hover:!bg-gray-100"
+            />
+        </div>
+    </div>
+
+    <!-- Dynamic Canvas Background Layer -->
+    <canvas
+        id="cta-canvas"
+        class="absolute inset-0 w-full h-full pointer-events-none opacity-80 dark:opacity-70"
+    ></canvas>
+</section>
+
+<script>
+    // --- Interactive CTA Background Logic ---
+    function initInteractiveCta() {
+        const section = document.querySelector(
+            ".interactive-cta-section",
+        ) as HTMLElement;
+        const canvas = document.getElementById(
+            "cta-canvas",
+        ) as HTMLCanvasElement;
+
+        if (!section || !canvas) return;
+
+        // --- Canvas Trail Logic ---
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        const mouse = { x: 0, y: 0, length: 0, angle: 0 };
+        let trail: any;
+        let w: number, h: number;
+        let animationId: number;
+
+        const distanceBetween = (p1: any, p2: any) =>
+            Math.sqrt(
+                (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y),
+            );
+        const angleBetween = (p1: any, p2: any) =>
+            Math.atan2(p2.y - p1.y, p2.x - p1.x);
+
+        class Trail {
+            points: any[];
+            x: number;
+            y: number;
+            delay: number;
+
+            constructor(
+                x: number,
+                y: number,
+                length = 0,
+                angle = 0,
+                delay = 5,
+            ) {
+                this.points = [];
+                this.x = x;
+                this.y = y;
+                this.delay = delay;
+                this.add(x, y, length, angle);
+            }
+
+            add(x: number, y: number, length = 0, angle = 0) {
+                this.x += (x - this.x) / this.delay;
+                this.y += (y - this.y) / this.delay;
+                this.points.unshift({ x: this.x, y: this.y, length, angle });
+            }
+
+            update() {
+                this.points.forEach((p) => {
+                    p.x += Math.cos(p.angle) * p.length;
+                    p.y += Math.sin(p.angle) * p.length;
+                    p.length *= 0.98;
+                });
+                this.points = this.points.slice(0, 60);
+            }
+        }
+
+        const updateStage = () => {
+            const rect = section.getBoundingClientRect();
+            w = rect.width;
+            h = rect.height;
+            canvas.width = w;
+            canvas.height = h;
+            mouse.x = w / 2;
+            mouse.y = h / 2;
+            trail = new Trail(mouse.x, mouse.y);
+        };
+
+        const onPointerMove = (e: MouseEvent | TouchEvent) => {
+            const rect = section.getBoundingClientRect();
+            const clientX =
+                (e as MouseEvent).clientX ||
+                (e as TouchEvent).touches[0].clientX;
+            const clientY =
+                (e as MouseEvent).clientY ||
+                (e as TouchEvent).touches[0].clientY;
+
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            const length = distanceBetween({ x, y }, mouse) * 0.2;
+            const angle = angleBetween(mouse, { x, y });
+
+            mouse.angle = angle;
+            mouse.length = length;
+            mouse.x = x;
+            mouse.y = y;
+        };
+
+        const loop = () => {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+            ctx.fillRect(0, 0, w, h);
+
+            const points = trail.points;
+            let hue = 205; // Primary Brand Blue Hue
+
+            points.forEach((p1: any) => {
+                points
+                    .filter(
+                        (p2: any) => p2 !== p1 && distanceBetween(p1, p2) < 80,
+                    )
+                    .forEach((p2: any) => {
+                        const dynamicHue = hue + Math.cos(p1.angle) * 20;
+                        ctx.strokeStyle = `hsla(${dynamicHue}, 80%, 60%, 0.15)`;
+                        ctx.beginPath();
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    });
+            });
+
+            if (points.length > 0) {
+                ctx.beginPath();
+                ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 0.6)`;
+                ctx.lineWidth = 2;
+                ctx.moveTo(points[0].x, points[0].y);
+                for (let i = 1; i < points.length; i++) {
+                    ctx.lineTo(points[i].x, points[i].y);
+                }
+                ctx.stroke();
+            }
+
+            trail.add(mouse.x, mouse.y, mouse.length, mouse.angle);
+            trail.update();
+            animationId = requestAnimationFrame(loop);
+        };
+
+        // --- Init and Events ---
+        updateStage();
+        window.addEventListener("resize", updateStage);
+        section.addEventListener("mousemove", onPointerMove);
+        section.addEventListener("touchmove", onPointerMove);
+
+        // Intersection Observer to save power
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    if (!animationId) loop();
+                } else {
+                    cancelAnimationFrame(animationId);
+                    animationId = 0;
+                }
+            },
+            { threshold: 0.1 },
+        );
+
+        observer.observe(section);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener("resize", updateStage);
+            section.removeEventListener("mousemove", onPointerMove);
+            section.removeEventListener("touchmove", onPointerMove);
+            cancelAnimationFrame(animationId);
+            observer.disconnect();
+        };
+    }
+
+    // Run on load and support View Transitions
+    let cleanup: any;
+    document.addEventListener("astro:page-load", () => {
+        if (cleanup) cleanup();
+        cleanup = initInteractiveCta();
+    });
+    document.addEventListener("astro:before-swap", () => {
+        if (cleanup) cleanup();
+    });
+</script>

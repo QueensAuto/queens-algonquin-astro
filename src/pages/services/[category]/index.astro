@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { mobileTiresBrand } from "../../../brands";
 import servicesData from "../../../data/services.json";
 import SmoothReveal from "../../../components/SmoothReveal.astro";
-import SpeedometerCTA from "../../../components/SpeedometerCTA.astro";
+import InteractiveCTA from "../../../components/InteractiveCTA.astro";
 
 export async function getStaticPaths() {
     return servicesData.map((category) => ({
@@ -116,7 +116,7 @@ const description = category.description;
     </section>
 
     <!-- Appointment CTA -->
-    <SpeedometerCTA />
+    <InteractiveCTA />
 
     <!-- Animation Engine -->
     <SmoothReveal />
