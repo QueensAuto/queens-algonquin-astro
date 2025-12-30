@@ -24,7 +24,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       id="header-left-section-services"
       class="pointer-events-auto flex items-center gap-3"
     >
-      <!-- Hamburger Button (Forced White for dark bg) -->
+      <!-- Hamburger Button (Locked White for dark backgrounds) -->
       <button
         id="mobile-menu-button-services"
         class="group flex items-center justify-center w-10 h-10 rounded-full text-white hover:bg-white/10 transition-colors"
@@ -43,7 +43,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
         </div>
       </button>
 
-      <!-- Logo (Forced White Version for dark bg) -->
+      <!-- Logo (Locked White Version for dark backgrounds) -->
       <a href="/" id="header-logo-services" class="flex items-center gap-2">
         {
           brand.logoPathWhite ? (
@@ -65,11 +65,11 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
     <!-- RIGHT ACTIONS: Phone + CTA + Theme Toggle -->
     <div class="pointer-events-auto flex items-center gap-6 md:gap-8">
-      <!-- Phone Number (Desktop Only - Forced White) -->
+      <!-- Phone Number (Locked White for dark backgrounds) -->
       <a
         id="header-phone-services"
         href={`tel:${brand.phone}`}
-        class="hidden md:flex items-center gap-2 text-white transition-colors hover:text-queens-secondary"
+        class="hidden md:flex items-center gap-2 text-white transition-colors hover:text-white/80"
       >
         <span class="text-sm font-black uppercase tracking-[0.15em]"
           >Call {brand.phone}</span

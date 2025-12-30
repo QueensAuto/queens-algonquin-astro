@@ -28,12 +28,23 @@ const {
 const brand: BrandConfig = propBrand || mobileTiresBrand;
 
 const currentPath = Astro.url.pathname;
-// Check if we are on a service SUB-PAGE (e.g. /services/brakes)
-// We want to exclude the main archive page (/services) which needs the white header.
+const pathSegments = currentPath.split("/").filter(Boolean);
+
+// Archive is just /services (1 segment)
 const isServicesArchive =
-  currentPath === "/services" || currentPath === "/services/";
+  pathSegments.length === 1 && pathSegments[0] === "services";
+// Category is /services/category (2 segments)
+const isCategoryPage =
+  pathSegments.length === 2 && pathSegments[0] === "services";
+// Sub-page (individual service) is /services/category/service (3 segments)
 const isServiceSubPage =
-  currentPath.startsWith("/services") && !isServicesArchive;
+  pathSegments.length === 3 && pathSegments[0] === "services";
+
+// Force regular header for archive and categories since they use standard bg-page
+const useServicesHeader =
+  (isServiceSubPage || forceDarkHeader) &&
+  !isCategoryPage &&
+  !isServicesArchive;
 ---
 
 <!doctype html>
@@ -142,7 +153,7 @@ const isServiceSubPage =
     >
 
     {
-      isServiceSubPage || forceDarkHeader ? (
+      useServicesHeader ? (
         <ServicesHeader
           brand={brand}
           inverse={headerInverse || forceDarkHeader}

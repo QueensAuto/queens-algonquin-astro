@@ -14,8 +14,23 @@ const description =
 <BaseLayout brand={mobileTiresBrand} title={title}>
     <!-- Hero Section -->
     <!-- NOTE: Extra top padding to account for floating header -->
-    <div class="pt-24 pb-20 sm:pt-32 sm:pb-24" data-reveal>
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="relative pt-24 pb-20 sm:pt-32 sm:pb-24 overflow-hidden" data-reveal>
+        <!-- Background Accents (Blurred Blobs for consistency) -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div
+                class="absolute top-[-10%] -right-[10%] w-[500px] h-[500px] bg-queens-primary/10 dark:bg-queens-primary/20 rounded-full blur-[120px]"
+            >
+            </div>
+            <div
+                class="absolute bottom-[-10%] -left-[10%] w-[400px] h-[400px] bg-queens-primary/5 dark:bg-queens-primary/10 rounded-full blur-[100px]"
+            >
+            </div>
+            
+            <!-- Bottom Seamless Blend Mask (Refined for 100% seamless transition) -->
+            <div class="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[var(--bg-page)] from-15% via-[var(--bg-page)]/60 to-transparent"></div>
+        </div>
+        
+        <div class="site-canvas relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:items-start">
                 <div data-reveal-item>
                     <!-- Premium Heading (smaller size for this page) -->
@@ -61,7 +76,7 @@ const description =
                 {
                     servicesData.map((category, index) => (
                         <div
-                            class="service-card-item rich-text glow-beam-hover flex flex-col rounded-3xl p-8 shadow-xl dark:shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+                            class="service-card-item bg-white rich-text glow-beam-hover flex flex-col rounded-3xl p-8 shadow-xl dark:shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
                         >
                             <h2 class="text-gray-900 dark:text-white">{category.title}</h2>
                             
