@@ -1401,3 +1401,27 @@ html {
 .progress-steps .step.completed span {
     color: var(--queens-primary-inverse);
 }
+
+/* ========================================
+   DEBUG: LAYOUT OVERFLOW TROUBLESHOOTING
+   ======================================== */
+section {
+    outline: 2px solid red !important;
+    outline-offset: -2px;
+}
+
+section > div {
+    outline: 1px dashed orange !important;
+}
+
+section > div > div {
+    outline: 1px dotted yellow !important;
+}
+
+/* Force body to show any potential overflow */
+body {
+    overflow-x: visible !important;
+}
+html {
+    overflow-x: visible !important;
+}
