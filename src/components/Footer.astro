@@ -180,97 +180,57 @@ const { brand } = Astro.props as { brand: BrandConfig };
     </div>
   </div>
 
-  <!-- Huge Brand Text & Tagline -->
-  <div class="footer-huge-container" id="footer-huge-container">
-    <div class="footer-huge-grid">
-      <div class="footer-huge-left">
-        <div class="footer-huge-wrapper">
-          <h2 class="footer-huge-text" id="footer-huge-text">
-            <span>Q</span><span>U</span><span>E</span><span>E</span><span
-              >N</span
-            ><span>S</span>
-          </h2>
-        </div>
-      </div>
-      <div class="footer-huge-right">
-        <p class="footer-tagline" id="footer-tagline">
-          Your Local Expert for<br class="hidden sm:block" />
-          Tires & Auto Repair.
-        </p>
-      </div>
+  <!-- Ticker Brand Text -->
+  <div class="footer-ticker-container">
+    <div class="footer-ticker-wrap" id="footer-ticker-wrap">
+      <span class="footer-ticker-text"
+        ><span class="text-white">QUEENS</span><span class="text-slate-600"
+          >AUTO</span
+        ><span class="ticker-separator">•</span></span
+      >
+      <span class="footer-ticker-text"
+        ><span class="text-white">QUEENS</span><span class="text-slate-600"
+          >AUTO</span
+        ><span class="ticker-separator">•</span></span
+      >
     </div>
   </div>
 </footer>
 
 <script>
   import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
+  function initFooterTicker() {
+    const wrap = document.getElementById("footer-ticker-wrap");
+    if (!wrap) return;
 
-  let footerCtx: any;
+    // Get all ticker items and duplicate them for seamless loop
+    const items = wrap.querySelectorAll(".footer-ticker-text");
+    if (items.length === 0) return;
 
-  function initFooterHugeText() {
-    // Cleanup previous context if any
-    if (footerCtx) footerCtx.revert();
+    // Clone all items and append to wrapper for seamless loop
+    items.forEach((item) => {
+      const clone = item.cloneNode(true);
+      wrap.appendChild(clone);
+    });
 
-    // Small delay to ensure layout is final
-    setTimeout(() => {
-      const container = document.getElementById("footer-huge-container");
-      if (!container) return;
+    // Calculate the width of the original set (first half)
+    const totalWidth = wrap.scrollWidth / 2;
 
-      footerCtx = gsap.context(() => {
-        const letters = container.querySelectorAll("#footer-huge-text span");
-        const tagline = container.querySelector("#footer-tagline");
-
-        if (!letters.length) return;
-
-        // Force set initial hidden state
-        gsap.set(letters, { y: "110%", opacity: 0 });
-        if (tagline) gsap.set(tagline, { y: 30, opacity: 0 });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: container,
-            start: "top bottom-=50",
-            toggleActions: "play none none none",
-            once: true,
-          },
-        });
-
-        tl.to(letters, {
-          y: "0%",
-          opacity: 1,
-          duration: 1.2,
-          stagger: 0.08,
-          ease: "power4.out",
-        });
-
-        if (tagline) {
-          tl.to(
-            tagline,
-            {
-              y: 0,
-              opacity: 1,
-              duration: 1,
-              ease: "power3.out",
-            },
-            "-=0.8",
-          ); // Overlap with letters
-        }
-      }, container);
-
-      ScrollTrigger.refresh();
-    }, 100);
+    // Create seamless infinite animation (simple approach - no modifiers)
+    gsap.to(wrap, {
+      x: -totalWidth,
+      duration: 21,
+      ease: "none",
+      repeat: -1,
+    });
   }
 
-  // Initialize
-  document.addEventListener("astro:page-load", initFooterHugeText);
-
-  // Cleanup on swap
-  document.addEventListener("astro:before-swap", () => {
-    if (footerCtx) footerCtx.revert();
-  });
+  // Init on page load and View Transitions
+  document.addEventListener("astro:page-load", initFooterTicker);
+  if (document.readyState !== "loading") {
+    initFooterTicker();
+  }
 </script>
 
 <style>
@@ -479,98 +439,46 @@ const { brand } = Astro.props as { brand: BrandConfig };
     color: #ffffff;
   }
 
-  /* Huge Text Section (Preserved) */
-  .footer-huge-container {
+  /* Ticker Section */
+  .footer-ticker-container {
     margin-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem 0;
     width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .footer-huge-grid {
-    max-width: 90rem;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    padding: 2rem 1.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    .footer-huge-grid {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4rem;
-    }
-  }
-
-  .footer-huge-left {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-
-  @media (min-width: 1024px) {
-    .footer-huge-left {
-      justify-content: flex-start;
-    }
-  }
-
-  .footer-huge-right {
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-  }
-
-  .footer-huge-wrapper {
     overflow: hidden;
   }
 
-  .footer-huge-text {
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 15vw, 15rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin: 0;
-    padding: 0.1em 0;
-    color: #0a79c8;
-    text-transform: uppercase;
+  .footer-ticker-wrap {
     display: flex;
-    gap: 0.01em;
-    user-select: none;
-    pointer-events: none;
-    text-align: center;
-  }
-
-  .footer-huge-text span {
-    display: inline-block;
+    white-space: nowrap;
     will-change: transform;
   }
 
-  .footer-tagline {
-    font-size: clamp(1.25rem, 3vw, 2.5rem);
+  .footer-ticker-text {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 18vw, 180px);
     font-weight: 800;
-    line-height: 1.1;
-    color: #ffffff;
+    line-height: 0.9;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.15em;
+    user-select: none;
+    pointer-events: none;
     letter-spacing: -0.02em;
-    margin: 0;
-    max-width: 20ch;
-    text-align: center;
+    flex-shrink: 0;
+    padding-right: 0.3em;
+  }
+
+  .ticker-separator {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 0.5em;
+    margin: 0 0.2em;
   }
 
   @media (min-width: 1024px) {
-    .footer-huge-text {
-      font-size: 220px;
-      text-align: left;
-    }
-    .footer-huge-right {
-      text-align: right;
-      justify-content: flex-end;
-    }
-    .footer-tagline {
-      text-align: right;
+    .footer-ticker-text {
+      font-size: 180px;
     }
   }
 </style>
