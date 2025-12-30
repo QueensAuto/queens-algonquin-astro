@@ -18,8 +18,7 @@ const description =
             >
             </div>
             <div
-                class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-queens-secondary-medium-dark/5 dark:bg-queens-secondary-medium-dark/10 rounded-full blur-[150px] animate-pulse"
-                style="animation-delay: 1s;"
+                class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-queens-secondary-medium-dark/5 dark:bg-queens-secondary-medium-dark/10 rounded-full blur-[150px] animate-pulse delay-1000"
             >
             </div>
         </div>
@@ -36,7 +35,10 @@ const description =
                     class="font-display text-slate-900 dark:text-white text-6xl md:text-8xl lg:text-9xl font-bold leading-none mb-8"
                 >
                     COMING <br class="hidden sm:block" />
-                    <span class="text-queens-primary">SOON</span>
+                    <span
+                        class="text-queens-primary inline-block relative -webkit-box-reflect-below-[-20px]-gradient"
+                        >SOON</span
+                    >
                 </h1>
 
                 <p
@@ -67,29 +69,3 @@ const description =
         </div>
     </main>
 </BaseLayout>
-
-<style>
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fade-in {
-        animation: fade-in 0.8s ease-out forwards;
-    }
-
-    /* Custom animation for display font letters if needed */
-    h1 span {
-        display: inline-block;
-        position: relative;
-        /* Optional: reflection effect */
-        -webkit-box-reflect: below -20px
-            linear-gradient(transparent, rgba(0, 0, 0, 0.1));
-    }
-</style>

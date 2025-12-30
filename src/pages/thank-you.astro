@@ -28,49 +28,13 @@ const description =
             src="https://www.googletagmanager.com/ns.html?id=GTM-KMB6CG6B"
             height="0"
             width="0"
-            style="display:none;visibility:hidden"></iframe>
+            class="hidden invisible"></iframe>
     </noscript>
 
     <!-- Confetti Script -->
     <script
         src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"
         is:inline></script>
-
-    <style is:global>
-        .btn-gradient {
-            background: linear-gradient(90deg, #22d3ee 0%, #3b82f6 100%);
-        }
-
-        @keyframes gradient-border-anim {
-            0% {
-                border-color: #22d3ee;
-            }
-            50% {
-                border-color: #3b82f6;
-            }
-            100% {
-                border-color: #22d3ee;
-            }
-        }
-        .animated-gradient-border {
-            animation: gradient-border-anim 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse-custom {
-            0%,
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4);
-            }
-            50% {
-                transform: scale(1.02);
-                box-shadow: 0 0 0 10px rgba(34, 211, 238, 0);
-            }
-        }
-        .animate-pulse-slow {
-            animation: pulse-custom 2s infinite;
-        }
-    </style>
 
     <div class="relative z-10 min-h-[80vh] flex flex-col pt-32 pb-20">
         <main class="flex-grow flex items-center">
@@ -108,7 +72,7 @@ const description =
                 <!-- Coupon Container -->
                 <div
                     id="coupon-container"
-                    class="mt-8 p-8 bg-white dark:bg-slate-900 shadow-2xl rounded-3xl animated-gradient-border border-2 border-cyan-400 max-w-md mx-auto hidden relative overflow-hidden"
+                    class="mt-8 p-8 bg-white dark:bg-slate-900 shadow-2xl rounded-3xl border-2 border-cyan-400 max-w-md mx-auto hidden relative overflow-hidden"
                 >
                     <!-- Shimmer bg effect -->
                     <div
@@ -182,8 +146,7 @@ const description =
                 <div class="mt-10">
                     <button
                         id="play-audio-btn"
-                        style="display: none;"
-                        class="animate-pulse-slow inline-flex items-center gap-4 px-10 py-5 btn-gradient text-white text-xl font-bold rounded-full shadow-2xl shadow-cyan-500/40 hover:scale-105 transition-all duration-300 group"
+                        class="animate-pulse inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-cyan-400 to-blue-500 text-white text-xl font-bold rounded-full shadow-2xl shadow-cyan-500/40 hover:scale-105 transition-all duration-300 group hidden"
                     >
                         <div
                             class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors"
@@ -405,7 +368,7 @@ const description =
                         </p>
                         <a
                             href={brand.phone}
-                            class="btn-gradient inline-flex items-center justify-center px-8 py-3 text-white font-bold rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all"
+                            class="bg-gradient-to-r from-cyan-400 to-blue-500 inline-flex items-center justify-center px-8 py-3 text-white font-bold rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all"
                         >
                             {brand.phone}
                         </a>
@@ -523,9 +486,9 @@ const description =
                 if (carYear && carMake && carModel && vehicleInfoEl) {
                     const vehicleString = `${carYear} ${carMake} ${carModel}`;
                     vehicleInfoEl.innerHTML = `Your <strong>${vehicleString}</strong> is all set for its service.`;
-                    vehicleInfoEl.style.display = "block";
+                    vehicleInfoEl.classList.remove("hidden");
                 } else if (vehicleInfoEl) {
-                    vehicleInfoEl.style.display = "none";
+                    vehicleInfoEl.classList.add("hidden");
                 }
 
                 const summaryServiceEl =
@@ -560,7 +523,7 @@ const description =
                 const playBtnText = document.getElementById("play-audio-text");
 
                 if (audioUrl && playBtn) {
-                    playBtn.style.display = "inline-flex";
+                    playBtn.classList.remove("hidden");
                     if (firstName !== "Guest" && playBtnText) {
                         playBtnText.textContent = `Message for ${firstName}`;
                     }
@@ -578,13 +541,13 @@ const description =
                             );
 
                         playBtn.disabled = true;
-                        playBtn.classList.remove("animate-pulse-slow");
+                        playBtn.classList.remove("animate-pulse");
                         if (playBtnText) playBtnText.textContent = "Playing...";
                         audio.addEventListener("ended", () => {
                             if (playBtnText)
                                 playBtnText.textContent = "Play Message Again";
                             playBtn.disabled = false;
-                            playBtn.classList.add("animate-pulse-slow");
+                            playBtn.classList.add("animate-pulse");
                         });
                     };
                 }

@@ -274,10 +274,15 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
     menuBtn.addEventListener("click", toggleMenu);
 
-    // Click outside to close (clicking on the dark overlay area)
-    bgOverlay.addEventListener("click", () => {
-      if (isOpen) closeMenu();
-    });
+    // Click outside to close (handles clicks on both the background and the empty flex container)
+    const handleOutsideClick = (e: any) => {
+      if (isOpen && (e.target === bgOverlay || e.target === contentPanel)) {
+        closeMenu();
+      }
+    };
+
+    bgOverlay.addEventListener("click", handleOutsideClick);
+    contentPanel.addEventListener("click", handleOutsideClick);
 
     // Link clicks - close immediately and navigate
     menu.querySelectorAll("a").forEach((link) => {

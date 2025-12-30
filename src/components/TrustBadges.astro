@@ -1,18 +1,21 @@
 <div class="flex flex-wrap items-center gap-3">
-    <div class="mr-1 text-right">
-        <p class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">
+    <!-- Payment Label -->
+    <div class="mr-1 text-right flex flex-col items-end justify-center">
+        <span
+            class="text-[10px] uppercase font-bold text-gray-400 tracking-wider leading-[0.85] block"
+        >
             Secure Checkout via
-        </p>
-        <p class="text-[12px] font-bold text-white leading-none">
+        </span>
+        <span class="text-[12px] font-bold text-white leading-[0.85] block">
             Stripe Payments
-        </p>
+        </span>
     </div>
+
     <div class="h-6 w-px bg-gray-700 mx-1"></div>
 
     <!-- Visa -->
     <div
-        class="h-8 w-12 bg-white rounded flex items-center justify-center p-1 border border-gray-200"
-        style="background-color: white !important; background-image: none !important; border-color: #e5e7eb !important;"
+        class="h-8 w-12 !bg-white !bg-none rounded flex items-center justify-center p-1 border !border-gray-200"
         title="Visa"
     >
         <svg
@@ -28,8 +31,7 @@
 
     <!-- Mastercard -->
     <div
-        class="h-8 w-12 bg-white rounded flex items-center justify-center p-1 border border-gray-200"
-        style="background-color: white !important; background-image: none !important; border-color: #e5e7eb !important;"
+        class="h-8 w-12 !bg-white !bg-none rounded flex items-center justify-center p-1 border !border-gray-200"
         title="Mastercard"
     >
         <svg viewBox="0 0 32 20" class="w-full h-full">
@@ -43,8 +45,7 @@
 
     <!-- Amex -->
     <div
-        class="h-8 w-12 bg-white rounded flex items-center justify-center p-1 border border-gray-200"
-        style="background-color: white !important; background-image: none !important; border-color: #e5e7eb !important;"
+        class="h-8 w-12 !bg-white !bg-none rounded flex items-center justify-center p-1 border !border-gray-200"
         title="American Express"
     >
         <svg
@@ -59,8 +60,7 @@
 
     <!-- Discover -->
     <div
-        class="h-8 w-12 bg-white rounded flex items-center justify-center p-1 border border-gray-200"
-        style="background-color: white !important; background-image: none !important; border-color: #e5e7eb !important;"
+        class="h-8 w-12 !bg-white !bg-none rounded flex items-center justify-center p-1 border !border-gray-200"
         title="Discover"
     >
         <svg
@@ -98,7 +98,7 @@
                 clip-rule="evenodd"></path>
         </svg>
         <span
-            class="text-[0.65rem] font-bold uppercase tracking-wider leading-none"
+            class="text-[0.65rem] font-bold uppercase tracking-wider leading-[0.85]"
             >SSL<br />Secure</span
         >
     </div>
