@@ -449,6 +449,30 @@ const serviceFaqs = [
                 opacity 0.1s ease-out,
                 transform 0.1s ease-out;
         }
+
+        /* Force prose text colors to prevent blue inheritance */
+        /* Using :global() because standard scoped styles don't reach inside set:html content */
+        .prose :global(p),
+        .prose :global(li),
+        .prose :global(ul),
+        .prose :global(ol) {
+            color: var(--text-secondary) !important;
+        }
+
+        .prose :global(strong),
+        .prose :global(b) {
+            color: var(--text-primary) !important;
+            font-weight: 700;
+        }
+
+        .prose :global(h1),
+        .prose :global(h2),
+        .prose :global(h3),
+        .prose :global(h4),
+        .prose :global(h5),
+        .prose :global(h6) {
+            color: var(--text-primary) !important;
+        }
     </style>
 
     <style>
