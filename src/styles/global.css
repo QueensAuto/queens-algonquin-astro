@@ -1403,25 +1403,11 @@ html {
 }
 
 /* ========================================
-   DEBUG: LAYOUT OVERFLOW TROUBLESHOOTING
+   MOBILE HORIZONTAL OVERFLOW FIX
+   Prevents any content from causing horizontal scroll/shift
    ======================================== */
-section {
-    outline: 2px solid red !important;
-    outline-offset: -2px;
-}
-
-section > div {
-    outline: 1px dashed orange !important;
-}
-
-section > div > div {
-    outline: 1px dotted yellow !important;
-}
-
-/* Force body to show any potential overflow */
+html,
 body {
-    overflow-x: visible !important;
-}
-html {
-    overflow-x: visible !important;
+    overflow-x: hidden !important;
+    max-width: 100vw;
 }

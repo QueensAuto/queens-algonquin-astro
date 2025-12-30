@@ -23,12 +23,15 @@
             lenis.destroy();
         }
 
+        // Check if mobile
+        const isMobile = window.innerWidth < 768;
+
         // Initialize Lenis
         lenis = new Lenis({
             autoRaf: true, // Let Lenis handle its own animation loop for better reliability
             lerp: 0.1,
-            smoothWheel: !isFirefox, // Disable Lenis smoothing on Firefox to use native wheel scroll
-            syncTouch: true,
+            smoothWheel: !isFirefox && !isMobile, // Disable Lenis smoothing on Firefox and mobile
+            syncTouch: false, // Disabled - causes layout shifts on iOS Safari
         });
 
         // Sync ScrollTrigger with Lenis
