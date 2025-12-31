@@ -13,12 +13,21 @@ const firstName = nameParts[0];
 const secondName = nameParts.length > 1 ? nameParts[1] : "";
 ---
 
-<!-- LiftLab-Style Header -->
+<!-- Smart Reveal Header -->
 <div
   id="header-wrapper"
-  class="absolute top-0 left-0 right-0 z-[100] pointer-events-none p-4 md:p-6"
+  class="fixed top-0 left-0 right-0 z-[100] pointer-events-none p-3 md:p-6 transition-all duration-500 ease-premium"
 >
-  <div class="mx-auto max-w-[1400px] flex items-center justify-between">
+  <!-- Glass Background Layer -->
+  <div
+    id="header-glass"
+    class="absolute inset-0 opacity-0 backdrop-blur-xl transition-all duration-500 pointer-events-none border-b border-transparent"
+  >
+  </div>
+
+  <div
+    class="mx-auto max-w-[1400px] w-full flex items-center justify-between relative z-10"
+  >
     <!-- LEFT: Hamburger + Logo (Clean, No Pill) -->
     <div
       id="header-left-section"
@@ -76,7 +85,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       <a
         id="header-phone"
         href={`tel:${brand.phone}`}
-        class="hidden md:flex items-center gap-2 text-queens-secondary dark:text-white transition-colors hover:text-queens-primary"
+        class="nav-phone-link hidden md:flex items-center gap-2 text-queens-secondary dark:text-white transition-colors"
       >
         <span class="text-sm font-black uppercase tracking-[0.15em]"
           >Call {brand.phone}</span
@@ -152,13 +161,77 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
   function setupHeader() {
     const wrapper = document.getElementById("header-wrapper");
+    const glass = document.getElementById("header-glass");
     const menuBtn = document.getElementById("mobile-menu-button");
     const menu = document.getElementById("mobile-menu");
     const bgOverlay = document.getElementById("menu-bg-overlay");
     const contentPanel = document.getElementById("menu-content-panel");
     const hamburgerLines = document.querySelectorAll(".hamburger-line");
 
-    if (!wrapper || !menuBtn || !menu || !bgOverlay || !contentPanel) return;
+    if (!wrapper || !menuBtn || !menu || !bgOverlay || !contentPanel || !glass)
+      return;
+
+    let lastScrollY = window.scrollY;
+    let isHidden = false;
+    let isScrolled = false;
+
+    // --- Scroll Logic (Hide/Show + Glass) ---
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // 1. Manage Glass State
+      if (currentScrollY > 50) {
+        if (!isScrolled) {
+          isScrolled = true;
+          // Apply glass styles
+          glass.classList.add("opacity-100");
+          glass.classList.remove("opacity-0");
+          glass.classList.add(
+            "border-white/5",
+            "bg-white/70",
+            "dark:bg-black/40",
+          );
+          wrapper.classList.remove("p-3", "md:p-6");
+          wrapper.classList.add("p-2", "md:p-4");
+        }
+      } else {
+        if (isScrolled) {
+          isScrolled = false;
+          glass.classList.add("opacity-0");
+          glass.classList.remove("opacity-100");
+          glass.classList.remove(
+            "border-white/5",
+            "bg-white/70",
+            "dark:bg-black/40",
+          );
+          wrapper.classList.add("p-3", "md:p-6");
+          wrapper.classList.remove("p-2", "md:p-4");
+        }
+      }
+
+      // 2. Hide/Show Logic
+      if (currentScrollY > lastScrollY && currentScrollY > 150 && !isOpen) {
+        // Scrolling Down - Hide
+        if (!isHidden) {
+          isHidden = true;
+          gsap.to(wrapper, {
+            yPercent: -100,
+            duration: 0.4,
+            ease: "power2.inOut",
+          });
+        }
+      } else {
+        // Scrolling Up - Show
+        if (isHidden) {
+          isHidden = false;
+          gsap.to(wrapper, { yPercent: 0, duration: 0.5, ease: "power4.out" });
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     let isOpen = false;
     let isAnimating = false;
@@ -345,3 +418,9 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
   document.addEventListener("astro:page-load", setupHeader);
 </script>
+
+<style>
+  .nav-phone-link:hover {
+    color: var(--color-queens-secondary-light) !important;
+  }
+</style>

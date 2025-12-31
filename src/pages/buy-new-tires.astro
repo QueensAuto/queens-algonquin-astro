@@ -62,7 +62,15 @@ import CtaButton from "../components/CtaButton.astro";
   </section>
 
   <!-- Promo Banner -->
-  <section class="promo-banner bg-queens-secondary py-6 md:py-8 promo-anim">
+  <section
+    class="promo-banner relative border-y border-white/5 dark:bg-transparent py-12 md:py-16 promo-anim"
+  >
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-queens-primary/10 blur-[120px] rounded-full"
+      >
+      </div>
+    </div>
     <div class="site-canvas">
       <div
         class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center md:text-left"
@@ -83,11 +91,19 @@ import CtaButton from "../components/CtaButton.astro";
           </svg>
         </div>
         <div>
-          <h2 class="text-xl md:text-2xl font-bold text-white">
-            Get a <span class="line-through opacity-70">FREE</span> Wheel Alignment
+          <h2
+            class="text-2xl md:text-4xl font-display font-black text-queens-primary dark:text-white uppercase tracking-tight"
+          >
+            Get a <span
+              class="text-queens-secondary dark:text-queens-primary italic"
+              >FREE</span
+            > Wheel Alignment
           </h2>
-          <p class="text-white/80 text-sm md:text-base">
-            when you buy a set of 4 new tires. <span class="text-xs opacity-60"
+          <p
+            class="text-gray-500 dark:text-gray-400 text-sm md:text-lg font-medium"
+          >
+            when you buy a set of 4 new tires. <span
+              class="text-xs opacity-50 uppercase tracking-widest ml-2"
               >(Online Offer Only)</span
             >
           </p>
@@ -97,23 +113,38 @@ import CtaButton from "../components/CtaButton.astro";
   </section>
 
   <!-- Tire Search Section -->
-  <section id="tire-search" class="tire-search-section py-16 md:py-24">
-    <div class="site-canvas">
+  <section
+    id="tire-search"
+    class="tire-search-section relative py-20 md:py-32 overflow-hidden"
+  >
+    <!-- Atmospheric Background Glow -->
+    <div class="absolute inset-0 pointer-events-none">
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[700px] bg-queens-primary/5 blur-[160px] rounded-full"
+      >
+      </div>
+    </div>
+    <div class="site-canvas relative z-10">
       <div class="text-center mb-12">
         <h2 class="display-md text-queens-primary dark:text-white mb-4">
           Search by Brand<br />or Tire Size
         </h2>
       </div>
 
-      <div class="max-w-xl mx-auto search-anim">
+      <div class="max-w-7xl mx-auto search-anim">
         <div
-          class="tire-widget-wrapper bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-6 md:p-8 border border-gray-100 dark:border-white/10"
+          class="tire-widget-wrapper bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-white/10"
         >
-          <!-- TireFlow Widget -->
-          <script
-            is:inline
-            src="https://tireflow.ezytire.com/6057/1/Script/Client.js"></script>
-          <div id="tire-flow-responsive-container"></div>
+          <!-- TireConnect Widget -->
+          <script is:inline src="https://app.tireconnect.ca/js/widget.js"
+          ></script>
+          <div id="tireconnect"></div>
+          <script is:inline>
+            TCWidget.init({
+              apikey: "dc18901bfdfcb8ba529d1eeb0c15c278",
+              container: "tireconnect",
+            });
+          </script>
         </div>
       </div>
     </div>
@@ -379,15 +410,11 @@ import CtaButton from "../components/CtaButton.astro";
   }
 
   .tire-search-section {
-    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    background: #f8fafc;
   }
 
   :global(.dark) .tire-search-section {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.02) 0%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
+    background: transparent;
   }
 
   .tire-widget-wrapper {
