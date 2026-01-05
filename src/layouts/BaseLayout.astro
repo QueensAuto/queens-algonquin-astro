@@ -133,6 +133,21 @@ const useServicesHeader =
       }
       // Scroll to top immediately
       window.scrollTo(0, 0);
+
+      // GTM / View Transitions Compatibility
+      // This tells GTM that a "page view" happened even when Astro swaps content
+      document.addEventListener(
+        "astro:page-load",
+        () => {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "page_view",
+            page_path: window.location.pathname,
+            page_title: document.title,
+          });
+        },
+        { once: false },
+      );
     </script>
     <slot name="head" />
   </head>
