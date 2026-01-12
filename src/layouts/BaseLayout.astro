@@ -157,6 +157,19 @@ const useServicesHeader =
               });
             });
           });
+
+          // Banner Click Tracking
+          // This captures any click on an element with data-banner-name and sends it to GTM
+          document.querySelectorAll("[data-banner-name]").forEach((banner) => {
+            banner.addEventListener("click", () => {
+              window.dataLayer.push({
+                event: "banner_click",
+                banner_name: banner.getAttribute("data-banner-name"),
+                banner_url: banner.getAttribute("href"),
+                click_location: document.title,
+              });
+            });
+          });
         },
         { once: false },
       );
