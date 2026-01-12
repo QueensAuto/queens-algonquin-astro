@@ -5,6 +5,7 @@ interface Props {
   class?: string;
   variant?: "standard" | "large";
   reload?: boolean;
+  bannerName?: string;
 }
 
 const {
@@ -13,6 +14,8 @@ const {
   class: className = "",
   variant = "standard",
   reload = false,
+  bannerName,
+  ...rest
 } = Astro.props;
 
 // Class mappings for variants
@@ -51,6 +54,8 @@ const textClasses = {
 <a
   href={href}
   data-astro-reload={reload || undefined}
+  data-banner-name={bannerName}
+  {...rest}
   class:list={[
     "btn-cta-premium group relative inline-flex items-center gap-2 rounded-full px-2 py-1.5 transition-all duration-300 ease-out hover:scale-105 shadow-md",
     className,
@@ -58,20 +63,30 @@ const textClasses = {
 >
   <!-- Text Section with Vertical Scroll -->
   <span class="relative h-5 overflow-hidden pl-4 pr-1">
-    <span class="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
-      <span class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]">
+    <span
+      class="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2"
+    >
+      <span
+        class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]"
+      >
         {text}
       </span>
-      <span class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]">
+      <span
+        class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]"
+      >
         {text}
       </span>
     </span>
   </span>
 
   <!-- Icon Circle Badge with Horizontal Slide -->
-  <div class="badge relative flex items-center justify-center overflow-hidden h-8 w-8 rounded-full">
+  <div
+    class="badge relative flex items-center justify-center overflow-hidden h-8 w-8 rounded-full"
+  >
     <!-- First Arrow -->
-    <div class="flex h-full w-full items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-full">
+    <div
+      class="flex h-full w-full items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-full"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -83,11 +98,13 @@ const textClasses = {
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
       </svg>
     </div>
     <!-- Entering Arrow -->
-    <div class="absolute inset-0 flex items-center justify-center -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0">
+    <div
+      class="absolute inset-0 flex items-center justify-center -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -99,7 +116,7 @@ const textClasses = {
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
       </svg>
     </div>
   </div>
