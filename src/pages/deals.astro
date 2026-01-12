@@ -17,6 +17,7 @@ const deals = [
             "Additional parts or services may be required depending on vehicle condition. Some restrictions may apply. Limited time only.",
         cta: "Book Appointment",
         link: "https://brakes.queensautoservices.com/",
+        trackingClass: "brake-banner-link"
     },
     {
         title: "$35 Alignment",
@@ -27,6 +28,7 @@ const deals = [
             "Most vehicles. Additional adjustments or parts may be extra. Some restrictions may apply. Limited time only.",
         cta: "Book Appointment",
         link: "https://wheel-alignment.queensautoservices.com/",
+        trackingClass: "alignment-banner-link"
     },
     {
         title: "Up To $45 OFF",
@@ -37,6 +39,7 @@ const deals = [
             "Excludes tires and batteries. One coupon per visit. Some restrictions may apply. Limited time only.",
         cta: "Book Appointment",
         link: "https://offer.queensautoservices.com/",
+        trackingClass: "auto-repair-banner-link"
     },
     {
         title: "FREE Alignment",
@@ -115,7 +118,7 @@ const deals = [
                                     <a
                                         href={deal.link}
                                         data-banner-name={`${deal.subtitle}: ${deal.title}`}
-                                        class={`inline-block w-full rounded-full px-6 py-4 text-center text-sm font-bold shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
+                                        class={`${deal.trackingClass || ''} inline-block w-full rounded-full px-6 py-4 text-center text-sm font-bold shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 ${
                                             (index + 1) % 2 === 0 
                                             ? 'bg-white !text-queens-primary hover:bg-gray-100' 
                                             : 'bg-queens-secondary text-white hover:bg-queens-light'
