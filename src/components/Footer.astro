@@ -359,23 +359,21 @@ const { brand } = Astro.props as { brand: BrandConfig };
   }
 
   .footer-premium-link {
-    color: #cbd5e1 !important; /* Premium Silver/Slate */
+    color: #cbd5e1; /* Premium Silver/Slate */
     text-decoration: none;
     transition: all 0.2s ease-in-out;
   }
 
   .footer-premium-link:hover {
-    color: var(
-      --color-queens-secondary-light
-    ) !important; /* Premium subtle blue shade */
+    color: var(--color-queens-secondary-light); /* Premium subtle blue shade */
   }
 
   .hot-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #ff5722 !important; /* Vivid Fire Orange */
-    color: #ffffff !important;
+    background-color: #ff5722; /* Vivid Fire Orange */
+    color: #ffffff;
     font-size: 10px;
     font-weight: 950;
     padding: 2px 6px;
@@ -413,14 +411,14 @@ const { brand } = Astro.props as { brand: BrandConfig };
     height: 2.5rem;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.05);
-    color: #cbd5e1 !important;
+    color: #cbd5e1;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .footer-social-link:hover {
     background: rgba(108, 175, 222, 0.1); /* queens-secondary-light glow bg */
-    color: var(--color-queens-secondary-light) !important;
+    color: var(--color-queens-secondary-light);
     border-color: rgba(108, 175, 222, 0.4);
     transform: translateY(-3px);
   }
