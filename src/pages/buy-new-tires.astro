@@ -61,27 +61,22 @@ import CtaButton from "../components/CtaButton.astro";
     </div>
   </section>
 
-  <!-- Promo Banner -->
-  <section
-    class="promo-banner relative border-y border-white/5 dark:bg-transparent py-12 md:py-16 promo-anim"
-  >
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
-      <div
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-queens-primary/10 blur-[120px] rounded-full"
-      >
-      </div>
-    </div>
+  <!-- Promo Banner: Minimalist Design -->
+  <section class="py-10 md:py-14 promo-anim">
     <div class="site-canvas">
       <div
-        class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center md:text-left"
+        class="flex flex-col md:flex-row items-center justify-center gap-5 md:gap-8 text-center md:text-left bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-6 md:p-8 shadow-sm"
       >
-        <div class="promo-icon float-animation">
+        <!-- Icon -->
+        <div
+          class="w-14 h-14 bg-queens-primary rounded-xl flex items-center justify-center flex-shrink-0"
+        >
           <svg
-            class="w-10 h-10 text-white"
+            class="w-7 h-7 text-white"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            stroke-width="2"
           >
             <path
               stroke-linecap="round"
@@ -90,21 +85,17 @@ import CtaButton from "../components/CtaButton.astro";
             ></path>
           </svg>
         </div>
+        <!-- Text -->
         <div>
           <h2
-            class="text-2xl md:text-4xl font-display font-black text-queens-primary dark:text-white uppercase tracking-tight"
+            class="text-2xl md:text-3xl font-display font-black text-gray-900 dark:text-white uppercase tracking-tight"
           >
-            Get a <span
-              class="text-queens-secondary dark:text-queens-primary italic"
-              >FREE</span
-            > Wheel Alignment
+            Get a <span class="text-queens-primary">FREE</span> Wheel Alignment
           </h2>
-          <p
-            class="text-gray-500 dark:text-gray-400 text-sm md:text-lg font-medium"
-          >
-            when you buy a set of 4 new tires. <span
-              class="text-xs opacity-50 uppercase tracking-widest ml-2"
-              >(Online Offer Only)</span
+          <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mt-1">
+            When you buy a set of 4 new tires. <span
+              class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider"
+              >(Online Only)</span
             >
           </p>
         </div>
@@ -112,10 +103,9 @@ import CtaButton from "../components/CtaButton.astro";
     </div>
   </section>
 
-  <!-- Tire Search Section -->
   <section
     id="tire-search"
-    class="tire-search-section relative py-20 md:py-32 overflow-hidden"
+    class="tire-search-section relative pt-0 pb-20 md:pb-32 overflow-hidden"
   >
     <!-- Atmospheric Background Glow -->
     <div class="absolute inset-0 pointer-events-none">
@@ -125,12 +115,6 @@ import CtaButton from "../components/CtaButton.astro";
       </div>
     </div>
     <div class="site-canvas relative z-10">
-      <div class="text-center mb-12">
-        <h2 class="display-md text-queens-primary dark:text-white mb-4">
-          Search by Brand<br />or Tire Size
-        </h2>
-      </div>
-
       <div class="max-w-7xl mx-auto search-anim">
         <div
           class="tire-widget-wrapper bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-white/10"
