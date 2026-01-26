@@ -3,157 +3,512 @@ const services = [
   {
     title: "Price Per Axle",
     subtitle: "$369 BRAKE SPECIAL",
+    description: "Professional brake pad and rotor inspection with complete brake service. Includes quality parts, labor, and a comprehensive safety check.",
     image: "/images/services/Changing brakes.webp",
     alt: "Professional Brake System Service",
-    accent: "text-queens-primary",
-    link: "https://brakes.queensautoservices.com/"
+    link: "https://brakes.queensautoservices.com/",
+    trackingClass: "brake-banner-link"
   },
   {
     title: "Limited Time Offer",
     subtitle: "$35 OFF ALIGNMENT",
+    description: "Precision 4-wheel alignment using state-of-the-art equipment. Extend tire life and improve fuel efficiency with proper alignment.",
     image: "/images/services/Wheel-Alignment-Algonquin-001.webp",
     alt: "Wheel Alignment Special Offer",
-    accent: "text-queens-primary",
-    link: "https://queensautoservices.com/wheel-alignment/special-offer.htm"
+    link: "https://wheel-alignment.queensautoservices.com/",
+    trackingClass: "alignment-banner-link"
   },
   {
     title: "General Repair",
     subtitle: "$100 OFF SERVICES",
+    description: "Save on engine diagnostics, transmission work, electrical repairs, and more. First-time customers get an extra discount!",
     image: "/images/services/Queens-Auto-Services-Auto-Repair-Slider-007.webp",
     alt: "General Repair Discount",
-    accent: "text-queens-primary",
-    link: "https://offer.queensautoservices.com/"
+    link: "https://offer.queensautoservices.com/",
+    trackingClass: "auto-repair-banner-link"
   }
 ];
 ---
 
-<section id="homepage-deals" class="py-20 overflow-hidden">
-  <div class="site-canvas">
-    <!-- Header -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 items-end">
-      <h2 class="display-xl text-queens-secondary dark:text-white">
-        EXCLUSIVE <br/>
-        <span class="text-queens-primary">SPECIALS</span>
-      </h2>
-      <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed max-w-xl">
-        Take advantage of our limited-time offers! From brake specials to discounts on general repairs, 
-        we have the best deals to keep your vehicle running smoothly for less. 
-        Claim your offer today!
-      </p>
-    </div>
+<section id="homepage-deals" class="deals-section">
+  <div class="deals-pin-wrapper">
+    <div class="deals-container site-canvas">
+      <!-- Sticky Number Column (Left) -->
+      <div class="deals-number-column">
+        <!-- Progress Bar -->
+        <div class="deals-progress-bar">
+          <div class="deals-progress-fill" id="deals-progress-fill"></div>
+        </div>
+        <span class="deals-number" id="deals-active-number">01</span>
+      </div>
 
-    <!-- Cards Grid (BEM Structured via Tailwind utility composition/classes) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {services.map((service) => (
-        <a 
-          href={service.link}
-          class="special-card group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer block"
-        >
-          <!-- Background Image -->
-          <img 
-            src={service.image} 
-            alt={service.alt}
-            class="special-card__image absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          />
-          
-          <!-- Gradient Overlay -->
-          <div class="special-card__overlay absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
-
-          <!-- Content -->
-          <div class="special-card__content absolute bottom-0 left-0 p-8 w-full">
-            <span 
-              class={`special-card__subtitle font-serif italic text-3xl ${service.accent} !mb-0 block leading-tight`}
-              style="font-family: var(--font-serif);"
+      <!-- Slides Container (Right) -->
+      <div class="deals-slides-viewport">
+        <div class="deals-slides-track">
+          {services.map((service, index) => (
+            <div 
+              class={`deals-slide ${index === 0 ? 'active' : ''}`}
+              data-index={index}
             >
-              {service.title}
-            </span>
-            <h3 class="special-card__title display-md text-white !mt-0 !mb-0 group-hover:-translate-y-2 transition-transform duration-500 leading-none">
-              {service.subtitle}
-            </h3>
-          </div>
-        </a>
-      ))}
+              <!-- Text Content -->
+              <div class="deals-slide-content">
+                <span class="deals-slide-eyebrow">
+                  {service.title}
+                </span>
+                <h3 class="deals-slide-title">
+                  {service.subtitle}
+                </h3>
+                <p class="deals-slide-description">
+                  {service.description}
+                </p>
+                <a 
+                  href={service.link}
+                  class={`deals-slide-cta ${service.trackingClass}`}
+                  data-banner-name={service.subtitle}
+                >
+                  <span>Claim Offer</span>
+                  <svg class="cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
+
+              <!-- Image -->
+              <div class="deals-slide-image-wrapper">
+                <img 
+                  src={service.image} 
+                  alt={service.alt}
+                  class="deals-slide-image"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .deals-section {
+    position: relative;
+    background-color: var(--color-page);
+    z-index: 20;
+  }
+
+  .deals-pin-wrapper {
+    min-height: 100vh;
+    background-color: var(--color-page);
+    position: relative;
+    z-index: 20;
+  }
+
+  .deals-container {
+    display: grid;
+    grid-template-columns: min-content 1fr; /* Allow number to dictate width */
+    gap: 4rem;
+    min-height: 100vh;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  @media (max-width: 1023px) {
+    .deals-container {
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .deals-container {
+      grid-template-columns: 1fr;
+      padding-top: 2rem;
+      gap: 1rem;
+    }
+    
+    /* On mobile, keep it in flow but compact */
+    .deals-number-column {
+      position: relative;
+      top: auto;
+      left: auto;
+      margin-bottom: -1rem; /* Tighten up spacing to content */
+      z-index: 10;
+    }
+  }
+
+  /* Number Column */
+  .deals-number-column {
+    display: flex;
+    flex-direction: row; /* Side by side */
+    align-items: center; /* Center vertically */
+    gap: 1.5rem;
+    position: relative;
+    z-index: 50; /* Ensure it stays above slides */
+  }
+
+  .deals-number {
+    font-family: var(--font-display);
+    /* Significantly reduced size */
+    font-size: clamp(4rem, 10vw, 7rem); 
+    font-weight: 900;
+    line-height: 0.85;
+    color: #0f172a;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :global(.dark) .deals-number {
+    color: #f8fafc;
+  }
+
+  /* Progress Bar */
+  .deals-progress-bar {
+    width: 4px;
+    height: 80px;
+    background-color: rgba(203, 213, 225, 0.4);
+    border-radius: 2px;
+    margin-left: 0; /* Removed margin */
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent collapsing on desktop */
+  }
+
+  :global(.dark) .deals-progress-bar {
+    background-color: rgba(71, 85, 105, 0.5);
+  }
+
+  .deals-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background-color: var(--queens-primary);
+    border-radius: 2px;
+    transition: height 0.1s ease-out;
+  }
+
+  /* Slides Viewport */
+  .deals-slides-viewport {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .deals-slides-track {
+    position: relative;
+    min-height: 60vh;
+  }
+
+  /* Individual Slide - CSS-powered smooth transitions */
+  .deals-slide {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 3rem;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1;
+    transition: 
+      opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
+      visibility 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    will-change: opacity;
+  }
+
+  .deals-slide.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 5;
+  }
+
+  @media (max-width: 1023px) {
+    .deals-slide {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .deals-slides-track {
+      min-height: 500px;
+    }
+  }
+
+  /* Slide Content - staggered CSS animations */
+  .deals-slide-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .deals-slide-eyebrow {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--queens-primary);
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: 
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  }
+
+  .deals-slide.active .deals-slide-eyebrow {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .deals-slide-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #0f172a;
+    line-height: 1;
+    margin: 0.5rem 0 1rem;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: 
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s,
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+  }
+
+  .deals-slide.active .deals-slide-title {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  :global(.dark) .deals-slide-title {
+    color: #f8fafc;
+  }
+
+  .deals-slide-description {
+    font-size: 1.125rem;
+    color: #64748b;
+    line-height: 1.7;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: 
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+
+  .deals-slide.active .deals-slide-description {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  :global(.dark) .deals-slide-description {
+    color: #94a3b8;
+  }
+
+  .deals-slide-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--queens-primary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: 
+      opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.25s,
+      transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.25s,
+      gap 0.3s ease;
+  }
+
+  .deals-slide.active .deals-slide-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .deals-slide-cta:hover {
+    gap: 0.75rem;
+  }
+
+  .cta-arrow {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .deals-slide-cta:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Slide Image - smooth entrance */
+  .deals-slide-image-wrapper {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: scale(0.95); /* Removed translateX which caused horizontal overflow */
+    transition: 
+      opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+    will-change: opacity, transform;
+  }
+
+  .deals-slide.active .deals-slide-image-wrapper {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  :global(.dark) .deals-slide-image-wrapper {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  }
+
+  .deals-slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .deals-slide:hover .deals-slide-image {
+    transform: scale(1.05);
+  }
+</style>
+
 
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  // Ensure ScrollTrigger is registered only once per page cycle
   gsap.registerPlugin(ScrollTrigger);
 
-  let serviceCardsCtx: any = null;
+  let dealsCtx: any = null;
+  let currentSlideIndex = 0;
 
-  function initServiceCardsAnimations() {
-    // Revert existing animations if they exist (crucial for View Transitions)
-    if (serviceCardsCtx) serviceCardsCtx.revert();
+  function initDealsSlider() {
+    if (dealsCtx) dealsCtx.revert();
 
-    // Create a scoped GSAP context
-    serviceCardsCtx = gsap.context(() => {
+    dealsCtx = gsap.context(() => {
       const section = document.querySelector("#homepage-deals");
-      if (!section) return;
+      const pinWrapper = document.querySelector(".deals-pin-wrapper");
+      if (!section || !pinWrapper) return;
 
-      // Header Animation
-      const header = section.querySelector(".grid");
-      if (header) {
-        gsap.fromTo(header.children, 
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: header,
-              start: "top 95%",
-              once: true
+      const slides = section.querySelectorAll(".deals-slide") as NodeListOf<HTMLElement>;
+      const numberEl = document.getElementById("deals-active-number");
+      const slideCount = slides.length;
+
+      if (!slides.length) return;
+
+      // Reset current slide index
+      currentSlideIndex = 0;
+
+      // Initialize slides - first is active
+      slides.forEach((slide, i) => {
+        if (i === 0) {
+          slide.classList.add("active");
+        } else {
+          slide.classList.remove("active");
+        }
+      });
+
+      // Calculate total scroll distance (100vh per slide)
+      const totalScrollHeight = window.innerHeight * slideCount;
+
+      // Simple transition function - just toggle classes, CSS handles the rest
+      function transitionToSlide(newIndex: number) {
+        if (newIndex === currentSlideIndex || newIndex < 0 || newIndex >= slideCount) return;
+
+        // Update slides - just toggle active class
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === newIndex);
+        });
+
+        // Update number with a simple fade
+        if (numberEl) {
+          numberEl.style.transition = "opacity 0.2s ease, transform 0.2s ease";
+          numberEl.style.opacity = "0";
+          numberEl.style.transform = "translateY(-10px)";
+          
+          setTimeout(() => {
+            if (numberEl) {
+              numberEl.textContent = String(newIndex + 1).padStart(2, '0');
+              numberEl.style.opacity = "1";
+              numberEl.style.transform = "translateY(0)";
             }
-          }
-        );
+          }, 200);
+        }
+
+        currentSlideIndex = newIndex;
       }
 
-      const cards = section.querySelectorAll(".special-card");
-      cards.forEach((card, index) => {
-        let xOffset = 0;
-        let yOffset = 0;
+      // Get progress bar element
+      const progressFill = document.getElementById("deals-progress-fill");
 
-        if (index === 0) xOffset = -50;
-        else if (index === 1) yOffset = 50;
-        else if (index === 2) xOffset = 50;
+      // Set up the pinned scroll
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: `+=${totalScrollHeight}`,
+        pin: pinWrapper,
+        scrub: 0.8,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const targetIndex = Math.min(
+            Math.floor(progress * slideCount),
+            slideCount - 1
+          );
 
-        gsap.fromTo(card,
-          { x: xOffset, y: yOffset, opacity: 0, scale: 0.95 },
-          {
-            x: 0,
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 95%",
-              once: true
-            }
+          if (targetIndex !== currentSlideIndex) {
+            transitionToSlide(targetIndex);
           }
-        );
+
+          // Update progress bar fill (0% to 100%)
+          if (progressFill) {
+            progressFill.style.height = `${progress * 100}%`;
+          }
+
+          // Calculate progress within the current slide's "zone" (0 to 1)
+          const slideZoneSize = 1 / slideCount;
+          const slideZoneStart = targetIndex * slideZoneSize;
+          const slideProgress = (progress - slideZoneStart) / slideZoneSize;
+          
+          // Clamp to 0-1 range
+          const clampedProgress = Math.max(0, Math.min(1, slideProgress));
+          
+          // Apply subtle shrink effect to the active slide (scale from 1 to 0.92)
+          // This gives visual feedback that scrolling is doing something
+          const activeSlide = slides[targetIndex];
+          if (activeSlide) {
+            const scaleValue = 1 - (clampedProgress * 0.08); // shrinks to 0.92 max
+            const opacityValue = 1 - (clampedProgress * 0.15); // fades slightly to 0.85
+            activeSlide.style.transform = `scale(${scaleValue})`;
+            activeSlide.style.opacity = String(opacityValue);
+          }
+          
+          // Reset transform on other slides
+          slides.forEach((slide, i) => {
+            if (i !== targetIndex) {
+              slide.style.transform = '';
+              slide.style.opacity = '';
+            }
+          });
+        }
       });
+
     });
   }
 
-  // Handle both initial load and subsequent navigations
   document.addEventListener("astro:page-load", () => {
-    // Small timeout to allow other pinned sections (like GSAPNewTires) 
-    // to calculate their heights first, avoiding layout shifts
-    setTimeout(initServiceCardsAnimations, 250);
+    setTimeout(initDealsSlider, 300);
   });
 
-  // Ensure cleanup when leaving the page
   document.addEventListener("astro:before-swap", () => {
-    if (serviceCardsCtx) serviceCardsCtx.revert();
+    if (dealsCtx) dealsCtx.revert();
   });
 </script>
 

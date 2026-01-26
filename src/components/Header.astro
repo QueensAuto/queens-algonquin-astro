@@ -13,15 +13,23 @@ const firstName = nameParts[0];
 const secondName = nameParts.length > 1 ? nameParts[1] : "";
 ---
 
-<!-- LiftLab-Style Header -->
+<!-- Smart Reveal Header -->
 <div
   id="header-wrapper"
-  class="absolute top-0 left-0 right-0 z-[100] pointer-events-none p-4 md:p-6"
+  class="fixed top-0 left-0 right-0 z-[100] pointer-events-none p-3 md:p-6 transition-all duration-500 ease-premium"
 >
-  <div class="mx-auto max-w-[1400px] flex items-center justify-between">
-    
+  <!-- Glass Background Layer -->
+  <div
+    id="header-glass"
+    class="absolute inset-0 opacity-0 backdrop-blur-xl transition-all duration-500 pointer-events-none border-b border-transparent"
+  >
+  </div>
+
+  <div
+    class="mx-auto max-w-[1400px] w-full flex items-center justify-between relative z-10"
+  >
     <!-- LEFT: Hamburger + Logo (Clean, No Pill) -->
-    <div 
+    <div
       id="header-left-section"
       class="pointer-events-auto flex items-center gap-3"
     >
@@ -32,9 +40,15 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
         aria-label="Toggle Menu"
       >
         <div id="hamburger-icon" class="relative w-5 h-3.5">
-          <span class="hamburger-line absolute top-0 left-0 w-full h-0.5 bg-current rounded-full"></span>
-          <span class="hamburger-line absolute top-1/2 left-0 w-full h-0.5 bg-current rounded-full -translate-y-1/2"></span>
-          <span class="hamburger-line absolute bottom-0 left-0 w-full h-0.5 bg-current rounded-full"></span>
+          <span
+            class="hamburger-line absolute top-0 left-0 w-full h-0.5 bg-current rounded-full"
+          ></span>
+          <span
+            class="hamburger-line absolute top-1/2 left-0 w-full h-0.5 bg-current rounded-full -translate-y-1/2"
+          ></span>
+          <span
+            class="hamburger-line absolute bottom-0 left-0 w-full h-0.5 bg-current rounded-full"
+          ></span>
         </div>
       </button>
 
@@ -58,8 +72,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
             </>
           ) : (
             <span class="text-lg font-bold tracking-tighter uppercase text-queens-secondary dark:text-white">
-              {firstName}{" "}
-              <span class="text-queens-primary">{secondName}</span>
+              {firstName} <span class="text-queens-primary">{secondName}</span>
             </span>
           )
         }
@@ -68,14 +81,15 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
     <!-- RIGHT ACTIONS: Phone + CTA + Theme Toggle -->
     <div class="pointer-events-auto flex items-center gap-6 md:gap-8">
-      
       <!-- Phone Number (Desktop Only) -->
-      <a 
+      <a
         id="header-phone"
         href={`tel:${brand.phone}`}
-        class="hidden md:flex items-center gap-2 text-queens-secondary dark:text-white transition-colors hover:text-queens-primary"
+        class="nav-phone-link hidden md:flex items-center gap-2 text-queens-secondary dark:text-white transition-colors"
       >
-        <span class="text-sm font-black uppercase tracking-[0.15em]">Call {brand.phone}</span>
+        <span class="text-sm font-black uppercase tracking-[0.15em]"
+          >Call {brand.phone}</span
+        >
       </a>
 
       <!-- Theme Toggle -->
@@ -90,20 +104,13 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 </div>
 
 <!-- Full Screen Menu Overlay -->
-<div
-  id="mobile-menu"
-  class="fixed inset-0 z-[90] hidden"
-  aria-hidden="true"
->
+<div id="mobile-menu" class="fixed inset-0 z-[90] hidden" aria-hidden="true">
   <!-- Background Image + Dark Overlay -->
-  <div 
-    id="menu-bg-overlay"
-    class="absolute inset-0 opacity-0"
-  >
+  <div id="menu-bg-overlay" class="absolute inset-0 opacity-0">
     <!-- Background Image -->
-    <img 
-      src="/images/services/Hero-mechanic-fixing-car-on-lift-copy.webp" 
-      alt="" 
+    <img
+      src="/images/services/Hero-mechanic-fixing-car-on-lift-copy.webp"
+      alt=""
       class="absolute inset-0 w-full h-full object-cover"
     />
     <!-- Dark Overlay -->
@@ -116,7 +123,9 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     class="absolute inset-0 flex items-center justify-center opacity-0 translate-y-8"
   >
     <!-- Centered Menu Card -->
-    <div class="w-full max-w-2xl mx-6 p-8 md:p-12 rounded-2xl bg-queens-primary shadow-2xl">
+    <div
+      class="w-full max-w-2xl mx-6 p-8 md:p-12 rounded-2xl bg-queens-primary shadow-2xl"
+    >
       <!-- 2-Column Link Grid -->
       <nav class="grid grid-cols-2 gap-x-8 gap-y-6">
         {
@@ -152,13 +161,77 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
   function setupHeader() {
     const wrapper = document.getElementById("header-wrapper");
+    const glass = document.getElementById("header-glass");
     const menuBtn = document.getElementById("mobile-menu-button");
     const menu = document.getElementById("mobile-menu");
     const bgOverlay = document.getElementById("menu-bg-overlay");
     const contentPanel = document.getElementById("menu-content-panel");
     const hamburgerLines = document.querySelectorAll(".hamburger-line");
 
-    if (!wrapper || !menuBtn || !menu || !bgOverlay || !contentPanel) return;
+    if (!wrapper || !menuBtn || !menu || !bgOverlay || !contentPanel || !glass)
+      return;
+
+    let lastScrollY = window.scrollY;
+    let isHidden = false;
+    let isScrolled = false;
+
+    // --- Scroll Logic (Hide/Show + Glass) ---
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // 1. Manage Glass State
+      if (currentScrollY > 50) {
+        if (!isScrolled) {
+          isScrolled = true;
+          // Apply glass styles
+          glass.classList.add("opacity-100");
+          glass.classList.remove("opacity-0");
+          glass.classList.add(
+            "border-white/5",
+            "bg-white/70",
+            "dark:bg-black/40",
+          );
+          wrapper.classList.remove("p-3", "md:p-6");
+          wrapper.classList.add("p-2", "md:p-4");
+        }
+      } else {
+        if (isScrolled) {
+          isScrolled = false;
+          glass.classList.add("opacity-0");
+          glass.classList.remove("opacity-100");
+          glass.classList.remove(
+            "border-white/5",
+            "bg-white/70",
+            "dark:bg-black/40",
+          );
+          wrapper.classList.add("p-3", "md:p-6");
+          wrapper.classList.remove("p-2", "md:p-4");
+        }
+      }
+
+      // 2. Hide/Show Logic
+      if (currentScrollY > lastScrollY && currentScrollY > 150 && !isOpen) {
+        // Scrolling Down - Hide
+        if (!isHidden) {
+          isHidden = true;
+          gsap.to(wrapper, {
+            yPercent: -100,
+            duration: 0.4,
+            ease: "power2.inOut",
+          });
+        }
+      } else {
+        // Scrolling Up - Show
+        if (isHidden) {
+          isHidden = false;
+          gsap.to(wrapper, { yPercent: 0, duration: 0.5, ease: "power4.out" });
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     let isOpen = false;
     let isAnimating = false;
@@ -179,34 +252,61 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       // Swap to white colors
       menuBtn.classList.add("!text-white");
       if (headerPhone) headerPhone.classList.add("!text-white");
-      
+
       // Force white logo visibility
       if (logoColor) logoColor.classList.add("!hidden");
       if (logoWhite) {
-          logoWhite.classList.remove("hidden");
-          logoWhite.classList.add("!block");
+        logoWhite.classList.remove("hidden");
+        logoWhite.classList.add("!block");
       }
 
       const tl = gsap.timeline({
-        onComplete: () => { isAnimating = false; }
+        onComplete: () => {
+          isAnimating = false;
+        },
       });
 
       // Hamburger to X - lines move to center and rotate
-      tl.to(hamburgerLines[0], { rotate: 45, y: 7, transformOrigin: "center center", duration: 0.3, ease: "power2.out" }, 0)
+      tl.to(
+        hamburgerLines[0],
+        {
+          rotate: 45,
+          y: 7,
+          transformOrigin: "center center",
+          duration: 0.3,
+          ease: "power2.out",
+        },
+        0,
+      )
         .to(hamburgerLines[1], { scaleX: 0, opacity: 0, duration: 0.2 }, 0)
-        .to(hamburgerLines[2], { rotate: -45, y: -7, transformOrigin: "center center", duration: 0.3, ease: "power2.out" }, 0);
+        .to(
+          hamburgerLines[2],
+          {
+            rotate: -45,
+            y: -7,
+            transformOrigin: "center center",
+            duration: 0.3,
+            ease: "power2.out",
+          },
+          0,
+        );
 
       // Background fade in
       tl.to(bgOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0);
 
       // Content panel reveal
-      tl.to(contentPanel, { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" }, 0.2);
+      tl.to(
+        contentPanel,
+        { opacity: 1, y: 0, duration: 0.6, ease: "power4.out" },
+        0.2,
+      );
 
       // Stagger menu links
-      tl.fromTo(".menu-link", 
+      tl.fromTo(
+        ".menu-link",
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, stagger: 0.05, duration: 0.4, ease: "power2.out" },
-        0.3
+        0.3,
       );
     };
 
@@ -218,12 +318,12 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       // Restore original colors
       menuBtn.classList.remove("!text-white");
       if (headerPhone) headerPhone.classList.remove("!text-white");
-      
+
       // Restore logo visibility logic
       if (logoColor) logoColor.classList.remove("!hidden");
       if (logoWhite) {
-          logoWhite.classList.add("hidden"); // Reset to default state (let CSS handle it)
-          logoWhite.classList.remove("!block");
+        logoWhite.classList.add("hidden"); // Reset to default state (let CSS handle it)
+        logoWhite.classList.remove("!block");
       }
 
       const tl = gsap.timeline({
@@ -231,22 +331,38 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
           menu.classList.add("hidden");
           document.body.style.overflow = "";
           isAnimating = false;
-        }
+        },
       });
 
       // Menu links fade out
-      tl.to(".menu-link", { opacity: 0, y: -10, stagger: 0.02, duration: 0.2 }, 0);
+      tl.to(
+        ".menu-link",
+        { opacity: 0, y: -10, stagger: 0.02, duration: 0.2 },
+        0,
+      );
 
       // Content panel hide
-      tl.to(contentPanel, { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, 0.1);
+      tl.to(
+        contentPanel,
+        { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" },
+        0.1,
+      );
 
       // Background fade out
       tl.to(bgOverlay, { opacity: 0, duration: 0.4, ease: "power2.in" }, 0.15);
 
       // X back to Hamburger
-      tl.to(hamburgerLines[0], { rotate: 0, y: 0, duration: 0.3, ease: "power2.out" }, 0.2)
+      tl.to(
+        hamburgerLines[0],
+        { rotate: 0, y: 0, duration: 0.3, ease: "power2.out" },
+        0.2,
+      )
         .to(hamburgerLines[1], { scaleX: 1, opacity: 1, duration: 0.2 }, 0.25)
-        .to(hamburgerLines[2], { rotate: 0, y: 0, duration: 0.3, ease: "power2.out" }, 0.2);
+        .to(
+          hamburgerLines[2],
+          { rotate: 0, y: 0, duration: 0.3, ease: "power2.out" },
+          0.2,
+        );
     };
 
     const toggleMenu = () => {
@@ -259,10 +375,15 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
     menuBtn.addEventListener("click", toggleMenu);
 
-    // Click outside to close
-    bgOverlay.addEventListener("click", () => {
-      if (isOpen) closeMenu();
-    });
+    // Click outside to close (Improved: handles clicks on both the background and the empty flex container)
+    const handleOutsideClick = (e: any) => {
+      if (isOpen && (e.target === bgOverlay || e.target === contentPanel)) {
+        closeMenu();
+      }
+    };
+
+    bgOverlay.addEventListener("click", handleOutsideClick);
+    contentPanel.addEventListener("click", handleOutsideClick);
 
     // Link clicks - close immediately
     menu.querySelectorAll("a").forEach((link) => {
@@ -282,14 +403,24 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     });
 
     // Cleanup on page transitions
-    document.addEventListener("astro:before-swap", () => {
-      if (isOpen) {
-        isOpen = false;
-        document.body.style.overflow = "";
-        menu.classList.add("hidden");
-      }
-    }, { once: true });
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        if (isOpen) {
+          isOpen = false;
+          document.body.style.overflow = "";
+          menu.classList.add("hidden");
+        }
+      },
+      { once: true },
+    );
   }
 
   document.addEventListener("astro:page-load", setupHeader);
 </script>
+
+<style>
+  .nav-phone-link:hover {
+    color: var(--color-queens-secondary-light) !important;
+  }
+</style>

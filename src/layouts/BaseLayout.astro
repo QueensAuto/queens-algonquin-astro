@@ -28,12 +28,23 @@ const {
 const brand: BrandConfig = propBrand || mobileTiresBrand;
 
 const currentPath = Astro.url.pathname;
-// Check if we are on a service SUB-PAGE (e.g. /services/brakes)
-// We want to exclude the main archive page (/services) which needs the white header.
+const pathSegments = currentPath.split("/").filter(Boolean);
+
+// Archive is just /services (1 segment)
 const isServicesArchive =
-  currentPath === "/services" || currentPath === "/services/";
+  pathSegments.length === 1 && pathSegments[0] === "services";
+// Category is /services/category (2 segments)
+const isCategoryPage =
+  pathSegments.length === 2 && pathSegments[0] === "services";
+// Sub-page (individual service) is /services/category/service (3 segments)
 const isServiceSubPage =
-  currentPath.startsWith("/services") && !isServicesArchive;
+  pathSegments.length === 3 && pathSegments[0] === "services";
+
+// Force regular header for archive and categories since they use standard bg-page
+const useServicesHeader =
+  (isServiceSubPage || forceDarkHeader) &&
+  !isCategoryPage &&
+  !isServicesArchive;
 ---
 
 <!doctype html>
@@ -55,7 +66,7 @@ const isServiceSubPage =
         j.async = true;
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-W56FDLTF");
+      })(window, document, "script", "dataLayer", "GTM-NJBHC4TP");
     </script>
     <!-- End Google Tag Manager -->
 
@@ -122,6 +133,46 @@ const isServiceSubPage =
       }
       // Scroll to top immediately
       window.scrollTo(0, 0);
+
+      // GTM / View Transitions Compatibility
+      // This tells GTM that a "page view" happened even when Astro swaps content
+      document.addEventListener(
+        "astro:page-load",
+        () => {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "page_view",
+            page_path: window.location.pathname,
+            page_title: document.title,
+          });
+
+          // Phone Click Tracking
+          // This captures any click on a "tel:" link and sends it to GTM
+          document.querySelectorAll('a[href^="tel:"]').forEach((link) => {
+            link.addEventListener("click", () => {
+              window.dataLayer.push({
+                event: "phone_click",
+                phone_number: link.getAttribute("href").replace("tel:", ""),
+                click_location: document.title,
+              });
+            });
+          });
+
+          // Banner Click Tracking
+          // This captures any click on an element with data-banner-name and sends it to GTM
+          document.querySelectorAll("[data-banner-name]").forEach((banner) => {
+            banner.addEventListener("click", () => {
+              window.dataLayer.push({
+                event: "banner_click",
+                banner_name: banner.getAttribute("data-banner-name"),
+                banner_url: banner.getAttribute("href"),
+                click_location: document.title,
+              });
+            });
+          });
+        },
+        { once: false },
+      );
     </script>
     <slot name="head" />
   </head>
@@ -132,7 +183,7 @@ const isServiceSubPage =
     <!-- Google Tag Manager (noscript) -->
     <noscript
       ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-W56FDLTF"
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NJBHC4TP"
         height="0"
         width="0"
         style="display:none;visibility:hidden"></iframe></noscript
@@ -142,7 +193,7 @@ const isServiceSubPage =
     >
 
     {
-      isServiceSubPage || forceDarkHeader ? (
+      useServicesHeader ? (
         <ServicesHeader
           brand={brand}
           inverse={headerInverse || forceDarkHeader}

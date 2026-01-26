@@ -1401,3 +1401,13 @@ html {
 .progress-steps .step.completed span {
     color: var(--queens-primary-inverse);
 }
+
+/* ========================================
+   MOBILE HORIZONTAL OVERFLOW FIX
+   Prevents any content from causing horizontal scroll/shift
+   ======================================== */
+html,
+body {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+}

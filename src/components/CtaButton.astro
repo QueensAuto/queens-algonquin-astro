@@ -6,6 +6,7 @@ interface Props {
   variant?: "standard" | "large";
   theme?: "default" | "solid";
   reload?: boolean;
+  bannerName?: string;
 }
 
 const {
@@ -15,12 +16,16 @@ const {
   variant = "standard",
   theme = "default",
   reload = false,
+  bannerName,
+  ...rest
 } = Astro.props;
 ---
 
 <a
   href={href}
   data-astro-reload={reload || undefined}
+  data-banner-name={bannerName}
+  {...rest}
   class:list={[
     "btn-cta-premium group relative inline-flex items-center gap-2 rounded-full px-2 py-1.5 transition-all duration-300 ease-out hover:scale-105 shadow-md",
     theme === "solid" ? "theme-solid" : "theme-default",

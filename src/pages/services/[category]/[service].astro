@@ -5,7 +5,7 @@ import servicesData from "../../../data/services.json";
 import SmoothReveal from "../../../components/SmoothReveal.astro";
 import CtaButton from "../../../components/CtaButton.astro";
 import CtaButtonSecondary from "../../../components/CtaButtonSecondary.astro";
-import SpeedometerCTA from "../../../components/SpeedometerCTA.astro";
+import InteractiveCTA from "../../../components/InteractiveCTA.astro";
 import FaqAccordion from "../../../components/FaqAccordion.astro";
 
 import { marked } from "marked";
@@ -190,10 +190,11 @@ const serviceFaqs = [
 
                     <!-- Banner 1: Auto Repair -->
                     <a
-                        href="https://queensautoservices.com/auto-repair-landing-page/?banner=sidebar_auto_repair_01"
+                        href="https://offer.queensautoservices.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-white/5"
+                        data-banner-name="Auto Repair Special"
+                        class="auto-repair-banner-link block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-white/5"
                         data-reveal-item
                     >
                         <img
@@ -209,10 +210,11 @@ const serviceFaqs = [
 
                     <!-- Banner 2: Brakes -->
                     <a
-                        href="https://queensautoservices.com/brakes/booking.htm?banner=sidebar_brakes_01"
+                        href="https://brakes.queensautoservices.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-slate-800"
+                        data-banner-name="Brake Service Special"
+                        class="brake-banner-link block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-slate-800"
                         data-reveal-item
                     >
                         <img
@@ -229,10 +231,11 @@ const serviceFaqs = [
 
                     <!-- Banner 3: Alignment -->
                     <a
-                        href="https://queensautoservices.com/wheel-alignment/special-offer.htm?banner=sidebar_alignment_01"
+                        href="https://wheel-alignment.queensautoservices.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-slate-800"
+                        data-banner-name="Wheel Alignment Special"
+                        class="alignment-banner-link block group relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gray-100 dark:bg-slate-800"
                         data-reveal-item
                     >
                         <img
@@ -324,8 +327,8 @@ const serviceFaqs = [
     </div>
 
     <!-- CTA Section with CSS-Only Scroll Reveal (Kevin Powell technique) -->
-    <!-- CTA Section with Speedometer Visual -->
-    <SpeedometerCTA />
+    <!-- CTA Section with Interactive Background Visual -->
+    <InteractiveCTA />
 
     <!-- Include the SmoothReveal animation system -->
     <SmoothReveal />
@@ -448,6 +451,30 @@ const serviceFaqs = [
             transition:
                 opacity 0.1s ease-out,
                 transform 0.1s ease-out;
+        }
+
+        /* Force prose text colors to prevent blue inheritance */
+        /* Using :global() because standard scoped styles don't reach inside set:html content */
+        .prose :global(p),
+        .prose :global(li),
+        .prose :global(ul),
+        .prose :global(ol) {
+            color: var(--text-secondary) !important;
+        }
+
+        .prose :global(strong),
+        .prose :global(b) {
+            color: var(--text-primary) !important;
+            font-weight: 700;
+        }
+
+        .prose :global(h1),
+        .prose :global(h2),
+        .prose :global(h3),
+        .prose :global(h4),
+        .prose :global(h5),
+        .prose :global(h6) {
+            color: var(--text-primary) !important;
         }
     </style>
 

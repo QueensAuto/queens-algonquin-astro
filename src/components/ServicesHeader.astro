@@ -13,18 +13,27 @@ const firstName = nameParts[0];
 const secondName = nameParts.length > 1 ? nameParts[1] : "";
 ---
 
-<!-- ServicesHeader - Forced White/Dark Theme for dark backgrounds -->
+<!-- Smart Reveal ServicesHeader -->
 <div
   id="header-wrapper-services"
-  class="absolute top-0 left-0 right-0 z-[100] pointer-events-none p-4 md:p-6"
+  class="fixed top-0 left-0 right-0 z-[100] pointer-events-none p-3 md:p-6 transition-all duration-500 ease-premium"
 >
-  <div class="mx-auto max-w-[1400px] flex items-center justify-between">
+  <!-- Glass Background Layer -->
+  <div
+    id="header-glass-services"
+    class="absolute inset-0 opacity-0 backdrop-blur-xl transition-all duration-500 pointer-events-none border-b border-transparent"
+  >
+  </div>
+
+  <div
+    class="mx-auto max-w-[1400px] w-full flex items-center justify-between relative z-10"
+  >
     <!-- LEFT: Hamburger + Logo (Clean, No Pill) -->
     <div
       id="header-left-section-services"
       class="pointer-events-auto flex items-center gap-3"
     >
-      <!-- Hamburger Button (Forced White for dark bg) -->
+      <!-- Hamburger Button (Locked White for dark backgrounds) -->
       <button
         id="mobile-menu-button-services"
         class="group flex items-center justify-center w-10 h-10 rounded-full text-white hover:bg-white/10 transition-colors"
@@ -43,7 +52,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
         </div>
       </button>
 
-      <!-- Logo (Forced White Version for dark bg) -->
+      <!-- Logo (Locked White Version for dark backgrounds) -->
       <a href="/" id="header-logo-services" class="flex items-center gap-2">
         {
           brand.logoPathWhite ? (
@@ -65,11 +74,11 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
     <!-- RIGHT ACTIONS: Phone + CTA + Theme Toggle -->
     <div class="pointer-events-auto flex items-center gap-6 md:gap-8">
-      <!-- Phone Number (Desktop Only - Forced White) -->
+      <!-- Phone Number (Locked White for dark backgrounds) -->
       <a
         id="header-phone-services"
         href={`tel:${brand.phone}`}
-        class="hidden md:flex items-center gap-2 text-white transition-colors hover:text-queens-secondary"
+        class="nav-phone-link hidden md:flex items-center gap-2 text-white transition-colors"
       >
         <span class="text-sm font-black uppercase tracking-[0.15em]"
           >Call {brand.phone}</span
@@ -149,6 +158,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
   function setupHeaderServices() {
     const wrapper = document.getElementById("header-wrapper-services");
+    const glass = document.getElementById("header-glass-services");
     const menuBtn = document.getElementById("mobile-menu-button-services");
     const menu = document.getElementById("mobile-menu-services");
     const bgOverlay = document.getElementById("menu-bg-overlay-services");
@@ -157,7 +167,62 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       ".hamburger-line-services",
     );
 
-    if (!wrapper || !menuBtn || !menu || !bgOverlay || !contentPanel) return;
+    if (!wrapper || !menuBtn || !menu || !bgOverlay || !contentPanel || !glass)
+      return;
+
+    let lastScrollY = window.scrollY;
+    let isHidden = false;
+    let isScrolled = false;
+
+    // --- Scroll Logic (Hide/Show + Glass) ---
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // 1. Manage Glass State
+      if (currentScrollY > 50) {
+        if (!isScrolled) {
+          isScrolled = true;
+          // Apply glass styles (Always dark-ish for services header to pop white text)
+          glass.classList.add("opacity-100");
+          glass.classList.remove("opacity-0");
+          glass.classList.add("border-white/10", "bg-black/40");
+          wrapper.classList.remove("p-3", "md:p-6");
+          wrapper.classList.add("p-2", "md:p-4");
+        }
+      } else {
+        if (isScrolled) {
+          isScrolled = false;
+          glass.classList.add("opacity-0");
+          glass.classList.remove("opacity-100");
+          glass.classList.remove("border-white/10", "bg-black/40");
+          wrapper.classList.add("p-3", "md:p-6");
+          wrapper.classList.remove("p-2", "md:p-4");
+        }
+      }
+
+      // 2. Hide/Show Logic
+      if (currentScrollY > lastScrollY && currentScrollY > 150 && !isOpen) {
+        // Scrolling Down - Hide
+        if (!isHidden) {
+          isHidden = true;
+          gsap.to(wrapper, {
+            yPercent: -100,
+            duration: 0.4,
+            ease: "power2.inOut",
+          });
+        }
+      } else {
+        // Scrolling Up - Show
+        if (isHidden) {
+          isHidden = false;
+          gsap.to(wrapper, { yPercent: 0, duration: 0.5, ease: "power4.out" });
+        }
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     let isOpen = false;
     let isAnimating = false;
@@ -274,10 +339,15 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
     menuBtn.addEventListener("click", toggleMenu);
 
-    // Click outside to close (clicking on the dark overlay area)
-    bgOverlay.addEventListener("click", () => {
-      if (isOpen) closeMenu();
-    });
+    // Click outside to close (handles clicks on both the background and the empty flex container)
+    const handleOutsideClick = (e: any) => {
+      if (isOpen && (e.target === bgOverlay || e.target === contentPanel)) {
+        closeMenu();
+      }
+    };
+
+    bgOverlay.addEventListener("click", handleOutsideClick);
+    contentPanel.addEventListener("click", handleOutsideClick);
 
     // Link clicks - close immediately and navigate
     menu.querySelectorAll("a").forEach((link) => {
@@ -312,3 +382,9 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
   document.addEventListener("astro:page-load", setupHeaderServices);
 </script>
+
+<style>
+  .nav-phone-link:hover {
+    color: var(--color-queens-secondary-light) !important;
+  }
+</style>

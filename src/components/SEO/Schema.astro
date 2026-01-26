@@ -46,7 +46,7 @@ const localBusinessSchema = {
         width: "512",
         height: "512",
     },
-    image: `https://${brand.domain}/images/shop/Queens-Auto-Banner-001.webp`,
+    image: `https://${brand.domain}/images/shop/Queens%20Auto%20Algonquin%20-%20Store%20Front.webp`,
     telephone: brand.phone,
     email: brand.email,
     address: {
@@ -59,8 +59,8 @@ const localBusinessSchema = {
     },
     geo: {
         "@type": "GeoCoordinates",
-        latitude: 42.1504838,
-        longitude: -88.2571728,
+        latitude: 42.150482,
+        longitude: -88.2572252,
     },
     hasMap: brand.googleMapsUrl,
     openingHoursSpecification: [
@@ -79,16 +79,18 @@ const localBusinessSchema = {
     ],
     sameAs: [
         "https://www.facebook.com/p/Queens-Auto-Services-Algonquin-100076608098799/",
+        "https://www.instagram.com/queens_auto_/",
+        "https://x.com/queensalgonquin",
     ],
     priceRange: "$$",
     aggregateRating: {
         "@type": "AggregateRating",
-        ratingValue: "4.9",
-        reviewCount: "128",
+        ratingValue: "4.4",
+        reviewCount: "188",
     },
 };
 
-// 2. WebSite Schema (Search Box)
+// 2. WebSite Schema
 const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -97,11 +99,6 @@ const websiteSchema = {
     name: siteName,
     publisher: {
         "@id": `https://${brand.domain}/#organization`,
-    },
-    potentialAction: {
-        "@type": "SearchAction",
-        target: `https://${brand.domain}/search?q={search_term_string}`,
-        "query-input": "required name=search_term_string",
     },
 };
 

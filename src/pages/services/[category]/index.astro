@@ -2,6 +2,8 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { mobileTiresBrand } from "../../../brands";
 import servicesData from "../../../data/services.json";
+import SmoothReveal from "../../../components/SmoothReveal.astro";
+import InteractiveCTA from "../../../components/InteractiveCTA.astro";
 
 export async function getStaticPaths() {
     return servicesData.map((category) => ({
@@ -11,58 +13,122 @@ export async function getStaticPaths() {
 }
 
 const { category } = Astro.props;
-const title = `${category.title} | Queens Mobile Tires`;
+const title = `${category.title} | Queens Auto Service Algonquin`;
 const description = category.description;
 ---
 
 <BaseLayout brand={mobileTiresBrand} title={title}>
-    <div class="py-24 sm:py-32">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center">
-                <p
-                    class="text-base font-semibold leading-7 text-indigo-600 dark:text-indigo-400"
-                >
-                    Services
-                </p>
-                <h2
-                    class="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
-                >
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 overflow-hidden bg-page">
+        <!-- Background Accents (Blurred Blobs for smooth, organic feel) -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div
+                class="absolute top-[-10%] -right-[10%] w-[500px] h-[500px] bg-queens-primary/10 dark:bg-queens-primary/20 rounded-full blur-[120px]"
+            >
+            </div>
+            <div
+                class="absolute bottom-[-10%] -left-[10%] w-[400px] h-[400px] bg-queens-primary/5 dark:bg-queens-primary/10 rounded-full blur-[100px]"
+            >
+            </div>
+            
+            <!-- Bottom Seamless Blend Mask (Refined for 100% seamless transition) -->
+            <div class="absolute inset-x-0 bottom-0 h-full bg-gradient-to-t from-[var(--bg-page)] from-15% via-[var(--bg-page)]/60 to-transparent"></div>
+        </div>
+        
+        <div class="site-canvas relative z-10" data-reveal>
+            <div class="max-w-3xl">
+                <nav class="flex mb-8" aria-label="Breadcrumb" data-reveal-item>
+                    <ol class="flex items-center space-x-2 text-sm font-medium text-gray-500 dark:text-white/50">
+                        <li>
+                            <a href="/" class="hover:text-queens-primary transition-colors">Home</a>
+                        </li>
+                        <li>
+                            <svg class="h-5 w-5 flex-shrink-0 text-gray-300 dark:text-white/20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M7.21 14.71a.75.75 0 010-1.06L10.64 10 7.21 6.56a.75.75 0 011.06-1.06l4 4a.75.75 0 010 1.06l-4 4a.75.75 0 01-1.06 0z" clip-rule="evenodd" />
+                            </svg>
+                        </li>
+                        <li>
+                            <a href="/services" class="hover:text-queens-primary transition-colors">Services</a>
+                        </li>
+                        <li>
+                            <svg class="h-5 w-5 flex-shrink-0 text-gray-300 dark:text-white/20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M7.21 14.71a.75.75 0 010-1.06L10.64 10 7.21 6.56a.75.75 0 011.06-1.06l4 4a.75.75 0 010 1.06l-4 4a.75.75 0 01-1.06 0z" clip-rule="evenodd" />
+                            </svg>
+                        </li>
+                        <li class="text-queens-primary font-bold">{category.title}</li>
+                    </ol>
+                </nav>
+
+                <h1 class="text-[clamp(2.5rem,8vw,5rem)] leading-[0.95] text-queens-secondary dark:text-white mb-6 uppercase tracking-tight font-black underline-offset-8" data-reveal-item>
                     {category.title}
-                </h2>
-                <p
-                    class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300"
-                >
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-white/70 leading-relaxed font-light italic" data-reveal-item>
                     {description}
                 </p>
             </div>
-            <div
-                class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:max-w-none lg:grid-cols-3"
-            >
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-24 bg-page">
+        <div class="site-canvas" data-reveal>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {
-                    category.services.map((service) => (
+                    category.services.map((service, index) => (
                         <a
                             href={`/services/${category.slug}/${service.slug}/`}
-                            class="flex flex-col gap-y-4 rounded-2xl bg-white dark:bg-white/5 p-6 shadow-lg hover:shadow-xl transition-shadow ring-1 ring-gray-200 dark:ring-white/10"
+                            class="group relative flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-queens-primary/10 glow-beam-hover overflow-hidden h-full"
+                            style={`--reveal-delay: ${index * 0.1}s`}
+                            data-reveal-item
                         >
-                            <h3 class="text-xl font-semibold leading-7 tracking-tight text-gray-900 dark:text-white">
-                                {service.title}
-                            </h3>
-                            <div class="text-sm font-semibold leading-6 text-indigo-600 dark:text-indigo-400 mt-auto">
-                                Learn More{" "}
-                                <span aria-hidden="true">&rarr;</span>
+                            <div class="relative z-10">
+                                <h3 class="text-2xl font-display font-bold text-gray-900 dark:text-white group-hover:text-queens-primary transition-colors mb-4 uppercase italic">
+                                    {service.title}
+                                </h3>
+                                
+                                <!-- Decorative Line -->
+                                <div class="w-12 h-1 bg-queens-primary/30 group-hover:w-full transition-all duration-500 mb-6 rounded-full"></div>
+                                
+                                <p class="text-gray-600 dark:text-white/60 line-clamp-3 mb-8 text-base leading-relaxed">
+                                    {service.pitch || "Expert automotive service you can trust. Meticulous care for your vehicle's longevity and performance."}
+                                </p>
+                            </div>
+
+                            <div class="relative z-10 flex items-center text-sm font-black uppercase tracking-widest text-queens-primary">
+                                <span class="group-hover:mr-2 transition-all">Explore Service</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform translate-x-0 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </div>
+
+                            <!-- Subtle Glowing Beam -->
+                            <div class="absolute bottom-0 left-0 w-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-700">
+                                <div class="glow-beam-sm h-1 opacity-50"></div>
                             </div>
                         </a>
                     ))
                 }
             </div>
-            <div class="mt-10 flex justify-center">
+
+            <!-- Bottom Navigation -->
+            <div class="mt-20 flex justify-center" data-reveal-item>
                 <a
-                    href="/services/"
-                    class="text-sm font-semibold leading-6 text-gray-900 dark:text-white"
+                    href="/services"
+                    class="group flex items-center gap-3 px-8 py-4 rounded-full border border-gray-200 dark:border-white/10 text-gray-600 dark:text-white/60 font-bold uppercase tracking-widest text-xs hover:bg-queens-primary hover:text-white hover:border-queens-primary transition-all duration-300"
                 >
-                    <span aria-hidden="true">&larr;</span> Back to all services
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                    </svg>
+                    Back to All Services
                 </a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Appointment CTA -->
+    <InteractiveCTA />
+
+    <!-- Animation Engine -->
+    <SmoothReveal />
 </BaseLayout>
