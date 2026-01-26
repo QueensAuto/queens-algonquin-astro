@@ -124,10 +124,23 @@ import CtaButton from "../components/CtaButton.astro";
           ></script>
           <div id="tireconnect"></div>
           <script is:inline>
-            TCWidget.init({
-              apikey: "dc18901bfdfcb8ba529d1eeb0c15c278",
-              container: "tireconnect",
-            });
+            function initTireWidget() {
+              if (window.TCWidget) {
+                TCWidget.init({
+                  apikey: "dc18901bfdfcb8ba529d1eeb0c15c278",
+                  container: "tireconnect",
+                });
+              }
+            }
+
+            // Run immediately
+            initTireWidget();
+
+            // Fallback for when script might load after this inline block
+            window.addEventListener("load", initTireWidget);
+
+            // Astro specific fallback
+            document.addEventListener("astro:page-load", initTireWidget);
           </script>
         </div>
       </div>
