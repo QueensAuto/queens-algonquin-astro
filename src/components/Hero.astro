@@ -2,7 +2,6 @@
 import type { BrandConfig } from "../brands";
 import { mobileTiresBrand } from "../brands";
 import CtaButton from "./CtaButton.astro";
-import CtaButtonSecondary from "./CtaButtonSecondary.astro";
 
 const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
@@ -57,7 +56,7 @@ const avatars = [
 
         <div class="flex flex-wrap gap-5 mb-14">
           <CtaButton href="/request-an-appointment" text="Book Appointment" />
-          <CtaButtonSecondary href="#homepage-deals" text="See Our Deals" />
+          <CtaButton href="/buy-new-tires" text="Buy New Tires" theme="solid" />
         </div>
 
         <div

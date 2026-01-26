@@ -4,6 +4,7 @@ interface Props {
   text?: string;
   class?: string;
   variant?: "standard" | "large";
+  theme?: "default" | "solid";
   reload?: boolean;
 }
 
@@ -12,40 +13,9 @@ const {
   text = "Get in touch",
   class: className = "",
   variant = "standard",
+  theme = "default",
   reload = false,
 } = Astro.props;
-
-// Class mappings for variants
-const containerClasses = {
-  standard: "gap-2 p-1 pr-5",
-  large: "gap-6 p-1.5 pr-8 hover:scale-[1.02] shadow-lg",
-};
-
-const circleClasses = {
-  standard: "left-1 top-1 bottom-1 w-8 group-hover:w-[calc(100%-0.5rem)]",
-  large:
-    "left-1.5 top-1.5 bottom-1.5 aspect-square group-hover:w-[calc(100%-0.75rem)]",
-};
-
-const iconWrapperClasses = {
-  standard: "h-8 w-8",
-  large: "h-10 w-10 sm:h-12 sm:w-12",
-};
-
-const iconClasses = {
-  standard: "h-4 w-4",
-  large: "h-5 w-5 stroke-[2.5px] group-hover:translate-x-1",
-};
-
-const textWrapperClasses = {
-  standard: "",
-  large: "py-4",
-};
-
-const textClasses = {
-  standard: "text-sm font-bold",
-  large: "text-xs sm:text-sm font-black uppercase tracking-[0.15em]",
-};
 ---
 
 <a
@@ -53,25 +23,36 @@ const textClasses = {
   data-astro-reload={reload || undefined}
   class:list={[
     "btn-cta-premium group relative inline-flex items-center gap-2 rounded-full px-2 py-1.5 transition-all duration-300 ease-out hover:scale-105 shadow-md",
+    theme === "solid" ? "theme-solid" : "theme-default",
     className,
   ]}
 >
   <!-- Text Section with Vertical Scroll -->
   <span class="relative h-5 overflow-hidden pl-4 pr-1">
-    <span class="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
-      <span class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]">
+    <span
+      class="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2"
+    >
+      <span
+        class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]"
+      >
         {text}
       </span>
-      <span class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]">
+      <span
+        class="btn-text flex h-5 items-center whitespace-nowrap text-sm font-black uppercase tracking-[0.15em]"
+      >
         {text}
       </span>
     </span>
   </span>
 
   <!-- Icon Circle Badge with Horizontal Slide -->
-  <div class="badge relative flex items-center justify-center overflow-hidden h-8 w-8 rounded-full">
+  <div
+    class="badge relative flex items-center justify-center overflow-hidden h-8 w-8 rounded-full"
+  >
     <!-- First Arrow -->
-    <div class="flex h-full w-full items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-full">
+    <div
+      class="flex h-full w-full items-center justify-center transition-transform duration-500 ease-out group-hover:translate-x-full"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -83,11 +64,13 @@ const textClasses = {
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
       </svg>
     </div>
     <!-- Entering Arrow -->
-    <div class="absolute inset-0 flex items-center justify-center -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0">
+    <div
+      class="absolute inset-0 flex items-center justify-center -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -99,38 +82,70 @@ const textClasses = {
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
       </svg>
     </div>
   </div>
 </a>
 
 <style>
-  /* Light Mode (Default) */
-  .btn-cta-premium {
+  /* ========================================
+     DEFAULT THEME (White BG, Blue Text)
+     ======================================== */
+  .theme-default {
     background-color: #ffffff !important;
   }
-  .btn-cta-premium .btn-text {
+  .theme-default .btn-text {
     color: var(--color-queens-primary) !important;
   }
-  .btn-cta-premium .badge {
+  .theme-default .badge {
     background-color: var(--color-queens-primary) !important;
   }
-  .btn-cta-premium .btn-icon {
+  .theme-default .btn-icon {
     color: #ffffff !important;
   }
 
-  /* Dark Mode */
-  :global(.dark) .btn-cta-premium {
+  /* Dark Mode Default (Blue BG, White Text) */
+  :global(.dark) .theme-default {
     background-color: var(--color-queens-primary) !important;
   }
-  :global(.dark) .btn-cta-premium .btn-text {
+  :global(.dark) .theme-default .btn-text {
     color: #ffffff !important;
   }
-  :global(.dark) .btn-cta-premium .badge {
+  :global(.dark) .theme-default .badge {
     background-color: #0b1121 !important; /* Queens Navy */
   }
-  :global(.dark) .btn-cta-premium .btn-icon {
+  :global(.dark) .theme-default .btn-icon {
+    color: #ffffff !important;
+  }
+
+  /* ========================================
+     SOLID THEME (Reverse of Default)
+     ======================================== */
+  .theme-solid {
+    background-color: var(--color-queens-primary) !important;
+  }
+  .theme-solid .btn-text {
+    color: #ffffff !important;
+  }
+  .theme-solid .badge {
+    background-color: #ffffff !important;
+  }
+  .theme-solid .btn-icon {
+    color: var(--color-queens-primary) !important;
+  }
+
+  /* Dark Mode Solid (White BG, Blue Text) */
+  :global(.dark) .theme-solid {
+    background-color: #ffffff !important;
+  }
+  :global(.dark) .theme-solid .btn-text {
+    color: var(--color-queens-primary) !important;
+  }
+  :global(.dark) .theme-solid .badge {
+    background-color: var(--color-queens-primary) !important;
+  }
+  :global(.dark) .theme-solid .btn-icon {
     color: #ffffff !important;
   }
 </style>
