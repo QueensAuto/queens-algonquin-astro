@@ -17,84 +17,88 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 <!-- Smart Reveal ServicesHeader -->
 <div
   id="header-wrapper-services"
-  class="fixed top-0 left-0 right-0 z-[100] pointer-events-none p-3 md:p-6 transition-all duration-500 ease-premium"
+  class="fixed top-0 left-0 right-0 z-[100] pointer-events-none transition-all duration-500 ease-premium flex flex-col"
 >
-  <AnnouncementBar
-    class="relative z-[101] w-screen left-1/2 -translate-x-1/2 -mt-3 mb-3 md:-mt-6 md:mb-6 pointer-events-auto"
-  />
-  <!-- Glass Background Layer -->
-  <div
-    id="header-glass-services"
-    class="absolute inset-0 opacity-0 backdrop-blur-xl transition-all duration-500 pointer-events-none border-b border-transparent"
-  >
-  </div>
+  <AnnouncementBar class="relative z-[101] w-full pointer-events-auto" />
 
   <div
-    class="mx-auto max-w-[1400px] w-full flex items-center justify-between relative z-10"
+    id="header-inner-services"
+    class="w-full p-3 md:p-6 transition-all duration-500 ease-premium pointer-events-none"
   >
-    <!-- LEFT: Hamburger + Logo (Clean, No Pill) -->
+    <!-- Glass Background Layer -->
     <div
-      id="header-left-section-services"
-      class="pointer-events-auto flex items-center gap-3"
+      id="header-glass-services"
+      class="absolute inset-0 opacity-0 backdrop-blur-xl transition-all duration-500 pointer-events-none border-b border-transparent"
     >
-      <!-- Hamburger Button (Locked White for dark backgrounds) -->
-      <button
-        id="mobile-menu-button-services"
-        class="group flex items-center justify-center w-10 h-10 rounded-full text-white hover:bg-white/10 transition-colors"
-        aria-label="Toggle Menu"
-      >
-        <div id="hamburger-icon-services" class="relative w-5 h-3.5">
-          <span
-            class="hamburger-line-services absolute top-0 left-0 w-full h-0.5 bg-current rounded-full"
-          ></span>
-          <span
-            class="hamburger-line-services absolute top-1/2 left-0 w-full h-0.5 bg-current rounded-full -translate-y-1/2"
-          ></span>
-          <span
-            class="hamburger-line-services absolute bottom-0 left-0 w-full h-0.5 bg-current rounded-full"
-          ></span>
-        </div>
-      </button>
-
-      <!-- Logo (Locked White Version for dark backgrounds) -->
-      <a href="/" id="header-logo-services" class="flex items-center gap-2">
-        {
-          brand.logoPathWhite ? (
-            <img
-              id="logo-white-services"
-              src={brand.logoPathWhite}
-              alt={brand.name}
-              class="h-7 md:h-8 w-auto object-contain block"
-            />
-          ) : (
-            <span class="text-lg font-bold tracking-tighter uppercase text-white">
-              {firstName}{" "}
-              <span class="text-queens-secondary">{secondName}</span>
-            </span>
-          )
-        }
-      </a>
     </div>
 
-    <!-- RIGHT ACTIONS: Phone + CTA + Theme Toggle -->
-    <div class="pointer-events-auto flex items-center gap-6 md:gap-8">
-      <!-- Phone Number (Locked White for dark backgrounds) -->
-      <a
-        id="header-phone-services"
-        href={`tel:${brand.phone}`}
-        class="nav-phone-link hidden md:flex items-center gap-2 text-white transition-colors"
+    <div
+      class="mx-auto max-w-[1400px] w-full flex items-center justify-between relative z-10"
+    >
+      <!-- LEFT: Hamburger + Logo (Clean, No Pill) -->
+      <div
+        id="header-left-section-services"
+        class="pointer-events-auto flex items-center gap-3"
       >
-        <span class="text-sm font-black uppercase tracking-[0.15em]"
-          >Call {brand.phone}</span
+        <!-- Hamburger Button (Locked White for dark backgrounds) -->
+        <button
+          id="mobile-menu-button-services"
+          class="group flex items-center justify-center w-10 h-10 rounded-full text-white hover:bg-white/10 transition-colors"
+          aria-label="Toggle Menu"
         >
-      </a>
+          <div id="hamburger-icon-services" class="relative w-5 h-3.5">
+            <span
+              class="hamburger-line-services absolute top-0 left-0 w-full h-0.5 bg-current rounded-full"
+            ></span>
+            <span
+              class="hamburger-line-services absolute top-1/2 left-0 w-full h-0.5 bg-current rounded-full -translate-y-1/2"
+            ></span>
+            <span
+              class="hamburger-line-services absolute bottom-0 left-0 w-full h-0.5 bg-current rounded-full"
+            ></span>
+          </div>
+        </button>
 
-      <!-- Theme Toggle (Inverse forced for visibility) -->
-      <ThemeToggle inverse={true} />
+        <!-- Logo (Locked White Version for dark backgrounds) -->
+        <a href="/" id="header-logo-services" class="flex items-center gap-2">
+          {
+            brand.logoPathWhite ? (
+              <img
+                id="logo-white-services"
+                src={brand.logoPathWhite}
+                alt={brand.name}
+                class="h-7 md:h-8 w-auto object-contain block"
+              />
+            ) : (
+              <span class="text-lg font-bold tracking-tighter uppercase text-white">
+                {firstName}{" "}
+                <span class="text-queens-secondary">{secondName}</span>
+              </span>
+            )
+          }
+        </a>
+      </div>
 
-      <!-- CTA Button (Desktop Only) -->
-      <div class="hidden md:block">
-        <CtaButton href="/request-an-appointment" text="Book Now" />
+      <!-- RIGHT ACTIONS: Phone + CTA + Theme Toggle -->
+      <div class="pointer-events-auto flex items-center gap-6 md:gap-8">
+        <!-- Phone Number (Locked White for dark backgrounds) -->
+        <a
+          id="header-phone-services"
+          href={`tel:${brand.phone}`}
+          class="nav-phone-link hidden md:flex items-center gap-2 text-white transition-colors"
+        >
+          <span class="text-sm font-black uppercase tracking-[0.15em]"
+            >Call {brand.phone}</span
+          >
+        </a>
+
+        <!-- Theme Toggle (Inverse forced for visibility) -->
+        <ThemeToggle inverse={true} />
+
+        <!-- CTA Button (Desktop Only) -->
+        <div class="hidden md:block">
+          <CtaButton href="/request-an-appointment" text="Book Now" />
+        </div>
       </div>
     </div>
   </div>
@@ -162,6 +166,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
   function setupHeaderServices() {
     const wrapper = document.getElementById("header-wrapper-services");
+    const inner = document.getElementById("header-inner-services");
     const glass = document.getElementById("header-glass-services");
     const menuBtn = document.getElementById("mobile-menu-button-services");
     const menu = document.getElementById("mobile-menu-services");
@@ -190,8 +195,10 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
           glass.classList.add("opacity-100");
           glass.classList.remove("opacity-0");
           glass.classList.add("border-white/10", "bg-black/40");
-          wrapper.classList.remove("p-3", "md:p-6");
-          wrapper.classList.add("p-2", "md:p-4");
+          if (inner) {
+            inner.classList.remove("p-3", "md:p-6");
+            inner.classList.add("p-2", "md:p-4");
+          }
         }
       } else {
         if (isScrolled) {
@@ -199,8 +206,10 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
           glass.classList.add("opacity-0");
           glass.classList.remove("opacity-100");
           glass.classList.remove("border-white/10", "bg-black/40");
-          wrapper.classList.add("p-3", "md:p-6");
-          wrapper.classList.remove("p-2", "md:p-4");
+          if (inner) {
+            inner.classList.add("p-3", "md:p-6");
+            inner.classList.remove("p-2", "md:p-4");
+          }
         }
       }
 
@@ -219,7 +228,11 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
         // Scrolling Up - Show
         if (isHidden) {
           isHidden = false;
-          gsap.to(wrapper, { yPercent: 0, duration: 0.5, ease: "power4.out" });
+          gsap.to(wrapper, {
+            yPercent: 0,
+            duration: 0.5,
+            ease: "power4.out",
+          });
         }
       }
 
@@ -284,7 +297,13 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       tl.fromTo(
         ".menu-link-services",
         { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, stagger: 0.05, duration: 0.4, ease: "power2.out" },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.05,
+          duration: 0.4,
+          ease: "power2.out",
+        },
         0.3,
       );
     };
