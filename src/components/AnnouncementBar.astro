@@ -10,20 +10,20 @@ const {
 
 <div
     id="AnnouncementBarWrapper"
-    class:list={["announcement-bar-wrapper w-full", className]}
-    data-state="hidden"
+    class:list={["w-full overflow-hidden h-0", className]}
+    style="height: 0;"
 >
     <div
         id="AnnouncementBar"
-        class="relative w-full bg-[#FFFBEB] dark:bg-[#2D2A1F] border-b border-yellow-200/50 dark:border-yellow-900/30 overflow-hidden"
+        class="relative w-full !bg-amber-50 border-b border-yellow-200/50"
     >
-        <div class="w-full px-4 py-1 sm:px-6 lg:px-8 relative">
+        <div class="w-full px-4 py-1.5 sm:px-6 lg:px-8 relative">
             <div
                 class="flex flex-row items-center justify-center gap-2 sm:gap-4 text-center pr-8"
             >
                 <div class="flex items-center gap-2">
                     <p
-                        class="text-xs sm:text-sm font-medium text-yellow-900 dark:text-yellow-100 tracking-wide"
+                        class="text-sm font-medium !text-yellow-900 tracking-wide"
                     >
                         <span class="hidden sm:inline">{message}</span>
                         <span class="inline sm:hidden">{mobileMessage}</span>
@@ -33,17 +33,17 @@ const {
                 <a
                     href={href}
                     data-astro-reload
-                    class="group inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-yellow-900 dark:text-yellow-100 hover:text-queens-secondary transition-colors duration-200"
+                    class="group inline-flex items-center gap-1.5 text-sm font-bold !text-yellow-900 hover:!text-yellow-700 transition-colors duration-200"
                 >
                     <span class="hidden sm:inline">
                         {ctaText}
                     </span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-3.5 w-3.5 transform group-hover:translate-x-0.5 transition-transform"
+                        class="h-4 w-4 arrow-pulse"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="currentColor"
+                        stroke="#0a79c8"
                         stroke-width="2.5"
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -59,7 +59,7 @@ const {
                 id="AnnouncementBarClose"
                 type="button"
                 aria-label="Close announcement"
-                class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-yellow-800/60 hover:text-yellow-900 hover:bg-yellow-200/50 dark:text-yellow-200/60 dark:hover:text-yellow-100 dark:hover:bg-yellow-800/30 transition-colors duration-200"
+                class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-yellow-800/60 hover:text-yellow-900 hover:bg-yellow-200/50 transition-colors duration-200"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -86,77 +86,33 @@ const {
 </div>
 
 <style>
-    .announcement-bar-wrapper {
-        display: grid;
-        grid-template-rows: 0fr;
-        opacity: 0;
-        z-index: 100;
-        overflow: hidden;
-        margin-bottom: 0 !important; /* Force 0 margin when hidden */
-        transition:
-            grid-template-rows 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-            opacity 0.6s ease-out,
-            margin-bottom 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    @keyframes pulse-arrow {
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(4px);
+        }
     }
 
-    .announcement-bar-wrapper[data-state="visible"] {
-        grid-template-rows: 1fr;
-        opacity: 1;
-        margin-bottom: var(
-            --initial-mb,
-            0
-        ); /* Restore margin handled by JS/inline style if needed, or rely on class removal of !important if handled via cascade - but !important override is tricky. Cleaner to use specific selector or let the class apply */
-    }
-
-    /* Better approach: Scope the margin reset to the attribute selector without !important if possible, 
-       but utility classes usually have high specificity. Let's use specific specificity hack or just !important and toggle it. 
-       Actually, standard classes like 'mb-3' are just single class selectors. 
-       Attribute selector [data-state="hidden"] has same specificity as class? No, equal.
-       So if I define margin-bottom: 0 in the css, and it appears AFTER tailwind, it wins.
-    */
-
-    .announcement-bar-wrapper:where(
-        [data-state="hidden"],
-        [data-state="closing"]
-    ) {
-        margin-bottom: 0 !important;
-    }
-
-    /* Inner container needs min-height 0 for grid transition to work */
-    #AnnouncementBar {
-        min-height: 0;
+    .arrow-pulse {
+        animation: pulse-arrow 2s ease-in-out infinite;
     }
 </style>
 
 <script>
+    import { gsap } from "gsap";
+
     function initAnnouncementBar() {
         const wrapper = document.getElementById("AnnouncementBarWrapper");
+        const bar = document.getElementById("AnnouncementBar");
         const closeBtn = document.getElementById("AnnouncementBarClose");
         const headerWrapper =
             document.getElementById("header-wrapper") ||
             document.getElementById("header-wrapper-services");
 
-        if (!wrapper) return;
-
-        // Function to update header position based on announcement bar
-        function updateHeaderPosition(barVisible: boolean) {
-            if (!headerWrapper) return;
-
-            // If the bar is INSIDE the header wrapper, do NOT manually set top.
-            // It will naturally push content down in the flex container.
-            if (headerWrapper.contains(wrapper)) return;
-
-            if (barVisible) {
-                // Get the actual height of the announcement bar
-                const barElement = wrapper?.querySelector(
-                    "#AnnouncementBar",
-                ) as HTMLElement | null;
-                const barHeight = barElement?.offsetHeight || 0;
-                headerWrapper.style.top = barHeight + "px";
-            } else {
-                headerWrapper.style.top = "0px";
-            }
-        }
+        if (!wrapper || !bar) return;
 
         // Check for cookie
         const isDismissed = document.cookie
@@ -168,38 +124,67 @@ const {
             return;
         }
 
-        // Show the bar after 3 seconds
-        setTimeout(() => {
-            wrapper.setAttribute("data-state", "visible");
-            // Wait for animation to complete, then update header position
-            setTimeout(() => {
-                updateHeaderPosition(true);
-            }, 50);
-        }, 3000);
+        // Open function
+        const openBar = () => {
+            // Get the exact height
+            const height = bar.offsetHeight;
 
-        // Close button handler
-        if (closeBtn) {
-            closeBtn.addEventListener("click", () => {
-                wrapper.setAttribute("data-state", "closing");
-                updateHeaderPosition(false);
-
-                // Set cookie for 7 days
-                const date = new Date();
-                date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-                document.cookie =
-                    "announcement-dismissed=true; expires=" +
-                    date.toUTCString() +
-                    "; path=/";
-
-                // Remove from DOM after animation completes (match CSS duration)
-                setTimeout(() => {
-                    wrapper.style.display = "none";
-                }, 800);
+            const tl = gsap.timeline({
+                defaults: { ease: "power4.out", duration: 1.2 },
             });
+
+            tl.to(wrapper!, { height: height }); // Animate bar height
+
+            // Sync header wrapper if it exists and is not parent
+            if (headerWrapper && !headerWrapper.contains(wrapper)) {
+                tl.to(headerWrapper, { top: height }, "<");
+            }
+        };
+
+        // Close function
+        const closeBar = () => {
+            const tl = gsap.timeline({
+                defaults: { ease: "power4.out", duration: 1.2 },
+                onComplete: () => {
+                    wrapper!.style.display = "none";
+                },
+            });
+
+            tl.to(wrapper!, { height: 0 });
+
+            // Sync header wrapper
+            if (headerWrapper && !headerWrapper.contains(wrapper)) {
+                tl.to(headerWrapper, { top: 0 }, "<");
+            }
+
+            // Set cookie
+            const date = new Date();
+            date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
+            document.cookie =
+                "announcement-dismissed=true; expires=" +
+                date.toUTCString() +
+                "; path=/";
+        };
+
+        // Auto-open after delay
+        setTimeout(() => {
+            openBar();
+        }, 1000);
+
+        // Event Listeners
+        if (closeBtn) {
+            closeBtn.addEventListener("click", closeBar);
         }
+
+        // Handle Resize to adjust height assignment if needed
+        window.addEventListener("resize", () => {
+            if (wrapper.offsetHeight > 0) {
+                gsap.set(wrapper, { height: "auto" });
+            }
+        });
     }
 
-    // Initialize on page load and after view transitions
+    // Initialize
     initAnnouncementBar();
     document.addEventListener("astro:page-load", initAnnouncementBar);
 </script>
