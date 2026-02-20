@@ -37,6 +37,36 @@ const siteName = brand.name;
 const isHomepage =
     Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
 
+// 0. BreadcrumbList Schema (Global - auto-generated from URL)
+const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const breadcrumbItems = [
+    {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `https://${brand.domain}/`,
+    },
+];
+pathSegments.forEach((segment: string, index: number) => {
+    const segmentName = segment
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (c: string) => c.toUpperCase());
+    const segmentPath = "/" + pathSegments.slice(0, index + 1).join("/");
+    breadcrumbItems.push({
+        "@type": "ListItem",
+        position: index + 2,
+        name: segmentName,
+        item: `https://${brand.domain}${segmentPath}`,
+    });
+});
+const breadcrumbSchema = !isHomepage
+    ? {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: breadcrumbItems,
+      }
+    : null;
+
 // 1. Organization Schema (Globally establishing E-E-A-T)
 const organizationSchema = {
     "@context": "https://schema.org",
@@ -218,6 +248,14 @@ if (reviewData && reviewData.length > 0) {
     set:html={JSON.stringify(organizationSchema)}
 />
 <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{
+    breadcrumbSchema && (
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(breadcrumbSchema)}
+        />
+    )
+}
 
 {/* Conditional Schemas */}
 {

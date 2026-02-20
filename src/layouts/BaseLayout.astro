@@ -20,6 +20,7 @@ const {
   headerInverse = false,
   serviceData,
   faqData,
+  reviewData,
   forceDarkTheme = false,
   forceDarkHeader = false,
 } = Astro.props;
@@ -97,6 +98,7 @@ const useServicesHeader =
       description={description}
       serviceData={serviceData}
       faqData={faqData}
+      reviewData={reviewData}
     />
     <ViewTransitions />
     <script is:inline define:vars={{ forceDarkTheme }}>
