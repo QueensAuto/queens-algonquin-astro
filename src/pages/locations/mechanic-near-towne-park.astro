@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaButton from "../../components/CtaButton.astro";
+---
+
+<BaseLayout title="Mechanic Near Towne Park Algonquin | Queens Auto Services">
+    <section class="pt-32 pb-16 md:pt-40 md:pb-20 lg:pb-24 overflow-hidden">
+        <div class="site-canvas">
+            <div class="max-w-3xl mx-auto text-center">
+                <!-- Breadcrumbs -->
+                <nav
+                    class="text-sm font-medium text-gray-500 mb-6"
+                    aria-label="Breadcrumb"
+                >
+                    <ol class="inline-flex items-center space-x-2 md:space-x-3">
+                        <li class="inline-flex items-center">
+                            <a
+                                href="/"
+                                class="hover:text-amber-600 transition-colors"
+                                >Home</a
+                            >
+                        </li>
+                        <li aria-current="page">
+                            <div class="flex items-center">
+                                <span class="mx-2">/</span>
+                                <span class="text-gray-900 dark:text-white"
+                                    >Towne Park</span
+                                >
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+
+                <h1
+                    class="display-hero-page text-queens-primary dark:text-white mb-6"
+                >
+                    <span class="text-queens-secondary"
+                        >Local Mechanic Near</span
+                    > Towne Park Algonquin
+                </h1>
+                <p
+                    class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+                >
+                    Queens Auto Services is your trusted neighborhood mechanic,
+                    located just down the street from historic Towne Park in
+                    downtown Algonquin. Enjoy the park while we fix your car!
+                </p>
+                <CtaButton
+                    href="/request-an-appointment"
+                    text="Schedule Your Visit"
+                />
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-900/50">
+        <div class="site-canvas">
+            <div
+                class="bg-white dark:bg-gray-800 p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 max-w-4xl mx-auto text-center"
+            >
+                <h2
+                    class="text-3xl font-black mb-6 text-gray-900 dark:text-white"
+                >
+                    Community First Auto Repair
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">
+                    Whether you are attending the summer concerts at Towne Park,
+                    taking a walk along the Fox River, or running errands in
+                    historic downtown Algonquin, you need a mechanic you can
+                    trust nearby.
+                </p>
+                <p class="text-gray-700 dark:text-gray-300 mb-8">
+                    We handle everything from check engine light diagnostics and
+                    suspension repairs to exhaust work and routine fluid
+                    exchanges. Our goal is to provide Algonquin residents with
+                    dealership-quality service at neighborhood prices.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a
+                        href="/mechanic-algonquin"
+                        class="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white font-bold rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                        >View All Services</a
+                    >
+                    <a
+                        href="/contact"
+                        class="px-6 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition-colors"
+                        >Get Directions</a
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

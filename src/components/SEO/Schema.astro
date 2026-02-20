@@ -2,8 +2,10 @@
 /**
  * Schema.astro
  * Centralized JSON-LD Schema Generator for Queens Auto Service
+ * Implements Advanced Nested Schema Tactics (Caleb Ulku Strategy)
  */
 import type { BrandConfig } from "../../brands/types";
+import allServicesData from "../../data/services.json";
 
 interface Props {
     brand: BrandConfig;
@@ -32,11 +34,13 @@ const {
 
 const canonicalUrl = url || `https://${brand.domain}${Astro.url.pathname}`;
 const siteName = brand.name;
+const isHomepage =
+    Astro.url.pathname === "/" || Astro.url.pathname === "/index.html";
 
-// 1. Base Organization / LocalBusiness Schema
-const localBusinessSchema = {
+// 1. Organization Schema (Globally establishing E-E-A-T)
+const organizationSchema = {
     "@context": "https://schema.org",
-    "@type": "AutoRepair",
+    "@type": "Organization",
     "@id": `https://${brand.domain}/#organization`,
     name: brand.name,
     url: `https://${brand.domain}`,
@@ -46,48 +50,11 @@ const localBusinessSchema = {
         width: "512",
         height: "512",
     },
-    image: `https://${brand.domain}/images/shop/Queens%20Auto%20Algonquin%20-%20Store%20Front.webp`,
-    telephone: brand.phone,
-    email: brand.email,
-    address: {
-        "@type": "PostalAddress",
-        streetAddress: "2401 E Algonquin Rd",
-        addressLocality: "Algonquin",
-        addressRegion: "IL",
-        postalCode: "60102",
-        addressCountry: "US",
-    },
-    geo: {
-        "@type": "GeoCoordinates",
-        latitude: 42.150482,
-        longitude: -88.2572252,
-    },
-    hasMap: brand.googleMapsUrl,
-    openingHoursSpecification: [
-        {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            opens: "07:30",
-            closes: "18:00",
-        },
-        {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: "Saturday",
-            opens: "07:30",
-            closes: "16:00",
-        },
-    ],
     sameAs: [
         "https://www.facebook.com/p/Queens-Auto-Services-Algonquin-100076608098799/",
         "https://www.instagram.com/queens_auto_/",
         "https://x.com/queensalgonquin",
     ],
-    priceRange: "$$",
-    aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.4",
-        reviewCount: "188",
-    },
 };
 
 // 2. WebSite Schema
@@ -102,9 +69,87 @@ const websiteSchema = {
     },
 };
 
-// 3. Service Schema (For individual service pages)
+// 3. LocalBusiness Schema (HOMEPAGE ONLY - Nested Hack)
+let localBusinessSchema = null;
+if (isHomepage) {
+    // Dynamically build Nested Services from services.json
+    const homepageServices: any[] = [];
+    allServicesData.forEach((category: any) => {
+        category.services.forEach((service: any) => {
+            homepageServices.push({
+                "@type": "Offer",
+                itemOffered: {
+                    "@type": "Service",
+                    name: service.title,
+                    description: service.shortTitle || service.title,
+                    url: `https://${brand.domain}/services/${category.slug}/${service.slug}`,
+                },
+            });
+        });
+    });
+
+    localBusinessSchema = {
+        "@context": "https://schema.org",
+        "@type": "AutoRepair",
+        "@id": `https://${brand.domain}/#localbusiness`,
+        name: brand.name,
+        url: `https://${brand.domain}`,
+        logo: {
+            "@id": `https://${brand.domain}/#organization`,
+        },
+        image: `https://${brand.domain}/images/shop/Queens%20Auto%20Algonquin%20-%20Store%20Front.webp`,
+        telephone: brand.phone,
+        email: brand.email,
+        address: {
+            "@type": "PostalAddress",
+            streetAddress: "2401 E Algonquin Rd",
+            addressLocality: "Algonquin",
+            addressRegion: "IL",
+            postalCode: "60102",
+            addressCountry: "US",
+        },
+        geo: {
+            "@type": "GeoCoordinates",
+            latitude: 42.150482,
+            longitude: -88.2572252,
+        },
+        hasMap: brand.googleMapsUrl,
+        openingHoursSpecification: [
+            {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                ],
+                opens: "07:30",
+                closes: "18:00",
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: "Saturday",
+                opens: "07:30",
+                closes: "16:00",
+            },
+        ],
+        priceRange: "$$",
+        aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.4",
+            reviewCount: "188",
+        },
+        makesOffer: homepageServices,
+        parentOrganization: {
+            "@id": `https://${brand.domain}/#organization`,
+        },
+    };
+}
+
+// 4. Service Schema (For individual service pages)
 let serviceSchema = null;
-if (serviceData) {
+if (serviceData && !isHomepage) {
     serviceSchema = {
         "@context": "https://schema.org",
         "@type": "Service",
@@ -126,7 +171,7 @@ if (serviceData) {
     };
 }
 
-// 4. FAQ Schema
+// 5. FAQ Schema
 let faqSchema = null;
 if (faqData) {
     faqSchema = {
@@ -142,7 +187,8 @@ if (faqData) {
         })),
     };
 }
-// 5. Review Schema
+
+// 6. Review Schema
 let reviewSchema = null;
 if (reviewData && reviewData.length > 0) {
     reviewSchema = reviewData.map((review: any) => ({
@@ -171,11 +217,19 @@ if (reviewData && reviewData.length > 0) {
 {/* Inject Global Schemas on Every Page */}
 <script
     type="application/ld+json"
-    set:html={JSON.stringify(localBusinessSchema)}
+    set:html={JSON.stringify(organizationSchema)}
 />
 <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
 {/* Conditional Schemas */}
+{
+    isHomepage && localBusinessSchema && (
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(localBusinessSchema)}
+        />
+    )
+}
 {
     serviceSchema && (
         <script

@@ -108,11 +108,84 @@ const serviceFaqs = [
                     >
                         <!-- Title Section -->
                         <div class="max-w-2xl">
-                            <h3
+                            <nav
+                                class="flex mb-6 animate-fade-up"
+                                aria-label="Breadcrumb"
+                            >
+                                <ol
+                                    class="flex items-center space-x-2 text-sm font-medium text-white/70 overflow-x-auto whitespace-nowrap pb-2 md:pb-0 hide-scrollbar"
+                                >
+                                    <li>
+                                        <a
+                                            href="/"
+                                            class="hover:text-queens-primary transition-colors"
+                                            >Home</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <svg
+                                            class="h-4 w-4 flex-shrink-0 text-white/30"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M7.21 14.71a.75.75 0 010-1.06L10.64 10 7.21 6.56a.75.75 0 011.06-1.06l4 4a.75.75 0 010 1.06l-4 4a.75.75 0 01-1.06 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="/services"
+                                            class="hover:text-queens-primary transition-colors"
+                                            >Services</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <svg
+                                            class="h-4 w-4 flex-shrink-0 text-white/30"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M7.21 14.71a.75.75 0 010-1.06L10.64 10 7.21 6.56a.75.75 0 011.06-1.06l4 4a.75.75 0 010 1.06l-4 4a.75.75 0 01-1.06 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href={`/services/${category.slug}`}
+                                            class="hover:text-queens-primary transition-colors"
+                                            >{category.title}</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <svg
+                                            class="h-4 w-4 flex-shrink-0 text-white/30"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M7.21 14.71a.75.75 0 010-1.06L10.64 10 7.21 6.56a.75.75 0 011.06-1.06l4 4a.75.75 0 010 1.06l-4 4a.75.75 0 01-1.06 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </li>
+                                    <li class="text-white font-bold">
+                                        {service.title}
+                                    </li>
+                                </ol>
+                            </nav>
+                            <h1
                                 class="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-md animate-fade-up"
                             >
                                 {service.shortTitle || service.title}
-                            </h3>
+                                <span
+                                    class="block text-queens-primary text-2xl md:text-3xl mt-2"
+                                    >in Algonquin, IL</span
+                                >
+                            </h1>
                         </div>
 
                         <!-- Description Section (Right aligned on desktop) -->

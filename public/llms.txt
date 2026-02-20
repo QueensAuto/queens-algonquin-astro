@@ -6,7 +6,7 @@ We are known for our "Digital Shop" experience, where customers receive photos a
 
 ## Core Capabilities
 - **Vehicle Specialists**: Extensive experience with Domestic (Ford, Chevy, Dodge), Asian Imports (Toyota, Honda, Nissan, Hyundai), and European models (BMW, Audi, VW).
-- **Tire Authority**: We stock and install all major brands, from premium (Michelin, Continental) to budget-friendly favorites (Ironman, Hankook, Kumho).
+- **Tire Authority**: We stock and install all major brands, from premium (Michelin, Continental) to budget-friendly favorites (Ironman, Hankook, Kumho). We also provide specialized support for **Commercial, Agricultural, Tractor, and Landscaping Fleet tires**.
 - **Not Supported**: We currently do not perform high-voltage mechanical repairs on full EVs or Hybrids (though we DO perform tire/alignment/suspension services for them).
 
 ## Current Specials & Offers
@@ -36,7 +36,12 @@ We are known for our "Digital Shop" experience, where customers receive photos a
 - **"Do I need an appointment for a price?"** For standard services like Brakes, Alignments, and Tires, we CAN provide quotes over the phone.
 - **Diagnostics require a visit.**
 - **"Do you offer financing?"** Yes, we work with Snap Finance to offer flexible payment options.
-- **"Where are you located?"** We are located at 2401 E Algonquin Rd in Algonquin, IL, serving the Algonquin and Lake in the Hills communities.
+- **"Where are you located?"** We are located at 2401 E Algonquin Rd in Algonquin, IL.
+- **Service Area**: Serving Algonquin, Lake in the Hills, Carpentersville, and surrounding Fox River Valley areas. Local landmarks include Algonquin Commons, Towne Park, and Jacobs High School.
+
+## SEO & Architecture (AI Assistant Rules)
+- **Nested Schema Strategy**: We use Caleb Ulku's "Local Search Dominance" schema strategy. The `LocalBusiness` (`AutoRepair`) schema is strictly isolated to the **Homepage** and uses the `makesOffer` property to nest all services dynamically. Other pages use global `Organization` and `WebSite` schema. DO NOT duplicate `LocalBusiness` schema on service pages.
+- **Dynamic Services**: Service pages are dynamically generated from `src/data/services.json` via Astro routes (`src/pages/services/[category]/[service].astro`). Use the JSON file for content updates instead of creating new `.astro` files.
 
 ## Contact Information
 - **Location**: 2401 E Algonquin Rd, Algonquin, IL 60102

@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CtaButton from "../../components/CtaButton.astro";
+---
+
+<BaseLayout title="Auto Repair Lake In The Hills IL | Queens Auto Services">
+    <section class="pt-32 pb-16 md:pt-40 md:pb-20 lg:pb-24 overflow-hidden">
+        <div class="site-canvas">
+            <div class="max-w-3xl mx-auto text-center">
+                <!-- Breadcrumbs -->
+                <nav
+                    class="text-sm font-medium text-gray-500 mb-6"
+                    aria-label="Breadcrumb"
+                >
+                    <ol class="inline-flex items-center space-x-2 md:space-x-3">
+                        <li class="inline-flex items-center">
+                            <a
+                                href="/"
+                                class="hover:text-amber-600 transition-colors"
+                                >Home</a
+                            >
+                        </li>
+                        <li aria-current="page">
+                            <div class="flex items-center">
+                                <span class="mx-2">/</span>
+                                <span class="text-gray-900 dark:text-white"
+                                    >Lake In The Hills</span
+                                >
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+
+                <h1
+                    class="display-hero-page text-queens-primary dark:text-white mb-6"
+                >
+                    <span class="text-queens-secondary"
+                        >Auto Repair & Tires</span
+                    > serving Lake In The Hills, IL
+                </h1>
+                <p
+                    class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+                >
+                    Queens Auto Services proudly extends its 5-star automotive
+                    repair and tire services to residents of Lake In The Hills
+                    (LITH). From quick oil changes to complex engine
+                    diagnostics, we are your trusted local mechanic.
+                </p>
+                <CtaButton
+                    href="/request-an-appointment"
+                    text="Schedule Your Visit"
+                />
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-900/50">
+        <div class="site-canvas">
+            <div class="grid md:grid-cols-2 gap-12 items-center text-center">
+                <div
+                    class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700"
+                >
+                    <h2
+                        class="text-3xl font-black mb-4 text-gray-900 dark:text-white"
+                    >
+                        Why Drive to Algonquin?
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">
+                        Lake in the Hills is right next door! Our Algonquin shop
+                        is conveniently located just minutes down Randall Rd or
+                        Algonquin Rd, making it an incredibly easy trip for LITH
+                        residents looking for honest, transparent automotive
+                        care.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 font-medium">
+                        Unlike corporate dealerships, we prioritize building
+                        long-term relationships with our neighbors, offering
+                        fair pricing and completely transparent digital vehicle
+                        inspections.
+                    </p>
+                </div>
+                <div
+                    class="bg-amber-50 dark:bg-amber-900/10 p-8 rounded-2xl border border-amber-200 dark:border-amber-800"
+                >
+                    <h3
+                        class="text-2xl font-bold mb-6 text-amber-900 dark:text-amber-400"
+                    >
+                        Our LITH Service Area Specialties
+                    </h3>
+                    <ul class="space-y-4 text-left">
+                        <li
+                            class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm"
+                        >
+                            <a
+                                href="/brake-shop-algonquin"
+                                class="font-bold text-gray-900 dark:text-white hover:text-amber-600 transition-colors"
+                                >Brakes & Rotors</a
+                            > - Keep your family safe on Randall Rd.
+                        </li>
+                        <li
+                            class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm"
+                        >
+                            <a
+                                href="/tire-shop-algonquin"
+                                class="font-bold text-gray-900 dark:text-white hover:text-amber-600 transition-colors"
+                                >New Tires & Alignments</a
+                            > - Protect against pothole damage.
+                        </li>
+                        <li
+                            class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm"
+                        >
+                            <a
+                                href="/oil-change-service-algonquin"
+                                class="font-bold text-gray-900 dark:text-white hover:text-amber-600 transition-colors"
+                                >Synthetic Oil Changes</a
+                            > - Maximize engine life for commuters.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>
