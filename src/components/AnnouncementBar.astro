@@ -131,6 +131,9 @@ const {
 
             const tl = gsap.timeline({
                 defaults: { ease: "power4.out", duration: 1.2 },
+                onComplete: () => {
+                    wrapper!.style.height = "auto";
+                },
             });
 
             tl.to(wrapper!, { height: height }); // Animate bar height
@@ -139,6 +142,9 @@ const {
             if (headerWrapper && !headerWrapper.contains(wrapper)) {
                 tl.to(headerWrapper, { top: height }, "<");
             }
+
+            // Push the entire page down
+            tl.to(document.body, { paddingTop: height }, "<");
         };
 
         // Close function
@@ -156,6 +162,9 @@ const {
             if (headerWrapper && !headerWrapper.contains(wrapper)) {
                 tl.to(headerWrapper, { top: 0 }, "<");
             }
+
+            // Pull the page back up
+            tl.to(document.body, { paddingTop: 0 }, "<");
 
             // Set cookie
             const date = new Date();
@@ -180,6 +189,7 @@ const {
         window.addEventListener("resize", () => {
             if (wrapper.offsetHeight > 0) {
                 gsap.set(wrapper, { height: "auto" });
+                gsap.set(document.body, { paddingTop: wrapper.offsetHeight });
             }
         });
     }
