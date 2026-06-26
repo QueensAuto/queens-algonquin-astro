@@ -136,6 +136,14 @@ const useServicesHeader =
       // Scroll to top immediately
       window.scrollTo(0, 0);
 
+      // Force full reload for /buy-new-tires (bypassing Astro transitions)
+      document.addEventListener("astro:before-preparation", (ev) => {
+        if (ev.to.pathname === "/buy-new-tires" || ev.to.pathname === "/buy-new-tires/") {
+          ev.preventDefault();
+          window.location.href = ev.to.href;
+        }
+      });
+
       // GTM / View Transitions Compatibility
       // This tells GTM that a "page view" happened even when Astro swaps content
       document.addEventListener(
