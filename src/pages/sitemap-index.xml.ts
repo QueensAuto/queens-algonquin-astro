@@ -7,6 +7,7 @@ const pages = [
     { url: '', priority: 1.0, changefreq: 'daily' },
     { url: 'about', priority: 0.8, changefreq: 'monthly' },
     { url: 'contact', priority: 0.8, changefreq: 'monthly' },
+    { url: 'request-an-appointment', priority: 0.9, changefreq: 'weekly' },
     { url: 'services', priority: 0.9, changefreq: 'weekly' },
     { url: 'deals', priority: 0.9, changefreq: 'daily' },
     { url: 'faq', priority: 0.7, changefreq: 'monthly' },
