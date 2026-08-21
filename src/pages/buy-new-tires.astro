@@ -22,13 +22,15 @@ import CtaButton from "../components/CtaButton.astro";
           <p
             class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg leading-relaxed hero-anim"
           >
-            Buy tires online and get them installed at our <strong
-              >local tire shop</strong
-            >. We have a great selection of new tires from the most popular
-            brands.
+            Get new tires from the brands you trust, installed right here at
+            our <strong>local tire shop</strong>. Call us and we'll find the
+            perfect tires for your vehicle and budget.
           </p>
           <div class="hero-anim">
-            <CtaButton href="#tire-search" text="Shop For Tires Now" />
+            <CtaButton
+              href="tel:+18478441700"
+              text="Call (847) 844-1700"
+            />
           </div>
         </div>
 
@@ -93,10 +95,7 @@ import CtaButton from "../components/CtaButton.astro";
             Get a <span class="text-queens-primary">FREE</span> Wheel Alignment
           </h2>
           <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg mt-1">
-            When you buy a set of 4 new tires. <span
-              class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider"
-              >(Online Only)</span
-            >
+            When you buy a set of 4 new tires.
           </p>
         </div>
       </div>
@@ -115,33 +114,47 @@ import CtaButton from "../components/CtaButton.astro";
       </div>
     </div>
     <div class="site-canvas relative z-10">
-      <div class="max-w-7xl mx-auto search-anim">
+      <div class="max-w-4xl mx-auto search-anim">
         <div
-          class="tire-widget-wrapper bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-white/10"
+          class="tire-widget-wrapper bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-white/10 p-8 md:p-12 text-center"
         >
-          <!-- TireConnect Widget -->
-          <script is:inline src="https://app.tireconnect.ca/js/widget.js"
-          ></script>
-          <div id="tireconnect"></div>
-          <script is:inline>
-            function initTireWidget() {
-              if (window.TCWidget) {
-                TCWidget.init({
-                  apikey: "dc18901bfdfcb8ba529d1eeb0c15c278",
-                  container: "tireconnect",
-                });
-              }
-            }
-
-            // Run immediately
-            initTireWidget();
-
-            // Fallback for when script might load after this inline block
-            window.addEventListener("load", initTireWidget);
-
-            // Astro specific fallback
-            document.addEventListener("astro:page-load", initTireWidget);
-          </script>
+          <div
+            class="w-16 h-16 mx-auto bg-queens-primary rounded-2xl flex items-center justify-center mb-6"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="display-md text-queens-primary dark:text-white mb-4">
+            Ready For New Tires? Give Us A Call.
+          </h2>
+          <p
+            class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto leading-relaxed mb-8"
+          >
+            Tell us your vehicle or tire size and we'll match you with the right
+            tires from brands like Michelin, Goodyear, Bridgestone, and more —
+            at a fair price, with expert installation included.
+          </p>
+          <CtaButton
+            href="tel:+18478441700"
+            text="Call (847) 844-1700"
+            theme="solid"
+            variant="large"
+          />
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-6">
+            Fast quotes. Honest pricing. Tires installed by our expert
+            mechanics in Algonquin.
+          </p>
         </div>
       </div>
     </div>
@@ -183,9 +196,10 @@ import CtaButton from "../components/CtaButton.astro";
               ></path>
             </svg>
           </div>
-          <h3 class="process-title">Select a local tire shop</h3>
+          <h3 class="process-title">Call the shop</h3>
           <p class="process-desc">
-            Choose a tire shop from our network of dealers.
+            Give us a ring or stop by — we'll talk through your vehicle, driving
+            needs, and budget.
           </p>
         </div>
 
@@ -210,8 +224,8 @@ import CtaButton from "../components/CtaButton.astro";
           </div>
           <h3 class="process-title">Find The Right Tires</h3>
           <p class="process-desc">
-            Easily search for new tires online and select a store to see price
-            and install.
+            We'll match you with the best tire options for your vehicle and get
+            you an out-the-door price.
           </p>
         </div>
 
@@ -234,10 +248,10 @@ import CtaButton from "../components/CtaButton.astro";
               ></path>
             </svg>
           </div>
-          <h3 class="process-title">Order your tires Online</h3>
+          <h3 class="process-title">Order Your Tires</h3>
           <p class="process-desc">
-            Quickly and simply order your tires and schedule your out-the-door
-            pricing.
+            Pick your tires and lock in your price — we handle the ordering for
+            you.
           </p>
         </div>
 

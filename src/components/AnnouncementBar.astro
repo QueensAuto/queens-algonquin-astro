@@ -1,4 +1,7 @@
 ---
+// Set to true to re-enable the announcement ticker
+const enabled = false;
+
 const {
     message = "Get a FREE Wheel Alignment when you buy 4 new tires!",
     mobileMessage = "FREE Alignment When You Buy 4 Tires",
@@ -8,6 +11,7 @@ const {
 } = Astro.props;
 ---
 
+{enabled && (
 <div
     id="AnnouncementBarWrapper"
     class:list={["w-full overflow-hidden h-0", className]}
@@ -84,6 +88,7 @@ const {
         </div>
     </div>
 </div>
+)}
 
 <style>
     @keyframes pulse-arrow {
