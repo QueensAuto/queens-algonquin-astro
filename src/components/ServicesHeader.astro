@@ -137,14 +137,13 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
           [
             { label: "Home", href: "/" },
             { label: "Services", href: "/services" },
-            { label: "New Tires", href: "/buy-new-tires", reload: true },
+            { label: "New Tires", href: "/buy-new-tires" },
             { label: "Deals", href: "/deals" },
             { label: "About Us", href: "/about" },
             { label: "Contact", href: "/contact" },
           ].map((item) => (
             <a
               href={item.href}
-              data-astro-reload={item.reload || undefined}
               class="menu-link-services text-xl md:text-2xl font-bold text-white uppercase tracking-wide hover:opacity-70 transition-opacity duration-200"
             >
               {item.label}

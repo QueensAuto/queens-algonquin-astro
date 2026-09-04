@@ -3,7 +3,6 @@ interface Props {
   href?: string;
   text?: string;
   class?: string;
-  reload?: boolean;
   bannerName?: string;
   theme?: "default" | "white";
 }
@@ -12,7 +11,6 @@ const {
   href = "/request-an-appointment",
   text = "Schedule Service",
   class: className = "",
-  reload = false,
   bannerName,
   theme = "default",
   ...rest
@@ -22,12 +20,10 @@ const themeClasses =
   theme === "white"
     ? "bg-white text-gray-900 hover:bg-gray-50 border-transparent"
     : "bg-white border-gray-200 text-gray-900 hover:bg-gray-50 hover:border-gray-300 dark:bg-queens-secondary-ultra-dark/40 dark:border-white/10 dark:text-white dark:hover:bg-queens-secondary-ultra-dark/60 dark:hover:border-white/20 dark:backdrop-blur-md";
-const isTiresPage = href === "/buy-new-tires";
 ---
 
 <a
   href={href}
-  data-astro-reload={reload || isTiresPage || undefined}
   data-banner-name={bannerName}
   {...rest}
   class:list={[

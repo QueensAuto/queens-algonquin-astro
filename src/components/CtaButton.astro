@@ -5,7 +5,6 @@ interface Props {
   class?: string;
   variant?: "standard" | "large";
   theme?: "default" | "solid";
-  reload?: boolean;
   bannerName?: string;
   target?: string;
   rel?: string;
@@ -17,16 +16,13 @@ const {
   class: className = "",
   variant = "standard",
   theme = "default",
-  reload = false,
   bannerName,
   ...rest
 } = Astro.props;
-const isTiresPage = href === "/buy-new-tires" || href === "/buy-new-tires/";
 ---
 
 <a
   href={href}
-  data-astro-reload={reload || isTiresPage || undefined}
   data-banner-name={bannerName}
   {...rest}
   class:list={[

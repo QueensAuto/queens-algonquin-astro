@@ -11,7 +11,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+*.log
 
+# agent tooling
+.freebuff/
 
 # environment variables
 .env
