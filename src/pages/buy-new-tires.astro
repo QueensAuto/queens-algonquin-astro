@@ -148,7 +148,7 @@ const gallery = [
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-gray-900 dark:text-white mb-1">No Counter Upsells</h3>
+                <h3 class="benefit-title font-bold text-gray-900 dark:text-white mb-1">No Counter Upsells</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">The quote we give you is the price you pay. Out the door.</p>
               </div>
             </div>
@@ -160,7 +160,7 @@ const gallery = [
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-gray-900 dark:text-white mb-1">Hunter Precision Install</h3>
+                <h3 class="benefit-title font-bold text-gray-900 dark:text-white mb-1">Hunter Precision Install</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Touchless mounting and road-force balancing on pro equipment.</p>
               </div>
             </div>
@@ -172,7 +172,7 @@ const gallery = [
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-gray-900 dark:text-white mb-1">Same-Day Service</h3>
+                <h3 class="benefit-title font-bold text-gray-900 dark:text-white mb-1">Same-Day Service</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Most sets are installed the same day you call.</p>
               </div>
             </div>
@@ -184,7 +184,7 @@ const gallery = [
                 </svg>
               </div>
               <div>
-                <h3 class="font-bold text-gray-900 dark:text-white mb-1">Neighbors, Not a Chain</h3>
+                <h3 class="benefit-title font-bold text-gray-900 dark:text-white mb-1">Neighbors, Not a Chain</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">25,000+ local drivers served from our shop on E Algonquin Rd.</p>
               </div>
             </div>
@@ -567,6 +567,18 @@ const gallery = [
 
   .final-cta {
     background: var(--bg-page);
+  }
+
+  /* Card-grid headings are content labels, not section headings: the global
+     h3 { font-size: 1.75rem→36px } rule is ~2x too large here, and unlayered
+     global rules beat Tailwind's layered text-* utilities, so pin the size
+     with a scoped class instead. */
+  .benefit-title {
+    font-size: 1.0625rem;
+    line-height: 1.3;
+    /* The global @layer base h1-h6 { margin-top: 2.5rem } rule pushes card
+       titles 45px below their icon; scoped rules beat the layered base rule. */
+    margin-top: 0;
   }
 
   /* The final CTA panel sits on a blue → dark-navy gradient over a photo.
