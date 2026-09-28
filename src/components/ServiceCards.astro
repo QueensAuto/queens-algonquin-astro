@@ -28,11 +28,21 @@ const services = [
     trackingClass: "auto-repair-banner-link"
   }
 ];
+
+const slideCount = services.length;
 ---
 
 <section id="homepage-deals" class="deals-section">
   <div class="deals-pin-wrapper">
     <div class="deals-container site-canvas">
+      <!-- Section header so visitors instantly know what this is -->
+      <div class="deals-header">
+        <span class="deals-eyebrow">Current Offers</span>
+        <h2 class="deals-heading">
+          Deals happening <span class="deals-heading-accent">right now</span>
+        </h2>
+      </div>
+
       <!-- Sticky Number Column (Left) -->
       <div class="deals-number-column">
         <!-- Progress Bar -->
@@ -46,9 +56,12 @@ const services = [
       <div class="deals-slides-viewport">
         <div class="deals-slides-track">
           {services.map((service, index) => (
-            <div 
+            <div
               class={`deals-slide ${index === 0 ? 'active' : ''}`}
               data-index={index}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`Offer ${index + 1} of ${slideCount}`}
             >
               <!-- Text Content -->
               <div class="deals-slide-content">
@@ -61,7 +74,7 @@ const services = [
                 <p class="deals-slide-description">
                   {service.description}
                 </p>
-                <a 
+                <a
                   href={service.link}
                   class={`deals-slide-cta ${service.trackingClass}`}
                   data-banner-name={service.subtitle}
@@ -75,8 +88,8 @@ const services = [
 
               <!-- Image -->
               <div class="deals-slide-image-wrapper">
-                <img 
-                  src={service.image} 
+                <img
+                  src={service.image}
                   alt={service.alt}
                   class="deals-slide-image"
                   loading={index === 0 ? "eager" : "lazy"}
@@ -86,8 +99,59 @@ const services = [
           ))}
         </div>
       </div>
+
+      <!-- Controls: dots + arrows + counter + scroll hint -->
+      <div class="deals-controls">
+        <button
+          type="button"
+          class="deals-nav-btn"
+          id="deals-prev"
+          aria-label="Previous offer"
+        >
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+
+        <div class="deals-dots" role="group" aria-label="Offer navigation">
+          {services.map((_, index) => (
+            <button
+              type="button"
+              class={`deals-dot ${index === 0 ? 'active' : ''}`}
+              data-dot-index={index}
+              aria-label={`Go to offer ${index + 1} of ${slideCount}`}
+              aria-current={index === 0 ? 'true' : undefined}
+            ></button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          class="deals-nav-btn"
+          id="deals-next"
+          aria-label="Next offer"
+        >
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+
+        <span class="deals-counter" aria-hidden="true">
+          <span id="deals-counter-current">01</span>&nbsp;/&nbsp;{String(slideCount).padStart(2, '0')}
+        </span>
+
+        <span class="deals-scroll-hint" id="deals-scroll-hint" aria-hidden="true">
+          Scroll for more
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7m7 7V3"></path>
+          </svg>
+        </span>
+      </div>
     </div>
   </div>
+
+  <!-- Screen-reader announcement of slide changes -->
+  <div class="deals-sr-only" aria-live="polite" id="deals-live-region"></div>
 </section>
 
 <style>
@@ -102,16 +166,55 @@ const services = [
     background-color: var(--color-page);
     position: relative;
     z-index: 20;
+    display: flex;
+    align-items: center;
   }
 
   .deals-container {
     display: grid;
     grid-template-columns: min-content 1fr; /* Allow number to dictate width */
-    gap: 4rem;
+    grid-template-rows: auto 1fr auto;
+    gap: 2.5rem 4rem;
+    width: 100%; /* .deals-pin-wrapper is a flex container; stretch like a block would */
     min-height: 100vh;
     align-items: center;
-    padding-top: 2rem;
+    padding-top: 2.5rem;
     padding-bottom: 2rem;
+  }
+
+  /* Section header */
+  .deals-header {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-self: end;
+  }
+
+  .deals-eyebrow {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--queens-primary);
+  }
+
+  .deals-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: #0f172a;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  :global(.dark) .deals-heading {
+    color: #f8fafc;
+  }
+
+  .deals-heading-accent {
+    color: var(--queens-primary);
   }
 
   @media (max-width: 1023px) {
@@ -124,17 +227,22 @@ const services = [
   @media (max-width: 640px) {
     .deals-container {
       grid-template-columns: 1fr;
-      padding-top: 2rem;
+      padding-top: 1.5rem;
       gap: 1rem;
+      min-height: 100svh;
     }
-    
+
     /* On mobile, keep it in flow but compact */
     .deals-number-column {
       position: relative;
       top: auto;
       left: auto;
-      margin-bottom: -1rem; /* Tighten up spacing to content */
+      margin-bottom: -0.5rem; /* Tighten up spacing to content */
       z-index: 10;
+    }
+
+    .deals-heading {
+      font-size: 1.75rem;
     }
   }
 
@@ -151,7 +259,7 @@ const services = [
   .deals-number {
     font-family: var(--font-display);
     /* Significantly reduced size */
-    font-size: clamp(4rem, 10vw, 7rem); 
+    font-size: clamp(4rem, 10vw, 7rem);
     font-weight: 900;
     line-height: 0.85;
     color: #0f172a;
@@ -197,7 +305,7 @@ const services = [
 
   .deals-slides-track {
     position: relative;
-    min-height: 60vh;
+    min-height: min(58vh, 560px);
   }
 
   /* Individual Slide - CSS-powered smooth transitions */
@@ -214,7 +322,7 @@ const services = [
     visibility: hidden;
     pointer-events: none;
     z-index: 1;
-    transition: 
+    transition:
       opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1),
       visibility 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     will-change: opacity;
@@ -233,7 +341,7 @@ const services = [
       gap: 2rem;
     }
     .deals-slides-track {
-      min-height: 500px;
+      min-height: 440px;
     }
   }
 
@@ -252,7 +360,7 @@ const services = [
     line-height: 1.2;
     opacity: 0;
     transform: translateY(15px);
-    transition: 
+    transition:
       opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
       transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
   }
@@ -272,7 +380,7 @@ const services = [
     margin: 0.5rem 0 1rem;
     opacity: 0;
     transform: translateY(15px);
-    transition: 
+    transition:
       opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s,
       transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
   }
@@ -294,7 +402,7 @@ const services = [
     margin-bottom: 1.5rem;
     opacity: 0;
     transform: translateY(15px);
-    transition: 
+    transition:
       opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
       transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
   }
@@ -319,7 +427,7 @@ const services = [
     letter-spacing: 0.1em;
     opacity: 0;
     transform: translateY(15px);
-    transition: 
+    transition:
       opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.25s,
       transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.25s,
       gap 0.3s ease;
@@ -353,7 +461,7 @@ const services = [
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     opacity: 0;
     transform: scale(0.95); /* Removed translateX which caused horizontal overflow */
-    transition: 
+    transition:
       opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
       transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
     will-change: opacity, transform;
@@ -378,6 +486,206 @@ const services = [
   .deals-slide:hover .deals-slide-image {
     transform: scale(1.05);
   }
+
+  /* Controls row: arrows + dots + counter + scroll hint */
+  .deals-controls {
+    grid-column: 2; /* align with the slides column, not the big number */
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .deals-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background-color: transparent;
+    color: #475569;
+    cursor: pointer;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease,
+      transform 0.15s ease;
+  }
+
+  .deals-nav-btn:hover {
+    background-color: var(--queens-primary);
+    border-color: var(--queens-primary);
+    color: #ffffff;
+  }
+
+  .deals-nav-btn:active {
+    transform: scale(0.94);
+  }
+
+  :global(.dark) .deals-nav-btn {
+    color: #cbd5e1;
+    border-color: rgba(71, 85, 105, 0.8);
+  }
+
+  .deals-nav-btn svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .deals-dots {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .deals-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    padding: 0;
+    border-radius: 9999px;
+    border: none;
+    background-color: rgba(148, 163, 184, 0.55);
+    cursor: pointer;
+    transition:
+      background-color 0.25s ease,
+      width 0.25s ease,
+      height 0.25s ease;
+  }
+
+  .deals-dot:hover {
+    background-color: rgba(100, 116, 139, 0.8);
+  }
+
+  .deals-dot.active {
+    width: 2rem;
+    height: 0.75rem;
+    background-color: var(--queens-primary);
+  }
+
+  .deals-counter {
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    white-space: nowrap;
+  }
+
+  :global(.dark) .deals-counter {
+    color: #94a3b8;
+  }
+
+  /* Scroll hint pill - dismisses after first scroll interaction */
+  .deals-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--queens-primary);
+    opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+
+  .deals-scroll-hint svg {
+    width: 1rem;
+    height: 1rem;
+    animation: deals-hint-bounce 1.6s ease-in-out infinite;
+  }
+
+  .deals-scroll-hint.is-hidden {
+    opacity: 0;
+  }
+
+  @keyframes deals-hint-bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(4px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .deals-controls {
+      grid-column: 1 / -1; /* single-column grid on mobile */
+      gap: 1rem;
+    }
+
+    .deals-nav-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .deals-scroll-hint {
+      display: none; /* tight space on mobile; dots + counter carry the signal */
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--queens-primary);
+    outline-offset: 3px;
+  }
+
+  /* Reduced-motion / static fallback: all offers stacked, no pin */
+  .deals-static .deals-slides-track {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .deals-static .deals-slide {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .deals-static .deals-slide-eyebrow,
+  .deals-static .deals-slide-title,
+  .deals-static .deals-slide-description,
+  .deals-static .deals-slide-cta,
+  .deals-static .deals-slide-image-wrapper {
+    opacity: 1;
+    transform: none;
+  }
+
+  .deals-static .deals-controls,
+  .deals-static .deals-progress-bar {
+    display: none;
+  }
+
+  .deals-static .deals-number-column {
+    display: none;
+  }
+
+  .deals-static .deals-container {
+    min-height: 0;
+  }
+
+  .deals-static .deals-pin-wrapper {
+    min-height: 0;
+    padding: 4rem 0;
+  }
+
+  /* Screen-reader only helper */
+  .deals-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 </style>
 
 
@@ -393,64 +701,109 @@ const services = [
   function initDealsSlider() {
     if (dealsCtx) dealsCtx.revert();
 
+    const section = document.querySelector("#homepage-deals") as HTMLElement | null;
+    const pinWrapper = document.querySelector(".deals-pin-wrapper") as HTMLElement | null;
+    if (!section || !pinWrapper) return;
+
+    const slides = section.querySelectorAll(".deals-slide") as NodeListOf<HTMLElement>;
+    const numberEl = document.getElementById("deals-active-number");
+    const counterEl = document.getElementById("deals-counter-current");
+    const liveRegion = document.getElementById("deals-live-region");
+    const dots = section.querySelectorAll<HTMLButtonElement>(".deals-dot");
+    const prevBtn = document.getElementById("deals-prev") as HTMLButtonElement | null;
+    const nextBtn = document.getElementById("deals-next") as HTMLButtonElement | null;
+    const scrollHint = document.getElementById("deals-scroll-hint");
+    const slideCount = slides.length;
+
+    if (!slides.length) return;
+
+    // Reduced motion: no pin, no scroll-jacking. Show every offer stacked statically.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      section.classList.add("deals-static");
+      slides.forEach((slide) => {
+        slide.classList.add("active");
+        slide.setAttribute("aria-hidden", "false");
+        slide.removeAttribute("inert");
+      });
+      return;
+    }
+    section.classList.remove("deals-static");
+
     dealsCtx = gsap.context(() => {
-      const section = document.querySelector("#homepage-deals");
-      const pinWrapper = document.querySelector(".deals-pin-wrapper");
-      if (!section || !pinWrapper) return;
-
-      const slides = section.querySelectorAll(".deals-slide") as NodeListOf<HTMLElement>;
-      const numberEl = document.getElementById("deals-active-number");
-      const slideCount = slides.length;
-
-      if (!slides.length) return;
+      let dealsST: ScrollTrigger | null = null;
 
       // Reset current slide index
       currentSlideIndex = 0;
 
-      // Initialize slides - first is active
-      slides.forEach((slide, i) => {
-        if (i === 0) {
-          slide.classList.add("active");
-        } else {
-          slide.classList.remove("active");
-        }
-      });
-
-      // Calculate total scroll distance (100vh per slide)
-      const totalScrollHeight = window.innerHeight * slideCount;
-
-      // Simple transition function - just toggle classes, CSS handles the rest
-      function transitionToSlide(newIndex: number) {
-        if (newIndex === currentSlideIndex || newIndex < 0 || newIndex >= slideCount) return;
-
-        // Update slides - just toggle active class
+      function applySlideState(newIndex: number) {
         slides.forEach((slide, i) => {
-          slide.classList.toggle("active", i === newIndex);
+          const isActive = i === newIndex;
+          slide.classList.toggle("active", isActive);
+          slide.setAttribute("aria-hidden", String(!isActive));
+          // Prevent hidden CTAs from stealing keyboard focus
+          if (isActive) {
+            slide.removeAttribute("inert");
+          } else {
+            slide.setAttribute("inert", "");
+          }
         });
 
-        // Update number with a simple fade
+        // Update dots
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === newIndex);
+          if (i === newIndex) {
+            dot.setAttribute("aria-current", "true");
+          } else {
+            dot.removeAttribute("aria-current");
+          }
+        });
+
+        // Update big number + counter with a simple fade
+        const label = String(newIndex + 1).padStart(2, "0");
         if (numberEl) {
           numberEl.style.transition = "opacity 0.2s ease, transform 0.2s ease";
           numberEl.style.opacity = "0";
           numberEl.style.transform = "translateY(-10px)";
-          
+
           setTimeout(() => {
             if (numberEl) {
-              numberEl.textContent = String(newIndex + 1).padStart(2, '0');
+              numberEl.textContent = label;
               numberEl.style.opacity = "1";
               numberEl.style.transform = "translateY(0)";
             }
           }, 200);
         }
+        if (counterEl) {
+          counterEl.textContent = label;
+        }
+
+        // Announce slide change to screen readers
+        if (liveRegion) {
+          const heading = slides[newIndex].querySelector(".deals-slide-title")?.textContent?.trim();
+          liveRegion.textContent = `Offer ${newIndex + 1} of ${slideCount}${heading ? `: ${heading}` : ""}`;
+        }
 
         currentSlideIndex = newIndex;
+      }
+
+      // Initialize slides - first is active
+      applySlideState(0);
+
+      // Calculate total scroll distance (~65vh per slide, shorter than before so
+      // visitors reach every offer without a marathon of pinned scrolling)
+      const vhMultiplier = window.innerWidth < 768 ? 0.55 : 0.65;
+      const totalScrollHeight = window.innerHeight * vhMultiplier * slideCount;
+
+      function transitionToSlide(newIndex: number) {
+        if (newIndex === currentSlideIndex || newIndex < 0 || newIndex >= slideCount) return;
+        applySlideState(newIndex);
       }
 
       // Get progress bar element
       const progressFill = document.getElementById("deals-progress-fill");
 
       // Set up the pinned scroll
-      ScrollTrigger.create({
+      dealsST = ScrollTrigger.create({
         trigger: section,
         start: "top top",
         end: `+=${totalScrollHeight}`,
@@ -472,14 +825,21 @@ const services = [
             progressFill.style.height = `${progress * 100}%`;
           }
 
+          // Dismiss the scroll hint once the visitor starts moving through offers
+          if (scrollHint && progress > 0.08) {
+            scrollHint.classList.add("is-hidden");
+          } else if (scrollHint && progress <= 0.02) {
+            scrollHint.classList.remove("is-hidden");
+          }
+
           // Calculate progress within the current slide's "zone" (0 to 1)
           const slideZoneSize = 1 / slideCount;
           const slideZoneStart = targetIndex * slideZoneSize;
           const slideProgress = (progress - slideZoneStart) / slideZoneSize;
-          
+
           // Clamp to 0-1 range
           const clampedProgress = Math.max(0, Math.min(1, slideProgress));
-          
+
           // Apply subtle shrink effect to the active slide (scale from 1 to 0.92)
           // This gives visual feedback that scrolling is doing something
           const activeSlide = slides[targetIndex];
@@ -489,7 +849,7 @@ const services = [
             activeSlide.style.transform = `scale(${scaleValue})`;
             activeSlide.style.opacity = String(opacityValue);
           }
-          
+
           // Reset transform on other slides
           slides.forEach((slide, i) => {
             if (i !== targetIndex) {
@@ -500,6 +860,30 @@ const services = [
         }
       });
 
+      // Controls: clicking a dot/arrow scrolls to the matching point inside the
+      // pinned range. Scroll stays the source of truth - controls are affordances.
+      function scrollToSlide(index: number) {
+        if (!dealsST) return;
+        const clamped = Math.max(0, Math.min(slideCount - 1, index));
+        const zoneCenter = (clamped + 0.5) / slideCount;
+        const targetY = dealsST.start + (dealsST.end - dealsST.start) * zoneCenter;
+        const lenis = (window as any).lenis;
+        if (lenis?.scrollTo) {
+          lenis.scrollTo(targetY, { duration: 0.8 });
+        } else {
+          window.scrollTo({ top: targetY, behavior: "smooth" });
+        }
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const index = Number(dot.dataset.dotIndex);
+          if (!Number.isNaN(index)) scrollToSlide(index);
+        });
+      });
+
+      prevBtn?.addEventListener("click", () => scrollToSlide(currentSlideIndex - 1));
+      nextBtn?.addEventListener("click", () => scrollToSlide(currentSlideIndex + 1));
     });
   }
 
@@ -511,5 +895,3 @@ const services = [
     if (dealsCtx) dealsCtx.revert();
   });
 </script>
-
-
