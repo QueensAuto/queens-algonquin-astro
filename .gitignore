@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Cloudflare local secrets and state
+.dev.vars
+.wrangler/
+
+# Local visual QA screenshots
+.qa/

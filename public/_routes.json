@@ -9,6 +9,7 @@
     "/images/*",
     "/video/*",
     "/fonts/*",
+    "/models/*",
     "/assets/*",
     "/audio/*",
     "/favicon.png",

@@ -168,9 +168,13 @@ const useServicesHeader =
       // Scroll to top immediately
       window.scrollTo(0, 0);
 
-      // Force full reload for /buy-new-tires (bypassing Astro transitions)
+      // Force a full page load (no view-transition swap) for /buy-new-tires
+      // and the always-dark landing pages. A swap would run this layout's
+      // theme script on the landing page and strip its `dark` class in light
+      // mode, leaving grey text on the navy background.
+      const FULL_RELOAD = /^\/(buy-new-tires|brakes|wheel-alignment|auto-repair-discount)\/?$/;
       document.addEventListener("astro:before-preparation", (ev) => {
-        if (ev.to.pathname === "/buy-new-tires" || ev.to.pathname === "/buy-new-tires/") {
+        if (FULL_RELOAD.test(ev.to.pathname)) {
           ev.preventDefault();
           window.location.href = ev.to.href;
         }
