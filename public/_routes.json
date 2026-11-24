@@ -24,6 +24,14 @@
     "/tire-shop-algonquin*",
     "/oil-change-service-algonquin*",
     "/mechanic-algonquin*",
-    "/auto-air-conditioning-service-algonquin*"
+    "/auto-air-conditioning-service-algonquin*",
+    "/tire-installation",
+    "/tire-installation/",
+    "/schedule-datetime",
+    "/schedule-datetime/",
+    "/customer-details",
+    "/customer-details/",
+    "/schedule-confirmation",
+    "/schedule-confirmation/"
   ]
 }

@@ -12,8 +12,6 @@ const pages = [
     { url: 'deals', priority: 0.9, changefreq: 'daily' },
     { url: 'faq', priority: 0.7, changefreq: 'monthly' },
     { url: 'buy-new-tires', priority: 0.9, changefreq: 'weekly' },
-    { url: 'tire-installation', priority: 0.7, changefreq: 'monthly' },
-    { url: 'used-tires', priority: 0.7, changefreq: 'monthly' },
     { url: 'privacy', priority: 0.3, changefreq: 'yearly' },
     { url: 'terms', priority: 0.3, changefreq: 'yearly' },
     { url: 'brakes', priority: 0.9, changefreq: 'weekly' },

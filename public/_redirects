@@ -20,3 +20,15 @@
 /mechanic-algonquin/                          /services/                                                   301
 /auto-air-conditioning-service-algonquin      /services/climate-control/ac-repair-recharge/                301
 /auto-air-conditioning-service-algonquin/     /services/climate-control/ac-repair-recharge/                301
+
+# Retired "mobile tires" booking funnel (Dec 2025). It sent bookings to an
+# n8n webhook that no longer exists; real bookings now go through
+# /request-an-appointment/ and the landing-page forms.
+/tire-installation        /services/tire-services/tire-installation/   301
+/tire-installation/       /services/tire-services/tire-installation/   301
+/schedule-datetime        /request-an-appointment/                     301
+/schedule-datetime/       /request-an-appointment/                     301
+/customer-details         /request-an-appointment/                     301
+/customer-details/        /request-an-appointment/                     301
+/schedule-confirmation    /request-an-appointment/                     301
+/schedule-confirmation/   /request-an-appointment/                     301
