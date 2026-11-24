@@ -289,14 +289,16 @@ const faqs = [
                     </form>
 
                     <script is:inline>
-                        const contactForm =
-                            document.getElementById("contact-form");
-                        const contactSubmit =
-                            document.getElementById("contact-submit");
-                        const contactFeedback =
-                            document.getElementById("contact-feedback");
+                        function initContactForm() {
+                            const contactForm =
+                                document.getElementById("contact-form");
+                            const contactSubmit =
+                                document.getElementById("contact-submit");
+                            const contactFeedback =
+                                document.getElementById("contact-feedback");
 
-                        if (contactForm) {
+                            if (!contactForm || contactForm.dataset.initialized) return;
+                            contactForm.dataset.initialized = "true";
                             contactForm.addEventListener(
                                 "submit",
                                 async (e) => {
@@ -364,6 +366,9 @@ const faqs = [
                                 },
                             );
                         }
+
+                        document.addEventListener("astro:page-load", initContactForm);
+                        initContactForm();
                     </script>
                 </div>
             </div>
