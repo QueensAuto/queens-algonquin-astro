@@ -22,6 +22,8 @@ const {
   serviceData,
   faqData,
   reviewData,
+  canonical: canonicalOverride,
+  noindex = false,
   forceDarkTheme = false,
   forceDarkHeader = false,
 } = Astro.props;
@@ -30,6 +32,8 @@ const {
 const brand: BrandConfig = propBrand || mobileTiresBrand;
 
 const currentPath = Astro.url.pathname;
+const canonicalPath = currentPath.endsWith("/") ? currentPath : `${currentPath}/`;
+const canonical = canonicalOverride || `https://queensautoservices.com${canonicalPath}`;
 // Pages excluded from markdown twins in astro.config.mjs (agentMarkdown exclude).
 const hasMarkdownTwin = !/^\/(404|coming-soon|customer-details|schedule-|thank-you|tireflow-test)/.test(currentPath);
 const pathSegments = currentPath.split("/").filter(Boolean);
@@ -57,6 +61,8 @@ const useServicesHeader =
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href="/favicon.png" />
 
     <!-- Google Tag Manager (deferred)

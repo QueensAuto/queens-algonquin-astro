@@ -16,6 +16,14 @@ const pages = [
     { url: 'used-tires', priority: 0.7, changefreq: 'monthly' },
     { url: 'privacy', priority: 0.3, changefreq: 'yearly' },
     { url: 'terms', priority: 0.3, changefreq: 'yearly' },
+    { url: 'brakes', priority: 0.9, changefreq: 'weekly' },
+    { url: 'wheel-alignment', priority: 0.9, changefreq: 'weekly' },
+    { url: 'auto-repair-discount', priority: 0.9, changefreq: 'weekly' },
+    { url: 'locations/auto-repair-near-algonquin-commons', priority: 0.7, changefreq: 'monthly' },
+    { url: 'locations/auto-repair-lake-in-the-hills', priority: 0.7, changefreq: 'monthly' },
+    { url: 'locations/auto-repair-carpentersville', priority: 0.7, changefreq: 'monthly' },
+    { url: 'locations/tires-near-jacobs-high-school', priority: 0.7, changefreq: 'monthly' },
+    { url: 'locations/mechanic-near-towne-park', priority: 0.7, changefreq: 'monthly' },
 ];
 
 export const GET: APIRoute = async () => {

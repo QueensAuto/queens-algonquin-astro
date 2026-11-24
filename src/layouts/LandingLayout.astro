@@ -20,9 +20,12 @@ const {
   faqData,
   reviewData,
   noindex = false,
+  canonical: canonicalOverride,
 } = Astro.props;
 
 const brand: BrandConfig = propBrand || mobileTiresBrand;
+const canonicalPath = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = canonicalOverride || `https://queensautoservices.com${canonicalPath}`;
 const phoneDigits = brand.phone.replace(/\D/g, "");
 const year = new Date().getFullYear();
 ---
@@ -34,6 +37,7 @@ const year = new Date().getFullYear();
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b1121" />
+    <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href="/favicon.png" />
 
