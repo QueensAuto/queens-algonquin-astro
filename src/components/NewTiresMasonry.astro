@@ -58,10 +58,10 @@ const gridImages = shuffle([...baseImages]);
             {
                 gridImages.slice(0, 30).map((src, index) => (
                     <div class="overflow-hidden aspect-[3/4]">
-                        <img
+                        <img decoding="async"
                             src={src}
                             alt=""
-                            loading={index < 12 ? "eager" : "lazy"}
+                            loading="lazy"
                             draggable="false"
                             class="block w-full h-full object-cover"
                         />
@@ -76,10 +76,10 @@ const gridImages = shuffle([...baseImages]);
             {
                 gridImages.map((src, index) => (
                     <div class="mb-3 lg:mb-4 bg-slate-800 rounded-xl overflow-hidden break-inside-avoid">
-                        <img
+                        <img decoding="async"
                             src={src}
                             alt=""
-                            loading={index < 12 ? "eager" : "lazy"}
+                            loading="lazy"
                             draggable="false"
                             class="block w-full h-auto object-cover transition-transform duration-500 ease-in-out hover:scale-105"
                         />

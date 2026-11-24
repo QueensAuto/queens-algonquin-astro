@@ -4,7 +4,7 @@ const services = [
     title: "Price Per Axle",
     subtitle: "$369 BRAKE SPECIAL",
     description: "Professional brake pad and rotor inspection with complete brake service. Includes quality parts, labor, and a comprehensive safety check.",
-    image: "/images/services/Changing brakes.webp",
+    image: "/images/services/brakes-card.webp",
     alt: "Professional Brake System Service",
     link: "https://brakes.queensautoservices.com/",
     trackingClass: "brake-banner-link"
@@ -13,7 +13,7 @@ const services = [
     title: "Limited Time Offer",
     subtitle: "$35 OFF ALIGNMENT",
     description: "Precision 4-wheel alignment using state-of-the-art equipment. Extend tire life and improve fuel efficiency with proper alignment.",
-    image: "/images/services/Wheel-Alignment-Algonquin-001.webp",
+    image: "/images/services/wheel-alignment-card.webp",
     alt: "Wheel Alignment Special Offer",
     link: "https://wheel-alignment.queensautoservices.com/",
     trackingClass: "alignment-banner-link"
@@ -22,7 +22,7 @@ const services = [
     title: "General Repair",
     subtitle: "$100 OFF SERVICES",
     description: "Save on engine diagnostics, transmission work, electrical repairs, and more. First-time customers get an extra discount!",
-    image: "/images/services/Queens-Auto-Services-Auto-Repair-Slider-007.webp",
+    image: "/images/services/auto-repair-card.webp",
     alt: "General Repair Discount",
     link: "https://offer.queensautoservices.com/",
     trackingClass: "auto-repair-banner-link"
@@ -88,7 +88,7 @@ const slideCount = services.length;
 
               <!-- Image -->
               <div class="deals-slide-image-wrapper">
-                <img
+                <img decoding="async"
                   src={service.image}
                   alt={service.alt}
                   class="deals-slide-image"

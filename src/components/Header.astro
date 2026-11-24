@@ -65,12 +65,14 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
             brand.logoPath ? (
               <>
                 <img
+                  loading="lazy"
                   id="logo-color"
                   src={brand.logoPath}
                   alt={brand.name}
                   class="h-7 md:h-8 w-auto object-contain block dark:hidden"
                 />
                 <img
+                  loading="lazy"
                   id="logo-white"
                   src={brand.logoPathWhite}
                   alt={brand.name}
@@ -118,6 +120,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
   <div id="menu-bg-overlay" class="absolute inset-0 opacity-0">
     <!-- Background Image -->
     <img
+      loading="lazy"
       src="/images/services/Hero-mechanic-fixing-car-on-lift-copy.webp"
       alt=""
       class="absolute inset-0 w-full h-full object-cover"

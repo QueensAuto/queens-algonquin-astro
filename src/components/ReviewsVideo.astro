@@ -49,10 +49,13 @@ const visibleCount = 2; // Number of cards visible at a time
                         loop
                         muted
                         playsinline
+                        preload="none"
+                        data-lazy-video
+                        data-poster="/images/shop/customer-reviews-poster.webp"
                         class="w-full h-full object-cover rv-video-reveal"
                     >
                         <source
-                            src="/video/Queens Auto Services Algonquin - Customer Reviews.mp4"
+                            data-src="/video/customer-reviews-540.mp4"
                             type="video/mp4"
                         />
                         Your browser does not support the video tag.
@@ -101,7 +104,7 @@ const visibleCount = 2; // Number of cards visible at a time
                                     </blockquote>
                                     <div class="flex items-center gap-3">
                                         {review.image ? (
-                                            <img
+                                            <img decoding="async"
                                                 src={review.image}
                                                 alt={review.name}
                                                 class="w-11 h-11 rounded-full object-cover shadow-md"
