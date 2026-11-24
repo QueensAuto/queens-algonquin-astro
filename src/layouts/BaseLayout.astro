@@ -21,7 +21,6 @@ const {
   headerInverse = false,
   serviceData,
   faqData,
-  reviewData,
   canonical: canonicalOverride,
   noindex = false,
   forceDarkTheme = false,
@@ -135,7 +134,6 @@ const useServicesHeader =
       description={description}
       serviceData={serviceData}
       faqData={faqData}
-      reviewData={reviewData}
     />
     <ClientRouter />
     {hasMarkdownTwin && <MarkdownAlternate />}

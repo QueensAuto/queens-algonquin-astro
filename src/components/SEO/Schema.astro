@@ -17,7 +17,6 @@ interface Props {
     image?: string;
     serviceData?: any;
     faqData?: any;
-    reviewData?: any[];
 }
 
 const {
@@ -29,7 +28,6 @@ const {
     image,
     serviceData,
     faqData,
-    reviewData,
 } = Astro.props;
 
 const canonicalUrl = url || `https://${brand.domain}${Astro.url.pathname}`;
@@ -218,31 +216,6 @@ if (faqData) {
         })),
     };
 }
-
-// 6. Review Schema
-let reviewSchema = null;
-if (reviewData && reviewData.length > 0) {
-    reviewSchema = reviewData.map((review: any) => ({
-        "@context": "https://schema.org",
-        "@type": "Review",
-        itemReviewed: {
-            "@id": `https://${brand.domain}/#organization`,
-        },
-        reviewRating: {
-            "@type": "Rating",
-            ratingValue: review.stars.toString(),
-            bestRating: "5",
-        },
-        author: {
-            "@type": "Person",
-            name: review.name,
-        },
-        reviewBody: review.text,
-        publisher: {
-            "@id": `https://${brand.domain}/#organization`,
-        },
-    }));
-}
 ---
 
 {/* Inject Global Schemas on Every Page */}
@@ -284,13 +257,4 @@ if (reviewData && reviewData.length > 0) {
             set:html={JSON.stringify(faqSchema)}
         />
     )
-}
-{
-    reviewSchema &&
-        reviewSchema.map((review: any) => (
-            <script
-                type="application/ld+json"
-                set:html={JSON.stringify(review)}
-            />
-        ))
 }
