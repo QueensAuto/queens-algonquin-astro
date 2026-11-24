@@ -121,7 +121,7 @@ if (isHomepage) {
 
     localBusinessSchema = {
         "@context": "https://schema.org",
-        "@type": "AutoRepair",
+        "@type": ["TireShop", "AutoRepair"],
         "@id": `https://${brand.domain}/#localbusiness`,
         name: schemaName,
         url: `https://${brand.domain}`,
@@ -142,7 +142,9 @@ if (isHomepage) {
             latitude: 42.150482,
             longitude: -88.2572252,
         },
-        hasMap: brand.googleMapsUrl,
+        // Google Business Profile listing (cid); primary GBP category is Tire shop.
+        hasMap: "https://www.google.com/maps?cid=918962926365490911",
+        sameAs: ["https://www.google.com/maps?cid=918962926365490911"],
         openingHoursSpecification: [
             {
                 "@type": "OpeningHoursSpecification",
