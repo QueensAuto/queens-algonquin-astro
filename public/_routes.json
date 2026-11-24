@@ -1,7 +1,9 @@
 {
   "version": 1,
-  "description": "Run the Pages Function (markdown negotiation in functions/_middleware.ts) for pages only; serve static assets directly.",
-  "include": ["/*"],
+  "description": "Run the Pages Function (markdown negotiation in functions/_middleware.ts) for pages only; static assets and the old paths in _redirects are served directly.",
+  "include": [
+    "/*"
+  ],
   "exclude": [
     "/_astro/*",
     "/images/*",
@@ -14,6 +16,13 @@
     "/robots.txt",
     "/llms.txt",
     "/sitemap-index.xml",
-    "/sitemap.xml"
+    "/sitemap.xml",
+    "/reviews",
+    "/reviews/",
+    "/brake-shop-algonquin*",
+    "/tire-shop-algonquin*",
+    "/oil-change-service-algonquin*",
+    "/mechanic-algonquin*",
+    "/auto-air-conditioning-service-algonquin*"
   ]
 }

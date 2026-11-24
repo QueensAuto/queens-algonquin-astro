@@ -1,0 +1,22 @@
+# Old/never-built URLs that were linked from the footer and location pages
+# (Feb 2026). Internal links now point at the real pages; these 301s catch
+# anyone (or any crawler) still using the old paths. Each path is also
+# excluded in _routes.json so the Pages Function never handles it.
+/reviews                                      /#reviews                                                    301
+/reviews/                                     /#reviews                                                    301
+/brake-shop-algonquin                         /services/brake-services/                                    301
+/brake-shop-algonquin/                        /services/brake-services/                                    301
+/tire-shop-algonquin/wheel-alignment          /services/steering-suspension/wheel-alignment/               301
+/tire-shop-algonquin/wheel-alignment/         /services/steering-suspension/wheel-alignment/               301
+/tire-shop-algonquin                          /services/tire-services/                                     301
+/tire-shop-algonquin/                         /services/tire-services/                                     301
+/oil-change-service-algonquin                 /services/maintenance-services/engine-oil-change-algonquin-il/ 301
+/oil-change-service-algonquin/                /services/maintenance-services/engine-oil-change-algonquin-il/ 301
+/mechanic-algonquin/check-engine-light        /services/engine-services/engine-diagnostics-repair/         301
+/mechanic-algonquin/check-engine-light/       /services/engine-services/engine-diagnostics-repair/         301
+/mechanic-algonquin/alternator-replacement    /services/electrical-systems/alternator-repair-or-replacement/ 301
+/mechanic-algonquin/alternator-replacement/   /services/electrical-systems/alternator-repair-or-replacement/ 301
+/mechanic-algonquin                           /services/                                                   301
+/mechanic-algonquin/                          /services/                                                   301
+/auto-air-conditioning-service-algonquin      /services/climate-control/ac-repair-recharge/                301
+/auto-air-conditioning-service-algonquin/     /services/climate-control/ac-repair-recharge/                301

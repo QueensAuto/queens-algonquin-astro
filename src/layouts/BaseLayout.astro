@@ -30,6 +30,8 @@ const {
 const brand: BrandConfig = propBrand || mobileTiresBrand;
 
 const currentPath = Astro.url.pathname;
+// Pages excluded from markdown twins in astro.config.mjs (agentMarkdown exclude).
+const hasMarkdownTwin = !/^\/(404|coming-soon|customer-details|schedule-|thank-you|tireflow-test)/.test(currentPath);
 const pathSegments = currentPath.split("/").filter(Boolean);
 
 // Archive is just /services (1 segment)
@@ -130,7 +132,7 @@ const useServicesHeader =
       reviewData={reviewData}
     />
     <ClientRouter />
-    <MarkdownAlternate />
+    {hasMarkdownTwin && <MarkdownAlternate />}
     <script is:inline define:vars={{ forceDarkTheme }}>
       const applyTheme = () => {
         if (forceDarkTheme) {
