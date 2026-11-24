@@ -14,8 +14,8 @@ export const mobileTiresBrand: BrandConfig = {
     cityLabel: "Algonquin, IL",
     googleMapsUrl: "https://maps.app.goo.gl/Y569UdAXUnBz7rSW9",
     hours: {
-        monFri: "7:30 - 6:00 pm",
-        sat: "7:30 - 4:00 pm",
+        monFri: "7:30 AM – 6:00 PM",
+        sat: "7:30 AM – 4:00 PM",
         sun: "Closed"
     },
 };
