@@ -4,6 +4,7 @@ export const mobileTiresBrand: BrandConfig = {
     id: "queens-algonquin",
     name: "Queens Auto Service Algonquin",
     schemaName: "Queens Auto Services",
+    turnstileSiteKey: "0x4AAAAAAGRMajJoka-pYu6g",
     domain: "queensautoservices.com",
     logoPath: "/images/logos/site-logos/New-Logo.webp",
     logoPathWhite: "/images/logos/site-logos/Logo-White.webp",
