@@ -1,6 +1,8 @@
 export type BrandConfig = {
     id: string;
     name: string;
+    /** Name used in JSON-LD; must match the Google Business Profile title. */
+    schemaName?: string;
     domain?: string;
     logoPath: string;
     logoPathWhite?: string;
