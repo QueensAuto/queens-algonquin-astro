@@ -323,7 +323,7 @@ const { brand } = Astro.props as { brand: BrandConfig };
 
   @media (min-width: 1024px) {
     .footer-grid {
-      grid-template-columns: 1.5fr 1fr 1fr 1fr; /* First column slightly wider for about text */
+      grid-template-columns: 1.4fr repeat(4, 1fr); /* About text wider; services, company, areas, contact */
       gap: 2rem;
     }
   }
