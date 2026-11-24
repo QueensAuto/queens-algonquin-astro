@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import { setDefaultResultOrder } from 'node:dns';
 import sitemap from '@astrojs/sitemap';
+import agentMarkdown from './src/integrations/agent-markdown/index.mjs';
 
 setDefaultResultOrder('ipv4first');
 
@@ -9,7 +10,13 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://queensautoservices.com',
-  integrations: [],
+  integrations: [
+    // Writes a markdown twin (index.md) next to every built page for AI
+    // agents; functions/_middleware.ts serves it on Accept: text/markdown.
+    agentMarkdown({
+      exclude: [/^\/customer-details/, /^\/schedule-/, /^\/thank-you/, /^\/coming-soon/, /^\/tireflow-test/]
+    })
+  ],
   devToolbar: {
     enabled: false
   },

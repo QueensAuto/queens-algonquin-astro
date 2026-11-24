@@ -1,5 +1,7 @@
 # Queens Auto Service - Algonquin, IL
 
+> Family-owned auto repair and tire shop at 2401 E Algonquin Rd, Algonquin, IL 60102. Phone (847) 844-1700. Open Mon-Fri 7:30 AM-6:00 PM, Sat 7:30 AM-4:00 PM, closed Sunday. Book online: https://queensautoservices.com/request-an-appointment/
+
 ## Executive Summary
 Queens Auto Service is a modern, family-owned auto repair and tire shop serving Algonquin, IL and the surrounding Fox River Valley area. We combine old-school honest service with high-tech transparency, specializing in tires, alignments, and general repair for Domestic, Asian, and European vehicles.
 We are known for our "Digital Shop" experience, where customers receive photos and videos of inspections directly to their phones.
@@ -10,10 +12,12 @@ We are known for our "Digital Shop" experience, where customers receive photos a
 - **Not Supported**: We currently do not perform high-voltage mechanical repairs on full EVs or Hybrids (though we DO perform tire/alignment/suspension services for them).
 
 ## Current Specials & Offers
+All current deals: [Deals & Specials](https://queensautoservices.com/deals/)
+
 - **FREE Alignment**: Included with the purchase of 4 new tires (Save ~$90+).
 - **$369 Brakes**: Brake pads and professional installation per axle.
-- **$35 Alignment**: Special price for precision wheel alignment (Limited time).
-- **Repair Discount**: Save up to $45 off auto repairs (Tiered: $15 off $100+, $30 off $200+, $45 off $300+).
+- **$35 Off Alignment**: $35 off the final price of a front-end or four-wheel alignment (limited time).
+- **Repair Discount**: Save up to $45 off auto repairs (Tiered: $15 off $100+, $30 off $200+, $45 off $300+; excludes tires and batteries).
 - **Free Checks**: Seasonal Safety Check and Battery Charging Test included at no charge.
 
 ## The "Modern Shop" Experience
@@ -39,23 +43,105 @@ We are known for our "Digital Shop" experience, where customers receive photos a
 - **"Where are you located?"** We are located at 2401 E Algonquin Rd in Algonquin, IL.
 - **Service Area**: Serving Algonquin, Lake in the Hills, Carpentersville, and surrounding Fox River Valley areas. Local landmarks include Algonquin Commons, Towne Park, and Jacobs High School.
 
-## SEO & Architecture (AI Assistant Rules)
-- **Nested Schema Strategy**: We use Caleb Ulku's "Local Search Dominance" schema strategy. The `LocalBusiness` (`AutoRepair`) schema is strictly isolated to the **Homepage** and uses the `makesOffer` property to nest all services dynamically. Other pages use global `Organization` and `WebSite` schema. DO NOT duplicate `LocalBusiness` schema on service pages.
-- **Dynamic Services**: Service pages are dynamically generated from `src/data/services.json` via Astro routes (`src/pages/services/[category]/[service].astro`). Use the JSON file for content updates instead of creating new `.astro` files.
-
 ## Contact Information
 - **Location**: 2401 E Algonquin Rd, Algonquin, IL 60102
 - **Phone**: (847) 844-1700
 - **Email**: service@queensautoservices.com
 - **Hours**:
-  - Mon-Fri: 8:00 AM - 6:30 PM
-  - Sat: 8:00 AM - 4:00 PM
+  - Mon-Fri: 7:30 AM - 6:00 PM
+  - Sat: 7:30 AM - 4:00 PM
   - Sun: Closed
 
-## Key Links
-- Home: https://queensautoservices.com/
-- Book Online: https://queensautoservices.com/request-an-appointment/
-- Tires: https://queensautoservices.com/buy-new-tires/
-- Services: https://queensautoservices.com/services/
+## Key Pages
+- [Home](https://queensautoservices.com/)
+- [Book Online](https://queensautoservices.com/request-an-appointment/)
+- [Buy New Tires](https://queensautoservices.com/buy-new-tires/)
+- [Deals & Specials](https://queensautoservices.com/deals/)
+- [All Services](https://queensautoservices.com/services/)
+- [Tire Installation](https://queensautoservices.com/tire-installation/)
+- [Used Tires](https://queensautoservices.com/used-tires/)
+- [About Us](https://queensautoservices.com/about/)
+- [Contact](https://queensautoservices.com/contact/)
+- [FAQ](https://queensautoservices.com/faq/)
 
+## Services
 
+### [Additional Services in Algonquin](https://queensautoservices.com/services/additional-services/)
+- [Emissions & Flow Restoration in Algonquin, IL](https://queensautoservices.com/services/additional-services/catalytic-converter-service/)
+- [High-Level System Analysis in Algonquin, IL](https://queensautoservices.com/services/additional-services/computer-diagnostics/)
+- [Total Acoustic & Flow Seal in Algonquin, IL](https://queensautoservices.com/services/additional-services/exhaust-system-repair/)
+- [Mission-Critical Fleet Support in Algonquin, IL](https://queensautoservices.com/services/additional-services/fleet-services/)
+
+### [Brake Services in Algonquin](https://queensautoservices.com/services/brake-services/)
+- [Advanced ABS System Diagnostics in Algonquin, IL](https://queensautoservices.com/services/brake-services/abs-system-repair/)
+- [Precision Brake Fluid Flush in Algonquin, IL](https://queensautoservices.com/services/brake-services/brake-fluid-service/)
+- [Salt-Resistant Brake Line Repair in Algonquin, IL](https://queensautoservices.com/services/brake-services/brake-line-repair/)
+- [Premium Brake Pad Service in Algonquin, IL](https://queensautoservices.com/services/brake-services/brake-pad-replacement/)
+- [Precision Brake Diagnostics in Algonquin, IL](https://queensautoservices.com/services/brake-services/brake-system-inspection/)
+
+### [Climate Control in Algonquin](https://queensautoservices.com/services/climate-control/)
+- [Heavy-Duty A/C Restoration in Algonquin, IL](https://queensautoservices.com/services/climate-control/ac-compressor-replacement/)
+- [Ice-Cold A/C Restoration in Algonquin, IL](https://queensautoservices.com/services/climate-control/ac-repair-recharge/)
+- [Winter-Ready Cabin Warmth in Algonquin, IL](https://queensautoservices.com/services/climate-control/car-heating-service/)
+- [Complete Engine Temp Guard in Algonquin, IL](https://queensautoservices.com/services/climate-control/cooling-system-flush/)
+- [Total Cooling System Defense in Algonquin, IL](https://queensautoservices.com/services/climate-control/cooling-system/)
+- [Precision Radiator Leak Repair in Algonquin, IL](https://queensautoservices.com/services/climate-control/radiator-leak/)
+- [High-Capacity Cooling Care in Algonquin, IL](https://queensautoservices.com/services/climate-control/radiator-service/)
+- [Precision Engine Rhythm Control in Algonquin, IL](https://queensautoservices.com/services/climate-control/thermostat-replacement/)
+
+### [Electrical Systems in Algonquin](https://queensautoservices.com/services/electrical-systems/)
+- [Total Electrical Power Restoration in Algonquin, IL](https://queensautoservices.com/services/electrical-systems/alternator-repair-or-replacement/)
+- [Precision Terminal Care in Algonquin, IL](https://queensautoservices.com/services/electrical-systems/battery-service/)
+- [Absolute Cold-Start Reliability in Algonquin, IL](https://queensautoservices.com/services/electrical-systems/battery-testing-replacement/)
+- [Deep-Dive Computerized Analysis in Algonquin, IL](https://queensautoservices.com/services/electrical-systems/electrical-diagnostics/)
+- [Surgical Circuit Diagnostics in Algonquin, IL](https://queensautoservices.com/services/electrical-systems/fuse-relay-service/)
+- [High-Visibility Safety Service in Algonquin, IL](https://queensautoservices.com/services/electrical-systems/light-repair-replacement/)
+- [Guaranteed Engine Ignition in Algonquin, IL](https://queensautoservices.com/services/electrical-systems/starter-repair-replacement/)
+
+### [Engine Services in Algonquin](https://queensautoservices.com/services/engine-services/)
+- [Critical Component Assurance in Algonquin, IL](https://queensautoservices.com/services/engine-services/belt-hose-replacement/)
+- [Precision Engine Diagnostics in Algonquin, IL](https://queensautoservices.com/services/engine-services/engine-diagnostics-repair/)
+- [Total Engine Restoration in Algonquin, IL](https://queensautoservices.com/services/engine-services/engine-repair/)
+- [Performance Optimization in Algonquin, IL](https://queensautoservices.com/services/engine-services/engine-tune-ups/)
+- [Clean-Burn Fuel Service in Algonquin, IL](https://queensautoservices.com/services/engine-services/fuel-system-service/)
+- [Meticulous Spark Plug Service in Algonquin, IL](https://queensautoservices.com/services/engine-services/spark-plug-replacement/)
+- [The Ultimate Preventive Service in Algonquin, IL](https://queensautoservices.com/services/engine-services/timing-belt-replacement/)
+
+### [Maintenance Services in Algonquin](https://queensautoservices.com/services/maintenance-services/)
+- [Premium Lubrication Service in Algonquin, IL](https://queensautoservices.com/services/maintenance-services/engine-oil-change-algonquin-il/)
+- [Pure Flow Restoration in Algonquin, IL](https://queensautoservices.com/services/maintenance-services/filter-replacement/)
+- [Total Fluid Guard Service in Algonquin, IL](https://queensautoservices.com/services/maintenance-services/fluid-level-checks-top-offs/)
+- [Ultimate Engine Protection in Algonquin, IL](https://queensautoservices.com/services/maintenance-services/full-synthetic-oil-change/)
+- [Total Vehicle Health Audit in Algonquin, IL](https://queensautoservices.com/services/maintenance-services/multi-point-inspections/)
+- [Enhanced Daily Protection in Algonquin, IL](https://queensautoservices.com/services/maintenance-services/synthetic-blend-oil-change/)
+
+### [Steering & Suspension in Algonquin](https://queensautoservices.com/services/steering-suspension/)
+- [Critical Suspension Integrity in Algonquin, IL](https://queensautoservices.com/services/steering-suspension/ball-joint-replacement/)
+- [Effortless Steering Care in Algonquin, IL](https://queensautoservices.com/services/steering-suspension/power-steering-service/)
+- [Premium Ride Restoration in Algonquin, IL](https://queensautoservices.com/services/steering-suspension/shock-strut-replacement/)
+- [Total Chassis Restoration in Algonquin, IL](https://queensautoservices.com/services/steering-suspension/suspension-system-repair/)
+- [Precision Steering Control in Algonquin, IL](https://queensautoservices.com/services/steering-suspension/tie-rod-end-replacement/)
+- [The Algonquin Alignment Standard in Algonquin, IL](https://queensautoservices.com/services/steering-suspension/wheel-alignment/)
+
+### [Tire Services in Algonquin](https://queensautoservices.com/services/tire-services/)
+- [Professional Flat Tire Repair in Algonquin, IL](https://queensautoservices.com/services/tire-services/flat-tire-repair/)
+- [Landscaping Fleet & Lawn Mower Tires in Algonquin, IL](https://queensautoservices.com/services/tire-services/landscaping-fleet-tires/)
+- [Skid Steer, Bobcat & Construction Tires in Algonquin, IL](https://queensautoservices.com/services/tire-services/skid-steer-construction-tires/)
+- [Precision Vibration Control in Algonquin, IL](https://queensautoservices.com/services/tire-services/tire-balancing/)
+- [Professional Tire Installation in Algonquin, IL](https://queensautoservices.com/services/tire-services/tire-installation/)
+- [Precision Tire Rotation in Algonquin, IL](https://queensautoservices.com/services/tire-services/tire-rotation/)
+- [TPMS Monitoring & Safety in Algonquin, IL](https://queensautoservices.com/services/tire-services/tpms-service/)
+- [Tractor & Agricultural Tires in Algonquin, IL](https://queensautoservices.com/services/tire-services/tractor-agricultural-tires/)
+
+### [Transmission Services in Algonquin](https://queensautoservices.com/services/transmission-services/)
+- [Manual Transmission Mastery in Algonquin, IL](https://queensautoservices.com/services/transmission-services/clutch-repair/)
+- [Axle & Gear Protection in Algonquin, IL](https://queensautoservices.com/services/transmission-services/differential-service/)
+- [Precision Gear Protection in Algonquin, IL](https://queensautoservices.com/services/transmission-services/transmission-fluid-service/)
+- [Expert Gearbox Restoration in Algonquin, IL](https://queensautoservices.com/services/transmission-services/transmission-repair-replacement/)
+
+## Nearby Areas We Serve
+- [Mechanic & Tire Shop for Carpentersville Drivers](https://queensautoservices.com/locations/auto-repair-carpentersville/)
+- [Auto Repair & Tires serving Lake In The Hills, IL](https://queensautoservices.com/locations/auto-repair-lake-in-the-hills/)
+- [Auto Repair Near Algonquin Commons](https://queensautoservices.com/locations/auto-repair-near-algonquin-commons/)
+- [Local Mechanic Near Towne Park Algonquin](https://queensautoservices.com/locations/mechanic-near-towne-park/)
+- [Tires & Auto Repair Near Jacobs High School](https://queensautoservices.com/locations/tires-near-jacobs-high-school/)

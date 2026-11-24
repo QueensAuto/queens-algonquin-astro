@@ -177,9 +177,9 @@ const { brand } = Astro.props as { brand: BrandConfig };
       <!-- Column 4: Location -->
       <div class="footer-col">
         <h2 class="footer-heading">Contact</h2>
-        <address class="footer-address">
+        <address class="footer-address" data-md-include>
           <strong>{brand.name}</strong>
-          {brand.address}<br />
+          <span>{brand.address}</span><br />
           <div class="mt-2">
             <a
               href={`tel:${brand.phone.replace(/\D/g, "")}`}
